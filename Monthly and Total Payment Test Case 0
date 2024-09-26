@@ -1,0 +1,9 @@
+public void testMonthlyPayment() {
+    System.out.println("monthlyPayment");
+    double amt = 0.0;
+    double yearlyInterestRate = 0.0;
+    int numYears = 0;
+    double expResult = 0.0;
+    double result = Helper.monthlyPayment(amt, yearlyInterestRate, numYears, true);
+    assertEquals(expResult, result, 0);
+}
