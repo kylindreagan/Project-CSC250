@@ -9,6 +9,8 @@ Download for GitHub desktop https://desktop.github.com/download/
 
 You can also use VSCode or Git Bash terminals, but I prefer the app.
 
+NetBeans technically works but commiting is more tedious.
+
 NOTE: Once project is underway, commits directly to main won't be allowed and any pull requests will require review so make sure you understand how to make branches and create pull requests
 
 # Project Outline
