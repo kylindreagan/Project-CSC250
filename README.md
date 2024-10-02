@@ -26,4 +26,4 @@ Using webscraping. Self explanatory.
 Add features as assigned or desired.
 
 # Testing
-Autotesting done through the .toml and .yml files. For every new test file, add the path to the .toml file (looks intimidating at first but it's pretty straightforward). Commits will NOT go through if tests fail so make sure to triple check tests before adding to .toml. 
+Autotesting done through the .xml and .yml files. For every new test file, add the path to the .xml file (looks intimidating at first but it's pretty straightforward). Commits will NOT go through if tests fail so make sure to triple check tests before adding to .xml. 
