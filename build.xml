@@ -1,6 +1,7 @@
 <project name="financial-calculators">
   <property name="main.build.dir" value="build/main"/>
-  <property name="main.src.dir" value="src/main/java"/>
+  <property name="main.src.dir" value="src/main/currencyHelper"/>
+  <property name="main.src.dir" value="src/main/MonthlyPayment"/>
   <property name="test.build.dir" value="build/test"/>
   <property name="test.src.dir" value="src/test/java"/>
 
