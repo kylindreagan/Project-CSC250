@@ -13,6 +13,8 @@ NetBeans technically works but commiting is more tedious.
 
 NOTE: Once project is underway, commits directly to main won't be allowed and any pull requests will require review so make sure you understand how to make branches and create pull requests
 
+Direct all other GitHub questions to Kylind (that's me! :>)
+
 # Project Outline
 ## Currency Coverter
 Using webscraping. Self explanatory.
@@ -22,3 +24,6 @@ Using webscraping. Self explanatory.
 "There are two general definitions of amortization. The first is the systematic repayment of a loan over time. The second is used in the context of business accounting and is the act of spreading the cost of an expensive and long-lived item over many periods."
 ## Rest TBD
 Add features as assigned or desired.
+
+# Testing
+Autotesting done through the .toml and .yml files. For every new test file, add the path to the .toml file (looks intimidating at first but it's pretty straightforward). Commits will NOT go through if tests fail so make sure to triple check tests before adding to .toml. 
