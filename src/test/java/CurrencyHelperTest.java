@@ -1,4 +1,4 @@
-package tests.java;
+package test.java;
 
 import org.junit.After;
 import org.junit.AfterClass;
