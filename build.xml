@@ -23,7 +23,7 @@
 
   <!-- Compile target for main code -->
   <target name="compile" depends="prepare">
-    <javac destdir="${main.build.dir}" includeantruntime="false">
+    <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false">
       <classpath refid="classpath.test"/>
     </javac>
   </target>
