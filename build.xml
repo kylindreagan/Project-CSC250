@@ -20,10 +20,7 @@
     <delete dir="${test.build.dir}"/>
   </target>
 
-
-
-
-<!-- Prepare target to ensure directories exist -->
+  <!-- Prepare target to ensure directories exist -->
   <target name="prepare">
     <mkdir dir="${main.src.dir}"/>
     <mkdir dir="${main.build.dir}"/>
