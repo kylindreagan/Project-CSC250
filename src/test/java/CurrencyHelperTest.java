@@ -37,6 +37,5 @@ public class CurrencyHelperTest {
     public void testWebScraperSuccess() {
         String result = currencyHelper.webScraper();
         assertEquals("success", result);
-        fail("The test case is a prototype.");
     }
 }
