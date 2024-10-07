@@ -6,19 +6,21 @@ public class MonthlyPayment {
             return n > 0;
     }
 
-    public static double monthlyPayment(double amt, double yearlyInterestRate, int numYears, boolean total){
+    public static String calculatePayment(double amt, double yearlyInterestRate, int numYears, boolean total){
             if (isPositive(amt) && isPositive(yearlyInterestRate) && isPositive(numYears)){
                 int months = numYears * 12;
                 double monthlyInterestRate = (yearlyInterestRate * 0.01) / 12;
                 double monthlyPayment = (amt * monthlyInterestRate) / (1 - (1 / Math.pow((1 + monthlyInterestRate),months)));
-                double totalPayment = monthlyPayment * 12;
                 if (total){
-                    return totalPayment;
+                    double totalPayment = monthlyPayment * months;
+                    String formattedPayment = String.format("%.02f", totalPayment);
+                    return formattedPayment;
                 } else{
-                    return monthlyPayment;
+                    String formattedPayment = String.format("%.02f", monthlyPayment);
+                    return formattedPayment;
                 }
             } else{
-                return 0.0;
+                return "0.00";
 
             }
     }

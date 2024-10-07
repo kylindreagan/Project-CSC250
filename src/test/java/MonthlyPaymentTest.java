@@ -50,9 +50,9 @@ public void testMonthlyPayment400M() {
         double amt = 400.0;
         double yearlyInterestRate = 5.0;
         int numYears = 4;
-        double expResult = 9.21;
-        double result = MonthlyPayment.monthlyPayment(amt, yearlyInterestRate, numYears, false);
-        assertEquals(expResult, result, 0);
+        String expResult = "9.21";
+        String result = MonthlyPayment.calculatePayment(amt, yearlyInterestRate, numYears, false);
+        assertEquals("Tests if amt is $400 at 5% for 4 years. Computes only monthly payment", result, expResult);
     }
 
 //Tests if amt is $400 at 5% for 4 years. Computes only total payment
@@ -62,8 +62,8 @@ public void testMonthlyPayment400T() {
         double amt = 400.0;
         double yearlyInterestRate = 5.0;
         int numYears = 4;
-        double expResult = 442.16;
-        double result = MonthlyPayment.monthlyPayment(amt, yearlyInterestRate, numYears, true);
-        assertEquals(expResult, result, 0);
+        String expResult = "442.16";
+        String result = MonthlyPayment.calculatePayment(amt, yearlyInterestRate, numYears, true);
+        assertEquals("Tests if amt is $400 at 5% for 4 years. Computes only total payment", result, expResult);
     }
 }
