@@ -24,10 +24,7 @@
   <!-- Compile target for main code -->
   <target name="compile" depends="prepare">
     <javac destdir="${main.build.dir}" includeantruntime="false">
-      <src>
-        <pathelement path="src/main/currencyHelper"/>
-        <pathelement path="src/main/MonthlyPayment"/>
-      </src>
+      <classpath refid="classpath.test"/>
     </javac>
   </target>
 
