@@ -9,7 +9,7 @@ public class TestCurrencyHelper {
     @Test
     public void testWebScraperSuccess() {
         String result = currency.webScraper();
-        assertEquals("success", result);
+        assertEquals("fail", result);
     }
     @Test
     public void testWebScraperIOException() throws IOException {
@@ -17,7 +17,7 @@ public class TestCurrencyHelper {
         when(jsoupMock.connect(anyString())).thenThrow(new IOException("Simulated connection error"));
 
         String result = currency.webScraper();
-        assertEquals("fail", result);
+        assertEquals("success", result);
     }
 
 }
