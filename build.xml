@@ -2,7 +2,7 @@
   
   <!-- Directories for main source and test -->
   <property name="main.build.dir" value="build/main"/>
-  <property name="main.src.dir" value="src/main/java"/>
+  <property name="main.src.dir" value="src/main"/>
   <property name="test.build.dir" value="build/test"/>
   <property name="test.src.dir" value="src/test/java"/>
 
@@ -18,8 +18,8 @@
     <mkdir dir="${main.build.dir}"/>
     <javac destdir="${main.build.dir}" includeantruntime="false">
       <src>
-        <pathelement path="src/main/java/currencyHelper"/>
-        <pathelement path="src/main/java/MonthlyPayment"/>
+        <pathelement path="src/main/currencyHelper"/>
+        <pathelement path="src/main/MonthlyPayment"/>
       </src>
     </javac>
   </target>
