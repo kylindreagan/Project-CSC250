@@ -1,4 +1,4 @@
-package tests;
+package tests.java;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.currencyHelper;
+import main.java.currencyHelper;
 
 import static org.junit.Assert.*;
 
