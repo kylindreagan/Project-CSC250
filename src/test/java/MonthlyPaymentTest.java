@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.java.MonthlyPayment;
+import main.MonthlyPayment;
 
 import static org.junit.Assert.*;
 

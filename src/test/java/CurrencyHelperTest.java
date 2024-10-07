@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import main.java.currencyHelper;
-
 import static org.junit.Assert.*;
 
 import org.jsoup.Jsoup;
+
+import main.currencyHelper;
 
 public class CurrencyHelperTest {
     

@@ -1,4 +1,4 @@
-package main.java;
+package main;
 
 public class currency extends javax.swing.JFrame {
 
