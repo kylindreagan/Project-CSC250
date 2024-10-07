@@ -2,7 +2,7 @@
   
   <!-- Directories for main source and test -->
   <property name="main.build.dir" value="build/main"/>
-  <property name="main.src.dir" value="src/main"/>
+  <property name="main.src.dir" value="src/main/java"/>
   <property name="test.build.dir" value="build/test"/>
   <property name="test.src.dir" value="src/test/java"/>
 
