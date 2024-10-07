@@ -1,7 +1,5 @@
-/**
- *
- * @author kylin
- */
+package main;
+
 public class currency extends javax.swing.JFrame {
 
     /**
@@ -59,7 +57,7 @@ public class currency extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
-        String s = mainHelper.webScraper();
+        String s = currencyHelper.webScraper();
         jLabel1.setText(s);
         
     }                                     

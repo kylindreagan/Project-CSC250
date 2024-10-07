@@ -1,13 +1,31 @@
+package tests;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 
-public class TestMonthlyPayment {
+public class MonthlyPaymentTest {
+
+    public MonthlyPaymentTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
 // Tests if input is 0.0
 @Test
 public void testMonthlyPayment0() {
@@ -16,7 +34,7 @@ public void testMonthlyPayment0() {
     double yearlyInterestRate = 0.0;
     int numYears = 0;
     double expResult = 0.0;
-    double result = Helper.monthlyPayment(amt, yearlyInterestRate, numYears, true);
+    double result = MonthlyPayment.monthlyPayment(amt, yearlyInterestRate, numYears, true);
     assertEquals(expResult, result, 0);
 }
 
@@ -28,7 +46,7 @@ public void testMonthlyPayment400M() {
         double yearlyInterestRate = 5.0;
         int numYears = 4;
         double expResult = 9.21;
-        double result = Helper.monthlyPayment(amt, yearlyInterestRate, numYears, false);
+        double result = MonthlyPayment.monthlyPayment(amt, yearlyInterestRate, numYears, false);
         assertEquals(expResult, result, 0);
     }
 
@@ -40,7 +58,7 @@ public void testMonthlyPayment400T() {
         double yearlyInterestRate = 5.0;
         int numYears = 4;
         double expResult = 442.16;
-        double result = Helper.monthlyPayment(amt, yearlyInterestRate, numYears, true);
+        double result = MonthlyPayment.monthlyPayment(amt, yearlyInterestRate, numYears, true);
         assertEquals(expResult, result, 0);
     }
 }

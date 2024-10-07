@@ -1,3 +1,5 @@
+package main;
+
 public class MonthlyPayment {
     
     public static boolean isPositive(double n){
