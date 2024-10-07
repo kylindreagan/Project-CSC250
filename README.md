@@ -26,4 +26,4 @@ Using webscraping. Self explanatory.
 Add features as assigned or desired.
 
 # Testing
-Autotesting done through the .xml and .yml files. For every new test file, add the path to the .xml file (looks intimidating at first but it's pretty straightforward). Commits will NOT go through if tests fail so make sure to triple check tests before adding to .xml. 
+Autotesting done through the .xml and .yml files. Make sure every test file ends in Test.java (look at current test folder for examples) so it will be run in main. Don't change xml or yml files unless necessary (only if we need a new library or want to update an old one). Do manual testing before attempting to push to main, make sure you get a reviewer (preferably several) on each pull request. Github will handle the rest.
