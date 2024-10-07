@@ -46,4 +46,7 @@
     </junit>
   </target>
 
+  <!-- Default target to compile and run tests -->
+  <target name="all" depends="compile,test"/>
+
 </project>
