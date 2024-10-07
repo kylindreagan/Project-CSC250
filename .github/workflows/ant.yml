@@ -25,5 +25,5 @@ jobs:
     - name: List directory structure (for debugging)
       run: ls -R
     - name: Build with Ant
-      run: ant -noinput -buildfile -v build.xml test
+      run: ant -v -noinput -buildfile build.xml test
 
