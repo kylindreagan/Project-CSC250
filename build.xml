@@ -13,9 +13,16 @@
     <pathelement location="${main.build.dir}"/>
   </path>
 
-  <!-- Compile target for main code -->
-  <target name="compile">
+
+
+<!-- Prepare target to ensure directories exist -->
+  <target name="prepare">
+    <mkdir dir="${main.src.dir}"/>
     <mkdir dir="${main.build.dir}"/>
+  </target>
+
+  <!-- Compile target for main code -->
+  <target name="compile" depends="prepare">
     <javac destdir="${main.build.dir}" includeantruntime="false">
       <src>
         <pathelement path="src/main/currencyHelper"/>
