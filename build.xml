@@ -26,6 +26,15 @@
     <mkdir dir="${main.build.dir}"/>
   </target>
 
+  <!-- Verify the compiled main classes -->
+  <target name="verify-main-build" depends="compile">
+    <echo message="Verifying main build..."/>
+    <exec executable="ls">
+      <arg value="-R"/>
+      <arg value="${main.build.dir}"/>
+    </exec>
+  </target>
+
   <!-- Compile target for main code -->
   <target name="compile" depends="prepare">
     <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false">
