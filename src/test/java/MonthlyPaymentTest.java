@@ -38,9 +38,9 @@ public void testMonthlyPayment0() {
     double amt = 0.0;
     double yearlyInterestRate = 0.0;
     int numYears = 0;
-    double expResult = 0.0;
-    double result = MonthlyPayment.monthlyPayment(amt, yearlyInterestRate, numYears, true);
-    assertEquals(expResult, result, 0);
+    String expResult = "0.00";
+    String result = MonthlyPayment.calculatePayment(amt, yearlyInterestRate, numYears, true);
+    assertEquals("Test 0", result, expResult);
 }
 
 //Tests if amt is $400 at 5% for 4 years. Computes only monthly payment
