@@ -8,8 +8,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import org.jsoup.Jsoup;
-
 import main.currencyHelper;
 
 public class CurrencyHelperTest {

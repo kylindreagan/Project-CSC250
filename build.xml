@@ -14,6 +14,13 @@
     <pathelement location="${main.build.dir}"/>
   </path>
 
+  <!-- Clean target to remove old builds -->
+  <target name="clean">
+    <delete dir="${main.build.dir}"/>
+    <delete dir="${test.build.dir}"/>
+  </target>
+
+
 
 
 <!-- Prepare target to ensure directories exist -->
@@ -49,6 +56,15 @@
         <fileset dir="${test.src.dir}" includes="**/*Test.java"/>
       </batchtest>
     </junit>
+  </target>
+
+  <!-- Verify the compiled test files -->
+  <target name="verify-test-build">
+    <echo message="Verifying test build..."/>
+    <exec executable="ls">
+      <arg value="-R"/>
+      <arg value="${test.build.dir}"/>
+    </exec>
   </target>
 
   <!-- Default target to compile and run tests -->
