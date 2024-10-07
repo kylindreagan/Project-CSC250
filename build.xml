@@ -1,4 +1,4 @@
-<project name="financial-calculators">
+<project name="Project-CSC250">
   
   <!-- Directories for main source and test -->
   <property name="main.build.dir" value="build/main"/>
@@ -41,7 +41,7 @@
       </classpath>
       <formatter type="brief" usefile="false" />
       <batchtest>
-        <fileset dir="${test.src.dir}" includes="**/*Test.java"/>
+        <fileset dir="${test.src.dir}" includes="tests/*.java"/>
       </batchtest>
     </junit>
   </target>
