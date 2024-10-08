@@ -31,7 +31,7 @@ public class MonthlyPaymentTest {
     @After
     public void tearDown() {
     }
-// Tests if input is 0.0
+// Tests if inputs are 0.0
 @Test
 public void testMonthlyPayment0() {
     System.out.println("monthlyPayment");
@@ -66,4 +66,15 @@ public void testMonthlyPayment400T() {
         String result = MonthlyPayment.calculatePayment(amt, yearlyInterestRate, numYears, true);
         assertEquals("Tests if amt is $400 at 5% for 4 years. Computes only total payment", result, expResult);
     }
+//Tests if inputs are negative values. 
+public void testMonthlyPaymentNegative() {
+    System.out.println("monthlyPayment");
+    double amt = -1;
+    double yearlyInterestRate = -1;
+    int numYears = -1;
+    String expResult = "0.00";
+    String result = MonthlyPayment.calculatePayment(amt, yearlyInterestRate, numYears, true);
+    assertEquals("Test 0", result, expResult);
+}
+
 }
