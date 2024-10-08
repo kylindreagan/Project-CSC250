@@ -74,7 +74,7 @@ public void testMonthlyPaymentNegative() {
     int numYears = -1;
     String expResult = "0.00";
     String result = MonthlyPayment.calculatePayment(amt, yearlyInterestRate, numYears, true);
-    assertEquals("Test 0", result, expResult);
+    assertEquals("Tests if inputs are negative values.", result, expResult);
 }
 
 }
