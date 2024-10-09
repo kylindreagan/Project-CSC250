@@ -34,6 +34,13 @@ public class CurrencyHelperTest {
     }
 
     @Test
+    public void testConnection() {
+        boolean s = currencyHelper.canConnect();
+        assertTrue(s);
+    }
+
+
+    @Test
     public void testWebScraperSuccessEuro() {
         //Low fluctuation
         Map<String, Double[]> scrapedRates = currencyHelper.webScraper();

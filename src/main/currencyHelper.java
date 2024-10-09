@@ -32,6 +32,7 @@ public class currencyHelper {
     }
     public static Map<String, Double[]> webScraper(){
        Map<String, Double[]> dict = new HashMap<>();
+       dict.put("US Dollar", new Double[]{1.0, 1.0});
         try {
             Document doc = Jsoup.connect("https://www.x-rates.com/table/?from=USD&amount=1").get();
 
