@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import main.currencyHelper;
@@ -70,7 +71,19 @@ public class CurrencyHelperTest {
             Math.abs(scrapedRates.get("Japanese Yen")[0] - expectedYenRate1) < toleranceA);
         assertTrue("Japanese Yen rate2 is not within expected range",
             Math.abs(scrapedRates.get("Japanese Yen")[1] - expectedYenRate2) < toleranceB);
+    }
 
+    @Test
+    public void testFileReader() {
+        Map<String, Double[]> dict = new HashMap<>();
+        currencyHelper.loadFromFile(dict, "src/files/currency_rates.txt");
+        double yenTo = 148.086221;
+        double yenFrom = 0.006753;
+        Double[] rates = dict.get("Japanese Yen");
+        assertNotNull("Rates should not be null", rates);
+        //delta: a small threshold value that specifies the acceptable range of error when comparing two floating-point numbers
+        assertEquals("Check USD to Yen", yenTo, rates[0], 0.000001);
+        assertEquals("Check Yen to USD", yenFrom, rates[1], 0.000001);
 
     }
 }

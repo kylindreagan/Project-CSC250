@@ -51,12 +51,12 @@ public class currencyHelper {
             }
         } catch (IOException e) {
             System.out.printf("Error: %s%n", e);
-            loadFromFile(dict, "currency_rates.txt");
+            loadFromFile(dict, "src/files/currency_rates.txt");
         }
         return dict;
     }
 
-     private static void loadFromFile(Map<String, Double[]> dict, String filename) {
+     public static void loadFromFile(Map<String, Double[]> dict, String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
