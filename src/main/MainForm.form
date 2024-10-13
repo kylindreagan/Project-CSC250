@@ -46,10 +46,29 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="currencyButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="rentVsBuyButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="autoLoanButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="refinanceButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="mortgageButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="houseAffordabilityButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="interestButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="rothIRAButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="downPaymentButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="rentButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="retirementButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="amortizationButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,8 +78,30 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="201" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="currencyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mortgageButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="amortizationButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="rentVsBuyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="houseAffordabilityButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="retirementButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="autoLoanButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="interestButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rentButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="refinanceButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rothIRAButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="downPaymentButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="96" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,10 +112,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Fax" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Financial Calculator"/>
+        <Property name="text" type="java.lang.String" value="Financial Calculators"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="currencyButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Fax" size="12" style="0"/>
@@ -82,7 +123,128 @@
         <Property name="text" type="java.lang.String" value="Currency Converter"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="currencyButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="mortgageButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Mortgage Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mortgageButtonMousePressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="amortizationButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Amortization Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="amortizationButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="rentVsBuyButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Rent vs. Buy Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rentVsBuyButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="houseAffordabilityButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="House Affordability Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="houseAffordabilityButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="retirementButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Retirement Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="retirementButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="autoLoanButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Auto Loan Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="autoLoanButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="interestButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Interest Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="interestButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="rentButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Rent Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rentButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="refinanceButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Refinance Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="refinanceButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="rothIRAButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Roth IRA Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rothIRAButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="downPaymentButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Fax" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Down Payment Calculator"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="downPaymentButtonMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
