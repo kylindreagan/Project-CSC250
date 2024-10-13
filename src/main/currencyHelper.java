@@ -76,5 +76,11 @@ public class currencyHelper {
             System.out.printf("Error reading from file: %s%n", e);
         }
     }
-    
+
+
+    public static Double currencyConverter(double fromRate, double toRate, float currency) {
+        double USDrate = currency * fromRate;
+        double newRate = USDrate * toRate;
+        return newRate;
+    }
 }
