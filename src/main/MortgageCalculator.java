@@ -1,3 +1,4 @@
+package main;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -7,12 +8,12 @@
  *
  * @author Alyssa
  */
-public class MortgageCalc extends javax.swing.JFrame {
+public class MortgageCalculator extends javax.swing.JFrame {
 
     /**
      * Creates new form MortgageCalc
      */
-    public MortgageCalc() {
+    public MortgageCalculator() {
         initComponents();
         calcButton.setEnabled(false);
         mpLabel.setVisible(false);
@@ -251,7 +252,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // if all fields have an input, enable calcButton
         if (evt.getKeyCode() == 10) {
             if (HPField.getText().strip().compareTo("") != 0) {
-               if (! (Helper.isValidNumber(HPField.getText()))){
+               if (! (MainHelper.isValidNumber(HPField.getText()))){
                     HPField.setText("");
                     HPField.requestFocus();
                     calcButton.setEnabled(false);
@@ -324,7 +325,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // checks for valid input
         // if all fields have an input, enable calcButton
         if (HPField.getText().strip().compareTo("") != 0) {
-            if (! (Helper.isValidNumber(HPField.getText()))){
+            if (! (MainHelper.isValidNumber(HPField.getText()))){
                 HPField.setText("");
                 HPField.requestFocus();
                 calcButton.setEnabled(false);
@@ -360,7 +361,7 @@ public class MortgageCalc extends javax.swing.JFrame {
                     mPayoffLabel.setVisible(false);
                     totalInterestLabel.setVisible(false);
                 }
-               if (! (Helper.isValidNumber(DPField.getText()))){
+               if (! (MainHelper.isValidNumber(DPField.getText()))){
                     DPField.setText("");
                     DPField.requestFocus();
                     calcButton.setEnabled(false);
@@ -397,7 +398,7 @@ public class MortgageCalc extends javax.swing.JFrame {
                     mPayoffLabel.setVisible(false);
                     totalInterestLabel.setVisible(false);
                 }
-            if (! (Helper.isValidNumber(DPField.getText()))){
+            if (! (MainHelper.isValidNumber(DPField.getText()))){
                 DPField.setText("");
                 DPField.requestFocus();
                 calcButton.setEnabled(false);
@@ -424,7 +425,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // if all fields have an input, enable calcButton
         if (evt.getKeyCode() == 10) {
             if (LTField.getText().strip().compareTo("") != 0) {
-               if (! (Helper.isValidNumber(LTField.getText()))){
+               if (! (MainHelper.isValidNumber(LTField.getText()))){
                     LTField.setText("");
                     LTField.requestFocus();
                     calcButton.setEnabled(false);
@@ -451,7 +452,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // checks for valid input
         // if all fields have an input, enable calcButton
         if (LTField.getText().strip().compareTo("") != 0) {
-            if (! (Helper.isValidNumber(LTField.getText()))){
+            if (! (MainHelper.isValidNumber(LTField.getText()))){
                 LTField.setText("");
                 LTField.requestFocus();
                 calcButton.setEnabled(false);
@@ -478,7 +479,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // if all fields have an input, enable calcButton
         if (evt.getKeyCode() == 10) {
             if (IRField.getText().strip().compareTo("") != 0) {
-               if (! (Helper.isValidNumber(IRField.getText()))){
+               if (! (MainHelper.isValidNumber(IRField.getText()))){
                     IRField.setText("");
                     IRField.requestFocus();
                     calcButton.setEnabled(false);
@@ -505,7 +506,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // checks for valid input
         // if all fields have an input, enable calcButton
         if (IRField.getText().strip().compareTo("") != 0) {
-            if (! (Helper.isValidNumber(IRField.getText()))){
+            if (! (MainHelper.isValidNumber(IRField.getText()))){
                 IRField.setText("");
                 IRField.requestFocus();
                 calcButton.setEnabled(false);
@@ -532,7 +533,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // if all fields have an input, enable calcButton
         if (evt.getKeyCode() == 10) {
             if (SDField.getText().strip().compareTo("") != 0) {
-               if (! (Helper.isValidNumber(SDField.getText()))){
+               if (! (MainHelper.isValidNumber(SDField.getText()))){
                     SDField.setText("");
                     SDField.requestFocus();
                     calcButton.setEnabled(false);
@@ -558,7 +559,7 @@ public class MortgageCalc extends javax.swing.JFrame {
         // checks for valid input
         // if all fields have an input, enable calcButton
         if (SDField.getText().strip().compareTo("") != 0) {
-            if (! (Helper.isValidNumber(SDField.getText()))){
+            if (! (MainHelper.isValidNumber(SDField.getText()))){
                 SDField.setText("");
                 SDField.requestFocus();
                 calcButton.setEnabled(false);
@@ -596,20 +597,20 @@ public class MortgageCalc extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MortgageCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MortgageCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MortgageCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MortgageCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MortgageCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MortgageCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MortgageCalc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MortgageCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MortgageCalc().setVisible(true);
+                new MortgageCalculator().setVisible(true);
             }
         });
     }
