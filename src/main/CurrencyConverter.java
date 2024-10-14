@@ -85,21 +85,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
         FromComboBox.setSelectedItem("US Dollar");
         ToComboBox.setSelectedItem("US Dollar");
     }
-    
-    private static void setPopularCurrencies(List<String> currencies) {
-        currencies.add("United States Dollar");
-        currencies.add("Euro");
-        currencies.add("British Pound");
-        currencies.add("Japanese Yen");
-        currencies.add("Australian Dollar");
-        currencies.add("Canadian Dollar");
-        currencies.add("Swiss Franc");
-        currencies.add("Chinese Yuan Renminbi");
-        currencies.add("Swedish Krona");
-        currencies.add("New Zealand Dollar");
-        currencies.add("Russian Ruble");
-        currencies.add("Mexican Peso");
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
