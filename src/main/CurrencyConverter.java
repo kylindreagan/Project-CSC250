@@ -15,14 +15,14 @@ import javax.swing.event.DocumentListener;
  *
  * @author kylin
  */
-public class CurrencyCalculator extends javax.swing.JFrame {
+public class CurrencyConverter extends javax.swing.JFrame {
     private Map<String, Double[]> currencyDict;
     private List<String> popularCurrencies;
 
     /**
      * Creates new form CurrencyCalculator
      */
-    public CurrencyCalculator() {
+    public CurrencyConverter() {
         currencyDict = currencyHelper.webScraper();
         popularCurrencies = Arrays.asList(
             "US Dollar", 
@@ -179,6 +179,11 @@ public class CurrencyCalculator extends javax.swing.JFrame {
         });
 
         ToCheckBox.setText("Show only most popular currencies");
+        ToCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ToCheckBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -281,6 +286,10 @@ public class CurrencyCalculator extends javax.swing.JFrame {
         updateComboBox(FromComboBox, currencyDict, popularCurrencies, FromCheckBox.isSelected());
     }//GEN-LAST:event_FromCheckBoxActionPerformed
 
+    private void ToCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToCheckBoxActionPerformed
+        updateComboBox(ToComboBox, currencyDict, popularCurrencies, ToCheckBox.isSelected());
+    }//GEN-LAST:event_ToCheckBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,21 +307,22 @@ public class CurrencyCalculator extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CurrencyCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrencyConverter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CurrencyCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrencyConverter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CurrencyCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrencyConverter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CurrencyCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CurrencyConverter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CurrencyCalculator().setVisible(true);
+                new CurrencyConverter().setVisible(true);
             }
         });
     }

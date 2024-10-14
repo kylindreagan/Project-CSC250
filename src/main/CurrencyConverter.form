@@ -240,6 +240,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Show only most popular currencies"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ToCheckBoxActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
