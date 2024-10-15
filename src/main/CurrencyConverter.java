@@ -4,6 +4,7 @@
  */
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -17,74 +18,55 @@ import javax.swing.event.DocumentListener;
  */
 public class CurrencyConverter extends javax.swing.JFrame {
     private Map<String, Double[]> currencyDict;
-    private List<String> popularCurrencies;
+    private static final List<String> Popular_Currencies = Arrays.asList(
+        "US Dollar", 
+        "Euro", 
+        "British Pound", 
+        "Japanese Yen", 
+        "Australian Dollar", 
+        "Canadian Dollar", 
+        "Swiss Franc", 
+        "Chinese Yuan Renminbi", 
+        "Swedish Krona", 
+        "New Zealand Dollar", 
+        "Russian Ruble", 
+        "Mexican Peso"
+    );
+    
 
     /**
      * Creates new form CurrencyCalculator
      */
     public CurrencyConverter() {
         currencyDict = currencyHelper.webScraper();
-        popularCurrencies = Arrays.asList(
-            "US Dollar", 
-            "Euro", 
-            "British Pound", 
-            "Japanese Yen", 
-            "Australian Dollar", 
-            "Canadian Dollar", 
-            "Swiss Franc", 
-            "Chinese Yuan Renminbi", 
-            "Swedish Krona", 
-            "New Zealand Dollar", 
-            "Russian Ruble", 
-            "Mexican Peso"
-        );
         initComponents();
-        updateComboBox(FromComboBox, currencyDict, popularCurrencies, FromCheckBox.isSelected());
-        updateComboBox(ToComboBox, currencyDict, popularCurrencies, ToCheckBox.isSelected());
+        updateComboBox(FromComboBox, FromCheckBox.isSelected());
+        updateComboBox(ToComboBox, ToCheckBox.isSelected());
         DocumentListener documentListener = new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                checkFields();
-            }
-
+            public void insertUpdate(DocumentEvent e) { checkFields(); }
             @Override
-            public void removeUpdate(DocumentEvent e) {
-                checkFields();
-            }
-
+            public void removeUpdate(DocumentEvent e) { checkFields(); }
             @Override
-            public void changedUpdate(DocumentEvent e) {
-                checkFields();
-            }
-
-            // Check if all fields are filled, then enable the button
+            public void changedUpdate(DocumentEvent e) { checkFields(); }
             private void checkFields() {
                 boolean allFilled = MainHelper.validate_money(AmountTextField.getText());
                 CalculateButton.setEnabled(allFilled);
             }
         };
-         
         AmountTextField.getDocument().addDocumentListener(documentListener);
     }
     
-    private void updateComboBox(JComboBox<String> comboBox, Map<String, Double[]> map, List<String> currencies, boolean popular) {
-        // Clear existing items
+    private void updateComboBox(JComboBox<String> comboBox, boolean popular) {
         comboBox.removeAllItems();
         
-        if (popular) {
-            for (String value : currencies) {
-                comboBox.addItem(value);
-            }
-        }
-        else {
-        // Add each key from the map as an item in the combo box
-        for (String key : map.keySet()) {
-            comboBox.addItem(key);
-        }  
-        }
-        FromComboBox.setSelectedItem("US Dollar");
-        ToComboBox.setSelectedItem("US Dollar");
+        List<String> items = popular ? Popular_Currencies : new ArrayList<>(currencyDict.keySet());
+        for (String item : items) {
+            comboBox.addItem(item);
     }
+    comboBox.setSelectedItem("US Dollar");
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -267,11 +249,11 @@ public class CurrencyConverter extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearButtonMouseClicked
 
     private void FromCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromCheckBoxActionPerformed
-        updateComboBox(FromComboBox, currencyDict, popularCurrencies, FromCheckBox.isSelected());
+        updateComboBox(FromComboBox, FromCheckBox.isSelected());
     }//GEN-LAST:event_FromCheckBoxActionPerformed
 
     private void ToCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToCheckBoxActionPerformed
-        updateComboBox(ToComboBox, currencyDict, popularCurrencies, ToCheckBox.isSelected());
+        updateComboBox(ToComboBox, ToCheckBox.isSelected());
     }//GEN-LAST:event_ToCheckBoxActionPerformed
 
     private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
