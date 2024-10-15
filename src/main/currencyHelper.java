@@ -49,6 +49,9 @@ public class currencyHelper {
                     Double.valueOf(tds.get(1).text()),
                     Double.valueOf(tds.get(2).text())
                 };
+
+                System.out.printf("Currency: %s, rate1: %s, rate2: %s%n",
+                currency, rate1, rate2);
     
                 dict.put(currency, rates);
             }
