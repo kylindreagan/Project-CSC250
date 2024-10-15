@@ -51,7 +51,7 @@ public class currencyHelper {
                 };
 
                 System.out.printf("Currency: %s, rate1: %s, rate2: %s%n",
-                currency, rate1, rate2);
+                currency, rates[0], rates[1]);
     
                 dict.put(currency, rates);
             }
