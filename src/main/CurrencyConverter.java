@@ -108,6 +108,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
         ResultTextField = new javax.swing.JTextField();
         FromCheckBox = new javax.swing.JCheckBox();
         ToCheckBox = new javax.swing.JCheckBox();
+        QuitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,7 +143,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
         ClearButton.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton.setForeground(new java.awt.Color(0, 0, 0));
         ClearButton.setText("Clear");
-        ClearButton.setActionCommand("Clear");
         ClearButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ClearButtonMouseClicked(evt);
@@ -170,6 +170,15 @@ public class CurrencyConverter extends javax.swing.JFrame {
             }
         });
 
+        QuitButton.setBackground(new java.awt.Color(255, 0, 0));
+        QuitButton.setForeground(new java.awt.Color(0, 0, 0));
+        QuitButton.setText("Quit");
+        QuitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QuitButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,23 +198,25 @@ public class CurrencyConverter extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(167, 167, 167)
-                            .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                             .addGap(90, 90, 90)
                             .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(34, 34, 34)
+                            .addComponent(ToLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(AmountLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(ResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(34, 34, 34)
-                            .addComponent(ToLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(51, 51, 51)
+                            .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(42, 42, 42)
+                            .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addComponent(FromCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -243,7 +254,8 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -274,6 +286,10 @@ public class CurrencyConverter extends javax.swing.JFrame {
     private void ToCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToCheckBoxActionPerformed
         updateComboBox(ToComboBox, currencyDict, popularCurrencies, ToCheckBox.isSelected());
     }//GEN-LAST:event_ToCheckBoxActionPerformed
+
+    private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_QuitButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -321,6 +337,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
     private javax.swing.JCheckBox FromCheckBox;
     private javax.swing.JComboBox<String> FromComboBox;
     private javax.swing.JLabel FromLabel;
+    private javax.swing.JButton QuitButton;
     private javax.swing.JTextField ResultTextField;
     private javax.swing.JLabel Title;
     private javax.swing.JCheckBox ToCheckBox;
