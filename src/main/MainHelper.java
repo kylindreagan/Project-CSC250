@@ -1,4 +1,3 @@
-package main;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -22,29 +21,16 @@ public class MainHelper {
         return true;
     }
     
-    public static boolean isPositive (double n) {
+    public static boolean isPositive (float n) {
         return n > 0;
     }
-
-    public static boolean validate_money(String money) {
-        float f;
-        int i;
-        try{
-             i = Integer.parseInt(money);
-            return true;
-        }
-        catch (NumberFormatException e1) {
-            try {
-                f = Float.parseFloat(money);
-            }
-            catch (NumberFormatException e2) {
-                return false;
-            }
-            if (money.indexOf(".") != (money.length()-3)) {
-                return false;
-            }
-
-            return true;
-            }
+    
+    public static float strIntoFloat (String n) {
+        return Float.parseFloat(n);
+    }
+    
+    public static boolean isZeroS (String n) {
+        return Float.parseFloat(n) == 0;
+        
     }
 }

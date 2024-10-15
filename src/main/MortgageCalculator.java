@@ -1,4 +1,3 @@
-package main;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,7 +10,7 @@ package main;
 public class MortgageCalculator extends javax.swing.JFrame {
 
     /**
-     * Creates new form MortgageCalc
+     * Creates new form MortgageCalculator
      */
     public MortgageCalculator() {
         initComponents();
@@ -252,7 +251,7 @@ public class MortgageCalculator extends javax.swing.JFrame {
         // if all fields have an input, enable calcButton
         if (evt.getKeyCode() == 10) {
             if (HPField.getText().strip().compareTo("") != 0) {
-               if (! (MainHelper.isValidNumber(HPField.getText()))){
+               if (! (MainHelper.isValidNumber(HPField.getText())) || MainHelper.isZeroS(HPField.getText())){
                     HPField.setText("");
                     HPField.requestFocus();
                     calcButton.setEnabled(false);
@@ -263,7 +262,9 @@ public class MortgageCalculator extends javax.swing.JFrame {
   
                 } 
                else {
-                   DPField.requestFocus();
+                   if (HPField.getText().strip().compareTo("") == 0){
+                    DPField.requestFocus();
+                    }
                    int dp = DPField.getText().strip().compareTo("");
                    int lt = LTField.getText().strip().compareTo("");
                    int ir = IRField.getText().strip().compareTo("");
@@ -292,21 +293,25 @@ public class MortgageCalculator extends javax.swing.JFrame {
         // defines the loan amount as home price - down payment
         float la = hp - dp;
         //the actual calculation for monthly pay on a mortgage
-        float mp = (float) (la / ((Math.pow(1 + i, n) - 1)  / (i * Math.pow(1 + i, n))));
+        float mp = la / n;
+        if (i != 0){
+            mp = (float) (la / ((Math.pow(1 + i, n) - 1)  / (i * Math.pow(1 + i, n))));
+        }
         // determines when loan is paid off
         float payoffDate = sd + lt;
         // determines total intrest accrued
-        float totInt = la * i;
+        float totInt = (n * mp) - hp + dp ;
         
         
-        mpLabel.setText("Monthly Pay: " + String.format("%,.2f" , mp));
+        mpLabel.setText("Monthly Pay: $" + String.format("%,.2f" , mp));
         mpLabel.setVisible(true);
-        numMPLabel.setText("Total of " + String.format("%,.0f", n) + " Mortgage Payments" + String.format("%,.2f", n * mp));
+        numMPLabel.setText("Total of " + String.format("%,.0f", n) 
+                + " Mortgage Payments $" + String.format("%,.2f", n * mp));
         numMPLabel.setVisible(true);
         mPayoffLabel.setText("Mortgage Payoff Date " + MonthBox.getSelectedItem() 
                 + " " + String.format("%.0f", payoffDate));
         mPayoffLabel.setVisible(true);
-        totalInterestLabel.setText("Total Interest " + String.format("%,.2f", totInt));
+        totalInterestLabel.setText("Total Interest $" + String.format("%,.2f", totInt));
         totalInterestLabel.setVisible(true);
         
     }//GEN-LAST:event_calcButtonActionPerformed
@@ -325,7 +330,7 @@ public class MortgageCalculator extends javax.swing.JFrame {
         // checks for valid input
         // if all fields have an input, enable calcButton
         if (HPField.getText().strip().compareTo("") != 0) {
-            if (! (MainHelper.isValidNumber(HPField.getText()))){
+            if (! (MainHelper.isValidNumber(HPField.getText())) || MainHelper.isZeroS(HPField.getText())){
                 HPField.setText("");
                 HPField.requestFocus();
                 calcButton.setEnabled(false);
@@ -335,7 +340,9 @@ public class MortgageCalculator extends javax.swing.JFrame {
                 totalInterestLabel.setVisible(false);
             } 
             else {
-                DPField.requestFocus();
+                if (HPField.getText().strip().compareTo("") == 0){
+                    DPField.requestFocus();
+                }
                 int dp = DPField.getText().strip().compareTo("");
                 int lt = LTField.getText().strip().compareTo("");
                 int ir = IRField.getText().strip().compareTo("");
@@ -371,7 +378,9 @@ public class MortgageCalculator extends javax.swing.JFrame {
                     totalInterestLabel.setVisible(false);
                 } 
                else {
-                   LTField.requestFocus();
+                   if (DPField.getText().strip().compareTo("") == 0){
+                    LTField.requestFocus();
+                    }
                    int hp = HPField.getText().strip().compareTo("");
                    int lt = LTField.getText().strip().compareTo("");
                    int ir = IRField.getText().strip().compareTo("");
@@ -408,7 +417,9 @@ public class MortgageCalculator extends javax.swing.JFrame {
                 totalInterestLabel.setVisible(false);
             } 
             else {
-                LTField.requestFocus();
+                if (DPField.getText().strip().compareTo("") == 0){
+                    LTField.requestFocus();
+                }
                 int hp = HPField.getText().strip().compareTo("");
                 int lt = LTField.getText().strip().compareTo("");
                 int ir = IRField.getText().strip().compareTo("");
@@ -425,7 +436,7 @@ public class MortgageCalculator extends javax.swing.JFrame {
         // if all fields have an input, enable calcButton
         if (evt.getKeyCode() == 10) {
             if (LTField.getText().strip().compareTo("") != 0) {
-               if (! (MainHelper.isValidNumber(LTField.getText()))){
+               if (! (MainHelper.isValidNumber(LTField.getText())) || MainHelper.isZeroS(LTField.getText())){
                     LTField.setText("");
                     LTField.requestFocus();
                     calcButton.setEnabled(false);
@@ -435,12 +446,14 @@ public class MortgageCalculator extends javax.swing.JFrame {
                     totalInterestLabel.setVisible(false);
                 } 
                else {
-                   IRField.requestFocus();
-                   int dp = DPField.getText().strip().compareTo("");
-                   int hp = HPField.getText().strip().compareTo("");
-                   int ir = IRField.getText().strip().compareTo("");
-                   int sd = SDField.getText().strip().compareTo("");
-                   if (dp != 0 && hp != 0 && ir != 0 && sd != 0) {
+                    if (LTField.getText().strip().compareTo("") == 0){
+                        IRField.requestFocus();
+                    }
+                    int dp = DPField.getText().strip().compareTo("");
+                    int hp = HPField.getText().strip().compareTo("");
+                    int ir = IRField.getText().strip().compareTo("");
+                    int sd = SDField.getText().strip().compareTo("");
+                    if (dp != 0 && hp != 0 && ir != 0 && sd != 0) {
                        calcButton.setEnabled(true);
                     }
                }
@@ -452,7 +465,7 @@ public class MortgageCalculator extends javax.swing.JFrame {
         // checks for valid input
         // if all fields have an input, enable calcButton
         if (LTField.getText().strip().compareTo("") != 0) {
-            if (! (MainHelper.isValidNumber(LTField.getText()))){
+            if (! (MainHelper.isValidNumber(LTField.getText())) || MainHelper.isZeroS(LTField.getText())){
                 LTField.setText("");
                 LTField.requestFocus();
                 calcButton.setEnabled(false);
@@ -462,7 +475,9 @@ public class MortgageCalculator extends javax.swing.JFrame {
                 totalInterestLabel.setVisible(false);
             } 
             else {
-                IRField.requestFocus();
+                if (LTField.getText().strip().compareTo("") == 0){
+                    IRField.requestFocus();
+                }
                 int dp = DPField.getText().strip().compareTo("");
                 int hp = HPField.getText().strip().compareTo("");
                 int ir = IRField.getText().strip().compareTo("");
@@ -489,7 +504,9 @@ public class MortgageCalculator extends javax.swing.JFrame {
                     totalInterestLabel.setVisible(false);
                 } 
                else {
-                   SDField.requestFocus();
+                    if (IRField.getText().strip().compareTo("") == 0){
+                    SDField.requestFocus();
+                    }
                    int dp = DPField.getText().strip().compareTo("");
                    int lt = LTField.getText().strip().compareTo("");
                    int hp = HPField.getText().strip().compareTo("");
@@ -516,7 +533,9 @@ public class MortgageCalculator extends javax.swing.JFrame {
                 totalInterestLabel.setVisible(false);
             } 
             else {
-                SDField.requestFocus();
+                if (IRField.getText().strip().compareTo("") == 0){
+                    SDField.requestFocus();
+                }
                 int dp = DPField.getText().strip().compareTo("");
                 int lt = LTField.getText().strip().compareTo("");
                 int hp = HPField.getText().strip().compareTo("");
