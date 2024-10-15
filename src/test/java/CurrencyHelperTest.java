@@ -77,8 +77,8 @@ public class CurrencyHelperTest {
     public void testFileReader() {
         Map<String, Double[]> dict = new HashMap<>();
         currencyHelper.loadFromFile(dict, "src/files/currency_rates.txt");
-        double yenTo = 148.086221;
-        double yenFrom = 0.006753;
+        double yenTo = 149.285613;
+        double yenFrom = 0.006699;
         Double[] rates = dict.get("Japanese Yen");
         assertNotNull("Rates should not be null", rates);
         //delta: a small threshold value that specifies the acceptable range of error when comparing two floating-point numbers
@@ -86,4 +86,33 @@ public class CurrencyHelperTest {
         assertEquals("Check Yen to USD", yenFrom, rates[1], 0.000001);
 
     }
+
+    @Test
+    public void testEmptyCurrency() {
+        double result = currencyHelper.currencyConverter(0.0, 0.0, 0.0f);
+        assertEquals(result, 0.0, .01);
+    }
+
+    @Test
+    public void testBasicConversion() {
+        double fromRate = 1.0; // 1 USD
+        double toRate = 0.85;  // 0.85 EUR
+        float amount = 100.0f;  // 100 USD
+        double expected = 85.0;  // Expected result is 85 EUR
+        double result = currencyHelper.currencyConverter(fromRate, toRate, amount);
+        assertEquals(expected, result, 0.01f); // Allow a small delta for floating-point comparison
+    }
+
+    @Test
+    public void testConversionWithNegativeAmount() {
+        double fromRate = 1.0;
+        double toRate = 0.85; 
+        float amount = -100.0f;
+        double expected = -85.0;
+        double result = currencyHelper.currencyConverter(fromRate, toRate, amount);
+        assertEquals(expected, result, 0.01);
+    }
+
+
+
 }
