@@ -77,8 +77,8 @@ public class CurrencyHelperTest {
     public void testFileReader() {
         Map<String, Double[]> dict = new HashMap<>();
         currencyHelper.loadFromFile(dict, "src/files/currency_rates.txt");
-        double yenTo = 148.086221;
-        double yenFrom = 0.006753;
+        double yenTo = 149.285613;
+        double yenFrom = 0.006699;
         Double[] rates = dict.get("Japanese Yen");
         assertNotNull("Rates should not be null", rates);
         //delta: a small threshold value that specifies the acceptable range of error when comparing two floating-point numbers
