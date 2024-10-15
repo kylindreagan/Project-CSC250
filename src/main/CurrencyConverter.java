@@ -134,9 +134,9 @@ public class CurrencyConverter extends javax.swing.JFrame {
         CalculateButton.setBackground(new java.awt.Color(204, 153, 0));
         CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton.setText("Calculate");
-        CalculateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CalculateButtonMouseClicked(evt);
+        CalculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalculateButtonActionPerformed(evt);
             }
         });
 
@@ -266,19 +266,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
         AmountTextField.setText("");
     }//GEN-LAST:event_ClearButtonMouseClicked
 
-    private void CalculateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalculateButtonMouseClicked
-        Double fromRate = currencyDict.get(FromComboBox.getSelectedItem())[1];
-        Double toRate = currencyDict.get(ToComboBox.getSelectedItem())[0];
-        float amount = Float.parseFloat(AmountTextField.getText());
-        Double newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount);
-        String Result = String.format("%.2f %s = %.2f %s", 
-                                  amount, 
-                                  FromComboBox.getSelectedItem(), 
-                                  newAmount, 
-                                  ToComboBox.getSelectedItem());;
-        ResultTextField.setText(Result);
-    }//GEN-LAST:event_CalculateButtonMouseClicked
-
     private void FromCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromCheckBoxActionPerformed
         updateComboBox(FromComboBox, currencyDict, popularCurrencies, FromCheckBox.isSelected());
     }//GEN-LAST:event_FromCheckBoxActionPerformed
@@ -290,6 +277,19 @@ public class CurrencyConverter extends javax.swing.JFrame {
     private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
         this.dispose();
     }//GEN-LAST:event_QuitButtonMouseClicked
+
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        Double fromRate = currencyDict.get(FromComboBox.getSelectedItem())[1];
+        Double toRate = currencyDict.get(ToComboBox.getSelectedItem())[0];
+        float amount = Float.parseFloat(AmountTextField.getText());
+        Double newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount);
+        String Result = String.format("%.2f %s = %.2f %s", 
+                                  amount, 
+                                  FromComboBox.getSelectedItem(), 
+                                  newAmount, 
+                                  ToComboBox.getSelectedItem());;
+        ResultTextField.setText(Result);
+    }//GEN-LAST:event_CalculateButtonActionPerformed
 
     /**
      * @param args the command line arguments
