@@ -52,6 +52,11 @@ public class MainHelperTest {
     }
 
     @Test
+    public void testValidateMoney_ValidWithoutCommaDecimal() {
+        assertTrue(MainHelper.validate_money("1000.50", true));
+    }
+
+    @Test
     public void testValidateMoney_InvalidAlphaCharacters() {
         assertFalse(MainHelper.validate_money("100a", true));
     }

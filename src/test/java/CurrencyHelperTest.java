@@ -114,6 +114,16 @@ public class CurrencyHelperTest {
         assertEquals(expected, result, 0.01);
     }
 
+    @Test
+    public void testValidateCurrency_ValidWithCommaDecimal() {
+        assertTrue(currencyHelper.validate_currency("1,000.50", Locale.US));
+    }
+
+    @Test
+    public void testValidateCurrency_ValidWithoutCommaDecimal() {
+        assertTrue(currencyHelper.validate_currency("1000.50", Locale.US));
+    }
+
 
 
 }

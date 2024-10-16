@@ -55,6 +55,11 @@ public class CurrencyConverter extends javax.swing.JFrame {
             }
         };
         AmountTextField.getDocument().addDocumentListener(documentListener);
+        // Add ActionListener to the JComboBox
+        FromComboBox.addActionListener(e -> documentListener.changedUpdate(null));
+
+        // Add ActionListener to the JCheckBox
+        FromCheckBox.addActionListener(e -> documentListener.changedUpdate(null));
     }
     
     private void updateComboBox(JComboBox<String> comboBox, boolean popular) {

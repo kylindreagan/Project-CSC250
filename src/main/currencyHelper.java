@@ -3,6 +3,7 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -97,29 +98,29 @@ public class currencyHelper {
     }
 
     public static boolean validate_currency(String money, Locale locale) {
-        if(locale != locale.ROOT) {
             // Create an instance of CurrencyValidator
-            String REGEX1 = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
-            String REGEX2 = "^\\d{1,3}(.{1}\\d{3})*(\\,\\d{1,2})?$";
+        if (locale != Locale.ROOT) {
+        // Get locale-specific symbols
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+        char groupingSeparator = symbols.getGroupingSeparator();
+        char decimalSeparator = symbols.getDecimalSeparator();
 
-            if (money.matches(REGEX1) || money.matches(REGEX2)) {
-                BigDecimalValidator validator = CurrencyValidator.getInstance();
+        // Create dynamic regex patterns using locale-specific separators
+        String regex = "^\\d{1,3}(\\" + groupingSeparator + "{1}\\d{3})*(\\" + decimalSeparator + "\\d{1,2})?$";
+        String regexNoGroup = "^\\d+(\\" + decimalSeparator + "\\d{1,2})?$";
 
-    
+            if (money.matches(regex) || (!money.contains(String.valueOf(groupingSeparator)) && !money.contains(String.valueOf(decimalSeparator))) || (!money.contains(String.valueOf(groupingSeparator)) && money.matches(regexNoGroup))) {
                 // Use the validator to check if the money string is valid for the given locale
                 // The validate method returns a BigDecimal if valid, or null if invalid
-                return validator.validate(money, locale) != null;
-            }
-            else {
+                return true;
+            } 
+        else {
                 return false;
             }
-            
-        }
-        else {
-            return MainHelper.validate_money(money, true);
-        }
-
+    } else {
+        return MainHelper.validate_money(money, true);
     }
+}
 
     public static Locale getLocale(String currency) {
         // Define the locale for each currency
