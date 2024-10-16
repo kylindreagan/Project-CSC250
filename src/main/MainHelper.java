@@ -3,12 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
-
-import java.util.Locale;
-
-import org.apache.commons.validator.routines.BigDecimalValidator;
-import org.apache.commons.validator.routines.CurrencyValidator;
-
 /**
  *
  * @author kylin
@@ -16,15 +10,20 @@ import org.apache.commons.validator.routines.CurrencyValidator;
 public class MainHelper {
 
     public static boolean validate_money(String money) {
-        float f;
-        int i;
         try{
-             i = Integer.parseInt(money);
+            Integer.parseInt(money);
             return true;
         }
         catch (NumberFormatException e1) {
+            if (money.contains(",") && money.indexOf(",") != (money.length()-3)) {
+                money = money.replace(".", "");
+                // Replace only the last comma with a dot for correct decimal formatting
+                int lastCommaIndex = money.lastIndexOf(",");
+                money = money.substring(0, lastCommaIndex) + "." + money.substring(lastCommaIndex + 1);
+            }
+            money = money.replace(",", "");
             try {
-                f = Float.parseFloat(money);
+                Float.parseFloat(money);
             }
             catch (NumberFormatException e2) {
                 return false;
