@@ -15,13 +15,22 @@ public class MainHelper {
             return true;
         }
         catch (NumberFormatException e1) {
-            if (money.contains(",") && money.indexOf(",") != (money.length()-3)) {
+            if (money.contains(",") && money.indexOf(",") == (money.length()-3)) {
                 money = money.replace(".", "");
                 // Replace only the last comma with a dot for correct decimal formatting
                 int lastCommaIndex = money.lastIndexOf(",");
                 money = money.substring(0, lastCommaIndex) + "." + money.substring(lastCommaIndex + 1);
             }
-            money = money.replace(",", "");
+            else {
+                money = money.replace(",", "");
+                try{
+                    Integer.parseInt(money);
+                    return true;
+                }
+                catch (NumberFormatException e3) {
+                    System.out.println("Not integer");
+                }
+            }
             try {
                 Float.parseFloat(money);
             }
