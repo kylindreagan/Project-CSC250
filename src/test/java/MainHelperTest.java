@@ -33,56 +33,61 @@ public class MainHelperTest {
 
      @Test
     public void testValidateMoney_ValidInteger() {
-        assertTrue(MainHelper.validate_money("100"));
+        assertTrue(MainHelper.validate_money("100", true));
     }
 
     @Test
     public void testValidateMoney_ValidFloat() {
-        assertTrue(MainHelper.validate_money("100.50"));
+        assertTrue(MainHelper.validate_money("100.50", true));
     }
 
     @Test
     public void testValidateMoney_ValidWithComma() {
-        assertTrue(MainHelper.validate_money("1,000"));
+        assertTrue(MainHelper.validate_money("1,000", true));
     }
 
     @Test
     public void testValidateMoney_ValidWithCommaDecimal() {
-        assertTrue(MainHelper.validate_money("1,000.50"));
+        assertTrue(MainHelper.validate_money("1,000.50", true));
     }
 
     @Test
     public void testValidateMoney_InvalidAlphaCharacters() {
-        assertFalse(MainHelper.validate_money("100a"));
+        assertFalse(MainHelper.validate_money("100a", true));
     }
 
     @Test
     public void testValidateMoney_InvalidEmptyString() {
-        assertFalse(MainHelper.validate_money(""));
+        assertFalse(MainHelper.validate_money("", true));
     }
 
     @Test
     public void testValidateMoney_InvalidSpecialCharacters() {
-        assertFalse(MainHelper.validate_money("$100"));
+        assertFalse(MainHelper.validate_money("$100", true));
     }
 
     @Test
     public void testValidateMoney_ValidDecimalWithComma() {
-        assertTrue(MainHelper.validate_money("1.000,50"));
+        assertTrue(MainHelper.validate_money("1.000,50", true));
     }
 
     @Test
-    public void testValidateMoney_ValidThousandSeparator() {
-        assertTrue(MainHelper.validate_money("2,500.00"));
+    public void testValidateMoney_InvalidNoForeign() {
+        assertFalse(MainHelper.validate_money("1.000,50", false));
+    }
+
+    @Test
+    public void testValidateMoney_ValidNoForeign() {
+        assertTrue(MainHelper.validate_money("2,500.00", false));
     }
 
     @Test
     public void testValidateMoney_InvalidMultipleDots() {
-        assertFalse(MainHelper.validate_money("100.50.60"));
+        assertFalse(MainHelper.validate_money("100.50.60", true));
     }
 
     @Test
     public void testValidateMoney_ValidSmallDecimal() {
-        assertTrue(MainHelper.validate_money("0.99"));
+        assertTrue(MainHelper.validate_money("0.99", true));
     }
 }

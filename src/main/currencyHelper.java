@@ -107,7 +107,7 @@ public class currencyHelper {
             return validator.validate(money, locale) != null;
         }
         else {
-            return MainHelper.validate_money(money);
+            return MainHelper.validate_money(money, true);
         }
 
     }
