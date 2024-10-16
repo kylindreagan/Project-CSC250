@@ -99,12 +99,21 @@ public class currencyHelper {
     public static boolean validate_currency(String money, Locale locale) {
         if(locale != locale.ROOT) {
             // Create an instance of CurrencyValidator
-            BigDecimalValidator validator = CurrencyValidator.getInstance();
+            String REGEX1 = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
+            String REGEX2 = "^\\d{1,3}(.{1}\\d{3})*(\\,\\d{1,2})?$";
+
+            if (money.matches(REGEX1) || money.matches(REGEX2)) {
+                BigDecimalValidator validator = CurrencyValidator.getInstance();
 
     
-            // Use the validator to check if the money string is valid for the given locale
-            // The validate method returns a BigDecimal if valid, or null if invalid
-            return validator.validate(money, locale) != null;
+                // Use the validator to check if the money string is valid for the given locale
+                // The validate method returns a BigDecimal if valid, or null if invalid
+                return validator.validate(money, locale) != null;
+            }
+            else {
+                return false;
+            }
+            
         }
         else {
             return MainHelper.validate_money(money, true);
