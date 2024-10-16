@@ -9,6 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import main.currencyHelper;
@@ -89,7 +90,7 @@ public class CurrencyHelperTest {
 
     @Test
     public void testEmptyCurrency() {
-        double result = currencyHelper.currencyConverter(0.0, 0.0, 0.0f);
+        double result = currencyHelper.currencyConverter(0.0, 0.0, "0.00", Locale.ROOT);
         assertEquals(result, 0.0, .01);
     }
 
@@ -97,9 +98,9 @@ public class CurrencyHelperTest {
     public void testBasicConversion() {
         double fromRate = 1.0; // 1 USD
         double toRate = 0.85;  // 0.85 EUR
-        float amount = 100.0f;  // 100 USD
+        String amount = "100.00";  // 100 USD
         double expected = 85.0;  // Expected result is 85 EUR
-        double result = currencyHelper.currencyConverter(fromRate, toRate, amount);
+        double result = currencyHelper.currencyConverter(fromRate, toRate, amount, Locale.ROOT);
         assertEquals(expected, result, 0.01f); // Allow a small delta for floating-point comparison
     }
 
@@ -107,9 +108,9 @@ public class CurrencyHelperTest {
     public void testConversionWithNegativeAmount() {
         double fromRate = 1.0;
         double toRate = 0.85; 
-        float amount = -100.0f;
+        String amount = "-100.00";
         double expected = -85.0;
-        double result = currencyHelper.currencyConverter(fromRate, toRate, amount);
+        double result = currencyHelper.currencyConverter(fromRate, toRate, amount, Locale.ROOT);
         assertEquals(expected, result, 0.01);
     }
 

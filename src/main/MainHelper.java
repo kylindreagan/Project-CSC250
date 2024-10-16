@@ -4,11 +4,17 @@
  */
 package main;
 
+import java.util.Locale;
+
+import org.apache.commons.validator.routines.BigDecimalValidator;
+import org.apache.commons.validator.routines.CurrencyValidator;
+
 /**
  *
  * @author kylin
  */
 public class MainHelper {
+
     public static boolean validate_money(String money) {
         float f;
         int i;
@@ -28,6 +34,6 @@ public class MainHelper {
             }
 
             return true;
-            }
+        }
     }
 }
