@@ -10,8 +10,6 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 
-import org.apache.commons.validator.routines.BigDecimalValidator;
-import org.apache.commons.validator.routines.CurrencyValidator;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -113,7 +111,6 @@ public class currencyHelper {
 }
 
     public static boolean validate_currency(String money, Locale locale) {
-            // Create an instance of CurrencyValidator
         if (locale != Locale.ROOT) {
     // Get locale-specific symbols
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
