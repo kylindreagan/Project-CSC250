@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.event.ActionListener;
+
 
 /**
  *
@@ -50,11 +52,16 @@ public class CurrencyConverter extends javax.swing.JFrame {
             @Override
             public void changedUpdate(DocumentEvent e) { checkFields(); }
             private void checkFields() {
-                boolean allFilled = MainHelper.validate_money(AmountTextField.getText());
+                boolean allFilled = currencyHelper.validate_currency(AmountTextField.getText(), currencyHelper.getLocale(FromComboBox.getSelectedItem().toString()));
                 CalculateButton.setEnabled(allFilled);
             }
         };
         AmountTextField.getDocument().addDocumentListener(documentListener);
+        // Add ActionListener to the JComboBox
+        FromComboBox.addActionListener(e -> documentListener.changedUpdate(null));
+
+        // Add ActionListener to the JCheckBox
+        FromCheckBox.addActionListener(e -> documentListener.changedUpdate(null));
     }
     
     private void updateComboBox(JComboBox<String> comboBox, boolean popular) {
@@ -249,7 +256,14 @@ public class CurrencyConverter extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearButtonMouseClicked
 
     private void FromCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromCheckBoxActionPerformed
+        ActionListener[] listeners = FromComboBox.getActionListeners();
+        for (ActionListener listener : listeners) {
+            FromComboBox.removeActionListener(listener);
+        }
         updateComboBox(FromComboBox, FromCheckBox.isSelected());
+        for (ActionListener listener : listeners) {
+            FromComboBox.addActionListener(listener);
+        }
     }//GEN-LAST:event_FromCheckBoxActionPerformed
 
     private void ToCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToCheckBoxActionPerformed
@@ -261,15 +275,17 @@ public class CurrencyConverter extends javax.swing.JFrame {
     }//GEN-LAST:event_QuitButtonMouseClicked
 
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        Object toCountry = ToComboBox.getSelectedItem();
         Double fromRate = currencyDict.get(FromComboBox.getSelectedItem())[1];
-        Double toRate = currencyDict.get(ToComboBox.getSelectedItem())[0];
-        float amount = Float.parseFloat(AmountTextField.getText());
-        Double newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount);
-        String Result = String.format("%.2f %s = %.2f %s", 
+        Double toRate = currencyDict.get(toCountry)[0];
+        String amount = AmountTextField.getText().toString();
+
+        Double newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount, currencyHelper.getLocale(toCountry.toString()));
+        String Result = String.format("%s %s = %.2f %s", 
                                   amount, 
                                   FromComboBox.getSelectedItem(), 
                                   newAmount, 
-                                  ToComboBox.getSelectedItem());;
+                                  ToComboBox.getSelectedItem());
         ResultTextField.setText(Result);
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
