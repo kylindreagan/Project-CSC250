@@ -13,8 +13,10 @@ public class MainHelper {
         if (allow_foreign) {
             String REGEX1 = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
             String REGEX2 = "^\\d{1,3}(.{1}\\d{3})*(\\,\\d{1,2})?$";
+            String regexNoGroup = "^\\d+(\\.\\d{1,2})?$";
+            String regexNoGroup2 = "^\\d+(\\,\\d{1,2})?$";
 
-            if (money.matches(REGEX1) || money.matches(REGEX2)) {
+            if (money.matches(REGEX1) || money.matches(REGEX2) || money.matches(regexNoGroup) || money.matches(regexNoGroup2)) {
                 return true;
             } else {
                 return false;
@@ -22,8 +24,9 @@ public class MainHelper {
         }
         else {
             String REGEX = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
+            String regexNoGroup = "^\\d+(\\.\\d{1,2})?$";
 
-            if (money.matches(REGEX)) {
+            if (money.matches(REGEX) || money.matches(regexNoGroup)) {
                 return true;
             } else {
                 return false;
