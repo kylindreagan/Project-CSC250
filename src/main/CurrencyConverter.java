@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.event.ActionListener;
+
 
 /**
  *
@@ -254,7 +256,14 @@ public class CurrencyConverter extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearButtonMouseClicked
 
     private void FromCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromCheckBoxActionPerformed
+        ActionListener[] listeners = FromComboBox.getActionListeners();
+        for (ActionListener listener : listeners) {
+            FromComboBox.removeActionListener(listener);
+        }
         updateComboBox(FromComboBox, FromCheckBox.isSelected());
+        for (ActionListener listener : listeners) {
+            FromComboBox.addActionListener(listener);
+        }
     }//GEN-LAST:event_FromCheckBoxActionPerformed
 
     private void ToCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToCheckBoxActionPerformed

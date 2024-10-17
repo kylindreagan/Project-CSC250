@@ -3,7 +3,10 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -87,33 +90,46 @@ public class currencyHelper {
 
 
     public static Double currencyConverter(double fromRate, double toRate, String currency, Locale locale) {
-        if(locale != locale.ROOT) {
-        BigDecimalValidator validator = CurrencyValidator.getInstance();
-        double newRate = validator.validate(currency, locale).doubleValue() * fromRate * toRate;
-        return newRate;
+    if (locale != Locale.ROOT) {
+        try {
+            // Create a NumberFormat instance for the given locale
+            NumberFormat format = NumberFormat.getNumberInstance(locale);
+            // Parse the currency string into a Number object
+            Number number = format.parse(currency);
+            // Convert the parsed number to BigDecimal for precision
+            BigDecimal parsedValue = new BigDecimal(number.doubleValue());
+            // Calculate the new rate
+            double newRate = parsedValue.doubleValue() * fromRate * toRate;
+            return newRate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            // Handle the parse exception, perhaps return 0.0 or handle it in another way
+            return 0.0;
         }
-        else {
-            return Double.valueOf(currency) * fromRate * toRate;
-        }
+    } else {
+        // When Locale.ROOT is used, directly parse the string as a Double
+        return Double.valueOf(currency) * fromRate * toRate;
     }
+}
 
     public static boolean validate_currency(String money, Locale locale) {
             // Create an instance of CurrencyValidator
         if (locale != Locale.ROOT) {
-        // Get locale-specific symbols
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
-        char groupingSeparator = symbols.getGroupingSeparator();
-        char decimalSeparator = symbols.getDecimalSeparator();
+    // Get locale-specific symbols
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+    char groupingSeparator = symbols.getGroupingSeparator();
+    char decimalSeparator = symbols.getDecimalSeparator();
 
-        // Create dynamic regex patterns using locale-specific separators
-        String regex = "^\\d{1,3}(\\" + groupingSeparator + "{1}\\d{3})*(\\" + decimalSeparator + "\\d{1,2})?$";
-        String regexNoGroup = "^\\d+(\\" + decimalSeparator + "\\d{1,2})?$";
+    // Create dynamic regex patterns using locale-specific separators
+    // Grouped pattern: numbers with grouping separators
+    String regexWithGroup = "^\\d{1,3}(\\" + groupingSeparator + "\\d{3})*(\\" + decimalSeparator + "\\d{1,2})?$";
+    // Ungrouped pattern: numbers without grouping separators (e.g., 1000, 1000.00)
+    String regexNoGroup = "^\\d+([" + decimalSeparator + "]\\d{1,2})?$";
 
-            if (money.matches(regex) || (!money.contains(String.valueOf(groupingSeparator)) && !money.contains(String.valueOf(decimalSeparator))) || (!money.contains(String.valueOf(groupingSeparator)) && money.matches(regexNoGroup))) {
-                // Use the validator to check if the money string is valid for the given locale
-                // The validate method returns a BigDecimal if valid, or null if invalid
-                return true;
-            } 
+    // Check if the money string matches either the grouped or ungrouped pattern
+    if (money.matches(regexWithGroup) || money.matches(regexNoGroup)) {
+        return true;
+    }
         else {
                 return false;
             }
