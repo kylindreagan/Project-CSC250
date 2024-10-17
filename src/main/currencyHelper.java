@@ -3,12 +3,14 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Currency;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -87,7 +89,7 @@ public class currencyHelper {
     }
 
 
-    public static Double currencyConverter(double fromRate, double toRate, String currency, Locale locale) {
+    public static String currencyConverter(double fromRate, double toRate, String currency, Locale locale) {
     if (locale != Locale.ROOT) {
         try {
             // Create a NumberFormat instance for the given locale
@@ -98,15 +100,16 @@ public class currencyHelper {
             BigDecimal parsedValue = new BigDecimal(number.doubleValue());
             // Calculate the new rate
             double newRate = parsedValue.doubleValue() * fromRate * toRate;
-            return newRate;
+            return formatCurrency(newRate, locale);
         } catch (ParseException e) {
             e.printStackTrace();
             // Handle the parse exception, perhaps return 0.0 or handle it in another way
-            return 0.0;
+            return "0.00";
         }
     } else {
         // When Locale.ROOT is used, directly parse the string as a Double
-        return Double.valueOf(currency) * fromRate * toRate;
+        double number =  Double.valueOf(currency) * fromRate * toRate;
+        return String.format("%.2f", number);
     }
 }
 
@@ -134,6 +137,17 @@ public class currencyHelper {
         return MainHelper.validate_money(money, true);
     }
 }
+    public static String getCurrencySymbol(Locale locale) {
+        Currency currency = Currency.getInstance(locale);
+        return currency.getSymbol(locale);
+    }
+
+        public static String formatCurrency(double amount, Locale locale) {
+            // Get a currency instance of NumberFormat for the given locale
+            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+            // Format the amount into a currency string
+            return currencyFormatter.format(amount);
+        }
 
     public static Locale getLocale(String currency) {
         // Define the locale for each currency

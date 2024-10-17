@@ -280,8 +280,8 @@ public class CurrencyConverter extends javax.swing.JFrame {
         Double toRate = currencyDict.get(toCountry)[0];
         String amount = AmountTextField.getText().toString();
 
-        Double newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount, currencyHelper.getLocale(toCountry.toString()));
-        String Result = String.format("%s %s = %.2f %s", 
+        String newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount, currencyHelper.getLocale(toCountry.toString()));
+        String Result = String.format("%s %s = %s %s", 
                                   amount, 
                                   FromComboBox.getSelectedItem(), 
                                   newAmount, 
