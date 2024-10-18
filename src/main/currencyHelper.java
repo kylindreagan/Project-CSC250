@@ -100,7 +100,7 @@ public class currencyHelper {
             BigDecimal parsedValue = new BigDecimal(number.doubleValue());
             // Calculate the new rate
             double newRate = parsedValue.doubleValue() * fromRate * toRate;
-            return formatCurrency(newRate, locale);
+            return formatCurrency(String.valueOf(newRate), locale);
         } catch (ParseException e) {
             e.printStackTrace();
             // Handle the parse exception, perhaps return 0.0 or handle it in another way
@@ -142,11 +142,24 @@ public class currencyHelper {
         return currency.getSymbol(locale);
     }
 
-        public static String formatCurrency(double amount, Locale locale) {
+        public static String formatCurrency(String amount, Locale locale) {
+            try {
+            NumberFormat format = NumberFormat.getNumberInstance(locale);
+            // Parse the currency string into a Number object
+            Number number = format.parse(amount);
+            // Convert the parsed number to BigDecimal for precision
+            BigDecimal parsedValue = new BigDecimal(number.doubleValue());
             // Get a currency instance of NumberFormat for the given locale
             NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
             // Format the amount into a currency string
-            return currencyFormatter.format(amount);
+            return currencyFormatter.format(parsedValue);
+            }
+            catch (ParseException e) {
+            e.printStackTrace();
+            // Handle the parse exception, perhaps return 0.0 or handle it in another way
+            return amount;
+        }
+            
         }
 
     public static Locale getLocale(String currency) {
