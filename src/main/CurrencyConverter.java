@@ -4,6 +4,8 @@
  */
 package main;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionListener;
-import java.util.Locale;
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -168,17 +171,17 @@ public class CurrencyConverter extends javax.swing.JFrame {
             }
         });
 
-        FromAmountLabel.setFont(new java.awt.Font("MS Gothic", 1, 18)); // NOI18N
+        FromAmountLabel.setFont(getFont());
         FromAmountLabel.setForeground(new java.awt.Color(153, 153, 0));
         FromAmountLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         FromAmountLabel.setText("$100.00");
 
-        ToAmountLabel.setFont(new java.awt.Font("MS Gothic", 1, 24)); // NOI18N
+        ToAmountLabel.setFont(getFont());
         ToAmountLabel.setForeground(new java.awt.Color(153, 153, 0));
         ToAmountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ToAmountLabel.setText("$100.00");
 
-        equivLabel.setFont(new java.awt.Font("MS Gothic", 1, 18)); // NOI18N
+        equivLabel.setFont(getFont());
         equivLabel.setForeground(new java.awt.Color(153, 153, 0));
         equivLabel.setText("is equivelant to...");
 
@@ -188,9 +191,10 @@ public class CurrencyConverter extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addComponent(FromCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,14 +229,14 @@ public class CurrencyConverter extends javax.swing.JFrame {
                         .addComponent(AmountLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(64, 64, 64)
                                 .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
                                 .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(101, 101, 101)
                                 .addComponent(equivLabel)
-                                .addGap(0, 34, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(31, 31, 31))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(ToAmountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -265,7 +269,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FromAmountLabel)
                             .addComponent(equivLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(AmountLabel1)
@@ -319,6 +323,12 @@ public class CurrencyConverter extends javax.swing.JFrame {
         ToAmountLabel.setText(newAmount);
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
+    
+    public Font getFont() {
+        Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 18);
+        customFont = customFont.deriveFont(18f); // Set the desired size
+        return customFont;
+    }
     /**
      * @param args the command line arguments
      */
