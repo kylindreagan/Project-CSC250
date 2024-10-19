@@ -92,13 +92,7 @@ public class currencyHelper {
 
     public static String currencyConverter(double fromRate, double toRate, String currency, Locale toLocale, Locale fromLocale) {
     if (toLocale != Locale.ROOT) {
-        BigDecimal newCurrency;
-                if (fromLocale != Locale.ROOT) {
-                    newCurrency = unformatCurrency(currency, fromLocale);
-                }
-                else {
-                    newCurrency = new BigDecimal(currency);
-                }
+                BigDecimal newCurrency = unformatCurrency(currency, fromLocale);
                 
                 // Calculate the new rate
                 BigDecimal newRate = newCurrency.multiply(BigDecimal.valueOf(fromRate)).multiply(BigDecimal.valueOf(toRate));
@@ -170,6 +164,23 @@ public class currencyHelper {
         }
             
         }
+    public static String generateWarningMessage(String amount, Locale locale) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+        char groupingSeparator = symbols.getGroupingSeparator();
+        char decimalSeparator = symbols.getDecimalSeparator();
+        String regexWhole = "^\\d{1,3}(\\" + decimalSeparator + "\\d{3})*(\\" + groupingSeparator + "\\d{1,2})?$";
+        if (amount.isEmpty()) {
+            return "Amount cannot be empty.";
+        }
+        
+        else if (!amount.matches("^[0-9.,]*$")) {
+            return "Amount contains invalid characters (Can only cantains digits, commas, and dots)";
+        }
+        else if (amount.matches(regexWhole)) {
+            return "Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+        }
+        return "Unknown formatting issue.";
+    }
 
     public static Locale getLocale(String currency) {
         // Define the locale for each currency
