@@ -16,6 +16,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 
 /**
@@ -317,9 +318,10 @@ public class CurrencyConverter extends javax.swing.JFrame {
         Double fromRate = currencyDict.get(FromComboBox.getSelectedItem())[1];
         Double toRate = currencyDict.get(toCountry)[0];
         String amount = AmountTextField.getText().toString();
+        Locale fromCountryLocale = currencyHelper.getLocale(fromCountry.toString());
 
-        String newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount, currencyHelper.getLocale(toCountry.toString()));
-        FromAmountLabel.setText(currencyHelper.formatCurrency(amount, currencyHelper.getLocale(fromCountry.toString())));
+        String newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount, currencyHelper.getLocale(toCountry.toString()), fromCountryLocale);
+        FromAmountLabel.setText(currencyHelper.formatCurrency(currencyHelper.unformatCurrency(amount, fromCountryLocale), fromCountryLocale));
         ToAmountLabel.setText(newAmount);
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
