@@ -3,12 +3,15 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Currency;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -87,26 +90,20 @@ public class currencyHelper {
     }
 
 
-    public static Double currencyConverter(double fromRate, double toRate, String currency, Locale locale) {
-    if (locale != Locale.ROOT) {
-        try {
-            // Create a NumberFormat instance for the given locale
-            NumberFormat format = NumberFormat.getNumberInstance(locale);
-            // Parse the currency string into a Number object
-            Number number = format.parse(currency);
-            // Convert the parsed number to BigDecimal for precision
-            BigDecimal parsedValue = new BigDecimal(number.doubleValue());
-            // Calculate the new rate
-            double newRate = parsedValue.doubleValue() * fromRate * toRate;
-            return newRate;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            // Handle the parse exception, perhaps return 0.0 or handle it in another way
-            return 0.0;
-        }
+    public static String currencyConverter(double fromRate, double toRate, String currency, Locale toLocale, Locale fromLocale) {
+    if (toLocale != Locale.ROOT) {
+                BigDecimal newCurrency = unformatCurrency(currency, fromLocale);
+                
+                // Calculate the new rate
+                BigDecimal newRate = newCurrency.multiply(BigDecimal.valueOf(fromRate)).multiply(BigDecimal.valueOf(toRate));
+                
+                // Format the new rate as a currency string
+                return formatCurrency(newRate, toLocale);
+       
     } else {
         // When Locale.ROOT is used, directly parse the string as a Double
-        return Double.valueOf(currency) * fromRate * toRate;
+        double number = Double.valueOf(currency) * fromRate * toRate;
+        return String.format("%.2f", number);
     }
 }
 
@@ -134,6 +131,56 @@ public class currencyHelper {
         return MainHelper.validate_money(money, true);
     }
 }
+    public static String getCurrencySymbol(Locale locale) {
+        Currency currency = Currency.getInstance(locale);
+        return currency.getSymbol(locale);
+    }
+    
+    public static BigDecimal unformatCurrency(String amount, Locale locale) {
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+            char groupingSeparator = symbols.getGroupingSeparator();
+            char decimalSeparator = symbols.getDecimalSeparator();
+
+            // Remove grouping separators before parsing
+            String cleanedCurrency = amount.replaceAll("\\Q" + groupingSeparator + "\\E", ""); // Escape groupingSeparator
+            // Replace the locale-specific decimal separator with '.'
+            cleanedCurrency = cleanedCurrency.replace(Character.toString(decimalSeparator), ".");
+            BigDecimal parsedValue = new BigDecimal(cleanedCurrency);
+            return parsedValue;
+        
+    }
+
+        public static String formatCurrency(BigDecimal amount, Locale locale) {
+            try {
+            // Get a currency instance of NumberFormat for the given locale
+            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+            // Format the amount into a currency string
+            return currencyFormatter.format(amount);
+            }
+            catch (NumberFormatException e) {
+            e.printStackTrace();
+            // Handle the parse exception, perhaps return 0.0 or handle it in another way
+            return amount.toString();
+        }
+            
+        }
+    public static String generateWarningMessage(String amount, Locale locale) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+        char groupingSeparator = symbols.getGroupingSeparator();
+        char decimalSeparator = symbols.getDecimalSeparator();
+        String regexWhole = "^\\d{1,3}(\\" + decimalSeparator + "\\d{3})*(\\" + groupingSeparator + "\\d{1,2})?$";
+        if (amount.isEmpty()) {
+            return "Amount cannot be empty.";
+        }
+        
+        else if (!amount.matches("^[0-9.,]*$")) {
+            return "Amount contains invalid characters (Can only cantains digits, commas, and dots)";
+        }
+        else if (amount.matches(regexWhole)) {
+            return "Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+        }
+        return "Unknown formatting issue.";
+    }
 
     public static Locale getLocale(String currency) {
         // Define the locale for each currency
