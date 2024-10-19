@@ -97,14 +97,24 @@ public class CurrencyHelperTest {
 
     @Test
     public void testBasicConversion() {
-        double fromRate = 1.0; // 1 USD
-        double toRate = 0.85;  // 0.85 EUR
-        String amount = "100.00";  // 100 USD
-        String expected = "85.00";  // Expected result is 85 EUR
+        double fromRate = 1.0;
+        double toRate = 0.85;
+        String amount = "100.00"; 
+        String expected = "85.00"; 
         String result = currencyHelper.currencyConverter(fromRate, toRate, amount, Locale.ROOT, Locale.ROOT);
-        assertEquals(expected, result, 0.01f); // Allow a small delta for floating-point comparison
+        assertEquals(expected, result);
     }
-    
+
+    @Test
+    public void testBasicConversionWLocale() {
+        double fromRate = 1.0;
+        double toRate = 0.85;
+        String amount = "100.00"; 
+        String expected = "$85.00"; 
+        String result = currencyHelper.currencyConverter(fromRate, toRate, amount, Locale.US, Locale.ROOT);
+        assertEquals(expected, result);
+    }
+
     @Test
     public void testValidateCurrency_ValidWithCommaDecimal() {
         assertTrue(currencyHelper.validate_currency("1,000.50", Locale.US));
