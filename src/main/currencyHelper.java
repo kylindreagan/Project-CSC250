@@ -109,9 +109,10 @@ public class currencyHelper {
         if (locale != Locale.ROOT) {
     // Get locale-specific symbols
     int i;
-    if (locale == Locale.JAPAN || locale == new Locale("es", "CL") || locale == Locale.KOREA) {
+    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) {
         return validate_nondec_currency(money);
     }
+    System.out.print(locale);
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     char groupingSeparator = symbols.getGroupingSeparator();
     char decimalSeparator = symbols.getDecimalSeparator();
@@ -182,6 +183,7 @@ public class currencyHelper {
         char groupingSeparator = symbols.getGroupingSeparator();
         char decimalSeparator = symbols.getDecimalSeparator();
         String regexWhole = "^\\d{1,3}(\\" + decimalSeparator + "\\d{3})*(\\" + groupingSeparator + "\\d{1,2})?$";
+        String regexNoGroup = "^\\d+([" + groupingSeparator + "]\\d{1,2})?$";
         if (amount.isEmpty()) {
             return "⚠ Amount cannot be empty.";
         }
@@ -189,17 +191,14 @@ public class currencyHelper {
         else if (!amount.matches("^[0-9.,]*$")) {
             return "⚠ Amount contains invalid characters (Can only cantains digits, commas, and dots)";
         }
-        else if (amount.matches(regexWhole)) {
-            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+        else if (amount.matches(regexWhole) || amount.matches(regexNoGroup)) {
+            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
-        else if (amount.matches(regexWhole)) {
-            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
-        }
-        else if ((locale == Locale.JAPAN || locale == new Locale("es", "CL") || locale == Locale.KOREA) && !validate_nondec_currency(amount)) {
+        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount)) {
             return "⚠ This format only is valid for nonnegative integers.";
         }
         else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {
-            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
         return "⚠ Unknown formatting error";
     }
