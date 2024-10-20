@@ -8,7 +8,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import main.currencyHelper;
@@ -89,28 +91,56 @@ public class CurrencyHelperTest {
 
     @Test
     public void testEmptyCurrency() {
-        double result = currencyHelper.currencyConverter(0.0, 0.0, 0.0f);
-        assertEquals(result, 0.0, .01);
+        String result = currencyHelper.currencyConverter(0.0, 0.0, "0.00", Locale.ROOT, Locale.ROOT);
+        assertEquals(result, "0.00");
     }
 
     @Test
     public void testBasicConversion() {
-        double fromRate = 1.0; // 1 USD
-        double toRate = 0.85;  // 0.85 EUR
-        float amount = 100.0f;  // 100 USD
-        double expected = 85.0;  // Expected result is 85 EUR
-        double result = currencyHelper.currencyConverter(fromRate, toRate, amount);
-        assertEquals(expected, result, 0.01f); // Allow a small delta for floating-point comparison
+        double fromRate = 1.0;
+        double toRate = 0.85;
+        String amount = "100.00"; 
+        String expected = "85.00"; 
+        String result = currencyHelper.currencyConverter(fromRate, toRate, amount, Locale.ROOT, Locale.ROOT);
+        assertEquals(expected, result);
     }
 
     @Test
-    public void testConversionWithNegativeAmount() {
+    public void testBasicConversionWLocale() {
         double fromRate = 1.0;
-        double toRate = 0.85; 
-        float amount = -100.0f;
-        double expected = -85.0;
-        double result = currencyHelper.currencyConverter(fromRate, toRate, amount);
-        assertEquals(expected, result, 0.01);
+        double toRate = 0.85;
+        String amount = "100.00"; 
+        String expected = "$85.00"; 
+        String result = currencyHelper.currencyConverter(fromRate, toRate, amount, Locale.US, Locale.ROOT);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testValidateCurrency_ValidWithCommaDecimal() {
+        assertTrue(currencyHelper.validate_currency("1,000.50", Locale.US));
+    }
+
+    @Test
+    public void testValidateCurrency_ValidWithoutCommaDecimal() {
+        assertTrue(currencyHelper.validate_currency("1000.50", Locale.US));
+    }
+
+    @Test
+    public void testUnformat_USD() {
+        Locale locale = Locale.US;
+        String amount = "1,000.00";
+        BigDecimal expected = new BigDecimal(1000.0);
+        BigDecimal actual = currencyHelper.unformatCurrency(amount, locale);
+        assertEquals(0, actual.compareTo(expected));
+    }
+
+    @Test
+    public void testUnformat_Euro() {
+        Locale locale = Locale.forLanguageTag("de-DE");;
+        String amount = "1.000,00";
+        BigDecimal expected = new BigDecimal(1000.0);
+        BigDecimal actual = currencyHelper.unformatCurrency(amount, locale);
+        assertEquals(0, actual.compareTo(expected));
     }
 
 

@@ -3,31 +3,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
-
 /**
  *
  * @author kylin
  */
 public class MainHelper {
-    public static boolean validate_money(String money) {
-        float f;
-        int i;
-        try{
-             i = Integer.parseInt(money);
-            return true;
-        }
-        catch (NumberFormatException e1) {
-            try {
-                f = Float.parseFloat(money);
-            }
-            catch (NumberFormatException e2) {
-                return false;
-            }
-            if (money.indexOf(".") != (money.length()-3)) {
-                return false;
-            }
 
-            return true;
+    public static boolean validate_money(String money, boolean allow_foreign) {
+        if (allow_foreign) {
+            String REGEX1 = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
+            String REGEX2 = "^\\d{1,3}(.{1}\\d{3})*(\\,\\d{1,2})?$";
+            String regexNoGroup = "^\\d+(\\.\\d{1,2})?$";
+            String regexNoGroup2 = "^\\d+(\\,\\d{1,2})?$";
+
+            if (money.matches(REGEX1) || money.matches(REGEX2) || money.matches(regexNoGroup) || money.matches(regexNoGroup2)) {
+                return true;
+            } else {
+                return false;
             }
+        }
+        else {
+            String REGEX = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
+            String regexNoGroup = "^\\d+(\\.\\d{1,2})?$";
+
+            if (money.matches(REGEX) || money.matches(regexNoGroup)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
+    public static boolean is_positive(float f) {
+        return f > 0;
+    }
+
+    public static boolean is_zero (float f) {
+        return f == 0;
+        
     }
 }
