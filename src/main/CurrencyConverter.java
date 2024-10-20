@@ -18,6 +18,7 @@ import java.util.Locale;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.util.Collections;
 
 
 /**
@@ -78,6 +79,8 @@ public class CurrencyConverter extends javax.swing.JFrame {
         comboBox.removeAllItems();
         
         List<String> items = popular ? Popular_Currencies : new ArrayList<>(currencyDict.keySet());
+        
+        Collections.sort(items);
         for (String item : items) {
             comboBox.addItem(item);
     }
@@ -243,9 +246,9 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 46, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

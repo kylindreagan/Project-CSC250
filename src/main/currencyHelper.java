@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Currency;
@@ -110,6 +108,10 @@ public class currencyHelper {
     public static boolean validate_currency(String money, Locale locale) {
         if (locale != Locale.ROOT) {
     // Get locale-specific symbols
+    int i;
+    if (locale == Locale.JAPAN || locale == new Locale("es", "CL") || locale == Locale.KOREA) {
+        return validate_nondec_currency(money);
+    }
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     char groupingSeparator = symbols.getGroupingSeparator();
     char decimalSeparator = symbols.getDecimalSeparator();
@@ -134,6 +136,17 @@ public class currencyHelper {
     public static String getCurrencySymbol(Locale locale) {
         Currency currency = Currency.getInstance(locale);
         return currency.getSymbol(locale);
+    }
+    
+    public static Boolean validate_nondec_currency(String money) {
+        int i;
+        try {
+            i = Integer.parseInt(money); 
+                return MainHelper.is_nonneg(i);
+            }
+            catch (NumberFormatException e) {
+                return false;
+            }
     }
     
     public static BigDecimal unformatCurrency(String amount, Locale locale) {
@@ -178,6 +191,12 @@ public class currencyHelper {
         }
         else if (amount.matches(regexWhole)) {
             return "Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+        }
+        else if (amount.matches(regexWhole)) {
+            return "Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+        }
+        else if ((locale == Locale.JAPAN || locale == new Locale("es", "CL") || locale == Locale.KOREA) && !validate_nondec_currency(amount)) {
+            return "This format only is valid for nonnegative integers.";
         }
         return "Unknown formatting issue.";
     }
