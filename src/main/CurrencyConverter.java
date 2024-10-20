@@ -150,6 +150,11 @@ public class CurrencyConverter extends javax.swing.JFrame {
         CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton.setText("Calculate");
         CalculateButton.setToolTipText("Click to calculate the converted amount.");
+        CalculateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CalculateButtonMouseClicked(evt);
+            }
+        });
         CalculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalculateButtonActionPerformed(evt);
@@ -350,6 +355,10 @@ public class CurrencyConverter extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_AmountTextFieldKeyPressed
+
+    private void CalculateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalculateButtonMouseClicked
+        requestFocusInWindow();
+    }//GEN-LAST:event_CalculateButtonMouseClicked
 
     
     public Font getFont() {
