@@ -198,6 +198,9 @@ public class currencyHelper {
         else if ((locale == Locale.JAPAN || locale == new Locale("es", "CL") || locale == Locale.KOREA) && !validate_nondec_currency(amount)) {
             return "⚠ This format only is valid for nonnegative integers.";
         }
+        else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {
+            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+        }
         return "⚠ Unknown formatting error";
     }
 
