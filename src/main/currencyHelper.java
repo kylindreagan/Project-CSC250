@@ -195,7 +195,7 @@ public class currencyHelper {
             return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
         else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount)) {
-            return "⚠ This format only is valid for nonnegative integers.";
+            return "⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.";
         }
         else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {
             return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
