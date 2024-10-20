@@ -63,9 +63,21 @@ public class CurrencyConverter extends javax.swing.JFrame {
             @Override
             public void changedUpdate(DocumentEvent e) { checkFields(); }
             private void checkFields() {
+                Object country = FromComboBox.getSelectedItem();
+                String amount = AmountTextField.getText();
+                Locale locale = currencyHelper.getLocale(country.toString());
                 boolean allFilled = currencyHelper.validate_currency(AmountTextField.getText(), currencyHelper.getLocale(FromComboBox.getSelectedItem().toString()));
                 CalculateButton.setEnabled(allFilled);
+                if (!allFilled){
+                String message = currencyHelper.generateWarningMessage(amount, locale);
+                WarningLabel.setText(message); 
+                AmountTextField.setForeground(Color.red);
             }
+            else {
+                AmountTextField.setForeground(Color.black);
+                WarningLabel.setText("");
+            }
+          }
         };
         AmountTextField.getDocument().addDocumentListener(documentListener);
         // Add ActionListener to the JComboBox
@@ -135,11 +147,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
 
         AmountTextField.setText("100");
         AmountTextField.setToolTipText("Enter the amount to be converted.");
-        AmountTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                AmountTextFieldFocusLost(evt);
-            }
-        });
         AmountTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 AmountTextFieldKeyPressed(evt);
@@ -150,11 +157,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
         CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton.setText("Calculate");
         CalculateButton.setToolTipText("Click to calculate the converted amount.");
-        CalculateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CalculateButtonMouseClicked(evt);
-            }
-        });
         CalculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalculateButtonActionPerformed(evt);
@@ -330,35 +332,13 @@ public class CurrencyConverter extends javax.swing.JFrame {
         CalculateFunction();
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
-    private void AmountTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_AmountTextFieldFocusLost
-        Object country = FromComboBox.getSelectedItem();
-        String amount = AmountTextField.getText();
-        Locale locale = currencyHelper.getLocale(country.toString());
-        if (!currencyHelper.validate_currency(amount, locale)) {
-            String message = currencyHelper.generateWarningMessage(amount, locale);
-            showWarning(message);
-            AmountTextField.setForeground(Color.red);
-        }
-        else {
-            AmountTextField.setForeground(Color.black);
-            WarningLabel.setText("");
-        }
-    }//GEN-LAST:event_AmountTextFieldFocusLost
-
     private void AmountTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmountTextFieldKeyPressed
         if (evt.getKeyCode() == 10) {
             if (CalculateButton.isEnabled()) {
                 CalculateFunction();
             }
-            else {
-                requestFocusInWindow();
-            }
         }
     }//GEN-LAST:event_AmountTextFieldKeyPressed
-
-    private void CalculateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalculateButtonMouseClicked
-        requestFocusInWindow();
-    }//GEN-LAST:event_CalculateButtonMouseClicked
 
     
     public Font getFont() {
@@ -401,12 +381,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 new CurrencyConverter().setVisible(true);
             }
         });
-    }
-    
-    private void showWarning(String message) {
-        // Show warning with a symbol
-        WarningLabel.setText("⚠️ " + message); // Add a warning symbol
-        WarningLabel.setVisible(true); // Show the label
     }
     
     private void CalculateFunction() {

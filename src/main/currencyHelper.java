@@ -183,22 +183,22 @@ public class currencyHelper {
         char decimalSeparator = symbols.getDecimalSeparator();
         String regexWhole = "^\\d{1,3}(\\" + decimalSeparator + "\\d{3})*(\\" + groupingSeparator + "\\d{1,2})?$";
         if (amount.isEmpty()) {
-            return "Amount cannot be empty.";
+            return "⚠ Amount cannot be empty.";
         }
         
         else if (!amount.matches("^[0-9.,]*$")) {
-            return "Amount contains invalid characters (Can only cantains digits, commas, and dots)";
+            return "⚠ Amount contains invalid characters (Can only cantains digits, commas, and dots)";
         }
         else if (amount.matches(regexWhole)) {
-            return "Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
         }
         else if (amount.matches(regexWhole)) {
-            return "Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
         }
         else if ((locale == Locale.JAPAN || locale == new Locale("es", "CL") || locale == Locale.KOREA) && !validate_nondec_currency(amount)) {
-            return "This format only is valid for nonnegative integers.";
+            return "⚠ This format only is valid for nonnegative integers.";
         }
-        return "Unknown formatting issue.";
+        return "⚠ Unknown formatting error";
     }
 
     public static Locale getLocale(String currency) {
