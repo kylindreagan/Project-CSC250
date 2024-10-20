@@ -38,6 +38,9 @@ public class MainHelper {
     public static boolean is_positive(float f) {
         return f > 0;
     }
+    public static boolean is_nonneg(int i) {
+        return i >= 0;
+    }
 
     public static boolean is_zero (float f) {
         return f == 0;
