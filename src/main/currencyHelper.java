@@ -26,7 +26,7 @@ public class currencyHelper {
         boolean s;
         s = true;
         try {
-            Document doc = Jsoup.connect("https://www.x-rates.com/table/?from=USD&amount=1").get();
+            Jsoup.connect("https://www.x-rates.com/table/?from=USD&amount=1").get();
         }
         catch (IOException e) {
             System.out.printf("Error: %s", e);
@@ -108,14 +108,12 @@ public class currencyHelper {
     public static boolean validate_currency(String money, Locale locale) {
         if (locale != Locale.ROOT) {
     // Get locale-specific symbols
-    int i;
-    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) {
-        return validate_nondec_currency(money);
-    }
-    System.out.print(locale);
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     char groupingSeparator = symbols.getGroupingSeparator();
     char decimalSeparator = symbols.getDecimalSeparator();
+    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) {
+        return validate_nondec_currency(money, locale);
+    }
 
     // Create dynamic regex patterns using locale-specific separators
     // Grouped pattern: numbers with grouping separators
@@ -139,10 +137,16 @@ public class currencyHelper {
         return currency.getSymbol(locale);
     }
     
-    public static Boolean validate_nondec_currency(String money) {
+    public static Boolean validate_nondec_currency(String money, Locale locale) {
         int i;
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+        char groupingSeparator = symbols.getGroupingSeparator();
+        String regex = "^\\d{1,3}((\\" + groupingSeparator + "\\d{3})*)?$";
+        if (money.matches(regex)) {
+            money = money.replaceAll("\\Q" + groupingSeparator + "\\E", "");
+        }
         try {
-            i = Integer.parseInt(money); 
+                i = Integer.parseInt(money); 
                 return MainHelper.is_nonneg(i);
             }
             catch (NumberFormatException e) {
@@ -194,7 +198,7 @@ public class currencyHelper {
         else if (amount.matches(regexWhole) || amount.matches(regexNoGroup)) {
             return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
-        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount)) {
+        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount, locale)) {
             return "⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.";
         }
         else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {

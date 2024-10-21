@@ -154,7 +154,7 @@ public class CurrencyHelperTest {
         String result = currencyHelper.generateWarningMessage("12a34", Locale.US);
         assertEquals("⚠ Amount contains invalid characters (Can only cantains digits, commas, and dots)", result);
     }
-    
+
     @Test
     public void testInvalidNumberEndingWithSeparator() {
         String result = currencyHelper.generateWarningMessage("1000.", Locale.US);
@@ -163,13 +163,13 @@ public class CurrencyHelperTest {
     @Test
     public void testValidDecimalNumberJapanLocale() {
         String result = currencyHelper.generateWarningMessage("1000.50", Locale.JAPAN);
-        assertEquals("⚠ This format only is valid for nonnegative integers.", result);
+        assertEquals("⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.", result);
     }
 
     @Test
     public void testValidWholeNumberChileLocale() {
         String result = currencyHelper.generateWarningMessage("1.000,50", new Locale("es", "CL"));
-        assertEquals("⚠ This format only is valid for nonnegative integers.", result);
+        assertEquals("⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.", result);
     }
 
     @Test
