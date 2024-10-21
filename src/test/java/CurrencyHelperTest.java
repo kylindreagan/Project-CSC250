@@ -143,6 +143,38 @@ public class CurrencyHelperTest {
         assertEquals(0, actual.compareTo(expected));
     }
 
+    @Test
+    public void testEmptyAmount() {
+        String result = currencyHelper.generateWarningMessage("", Locale.US);
+        assertEquals("⚠ Amount cannot be empty.", result);
+    }
 
+    @Test
+    public void testInvalidCharacters() {
+        String result = currencyHelper.generateWarningMessage("12a34", Locale.US);
+        assertEquals("⚠ Amount contains invalid characters (Can only cantains digits, commas, and dots)", result);
+    }
 
+    @Test
+    public void testInvalidNumberEndingWithSeparator() {
+        String result = currencyHelper.generateWarningMessage("1000.", Locale.US);
+        assertEquals("⚠ Wrong numerical format (Must match 1,000.00 or 1000.00)", result);
+    }
+    @Test
+    public void testValidDecimalNumberJapanLocale() {
+        String result = currencyHelper.generateWarningMessage("1000.50", Locale.JAPAN);
+        assertEquals("⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.", result);
+    }
+
+    @Test
+    public void testValidWholeNumberChileLocale() {
+        String result = currencyHelper.generateWarningMessage("1.000,50", new Locale("es", "CL"));
+        assertEquals("⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.", result);
+    }
+
+    @Test
+    public void testUnknownFormattingError() {
+        String result = currencyHelper.generateWarningMessage("1000.50", new Locale("de", "DE"));
+        assertEquals("⚠ Wrong numerical format (Must match 1.000,00 or 1000,00)", result);
+    }
 }

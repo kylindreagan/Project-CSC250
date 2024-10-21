@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Currency;
@@ -28,7 +26,7 @@ public class currencyHelper {
         boolean s;
         s = true;
         try {
-            Document doc = Jsoup.connect("https://www.x-rates.com/table/?from=USD&amount=1").get();
+            Jsoup.connect("https://www.x-rates.com/table/?from=USD&amount=1").get();
         }
         catch (IOException e) {
             System.out.printf("Error: %s", e);
@@ -113,6 +111,9 @@ public class currencyHelper {
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     char groupingSeparator = symbols.getGroupingSeparator();
     char decimalSeparator = symbols.getDecimalSeparator();
+    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) {
+        return validate_nondec_currency(money, locale);
+    }
 
     // Create dynamic regex patterns using locale-specific separators
     // Grouped pattern: numbers with grouping separators
@@ -134,6 +135,23 @@ public class currencyHelper {
     public static String getCurrencySymbol(Locale locale) {
         Currency currency = Currency.getInstance(locale);
         return currency.getSymbol(locale);
+    }
+    
+    public static Boolean validate_nondec_currency(String money, Locale locale) {
+        int i;
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+        char groupingSeparator = symbols.getGroupingSeparator();
+        String regex = "^\\d{1,3}((\\" + groupingSeparator + "\\d{3})*)?$";
+        if (money.matches(regex)) {
+            money = money.replaceAll("\\Q" + groupingSeparator + "\\E", "");
+        }
+        try {
+                i = Integer.parseInt(money); 
+                return MainHelper.is_nonneg(i);
+            }
+            catch (NumberFormatException e) {
+                return false;
+            }
     }
     
     public static BigDecimal unformatCurrency(String amount, Locale locale) {
@@ -169,17 +187,24 @@ public class currencyHelper {
         char groupingSeparator = symbols.getGroupingSeparator();
         char decimalSeparator = symbols.getDecimalSeparator();
         String regexWhole = "^\\d{1,3}(\\" + decimalSeparator + "\\d{3})*(\\" + groupingSeparator + "\\d{1,2})?$";
+        String regexNoGroup = "^\\d+([" + groupingSeparator + "]\\d{1,2})?$";
         if (amount.isEmpty()) {
-            return "Amount cannot be empty.";
+            return "⚠ Amount cannot be empty.";
         }
         
         else if (!amount.matches("^[0-9.,]*$")) {
-            return "Amount contains invalid characters (Can only cantains digits, commas, and dots)";
+            return "⚠ Amount contains invalid characters (Can only cantains digits, commas, and dots)";
         }
-        else if (amount.matches(regexWhole)) {
-            return "Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00)";
+        else if (amount.matches(regexWhole) || amount.matches(regexNoGroup)) {
+            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
-        return "Unknown formatting issue.";
+        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount, locale)) {
+            return "⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.";
+        }
+        else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {
+            return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
+        }
+        return "⚠ Unknown formatting error";
     }
 
     public static Locale getLocale(String currency) {
