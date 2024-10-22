@@ -18,6 +18,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         setInvisible();
     }
     
+    //Hides all irrelevant fields
     public void setInvisible(){
         closingCostsCheckBox.setVisible(false);
         closingCostsStateSelection.setVisible(false);
@@ -131,6 +132,11 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         loanTermLabel.setText("Loan Term");
 
         CalculateButton.setText("Calculate");
+        CalculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalculateButtonActionPerformed(evt);
+            }
+        });
 
         clearButton.setText("Clear");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -200,10 +206,6 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(upfrontCashEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(homePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(downPaymentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(downPaymentEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +235,12 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(clearButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(resetButton)))))))
+                                        .addComponent(resetButton))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(homePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)))))
                 .addContainerGap(56, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(249, 249, 249)
@@ -301,7 +308,8 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Buttons are linked to a button group that only allows certain fields to be displayed at a time
+    //This calculator does not use the initial home price
     private void homePriceRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homePriceRadioActionPerformed
         setInvisible();
         upfrontCashLabel.setVisible(true);
@@ -317,7 +325,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         loanTermEntryField.setVisible(true);
         yearsLabel.setVisible(true);
     }//GEN-LAST:event_homePriceRadioActionPerformed
-
+    //This calculator does not use the upfront cash
     private void cashRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashRadioActionPerformed
         setInvisible();
         homePriceLabel.setVisible(true);
@@ -337,7 +345,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
       this.dispose();
     }//GEN-LAST:event_returnButtonActionPerformed
-
+    //This function does not use the down payment
     private void downPaymentRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downPaymentRadioActionPerformed
         setInvisible();
         homePriceLabel.setVisible(true);
@@ -352,7 +360,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         loanTermEntryField.setVisible(true);
         yearsLabel.setVisible(true);
     }//GEN-LAST:event_downPaymentRadioActionPerformed
-
+    //Clears all fields for ease of use
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         closingCostsEntryField.setText("");
         downPaymentEntryField.setText("");
@@ -361,7 +369,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         loanTermEntryField.setText("");
         upfrontCashEntryField.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
-
+    //Resets all fields to normalized values (as determined by calculator.net)
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         closingCostsEntryField.setText("3,391");
         downPaymentEntryField.setText("20");
@@ -370,6 +378,18 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         loanTermEntryField.setText("30");
         upfrontCashEntryField.setText("100,000");
     }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        if (homePriceRadio.isSelected()){
+            DownPaymentHelper.homePriceCalculate();
+        }
+        if (cashRadio.isSelected()){
+            DownPaymentHelper.cashCalculate();
+        }
+        if (downPaymentRadio.isSelected()){
+            DownPaymentHelper.downPaymentCalculate();
+        }
+    }//GEN-LAST:event_CalculateButtonActionPerformed
 
     /**
      * @param args the command line arguments
