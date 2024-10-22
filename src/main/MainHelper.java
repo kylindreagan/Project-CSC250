@@ -33,7 +33,6 @@ public class MainHelper {
             }
         }
     }
-
     public static boolean isValidNumber (String test) {
         // a valid number is any positive or zero number
         try {
@@ -47,7 +46,6 @@ public class MainHelper {
         return true;
     }
 
-
     public static boolean is_positive(float f) {
         return f > 0;
     }
@@ -59,7 +57,6 @@ public class MainHelper {
         return f == 0;
         
     }
-    
     public static boolean isZeroS (String n) {
         return Float.parseFloat(n) == 0;
         
