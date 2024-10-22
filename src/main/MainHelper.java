@@ -34,6 +34,19 @@ public class MainHelper {
         }
     }
 
+    public static boolean isValidNumber (String test) {
+        // a valid number is any positive or zero number
+        try {
+            float i = Float.parseFloat(test);
+            if (i < 0) {
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
 
     public static boolean is_positive(float f) {
         return f > 0;
@@ -44,6 +57,11 @@ public class MainHelper {
 
     public static boolean is_zero (float f) {
         return f == 0;
+        
+    }
+    
+    public static boolean isZeroS (String n) {
+        return Float.parseFloat(n) == 0;
         
     }
 }
