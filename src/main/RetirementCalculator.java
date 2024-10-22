@@ -4,17 +4,43 @@
  */
 package main;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import javax.swing.JTextField;
+
 /**
  *
- * @author giann
+ * @author kylind
  */
 public class RetirementCalculator extends javax.swing.JFrame {
+    
+    private Boolean INARpercent;
+    private Boolean Futurepercent;
+    private static JTextField lastFocusedField = null;  // Variable to track last focused JTextField
 
     /**
      * Creates new form RetirementCalculator
      */
     public RetirementCalculator() {
+        INARpercent = true;
+        Futurepercent = true;
         initComponents();
+        FocusListener focusListener = new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // Record the last focused JTextField
+                lastFocusedField = (JTextField) e.getComponent();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                // Do nothing when focus is lost
+            }
+        };
+        
     }
 
     /**
@@ -27,43 +53,55 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private void initComponents() {
 
         RetirementTabs = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        HowMuch = new javax.swing.JPanel();
         AmountLabel2 = new javax.swing.JLabel();
         AmountLabel3 = new javax.swing.JLabel();
         AmountLabel4 = new javax.swing.JLabel();
         AmountLabel5 = new javax.swing.JLabel();
         AmountLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        INARComboBox = new javax.swing.JComboBox<>();
         AmountLabel7 = new javax.swing.JLabel();
         AmountLabel8 = new javax.swing.JLabel();
         AmountLabel9 = new javax.swing.JLabel();
         AmountLabel10 = new javax.swing.JLabel();
-        CurrentAgeField = new javax.swing.JFormattedTextField();
-        PrecomeField = new javax.swing.JFormattedTextField();
-        LifeExpField = new javax.swing.JFormattedTextField();
-        RetiredAgeField = new javax.swing.JFormattedTextField();
-        PrecomeField1 = new javax.swing.JFormattedTextField();
-        PrecomeField2 = new javax.swing.JFormattedTextField();
-        PrecomeField3 = new javax.swing.JFormattedTextField();
-        PrecomeField4 = new javax.swing.JFormattedTextField();
+        LifeExpField = new javax.swing.JTextField();
+        CurrentAgeField = new javax.swing.JTextField();
+        PrecomeField = new javax.swing.JTextField();
+        IncreaseField = new javax.swing.JTextField();
+        RetireAgeField = new javax.swing.JTextField();
+        InvestField = new javax.swing.JTextField();
+        InflateField = new javax.swing.JTextField();
+        INARField = new javax.swing.JTextField();
+        Title3 = new javax.swing.JLabel();
+        Title4 = new javax.swing.JLabel();
+        AmountLabel11 = new javax.swing.JLabel();
+        OIARField = new javax.swing.JTextField();
+        AmountLabel12 = new javax.swing.JLabel();
+        AmountLabel13 = new javax.swing.JLabel();
+        FutureField = new javax.swing.JTextField();
+        CurrentField = new javax.swing.JTextField();
+        FutureComboBox = new javax.swing.JComboBox<>();
+        AmountLabel14 = new javax.swing.JLabel();
+        AmountLabel15 = new javax.swing.JLabel();
+        AmountLabel16 = new javax.swing.JLabel();
+        AmountLabel17 = new javax.swing.JLabel();
+        AmountLabel18 = new javax.swing.JLabel();
+        INARLabelTrailing = new javax.swing.JLabel();
+        AmountLabel20 = new javax.swing.JLabel();
+        FutureLabelTrailing = new javax.swing.JLabel();
+        AmountLabel22 = new javax.swing.JLabel();
+        WarningLabel = new javax.swing.JLabel();
+        CalculateButton = new javax.swing.JButton();
+        ClearButton = new javax.swing.JButton();
+        ResetButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
+        QuitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.white);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1163, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-
-        RetirementTabs.addTab("How can you save for retirement?", jPanel2);
+        HowMuch.setPreferredSize(new java.awt.Dimension(710, 710));
 
         AmountLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -83,9 +121,14 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         AmountLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AmountLabel6.setText("Investment Return");
+        AmountLabel6.setText("Current Savings");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
+        INARComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
+        INARComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                INARComboBoxPropertyChange(evt);
+            }
+        });
 
         AmountLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -103,141 +146,380 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel10.setText("Inflation Rate");
 
-        CurrentAgeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        Title3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        Title3.setForeground(new java.awt.Color(51, 0, 204));
+        Title3.setText("Assumptions");
 
-        PrecomeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        PrecomeField.setVerifyInputWhenFocusTarget(false);
+        Title4.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        Title4.setForeground(new java.awt.Color(51, 0, 204));
+        Title4.setText("Optional");
 
-        LifeExpField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        AmountLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel11.setText("<html>\nOther income <br> After Retirement\n</html>");
 
-        RetiredAgeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        AmountLabel12.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel12.setText("Investment Return");
 
-        PrecomeField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        PrecomeField1.setVerifyInputWhenFocusTarget(false);
+        AmountLabel13.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel13.setText("Future Savings");
 
-        PrecomeField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00%"))));
-        PrecomeField2.setVerifyInputWhenFocusTarget(false);
+        FutureComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
+        FutureComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                FutureComboBoxPropertyChange(evt);
+            }
+        });
 
-        PrecomeField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        PrecomeField3.setVerifyInputWhenFocusTarget(false);
+        AmountLabel14.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel14.setText("$");
 
-        PrecomeField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        PrecomeField4.setVerifyInputWhenFocusTarget(false);
+        AmountLabel15.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel15.setText("$");
+
+        AmountLabel16.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel16.setText("$");
+
+        AmountLabel17.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel17.setText("%/year");
+
+        AmountLabel18.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel18.setText("%/year");
+
+        INARLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        INARLabelTrailing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        INARLabelTrailing.setText("of current income");
+
+        AmountLabel20.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel20.setText("%/year");
+
+        FutureLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        FutureLabelTrailing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FutureLabelTrailing.setText("of current income");
+
+        AmountLabel22.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AmountLabel22.setText("/month");
+
+        WarningLabel.setForeground(new java.awt.Color(255, 51, 51));
+        WarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        CalculateButton.setBackground(new java.awt.Color(204, 153, 0));
+        CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
+        CalculateButton.setText("Calculate");
+        CalculateButton.setToolTipText("Click to calculate the converted amount.");
+        CalculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalculateButtonActionPerformed(evt);
+            }
+        });
+
+        ClearButton.setBackground(new java.awt.Color(255, 255, 255));
+        ClearButton.setForeground(new java.awt.Color(0, 0, 0));
+        ClearButton.setText("Clear Current");
+        ClearButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ClearButtonMouseClicked(evt);
+            }
+        });
+        ClearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearButtonActionPerformed(evt);
+            }
+        });
+
+        ResetButton.setBackground(new java.awt.Color(255, 255, 255));
+        ResetButton.setForeground(new java.awt.Color(0, 0, 0));
+        ResetButton.setText("Clear All");
+        ResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ResetButtonMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout HowMuchLayout = new javax.swing.GroupLayout(HowMuch);
+        HowMuch.setLayout(HowMuchLayout);
+        HowMuchLayout.setHorizontalGroup(
+            HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowMuchLayout.createSequentialGroup()
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(HowMuchLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HowMuchLayout.createSequentialGroup()
+                                        .addComponent(AmountLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(RetireAgeField))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HowMuchLayout.createSequentialGroup()
+                                        .addComponent(AmountLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(AmountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CurrentAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(73, 73, 73))))
+                    .addGroup(HowMuchLayout.createSequentialGroup()
+                        .addGap(0, 117, Short.MAX_VALUE)
+                        .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, 61))
+            .addGroup(HowMuchLayout.createSequentialGroup()
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(HowMuchLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(AmountLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AmountLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AmountLabel4))
+                    .addGroup(HowMuchLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AmountLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(FutureField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(FutureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(FutureLabelTrailing))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(AmountLabel17))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(AmountLabel18))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(InflateField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AmountLabel20))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(AmountLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(CurrentField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(AmountLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(OIARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AmountLabel22))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(INARLabelTrailing)))))
+                    .addGroup(HowMuchLayout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(Title3))
+                    .addGroup(HowMuchLayout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(Title4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        HowMuchLayout.setVerticalGroup(
+            HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HowMuchLayout.createSequentialGroup()
+                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(HowMuchLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AmountLabel2)
+                            .addComponent(CurrentAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AmountLabel5)
+                            .addComponent(RetireAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AmountLabel3)
+                            .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AmountLabel16)
+                            .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel4)
+                            .addComponent(AmountLabel8))
+                        .addComponent(Title3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AmountLabel9)
+                            .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel17))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowMuchLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(INARLabelTrailing))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AmountLabel12)
+                    .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AmountLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AmountLabel10)
+                    .addComponent(InflateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AmountLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Title4)
+                .addGap(9, 9, 9)
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AmountLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AmountLabel15)
+                    .addComponent(OIARField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AmountLabel22))
+                .addGap(18, 18, 18)
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AmountLabel6)
+                    .addComponent(AmountLabel14)
+                    .addComponent(CurrentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AmountLabel13)
+                    .addComponent(FutureField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FutureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FutureLabelTrailing))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        RetirementTabs.addTab("How much do you need to retire?", HowMuch);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(AmountLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AmountLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(AmountLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LifeExpField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AmountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(AmountLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CurrentAgeField, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                    .addComponent(RetiredAgeField))))
-                        .addGap(141, 141, 141)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AmountLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(PrecomeField2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(PrecomeField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PrecomeField4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PrecomeField3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 344, Short.MAX_VALUE))
+            .addGap(0, 817, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel2)
-                    .addComponent(CurrentAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel9)
-                    .addComponent(PrecomeField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel5)
-                            .addComponent(RetiredAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PrecomeField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel6)
-                    .addComponent(PrecomeField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel10)
-                    .addComponent(PrecomeField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel8)
-                    .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel4))
-                .addContainerGap(135, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel3)
-                    .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(188, 188, 188))
+            .addGap(0, 614, Short.MAX_VALUE)
         );
 
-        RetirementTabs.addTab("How much do you need to retire?", jPanel1);
+        RetirementTabs.addTab("Results", jPanel1);
 
         Title1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 48)); // NOI18N
         Title1.setForeground(new java.awt.Color(51, 0, 204));
         Title1.setText("Retirement Calculator");
+
+        QuitButton.setBackground(new java.awt.Color(255, 0, 0));
+        QuitButton.setForeground(new java.awt.Color(0, 0, 0));
+        QuitButton.setText("Quit");
+        QuitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QuitButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
+                .addComponent(RetirementTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Title1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(RetirementTabs)
+                .addGap(127, 127, 127))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(Title1)
-                .addGap(18, 18, 18)
-                .addComponent(RetirementTabs))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Title1)
+                    .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addComponent(RetirementTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void INARComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_INARComboBoxPropertyChange
+        if (!INARpercent) {
+            INARLabelTrailing.setText("/year (today's money)");
+        }
+        else {
+            INARLabelTrailing.setText("of current income");
+        }
+        INARpercent = !INARpercent;
+    }//GEN-LAST:event_INARComboBoxPropertyChange
+
+    private void FutureComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_FutureComboBoxPropertyChange
+        if (!Futurepercent) {
+            FutureLabelTrailing.setText("/year");
+        }
+        else {
+            FutureLabelTrailing.setText("of current income");
+        }
+        Futurepercent = !Futurepercent;
+    }//GEN-LAST:event_FutureComboBoxPropertyChange
+
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        CalculateFunction();
+    }//GEN-LAST:event_CalculateButtonActionPerformed
+
+    private void ClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClearButtonMouseClicked
+        Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+        if (focusedComponent instanceof JTextField) {
+            ((JTextField) focusedComponent).setText("");
+        }
+    }//GEN-LAST:event_ClearButtonMouseClicked
+
+    private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
+        RetirementHelper.clearAllTextFields(HowMuch);
+    }//GEN-LAST:event_ResetButtonMouseClicked
+
+    private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_QuitButtonMouseClicked
+
+    private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClearButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,10 +555,26 @@ public class RetirementCalculator extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void CalculateFunction() {
+        //TO DO
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AmountLabel10;
+    private javax.swing.JLabel AmountLabel11;
+    private javax.swing.JLabel AmountLabel12;
+    private javax.swing.JLabel AmountLabel13;
+    private javax.swing.JLabel AmountLabel14;
+    private javax.swing.JLabel AmountLabel15;
+    private javax.swing.JLabel AmountLabel16;
+    private javax.swing.JLabel AmountLabel17;
+    private javax.swing.JLabel AmountLabel18;
     private javax.swing.JLabel AmountLabel2;
+    private javax.swing.JLabel AmountLabel20;
+    private javax.swing.JLabel AmountLabel22;
     private javax.swing.JLabel AmountLabel3;
     private javax.swing.JLabel AmountLabel4;
     private javax.swing.JLabel AmountLabel5;
@@ -284,18 +582,31 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel AmountLabel7;
     private javax.swing.JLabel AmountLabel8;
     private javax.swing.JLabel AmountLabel9;
-    private javax.swing.JFormattedTextField CurrentAgeField;
-    private javax.swing.JFormattedTextField LifeExpField;
-    private javax.swing.JFormattedTextField PrecomeField;
-    private javax.swing.JFormattedTextField PrecomeField1;
-    private javax.swing.JFormattedTextField PrecomeField2;
-    private javax.swing.JFormattedTextField PrecomeField3;
-    private javax.swing.JFormattedTextField PrecomeField4;
-    private javax.swing.JFormattedTextField RetiredAgeField;
+    private javax.swing.JButton CalculateButton;
+    private javax.swing.JButton ClearButton;
+    private javax.swing.JTextField CurrentAgeField;
+    private javax.swing.JTextField CurrentField;
+    private javax.swing.JComboBox<String> FutureComboBox;
+    private javax.swing.JTextField FutureField;
+    private javax.swing.JLabel FutureLabelTrailing;
+    private javax.swing.JPanel HowMuch;
+    private javax.swing.JComboBox<String> INARComboBox;
+    private javax.swing.JTextField INARField;
+    private javax.swing.JLabel INARLabelTrailing;
+    private javax.swing.JTextField IncreaseField;
+    private javax.swing.JTextField InflateField;
+    private javax.swing.JTextField InvestField;
+    private javax.swing.JTextField LifeExpField;
+    private javax.swing.JTextField OIARField;
+    private javax.swing.JTextField PrecomeField;
+    private javax.swing.JButton QuitButton;
+    private javax.swing.JButton ResetButton;
+    private javax.swing.JTextField RetireAgeField;
     private javax.swing.JTabbedPane RetirementTabs;
     private javax.swing.JLabel Title1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel Title3;
+    private javax.swing.JLabel Title4;
+    private javax.swing.JLabel WarningLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
