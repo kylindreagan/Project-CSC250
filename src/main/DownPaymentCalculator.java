@@ -6,7 +6,7 @@ package main;
 
 /**
  *
- * @author giann
+ * @author Alyssa
  */
 public class DownPaymentCalculator extends javax.swing.JFrame {
 
