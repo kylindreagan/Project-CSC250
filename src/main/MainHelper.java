@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
+
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 /**
  *
  * @author kylin
@@ -33,6 +37,23 @@ public class MainHelper {
             }
         }
     }
+
+    public static String generate_USD_warning(String amount) {
+        String regexWhole = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
+        String regexNoGroup = "^\\d+(\\.\\d{1,2})?$";
+        if (amount.isEmpty()) {
+            return "⚠ Amount cannot be empty.";
+        }
+        
+        else if (!amount.matches("^[0-9.,]*$")) {
+            return "⚠ Amount contains invalid characters (Can only cantains digits, commas, and dots)";
+        }
+        else if (!amount.matches(regexWhole) && !amount.matches(regexNoGroup)) {
+            return "⚠ Wrong numerical format (Must match 1,000.00 or 1000.00)";
+        }
+        return "⚠ Unknown formatting error";
+    }
+
     public static boolean isValidNumber (String test) {
         // a valid number is any positive or zero number
         try {
