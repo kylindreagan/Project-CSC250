@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -19,6 +20,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private Boolean INARpercent;
     private Boolean Futurepercent;
     private static JTextField lastFocusedField = null;  // Variable to track last focused JTextField
+    private static Boolean allow_foreign = false;
 
     /**
      * Creates new form RetirementCalculator
@@ -27,7 +29,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARpercent = true;
         Futurepercent = true;
         initComponents();
-        FocusListener focusListener = new FocusListener() {
+        FocusListener focusListenerLastFocused = new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
                 // Record the last focused JTextField
@@ -39,6 +41,18 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 // Do nothing when focus is lost
             }
         };
+
+        CurrentAgeField.addFocusListener(focusListenerLastFocused);
+        CurrentField.addFocusListener(focusListenerLastFocused);
+        FutureField.addFocusListener(focusListenerLastFocused);
+        LifeExpField.addFocusListener(focusListenerLastFocused);
+        RetireAgeField.addFocusListener(focusListenerLastFocused);
+        PrecomeField.addFocusListener(focusListenerLastFocused);
+        IncreaseField.addFocusListener(focusListenerLastFocused);
+        INARField.addFocusListener(focusListenerLastFocused);
+        OIARField.addFocusListener(focusListenerLastFocused);
+        InvestField.addFocusListener(focusListenerLastFocused);
+        InflateField.addFocusListener(focusListenerLastFocused);
         
     }
 
@@ -510,6 +524,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
     private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
         RetirementHelper.clearAllTextFields(HowMuch);
+        lastFocusedField = null;
     }//GEN-LAST:event_ResetButtonMouseClicked
 
     private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
@@ -517,7 +532,12 @@ public class RetirementCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_QuitButtonMouseClicked
 
     private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
-        // TODO add your handling code here:
+         if (lastFocusedField != null) {
+                    lastFocusedField.setText("");  // Clear the content of the last focused text field
+                    lastFocusedField = null;
+                } else {
+                    JOptionPane.showMessageDialog(null, "No text field was selected!");
+                }
     }//GEN-LAST:event_ClearButtonActionPerformed
 
     /**
