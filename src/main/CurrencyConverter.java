@@ -4,6 +4,9 @@
  */
 package main;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +14,15 @@ import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.Locale;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.util.Collections;
+
 
 /**
  *
@@ -42,6 +54,10 @@ public class CurrencyConverter extends javax.swing.JFrame {
         initComponents();
         updateComboBox(FromComboBox, FromCheckBox.isSelected());
         updateComboBox(ToComboBox, ToCheckBox.isSelected());
+        StyledDocument doc = ResultTextPane.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
         DocumentListener documentListener = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) { checkFields(); }
@@ -50,17 +66,36 @@ public class CurrencyConverter extends javax.swing.JFrame {
             @Override
             public void changedUpdate(DocumentEvent e) { checkFields(); }
             private void checkFields() {
-                boolean allFilled = MainHelper.validate_money(AmountTextField.getText());
+                Object country = FromComboBox.getSelectedItem();
+                String amount = AmountTextField.getText();
+                Locale locale = currencyHelper.getLocale(country.toString());
+                boolean allFilled = currencyHelper.validate_currency(AmountTextField.getText(), currencyHelper.getLocale(FromComboBox.getSelectedItem().toString()));
                 CalculateButton.setEnabled(allFilled);
+                if (!allFilled){
+                String message = currencyHelper.generateWarningMessage(amount, locale);
+                WarningLabel.setText(message); 
+                AmountTextField.setForeground(Color.red);
             }
+            else {
+                AmountTextField.setForeground(Color.black);
+                WarningLabel.setText("");
+            }
+          }
         };
         AmountTextField.getDocument().addDocumentListener(documentListener);
+        // Add ActionListener to the JComboBox
+        FromComboBox.addActionListener(e -> documentListener.changedUpdate(null));
+
+        // Add ActionListener to the JCheckBox
+        FromCheckBox.addActionListener(e -> documentListener.changedUpdate(null));
     }
     
     private void updateComboBox(JComboBox<String> comboBox, boolean popular) {
         comboBox.removeAllItems();
         
         List<String> items = popular ? Popular_Currencies : new ArrayList<>(currencyDict.keySet());
+        
+        Collections.sort(items);
         for (String item : items) {
             comboBox.addItem(item);
     }
@@ -87,10 +122,12 @@ public class CurrencyConverter extends javax.swing.JFrame {
         CalculateButton = new javax.swing.JButton();
         ClearButton = new javax.swing.JButton();
         AmountLabel1 = new javax.swing.JLabel();
-        ResultTextField = new javax.swing.JTextField();
         FromCheckBox = new javax.swing.JCheckBox();
         ToCheckBox = new javax.swing.JCheckBox();
         QuitButton = new javax.swing.JButton();
+        WarningLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ResultTextPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +138,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
         FromLabel.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
         FromLabel.setText("From");
 
-        Title.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        Title.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 36)); // NOI18N
         Title.setForeground(new java.awt.Color(51, 0, 204));
         Title.setText("Currency Calculator");
 
@@ -111,11 +148,18 @@ public class CurrencyConverter extends javax.swing.JFrame {
         AmountLabel.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
         AmountLabel.setText("Amount");
 
-        AmountTextField.setText("100");
+        AmountTextField.setText("100.00");
+        AmountTextField.setToolTipText("Enter the amount to be converted.");
+        AmountTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AmountTextFieldKeyPressed(evt);
+            }
+        });
 
         CalculateButton.setBackground(new java.awt.Color(204, 153, 0));
         CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton.setText("Calculate");
+        CalculateButton.setToolTipText("Click to calculate the converted amount.");
         CalculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalculateButtonActionPerformed(evt);
@@ -133,9 +177,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
 
         AmountLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
         AmountLabel1.setText("Result");
-
-        ResultTextField.setEditable(false);
-        ResultTextField.setText("100.00 US Dollar = 100.00 US Dollar");
 
         FromCheckBox.setSelected(true);
         FromCheckBox.setText("Show only most popular currencies");
@@ -161,59 +202,73 @@ public class CurrencyConverter extends javax.swing.JFrame {
             }
         });
 
+        WarningLabel.setForeground(new java.awt.Color(255, 51, 51));
+        WarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        ResultTextPane.setFont(getFont());
+        ResultTextPane.setForeground(new java.awt.Color(153, 153, 0));
+        ResultTextPane.setText("$100.00\nis equivalent to\n$100.00");
+        jScrollPane2.setViewportView(ResultTextPane);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(FromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(FromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(AmountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(90, 90, 90)
-                            .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(34, 34, 34)
-                            .addComponent(ToLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(AmountLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(ResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(51, 51, 51)
-                            .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(42, 42, 42)
-                            .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(FromCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(ToCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                        .addGap(143, 143, 143)
+                        .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(AmountLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane2))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(FromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(FromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(ToLabel)
+                                                .addGap(34, 34, 34)
+                                                .addComponent(ToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(43, 43, 43)
+                                            .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(53, 53, 53)
+                                            .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(47, 47, 47)
+                                            .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(173, 173, 173)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(ToCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(FromCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(AmountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(36, 36, 36))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(Title)
-                .addGap(35, 35, 35)
+                .addContainerGap()
+                .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AmountLabel)
                     .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -229,16 +284,23 @@ public class CurrencyConverter extends javax.swing.JFrame {
                     .addComponent(ToLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ToCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel1)
-                    .addComponent(ResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(AmountLabel1)
+                                .addGap(39, 39, 39))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(QuitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -249,7 +311,14 @@ public class CurrencyConverter extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearButtonMouseClicked
 
     private void FromCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FromCheckBoxActionPerformed
+        ActionListener[] listeners = FromComboBox.getActionListeners();
+        for (ActionListener listener : listeners) {
+            FromComboBox.removeActionListener(listener);
+        }
         updateComboBox(FromComboBox, FromCheckBox.isSelected());
+        for (ActionListener listener : listeners) {
+            FromComboBox.addActionListener(listener);
+        }
     }//GEN-LAST:event_FromCheckBoxActionPerformed
 
     private void ToCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToCheckBoxActionPerformed
@@ -261,18 +330,30 @@ public class CurrencyConverter extends javax.swing.JFrame {
     }//GEN-LAST:event_QuitButtonMouseClicked
 
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
-        Double fromRate = currencyDict.get(FromComboBox.getSelectedItem())[1];
-        Double toRate = currencyDict.get(ToComboBox.getSelectedItem())[0];
-        float amount = Float.parseFloat(AmountTextField.getText());
-        Double newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount);
-        String Result = String.format("%.2f %s = %.2f %s", 
-                                  amount, 
-                                  FromComboBox.getSelectedItem(), 
-                                  newAmount, 
-                                  ToComboBox.getSelectedItem());;
-        ResultTextField.setText(Result);
+        CalculateFunction();
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
+    private void AmountTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AmountTextFieldKeyPressed
+        if (evt.getKeyCode() == 10) {
+            if (CalculateButton.isEnabled()) {
+                CalculateFunction();
+            }
+        }
+    }//GEN-LAST:event_AmountTextFieldKeyPressed
+
+    
+    public Font getFont() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/iskoola-pota.ttf"));
+            customFont = customFont.deriveFont(Font.BOLD, 18);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 18);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -309,6 +390,22 @@ public class CurrencyConverter extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void CalculateFunction() {
+        WarningLabel.setText("");
+        AmountTextField.setForeground(Color.black);
+        Object toCountry = ToComboBox.getSelectedItem();
+        Object fromCountry = FromComboBox.getSelectedItem();
+        Double fromRate = currencyDict.get(FromComboBox.getSelectedItem())[1];
+        Double toRate = currencyDict.get(toCountry)[0];
+        String amount = AmountTextField.getText().toString();
+        Locale fromCountryLocale = currencyHelper.getLocale(fromCountry.toString());
+
+        String newAmount = currencyHelper.currencyConverter(fromRate, toRate, amount, currencyHelper.getLocale(toCountry.toString()), fromCountryLocale);
+        String fromAmount = currencyHelper.formatCurrency(currencyHelper.unformatCurrency(amount, fromCountryLocale), fromCountryLocale);
+        
+        ResultTextPane.setText(fromAmount + "\n is equivalent to \n" + newAmount);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AmountLabel;
@@ -320,10 +417,12 @@ public class CurrencyConverter extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> FromComboBox;
     private javax.swing.JLabel FromLabel;
     private javax.swing.JButton QuitButton;
-    private javax.swing.JTextField ResultTextField;
+    private javax.swing.JTextPane ResultTextPane;
     private javax.swing.JLabel Title;
     private javax.swing.JCheckBox ToCheckBox;
     private javax.swing.JComboBox<String> ToComboBox;
     private javax.swing.JLabel ToLabel;
+    private javax.swing.JLabel WarningLabel;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

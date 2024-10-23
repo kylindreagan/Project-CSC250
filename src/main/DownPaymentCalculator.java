@@ -6,7 +6,7 @@ package main;
 
 /**
  *
- * @author giann
+ * @author gianna
  */
 public class DownPaymentCalculator extends javax.swing.JFrame {
 
@@ -15,6 +15,28 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
      */
     public DownPaymentCalculator() {
         initComponents();
+        setInvisible();
+    }
+    
+    //Hides all irrelevant fields
+    public void setInvisible(){
+        closingCostsCheckBox.setVisible(false);
+        closingCostsStateSelection.setVisible(false);
+        yearsLabel.setVisible(false);
+        interestRatePercentSign.setVisible(false);
+        homePriceLabel.setVisible(false);
+        upfrontCashLabel.setVisible(false);
+        downPaymentLabel.setVisible(false);
+        downPaymentPercentSign.setVisible(false);
+        interestRateLabel.setVisible(false);
+        loanTermLabel.setVisible(false);
+        closingCostsPercentSign.setVisible(false);
+        homePriceEntryField.setVisible(false);
+        upfrontCashEntryField.setVisible(false);
+        downPaymentEntryField.setVisible(false);
+        closingCostsEntryField.setVisible(false);
+        interestRateEntryField.setVisible(false);
+        loanTermEntryField.setVisible(false);
     }
 
     /**
@@ -26,21 +48,348 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        homePriceRadio = new javax.swing.JRadioButton();
+        cashRadio = new javax.swing.JRadioButton();
+        downPaymentRadio = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        homePriceEntryField = new javax.swing.JTextField();
+        homePriceLabel = new javax.swing.JLabel();
+        upfrontCashLabel = new javax.swing.JLabel();
+        upfrontCashEntryField = new javax.swing.JTextField();
+        downPaymentLabel = new javax.swing.JLabel();
+        downPaymentEntryField = new javax.swing.JTextField();
+        downPaymentPercentSign = new javax.swing.JLabel();
+        interestRateLabel = new javax.swing.JLabel();
+        closingCostsCheckBox = new javax.swing.JCheckBox();
+        loanTermLabel = new javax.swing.JLabel();
+        CalculateButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
+        closingCostsEntryField = new javax.swing.JTextField();
+        closingCostsPercentSign = new javax.swing.JLabel();
+        closingCostsStateSelection = new javax.swing.JComboBox<>();
+        interestRateEntryField = new javax.swing.JTextField();
+        interestRatePercentSign = new javax.swing.JLabel();
+        loanTermEntryField = new javax.swing.JTextField();
+        yearsLabel = new javax.swing.JLabel();
+        returnButton = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        jLabel1.setText("Down Payment Calculator");
+
+        buttonGroup1.add(homePriceRadio);
+        homePriceRadio.setText("Calculate Affordable Home Price");
+        homePriceRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homePriceRadioActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(cashRadio);
+        cashRadio.setText("Calculate Upfront Cash Needed");
+        cashRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cashRadioActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(downPaymentRadio);
+        downPaymentRadio.setText("Calculate Down Payment %");
+        downPaymentRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downPaymentRadioActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jLabel2.setText("Select a calculator to start");
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel2.setOpaque(true);
+
+        homePriceEntryField.setText("500,000");
+
+        homePriceLabel.setText("Home Price    $");
+
+        upfrontCashLabel.setText("Upfront Cash Available    $");
+
+        upfrontCashEntryField.setText("100,000");
+
+        downPaymentLabel.setText("Down Payment");
+
+        downPaymentEntryField.setText("20");
+
+        downPaymentPercentSign.setText("%");
+
+        interestRateLabel.setText("Interest Rate");
+
+        closingCostsCheckBox.setText("Include Closing Costs");
+
+        loanTermLabel.setText("Loan Term");
+
+        CalculateButton.setText("Calculate");
+        CalculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalculateButtonActionPerformed(evt);
+            }
+        });
+
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        closingCostsEntryField.setText("3,391");
+
+        closingCostsPercentSign.setText("$");
+
+        closingCostsStateSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        interestRateEntryField.setText("6.489");
+
+        interestRatePercentSign.setText("%");
+
+        loanTermEntryField.setText("30");
+
+        yearsLabel.setText("Years");
+
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
+
+        resetButton.setText("Reset");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(264, 264, 264))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(returnButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(216, 216, 216))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(homePriceRadio)
+                        .addGap(24, 24, 24)
+                        .addComponent(cashRadio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(downPaymentRadio))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(upfrontCashLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(upfrontCashEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(downPaymentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(downPaymentEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(downPaymentPercentSign, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(closingCostsCheckBox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(closingCostsPercentSign, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(loanTermLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(interestRateLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(interestRateEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(interestRatePercentSign))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(CalculateButton)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(loanTermEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(yearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(clearButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(resetButton))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(homePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)))))
+                .addContainerGap(56, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(closingCostsEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(closingCostsStateSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(returnButton))
+                .addGap(9, 9, 9)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(homePriceRadio)
+                        .addComponent(downPaymentRadio))
+                    .addComponent(cashRadio))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(homePriceLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(upfrontCashLabel)
+                            .addComponent(upfrontCashEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(downPaymentLabel)
+                            .addComponent(downPaymentEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(downPaymentPercentSign))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(closingCostsCheckBox)
+                            .addComponent(closingCostsEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(closingCostsPercentSign)
+                            .addComponent(closingCostsStateSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(interestRateLabel)
+                            .addComponent(interestRateEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(interestRatePercentSign))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(loanTermLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(loanTermEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(yearsLabel)))
+                        .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CalculateButton)
+                            .addComponent(clearButton)
+                            .addComponent(resetButton))
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    //Buttons are linked to a button group that only allows certain fields to be displayed at a time
+    //This calculator does not use the initial home price
+    private void homePriceRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homePriceRadioActionPerformed
+        setInvisible();
+        upfrontCashLabel.setVisible(true);
+        upfrontCashEntryField.setVisible(true);
+        downPaymentLabel.setVisible(true);
+        downPaymentEntryField.setVisible(true);
+        downPaymentPercentSign.setVisible(true);
+        closingCostsCheckBox.setVisible(true);
+        interestRateLabel.setVisible(true);
+        interestRatePercentSign.setVisible(true);
+        interestRateEntryField.setVisible(true);
+        loanTermLabel.setVisible(true);
+        loanTermEntryField.setVisible(true);
+        yearsLabel.setVisible(true);
+    }//GEN-LAST:event_homePriceRadioActionPerformed
+    //This calculator does not use the upfront cash
+    private void cashRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashRadioActionPerformed
+        setInvisible();
+        homePriceLabel.setVisible(true);
+        homePriceEntryField.setVisible(true);
+        downPaymentLabel.setVisible(true);
+        downPaymentEntryField.setVisible(true);
+        downPaymentPercentSign.setVisible(true);
+        closingCostsCheckBox.setVisible(true);
+        interestRateLabel.setVisible(true);
+        interestRatePercentSign.setVisible(true);
+        interestRateEntryField.setVisible(true);
+        loanTermLabel.setVisible(true);
+        loanTermEntryField.setVisible(true);
+        yearsLabel.setVisible(true);
+    }//GEN-LAST:event_cashRadioActionPerformed
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_returnButtonActionPerformed
+    //This function does not use the down payment
+    private void downPaymentRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downPaymentRadioActionPerformed
+        setInvisible();
+        homePriceLabel.setVisible(true);
+        homePriceEntryField.setVisible(true);
+        upfrontCashLabel.setVisible(true);
+        upfrontCashEntryField.setVisible(true);
+        closingCostsCheckBox.setVisible(true);
+        interestRateLabel.setVisible(true);
+        interestRatePercentSign.setVisible(true);
+        interestRateEntryField.setVisible(true);
+        loanTermLabel.setVisible(true);
+        loanTermEntryField.setVisible(true);
+        yearsLabel.setVisible(true);
+    }//GEN-LAST:event_downPaymentRadioActionPerformed
+    //Clears all fields for ease of use
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        closingCostsEntryField.setText("");
+        downPaymentEntryField.setText("");
+        homePriceEntryField.setText("");
+        interestRateEntryField.setText("");
+        loanTermEntryField.setText("");
+        upfrontCashEntryField.setText("");
+    }//GEN-LAST:event_clearButtonActionPerformed
+    //Resets all fields to normalized values (as determined by calculator.net)
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        closingCostsEntryField.setText("3,391");
+        downPaymentEntryField.setText("20");
+        homePriceEntryField.setText("500,000");
+        interestRateEntryField.setText("6.489");
+        loanTermEntryField.setText("30");
+        upfrontCashEntryField.setText("100,000");
+    }//GEN-LAST:event_resetButtonActionPerformed
+
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        if (homePriceRadio.isSelected()){
+            DownPaymentHelper.homePriceCalculate();
+        }
+        if (cashRadio.isSelected()){
+            DownPaymentHelper.cashCalculate();
+        }
+        if (downPaymentRadio.isSelected()){
+            DownPaymentHelper.downPaymentCalculate();
+        }
+    }//GEN-LAST:event_CalculateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +427,32 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CalculateButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton cashRadio;
+    private javax.swing.JButton clearButton;
+    private javax.swing.JCheckBox closingCostsCheckBox;
+    private javax.swing.JTextField closingCostsEntryField;
+    private javax.swing.JLabel closingCostsPercentSign;
+    private javax.swing.JComboBox<String> closingCostsStateSelection;
+    private javax.swing.JTextField downPaymentEntryField;
+    private javax.swing.JLabel downPaymentLabel;
+    private javax.swing.JLabel downPaymentPercentSign;
+    private javax.swing.JRadioButton downPaymentRadio;
+    private javax.swing.JTextField homePriceEntryField;
+    private javax.swing.JLabel homePriceLabel;
+    private javax.swing.JRadioButton homePriceRadio;
+    private javax.swing.JTextField interestRateEntryField;
+    private javax.swing.JLabel interestRateLabel;
+    private javax.swing.JLabel interestRatePercentSign;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField loanTermEntryField;
+    private javax.swing.JLabel loanTermLabel;
+    private javax.swing.JButton resetButton;
+    private javax.swing.JButton returnButton;
+    private javax.swing.JTextField upfrontCashEntryField;
+    private javax.swing.JLabel upfrontCashLabel;
+    private javax.swing.JLabel yearsLabel;
     // End of variables declaration//GEN-END:variables
 }
