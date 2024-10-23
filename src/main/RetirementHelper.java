@@ -6,9 +6,6 @@ package main;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.util.concurrent.Future;
-
-import javax.print.attribute.standard.MediaSize.Other;
 import javax.swing.JTextField;
 
 /**
