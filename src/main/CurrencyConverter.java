@@ -350,7 +350,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
         } catch (FontFormatException | IOException e) {
            Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 18);
             customFont = customFont.deriveFont(18f); // Set the desired size
-            System.out.print("You dumbass this code doesn't even work!");
             return customFont;
         }
 
