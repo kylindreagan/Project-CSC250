@@ -6,6 +6,7 @@ package main;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -340,9 +343,17 @@ public class CurrencyConverter extends javax.swing.JFrame {
 
     
     public Font getFont() {
-        Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 18);
-        customFont = customFont.deriveFont(18f); // Set the desired size
-        return customFont;
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/iskoola-pota.ttf"));
+            customFont = customFont.deriveFont(Font.BOLD, 18);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 18);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            System.out.print("You dumbass this code doesn't even work!");
+            return customFont;
+        }
+
     }
     /**
      * @param args the command line arguments
