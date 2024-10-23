@@ -9,7 +9,6 @@ import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -81,13 +80,56 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 RetireAgeField.setForeground(Color.black);
                 CurrentAgeField.setForeground(Color.black);
                 LifeExpField.setForeground(Color.black);
-                WarningLabel.setText("");
+                Boolean x = !MainHelper.validate_money(PrecomeField.getText(), false);
+                Boolean a = !MainHelper.isValidNumber(IncreaseField.getText());
+                Boolean b = !MainHelper.isValidNumber(InvestField.getText());
+                Boolean c = !MainHelper.isValidNumber(InflateField.getText());
+                if (x || a || b || c) {
+                    if (c) {
+                        InflateField.setForeground(Color.red);
+                        WarningLabel.setText("⚠ Invalid Inflation Rate.");
+                    }
+                    else {
+                        InflateField.setForeground(Color.black);
+                    }
+                    if (b) {
+                        InvestField.setForeground(Color.red);
+                        WarningLabel.setText("⚠ Invalid Investment Returns.");
+                    }
+                    else {
+                        InvestField.setForeground(Color.red);
+                    }
+                    if (a) {
+                        IncreaseField.setForeground(Color.red);
+                        WarningLabel.setText("⚠ Invalid Income Increase.");
+                    }
+                    else {
+                        IncreaseField.setForeground(Color.black);
+                    }
+                    if(x) {
+                        PrecomeField.setForeground(Color.red);
+                        WarningLabel.setText("⚠ Invalid Pre-Income Tax.");
+                    }
+                    else {
+                        PrecomeField.setForeground(Color.black);
+                    }
+                }
+                else {
+                    PrecomeField.setForeground(Color.black);
+                    InflateField.setForeground(Color.black);
+                    InvestField.setForeground(Color.black);
+                    IncreaseField.setForeground(Color.black);
+                    WarningLabel.setText("");
+                }
             }
           }
         };
         CurrentAgeField.getDocument().addDocumentListener(documentListener);
         RetireAgeField.getDocument().addDocumentListener(documentListener);
         LifeExpField.getDocument().addDocumentListener(documentListener);
+        PrecomeField.getDocument().addDocumentListener(documentListener);
+        InflateField.getDocument().addDocumentListener(documentListener);
+        IncreaseField.getDocument().addDocumentListener(documentListener);
     }
 
     /**
