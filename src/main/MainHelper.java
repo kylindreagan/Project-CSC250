@@ -34,6 +34,15 @@ public class MainHelper {
         }
     }
 
+    public static float parseMoney(String m, String groupingSeparator) {
+        Float money;
+        
+        m.replaceAll("\\Q" + groupingSeparator + "\\E", "");
+        money = Float.valueOf(m);
+        return money;
+        
+    }
+
     public static String generate_USD_warning(String amount) {
         String regexWhole = "^\\d{1,3}(,{1}\\d{3})*(\\.\\d{1,2})?$";
         String regexNoGroup = "^\\d+(\\.\\d{1,2})?$";
