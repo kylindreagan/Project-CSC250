@@ -5,7 +5,6 @@
 package main;
 
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;

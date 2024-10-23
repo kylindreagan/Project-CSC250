@@ -66,5 +66,27 @@ public class RetirementHelper {
         return FV;
     }
 
+    public static boolean validate_ages(String Retirement_Age, String Current_Age, String Life_Expectency) {
+        int RA;
+        int CA;
+        int LE;
+        try{
+            RA = Integer.parseInt(Retirement_Age);
+            CA = Integer.parseInt(Current_Age);
+            LE = Integer.parseInt(Life_Expectency);
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
+
+        if (LE <= RA || RA < CA ||CA <= 0 || LE > 150) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    //Additional Savings Needed=PV−FV
+
     
 }
