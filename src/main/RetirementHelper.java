@@ -113,6 +113,15 @@ public class RetirementHelper {
         
         return "Unknown error has occured";
     }
+    
+    public static Boolean validate_dynamic(String value, Boolean is_percent) {
+        if (is_percent) {
+            return MainHelper.isValidNumber(value);
+        }
+        else{
+            return MainHelper.validate_money(value, false);
+        }
+    }
 
     //Additional Savings Needed=PV−FV
 

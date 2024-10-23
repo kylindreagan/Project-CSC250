@@ -70,6 +70,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 String LE = LifeExpField.getText();
                 Boolean ValidAge = RetirementHelper.validate_ages(RA, CA, LE);
                 if (!ValidAge){
+                CalculateButton.setEnabled(false);
                 String message = RetirementHelper.generate_age_warning(RA, CA, LE);
                 WarningLabel.setText(message); 
                 RetireAgeField.setForeground(Color.red);
@@ -85,6 +86,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 Boolean b = !MainHelper.isValidNumber(InvestField.getText());
                 Boolean c = !MainHelper.isValidNumber(InflateField.getText());
                 if (x || a || b || c) {
+                    CalculateButton.setEnabled(false);
                     if (c) {
                         InflateField.setForeground(Color.red);
                         WarningLabel.setText("⚠ Invalid Inflation Rate.");
@@ -119,7 +121,18 @@ public class RetirementCalculator extends javax.swing.JFrame {
                     InflateField.setForeground(Color.black);
                     InvestField.setForeground(Color.black);
                     IncreaseField.setForeground(Color.black);
-                    WarningLabel.setText("");
+                    Boolean INARValid = RetirementHelper.validate_dynamic(INARField.getText(), INARpercent);
+                    if (!INARValid) {
+                       INARField.setForeground(Color.red);
+                       WarningLabel.setText("⚠ Invalid Income Needed After Retirement.");
+                        CalculateButton.setEnabled(false);
+                    }
+                    else{
+                        INARField.setForeground(Color.black);
+                        WarningLabel.setText("");
+                        CalculateButton.setEnabled(true);
+                    }
+                    
                 }
             }
           }
@@ -128,8 +141,11 @@ public class RetirementCalculator extends javax.swing.JFrame {
         RetireAgeField.getDocument().addDocumentListener(documentListener);
         LifeExpField.getDocument().addDocumentListener(documentListener);
         PrecomeField.getDocument().addDocumentListener(documentListener);
+        InvestField.getDocument().addDocumentListener(documentListener);
         InflateField.getDocument().addDocumentListener(documentListener);
         IncreaseField.getDocument().addDocumentListener(documentListener);
+        INARField.getDocument().addDocumentListener(documentListener);
+        
     }
 
     /**
