@@ -277,7 +277,7 @@ public class currencyHelper {
             case "Mexican Peso":
                 return new Locale("es", "MX"); // Mexico
             case "Nepalese Rupee":
-                return new Locale("ne", "NP"); // Nepal
+                return new Locale("en", "NP"); // Nepal
             case "New Zealand Dollar":
                 return Locale.forLanguageTag("en-NZ"); // New Zealand
             case "Norwegian Krone":
