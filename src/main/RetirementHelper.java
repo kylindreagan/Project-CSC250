@@ -85,6 +85,34 @@ public class RetirementHelper {
         
         return true;
     }
+    
+    public static String generate_age_warning(String Retirement_Age, String Current_Age, String Life_Expectency) {
+        int RA;
+        int CA;
+        int LE;
+        try{
+            RA = Integer.parseInt(Retirement_Age);
+            CA = Integer.parseInt(Current_Age);
+            LE = Integer.parseInt(Life_Expectency);
+        }
+        catch (NumberFormatException e) {
+            return "Ages must be valid whole number integers.";
+        }
+
+        if (LE <= RA) {
+            return "Life expectancy needs to be larger than planned retirement age.";
+        }
+        
+        if (RA < CA){
+            return "You are already in retirement";
+        }
+        
+        if (CA <= 0 || LE > 150) {
+            return "Please provide positive and reasonable ages"; 
+        }
+        
+        return "Unknown error has occured";
+    }
 
     //Additional Savings Needed=PV−FV
 

@@ -308,7 +308,7 @@
                   <Font name="Franklin Gothic Heavy" size="18" style="2"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Life Expectency"/>
+                <Property name="text" type="java.lang.String" value="Life Expectancy"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="AmountLabel4">
@@ -391,20 +391,44 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="LifeExpField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="85"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="CurrentAgeField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="35"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="PrecomeField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="70,000"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="IncreaseField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="3"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="RetireAgeField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="67"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="InvestField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="6"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="InflateField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="3"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="INARField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="75"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Title3">
               <Properties>
@@ -438,6 +462,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="OIARField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="AmountLabel12">
               <Properties>
@@ -458,8 +485,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="FutureField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="10"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="CurrentField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="30,000"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="FutureComboBox">
               <Properties>
@@ -471,7 +504,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="FutureComboBoxPropertyChange"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FutureComboBoxActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -612,7 +645,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="ResultTab">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Results">

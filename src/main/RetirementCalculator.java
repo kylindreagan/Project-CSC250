@@ -4,12 +4,16 @@
  */
 package main;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -54,6 +58,36 @@ public class RetirementCalculator extends javax.swing.JFrame {
         InvestField.addFocusListener(focusListenerLastFocused);
         InflateField.addFocusListener(focusListenerLastFocused);
         
+        DocumentListener documentListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) { checkFields(); }
+            @Override
+            public void removeUpdate(DocumentEvent e) { checkFields(); }
+            @Override
+            public void changedUpdate(DocumentEvent e) { checkFields(); }
+            private void checkFields() {
+                String RA = RetireAgeField.getText();
+                String CA = CurrentAgeField.getText();
+                String LE = LifeExpField.getText();
+                Boolean ValidAge = RetirementHelper.validate_ages(RA, CA, LE);
+                if (!ValidAge){
+                String message = RetirementHelper.generate_age_warning(RA, CA, LE);
+                WarningLabel.setText(message); 
+                RetireAgeField.setForeground(Color.red);
+                CurrentAgeField.setForeground(Color.red);
+                LifeExpField.setForeground(Color.red);
+            }
+            else {
+                RetireAgeField.setForeground(Color.black);
+                CurrentAgeField.setForeground(Color.black);
+                LifeExpField.setForeground(Color.black);
+                WarningLabel.setText("");
+            }
+          }
+        };
+        CurrentAgeField.getDocument().addDocumentListener(documentListener);
+        RetireAgeField.getDocument().addDocumentListener(documentListener);
+        LifeExpField.getDocument().addDocumentListener(documentListener);
     }
 
     /**
@@ -107,7 +141,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         CalculateButton = new javax.swing.JButton();
         ClearButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        ResultTab = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
 
@@ -122,7 +156,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         AmountLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AmountLabel3.setText("Life Expectency");
+        AmountLabel3.setText("Life Expectancy");
 
         AmountLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -159,6 +193,22 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel10.setText("Inflation Rate");
 
+        LifeExpField.setText("85");
+
+        CurrentAgeField.setText("35");
+
+        PrecomeField.setText("70,000");
+
+        IncreaseField.setText("3");
+
+        RetireAgeField.setText("67");
+
+        InvestField.setText("6");
+
+        InflateField.setText("3");
+
+        INARField.setText("75");
+
         Title3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
         Title3.setForeground(new java.awt.Color(51, 0, 204));
         Title3.setText("Assumptions");
@@ -171,6 +221,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel11.setText("<html>\nOther income <br> After Retirement\n</html>");
 
+        OIARField.setText("0");
+
         AmountLabel12.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel12.setText("Investment Return");
@@ -179,10 +231,14 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel13.setText("Future Savings");
 
+        FutureField.setText("10");
+
+        CurrentField.setText("30,000");
+
         FutureComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        FutureComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                FutureComboBoxPropertyChange(evt);
+        FutureComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FutureComboBoxActionPerformed(evt);
             }
         });
 
@@ -436,18 +492,18 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         RetirementTabs.addTab("How much do you need to retire?", HowMuch);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ResultTabLayout = new javax.swing.GroupLayout(ResultTab);
+        ResultTab.setLayout(ResultTabLayout);
+        ResultTabLayout.setHorizontalGroup(
+            ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 817, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ResultTabLayout.setVerticalGroup(
+            ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 614, Short.MAX_VALUE)
         );
 
-        RetirementTabs.addTab("Results", jPanel1);
+        RetirementTabs.addTab("Results", ResultTab);
 
         Title1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 48)); // NOI18N
         Title1.setForeground(new java.awt.Color(51, 0, 204));
@@ -494,25 +550,18 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private void INARComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_INARComboBoxPropertyChange
         if (!INARpercent) {
             INARLabelTrailing.setText("/year (today's money)");
+            INARpercent = true;
         }
         else {
             INARLabelTrailing.setText("of current income");
+            INARpercent = false;
         }
         INARpercent = !INARpercent;
     }//GEN-LAST:event_INARComboBoxPropertyChange
 
-    private void FutureComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_FutureComboBoxPropertyChange
-        if (!Futurepercent) {
-            FutureLabelTrailing.setText("/year");
-        }
-        else {
-            FutureLabelTrailing.setText("of current income");
-        }
-        Futurepercent = !Futurepercent;
-    }//GEN-LAST:event_FutureComboBoxPropertyChange
-
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
         CalculateFunction();
+        RetirementTabs.setSelectedComponent(ResultTab);
     }//GEN-LAST:event_CalculateButtonActionPerformed
 
     private void ClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClearButtonMouseClicked
@@ -539,6 +588,41 @@ public class RetirementCalculator extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "No text field was selected!");
                 }
     }//GEN-LAST:event_ClearButtonActionPerformed
+
+    private void FutureComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FutureComboBoxActionPerformed
+        if (Futurepercent) {
+            FutureLabelTrailing.setText("/year");
+            if (MainHelper.isValidNumber(FutureField.getText())) {
+                Float f = Float.parseFloat(FutureField.getText());
+                f *= 700;
+                if (f < 1 && f != 0) {
+                   FutureField.setText("1"); 
+                }
+                else {
+                    FutureField.setText(String.valueOf(f));
+                }
+                
+            }
+            else {
+                FutureField.setText("7,000");
+            }
+            Futurepercent = false;
+        }
+        else {
+            FutureLabelTrailing.setText("of current income");
+            if (MainHelper.validate_money(FutureField.getText(), allow_foreign)) {
+                Float f = MainHelper.parseMoney(FutureField.getText(), ",");
+                f /= 700;
+                FutureField.setText(String.valueOf(f));
+                
+            }
+            else {
+                FutureField.setText("10");
+            }
+            Futurepercent = true;
+        }
+        
+    }//GEN-LAST:event_FutureComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -620,12 +704,12 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JTextField PrecomeField;
     private javax.swing.JButton QuitButton;
     private javax.swing.JButton ResetButton;
+    private javax.swing.JPanel ResultTab;
     private javax.swing.JTextField RetireAgeField;
     private javax.swing.JTabbedPane RetirementTabs;
     private javax.swing.JLabel Title1;
     private javax.swing.JLabel Title3;
     private javax.swing.JLabel Title4;
     private javax.swing.JLabel WarningLabel;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
