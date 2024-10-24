@@ -198,6 +198,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         WarningLabel = new javax.swing.JLabel();
         CalculateButton = new javax.swing.JButton();
         ClearButton = new javax.swing.JButton();
+        SuperClearButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
         ResultTab = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
@@ -229,9 +230,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel6.setText("Current Savings");
 
         INARComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        INARComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                INARComboBoxPropertyChange(evt);
+        INARComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                INARComboBoxActionPerformed(evt);
             }
         });
 
@@ -363,9 +364,18 @@ public class RetirementCalculator extends javax.swing.JFrame {
             }
         });
 
+        SuperClearButton.setBackground(new java.awt.Color(255, 255, 255));
+        SuperClearButton.setForeground(new java.awt.Color(0, 0, 0));
+        SuperClearButton.setText("Clear All");
+        SuperClearButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SuperClearButtonMouseClicked(evt);
+            }
+        });
+
         ResetButton.setBackground(new java.awt.Color(255, 255, 255));
         ResetButton.setForeground(new java.awt.Color(0, 0, 0));
-        ResetButton.setText("Clear All");
+        ResetButton.setText("Reset");
         ResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ResetButtonMouseClicked(evt);
@@ -392,7 +402,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(SuperClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(HowMuchLayout.createSequentialGroup()
                                 .addComponent(AmountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -414,7 +424,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AmountLabel4))
+                        .addComponent(AmountLabel4)
+                        .addGap(123, 123, 123)
+                        .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(HowMuchLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -470,7 +482,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                     .addGroup(HowMuchLayout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addComponent(Title4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         HowMuchLayout.setVerticalGroup(
             HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,7 +522,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SuperClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -605,18 +619,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void INARComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_INARComboBoxPropertyChange
-        if (!INARpercent) {
-            INARLabelTrailing.setText("/year (today's money)");
-            INARpercent = true;
-        }
-        else {
-            INARLabelTrailing.setText("of current income");
-            INARpercent = false;
-        }
-        INARpercent = !INARpercent;
-    }//GEN-LAST:event_INARComboBoxPropertyChange
-
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
         CalculateFunction();
         RetirementTabs.setSelectedComponent(ResultTab);
@@ -629,10 +631,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ClearButtonMouseClicked
 
-    private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
+    private void SuperClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuperClearButtonMouseClicked
         RetirementHelper.clearAllTextFields(HowMuch);
         lastFocusedField = null;
-    }//GEN-LAST:event_ResetButtonMouseClicked
+    }//GEN-LAST:event_SuperClearButtonMouseClicked
 
     private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
         this.dispose();
@@ -648,10 +650,11 @@ public class RetirementCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearButtonActionPerformed
 
     private void FutureComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FutureComboBoxActionPerformed
-        if (Futurepercent) {
+        if ("$".equals(FutureComboBox.getSelectedItem().toString())) {
             FutureLabelTrailing.setText("/year");
+            if (Futurepercent) {
             if (MainHelper.isValidNumber(FutureField.getText())) {
-                Float f = Float.parseFloat(FutureField.getText());
+                Float f = Float.valueOf(FutureField.getText());
                 f *= 700;
                 if (f < 1 && f != 0) {
                    FutureField.setText("1"); 
@@ -665,9 +668,11 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 FutureField.setText("7,000");
             }
             Futurepercent = false;
+            }
         }
         else {
             FutureLabelTrailing.setText("of current income");
+            if (!Futurepercent){
             if (MainHelper.validate_money(FutureField.getText(), allow_foreign)) {
                 Float f = MainHelper.parseMoney(FutureField.getText(), ",");
                 f /= 700;
@@ -678,9 +683,77 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 FutureField.setText("10");
             }
             Futurepercent = true;
+            }
         }
         
     }//GEN-LAST:event_FutureComboBoxActionPerformed
+
+    private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
+        LifeExpField.setText("85");
+
+        CurrentAgeField.setText("35");
+
+        PrecomeField.setText("70,000");
+
+        IncreaseField.setText("3");
+
+        RetireAgeField.setText("67");
+
+        InvestField.setText("6");
+
+        InflateField.setText("3");
+
+        INARField.setText("75");
+        
+        FutureField.setText("10");
+
+        CurrentField.setText("30,000");
+        
+        OIARField.setText("0");
+        
+        INARComboBox.setSelectedItem("%");
+        
+        FutureComboBox.setSelectedItem("%");
+    }//GEN-LAST:event_ResetButtonMouseClicked
+
+    private void INARComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INARComboBoxActionPerformed
+        if ("$".equals(INARComboBox.getSelectedItem().toString())) {
+            INARLabelTrailing.setText("/year (today's money)");
+            if (INARpercent) {
+                if (MainHelper.isValidNumber(INARField.getText())) {
+                Float f = Float.valueOf(INARField.getText());
+                f *= 700;
+                if (f < 1 && f != 0) {
+                   INARField.setText("1"); 
+                }
+                else {
+                    INARField.setText(String.valueOf(f));
+                }
+                
+            }
+            else {
+                INARField.setText("52,500");
+            }
+                INARpercent = false;
+            }
+            
+        }
+        else {
+            INARLabelTrailing.setText("of current income");
+            if (!INARpercent){
+            INARpercent = true;
+            if (MainHelper.validate_money(INARField.getText(), allow_foreign)) {
+                Float f = MainHelper.parseMoney(INARField.getText(), ",");
+                f /= 700;
+                INARField.setText(String.valueOf(f));
+                
+            }
+            else {
+                INARField.setText("75");
+            }
+            }
+        }
+    }//GEN-LAST:event_INARComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -765,6 +838,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JPanel ResultTab;
     private javax.swing.JTextField RetireAgeField;
     private javax.swing.JTabbedPane RetirementTabs;
+    private javax.swing.JButton SuperClearButton;
     private javax.swing.JLabel Title1;
     private javax.swing.JLabel Title3;
     private javax.swing.JLabel Title4;

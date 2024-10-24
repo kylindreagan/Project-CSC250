@@ -95,7 +95,7 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="ResetButton" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <Component id="SuperClearButton" min="-2" pref="94" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="AmountLabel2" min="-2" pref="161" max="-2" attributes="0"/>
@@ -125,6 +125,8 @@
                               <Component id="PrecomeField" min="-2" pref="180" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="AmountLabel4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="ResetButton" min="-2" pref="94" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -195,7 +197,7 @@
                               <Component id="Title4" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="144" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -243,8 +245,10 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="ClearButton" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                                  <Component id="ResetButton" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="SuperClearButton" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="ResetButton" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="INARField" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
@@ -348,7 +352,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="INARComboBoxPropertyChange"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="INARComboBoxActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -629,7 +633,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClearButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="ResetButton">
+            <Component class="javax.swing.JButton" name="SuperClearButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -638,6 +642,20 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Clear All"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SuperClearButtonMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="ResetButton">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Reset"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ResetButtonMouseClicked"/>
