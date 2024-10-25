@@ -24,6 +24,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private Boolean Futurepercent;
     private static JTextField lastFocusedField = null;  // Variable to track last focused JTextField
     private static Boolean allow_foreign = false;
+    float future;
+    float OIAR;
+    float current;
 
     /**
      * Creates new form RetirementCalculator
@@ -121,7 +124,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                     InflateField.setForeground(Color.black);
                     InvestField.setForeground(Color.black);
                     IncreaseField.setForeground(Color.black);
-                    Boolean INARValid = RetirementHelper.validate_dynamic(INARField.getText(), INARpercent);
+                    Boolean INARValid = RetirementHelper.validate_dynamic(INARField.getText(), "%".equals(INARComboBox.getSelectedItem()));
                     if (!INARValid) {
                        INARField.setForeground(Color.red);
                        WarningLabel.setText("⚠ Invalid Income Needed After Retirement.");
@@ -201,6 +204,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         SuperClearButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
         ResultTab = new javax.swing.JPanel();
+        OutputLabel = new javax.swing.JLabel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
 
@@ -568,11 +572,17 @@ public class RetirementCalculator extends javax.swing.JFrame {
         ResultTab.setLayout(ResultTabLayout);
         ResultTabLayout.setHorizontalGroup(
             ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 817, Short.MAX_VALUE)
+            .addGroup(ResultTabLayout.createSequentialGroup()
+                .addGap(328, 328, 328)
+                .addComponent(OutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         ResultTabLayout.setVerticalGroup(
             ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
+            .addGroup(ResultTabLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(OutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(549, Short.MAX_VALUE))
         );
 
         RetirementTabs.addTab("Results", ResultTab);
@@ -791,7 +801,59 @@ public class RetirementCalculator extends javax.swing.JFrame {
     }
     
     private void CalculateFunction() {
-        //TO DO
+        Boolean IRisPercent = "%".equals(INARComboBox.getSelectedItem().toString());
+        getOptionals();
+        String groupingseperator = ",";
+        int CA = Integer.parseInt(CurrentAgeField.getText());
+        int RA = Integer.parseInt(RetireAgeField.getText());
+        int LE = Integer.parseInt(LifeExpField.getText());
+        float PIT = MainHelper.parseMoney(PrecomeField.getText(), groupingseperator);
+        float Increase = MainHelper.parseMoney(IncreaseField.getText(), groupingseperator) / 100;
+        float INAR = RetirementHelper.parseDynamic(INARField.getText(), "%".equals(INARComboBox.getSelectedItem().toString()));
+        float Invest = MainHelper.parseMoney(InvestField.getText(), ",") / 100;
+        float Inflate = MainHelper.parseMoney(InflateField.getText(), ",") / 100;
+        int RY = LE - RA;
+        float FIN;
+        float PV = 0.0f;
+        float FV = 0.0f;
+        
+        if (IRisPercent) {
+            FIN = INAR * PIT;
+        }
+        else {
+            FIN = INAR;
+        }
+        float NeededRemaining = RetirementHelper.Total_Required_Retirement_Income(FIN, RY, OIAR);
+        float Additional_Savings_Needed = PV-FV;
+        
+        OutputLabel.setText(MainHelper.formatCurrency(NeededRemaining));
+    }
+    
+    private void getOptionals() {
+        Boolean FutureValid = RetirementHelper.validate_dynamic(FutureField.getText(), "%".equals(FutureComboBox.getSelectedItem()));
+        if (FutureValid && "%".equals(FutureComboBox.getSelectedItem())) {
+            future = MainHelper.parseMoney(FutureField.getText(), ",") / 100;
+        }
+        else if (FutureValid) {
+            future = MainHelper.parseMoney(FutureField.getText(), ",");
+        }
+        else {
+            future = 0;
+        }
+        Boolean OIARValid = MainHelper.validate_money(OIARField.getText(), allow_foreign);
+        if (OIARValid) {
+            OIAR =MainHelper.parseMoney(OIARField.getText(), ",");
+        }
+        else {
+            OIAR = 0;
+        }
+        Boolean CurrentValid = MainHelper.validate_money(CurrentField.getText(), allow_foreign);
+        if (CurrentValid) {
+            current = MainHelper.parseMoney(CurrentField.getText(), ",");
+        }
+        else {
+            current = 0;
+        }
     }
     
     
@@ -832,6 +894,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JTextField InvestField;
     private javax.swing.JTextField LifeExpField;
     private javax.swing.JTextField OIARField;
+    private javax.swing.JLabel OutputLabel;
     private javax.swing.JTextField PrecomeField;
     private javax.swing.JButton QuitButton;
     private javax.swing.JButton ResetButton;

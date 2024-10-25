@@ -27,43 +27,8 @@ public class RetirementHelper {
         }
     }
 
-    public static float Future_Income_Needed(float PreTax_Income, int Retirement_Age, int Current_Age, int Retirement_Years,float Annual_Increase, float Inflation) {
-        float FIN;
-
-        double Expected_Increase = Math.pow((1+Annual_Increase), (Retirement_Age-Current_Age));
-        double Expected_Decrease = Math.pow((1+Inflation), Retirement_Years); //Retirement Years = Life Expectancy - Retrement Age
-
-        FIN = (float)(PreTax_Income * Expected_Decrease * Expected_Increase);
-        return FIN;
-    }
-
-    public static float Total_Required_Retirement_Income(float FIN, int Retirement_Years, float OIAR, float Investment_Return_Rate){
-        return FIN * Retirement_Years - OIAR * Retirement_Years; //OIAR = Other Income After Retirement 
-    }
-
-    public static float Present_Value_of_Required_Retirement_Income(float FIN, int Retirement_Years, float Inflation,  float Investment_Return_Rate) {
-        float PV = 0.0f;
-        float r = (Investment_Return_Rate - Inflation) / 100; 
-
-        for (int i = 1; i <= Retirement_Years; i++) {
-            PV += FIN / Math.pow(1+r, i);
-        }
-
-        return PV;
-    }
-
-    public static float Future_Value_of_Current_and_Future_Retirement_Savings(float Current_Savings, float Future_Savings, int Retirement_Age, int Current_Age, int Retirement_Years, float Investment_Return_Rate){
-        float FV;
-
-        double Prospective_Funds = Math.pow((1 + Investment_Return_Rate),(Retirement_Age-Current_Age));
-
-        FV = Current_Savings * (float)Prospective_Funds;
-
-        for (int i = 1; i <= Retirement_Years; i++) {
-            FV += Future_Savings / Math.pow(1+Investment_Return_Rate, i);
-        }
-
-        return FV;
+    public static float Total_Required_Retirement_Income(float FIN, int Retirement_Years, float OIAR){
+        return FIN * Retirement_Years - OIAR * Retirement_Years * 12; //OIAR = Other Income After Retirement 
     }
 
     public static boolean validate_ages(String Retirement_Age, String Current_Age, String Life_Expectency) {
@@ -115,11 +80,15 @@ public class RetirementHelper {
     }
     
     public static Boolean validate_dynamic(String value, Boolean is_percent) {
+        return MainHelper.validate_money(value, false);
+    }
+    
+    public static float parseDynamic(String value, Boolean is_percent){
         if (is_percent) {
-            return MainHelper.isValidNumber(value);
+            return MainHelper.parseMoney(value, ",") / 100;
         }
         else{
-            return MainHelper.validate_money(value, false);
+            return MainHelper.parseMoney(value, ",");
         }
     }
 
