@@ -27,13 +27,16 @@ public class RetirementHelper {
         }
     }
 
-    public static List<Float> Total_Required_Retirement_Income(float FIN, int Retirement_Years, float OIAR, float Invest, float PIT){
-        List<Float> TRRI = new ArrayList<>();
-        float end_value = FIN * Retirement_Years - OIAR * Retirement_Years * 12; //OIAR = Other Income After Retirement 
-        TRRI.add(end_value);
-        for (int i = Retirement_Years; i >= 0; i--) {
-            end_value -= PIT * Math.pow(1+Invest, i);
-            TRRI.add(end_value);
+    public static List<Integer> Total_Required_Retirement_Income(float FIN, int LE, int RA, int CA, float OIAR, float Inflate){
+        List<Integer> TRRI = new ArrayList<>();
+        float Yearly_Needs = FIN - OIAR * 12; //OIAR = Other Income After Retirement 
+        System.out.println(Yearly_Needs);
+        float Total_Needs = 0.0f;
+        TRRI.add(0);
+        for (int i = (LE-2); i > RA; i--) {
+            Total_Needs += Yearly_Needs * Math.pow(1+Inflate,i-CA);
+            TRRI.add(Math.round(Total_Needs));
+            System.out.println(Total_Needs);
         }
         Collections.reverse(TRRI); // Reverse the list in-place for correct order
         return TRRI;
@@ -50,7 +53,6 @@ public class RetirementHelper {
             savings *= (1+Invest);
             savings += contribution;
             TORI.add(Math.round(savings));
-            System.out.println(savings);
         }
         return TORI;
     }
