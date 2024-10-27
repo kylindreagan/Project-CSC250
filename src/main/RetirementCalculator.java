@@ -856,7 +856,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         else {
             FIN = INAR;
         }
-        List<Integer> NeededRemaining = RetirementHelper.Total_Required_Retirement_Income(FIN, LE, RA, CA, OIAR, Inflate);
+        List<Integer> NeededRemaining = RetirementHelper.Total_Required_Retirement_Income(FIN, LE, RA, CA, OIAR, Inflate, Invest);
         float final_needed = NeededRemaining.get(0);
         List<Integer> TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, future, Increase);
         float final_obtained = TORI.get(TORI.size()-1);
