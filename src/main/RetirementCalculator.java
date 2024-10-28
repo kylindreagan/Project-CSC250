@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -923,6 +922,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         int RY = LE - RA;
         int LY = RA - CA;
         float FIN;
+        float final_obtained;
         
         if (IRisPercent) {
             FIN = INAR * PIT;
@@ -932,8 +932,13 @@ public class RetirementCalculator extends javax.swing.JFrame {
         }
         List<Integer> NeededRemaining = RetirementHelper.Total_Required_Retirement_Income(FIN, LE, RA, CA, OIAR, Inflate, Invest);
         float final_needed = NeededRemaining.get(0);
+        if ("%".equals(INARComboBox.getSelectedItem())){
         List<Integer> TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, future, Increase);
-        float final_obtained = TORI.get(TORI.size()-1);
+        final_obtained = TORI.get(TORI.size()-1);
+        }
+        else {
+            final_obtained = Math.round(future * LY);
+        }
         TitleLabel.setText("YOU WILL NEED:");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_needed));
         TitleLabel1.setText("YOU WILL HAVE:");
