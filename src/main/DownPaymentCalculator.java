@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 /**
  *
- * @author giann
+ * @author gianna
  */
 public class DownPaymentCalculator extends javax.swing.JFrame {
 
@@ -28,7 +28,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         Dictionary<String, Integer> stateClosingCosts = DownPaymentHelper.createVals();
         updateComboBox(closingCostsStateSelection, stateClosingCosts);
     }
-    
+
     //Hides/Clears all irrelevant fields
     public void setInvisible(){
         closingCostsCheckBox.setVisible(false);
@@ -487,6 +487,18 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
             closingCostsStateSelection.setVisible(false);
         }
     }//GEN-LAST:event_closingCostsCheckBoxActionPerformed
+
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        if (homePriceRadio.isSelected()){
+            DownPaymentHelper.homePriceCalculate();
+        }
+        if (cashRadio.isSelected()){
+            DownPaymentHelper.cashCalculate();
+        }
+        if (downPaymentRadio.isSelected()){
+            DownPaymentHelper.downPaymentCalculate();
+        }
+    }//GEN-LAST:event_CalculateButtonActionPerformed
 
     /**
      * @param args the command line arguments
