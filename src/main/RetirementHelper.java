@@ -56,6 +56,19 @@ public class RetirementHelper {
         }
         return TORI;
     }
+    
+    public static List<Integer> Total_Obtained_Retirement_Income_Alt(int Living_Years, float Invest, float Current, float future) {
+        List<Integer> TORI = new ArrayList<>();
+        float savings = Current;
+        TORI.add(Math.round(savings));
+        for (int i = 0; i < Living_Years; i++){
+            float contribution = future;
+            savings *= (1+Invest);
+            savings += contribution;
+            TORI.add(Math.round(savings));
+        }
+        return TORI;
+    }
 
     public static boolean validate_ages(String Retirement_Age, String Current_Age, String Life_Expectency) {
         int RA;
@@ -75,6 +88,20 @@ public class RetirementHelper {
         }
         
         return true;
+    }
+    
+    public static int posOfSmallestElementGtOeT(Integer limit, List<Integer> list) {
+    double greater = 0;
+    int pos = -1;
+    for(int i=0; i < list.size(); i++) {
+        if(list.get(i) >= limit) {
+            if(pos == -1) // check whether its the first value above the limit in the list
+                pos = i;
+            else if(list.get(pos) > list.get(i)) //compare the current value with the previous smallest value
+                pos = i;
+        }
+    }
+    return pos;
     }
     
     public static String generate_age_warning(String Retirement_Age, String Current_Age, String Life_Expectency) {

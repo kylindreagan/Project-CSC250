@@ -922,7 +922,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         int RY = LE - RA;
         int LY = RA - CA;
         float FIN;
-        float final_obtained;
+        Integer final_obtained;
         
         if (IRisPercent) {
             FIN = INAR * PIT;
@@ -931,13 +931,15 @@ public class RetirementCalculator extends javax.swing.JFrame {
             FIN = INAR;
         }
         List<Integer> NeededRemaining = RetirementHelper.Total_Required_Retirement_Income(FIN, LE, RA, CA, OIAR, Inflate, Invest);
-        float final_needed = NeededRemaining.get(0);
-        if ("%".equals(INARComboBox.getSelectedItem())){
-        List<Integer> TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, future, Increase);
-        final_obtained = TORI.get(TORI.size()-1);
+        Integer final_needed = NeededRemaining.get(0);
+        List<Integer> TORI;
+        if ("%".equals(FutureComboBox.getSelectedItem())){
+            TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, future, Increase);
+            final_obtained = TORI.get(TORI.size()-1);
         }
         else {
-            final_obtained = Math.round(future * LY);
+            TORI = RetirementHelper.Total_Obtained_Retirement_Income_Alt(LY, Invest, current, future);
+            final_obtained = TORI.get(TORI.size()-1);
         }
         TitleLabel.setText("YOU WILL NEED:");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_needed));
@@ -945,11 +947,21 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
         TitleLabel2.setText("HOW CAN YOU REACH THIS?");
         
-        float yearlySavings = (final_needed * (Invest))/ ((float)Math.pow(1+Invest, LY) - 1);
-        float savingsPercentage = yearlySavings / PIT * 100;
+        if (final_needed > final_obtained) {
         
-        OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
-        OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
+            float yearlySavings = (final_needed * (Invest))/ ((float)Math.pow(1+Invest, LY) - 1);
+            float savingsPercentage = yearlySavings / PIT * 100;
+
+            OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
+            OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
+        }
+        else {
+            Integer lowest_possible = RetirementHelper.posOfSmallestElementGtOeT(final_needed, TORI);
+            
+            OutputLabel3.setText(String.format("You'll have the amount you need at age %d", lowest_possible+CA));
+            OutputLabel2.setText("");
+            
+        }
     }
     
     private void getOptionals() {
