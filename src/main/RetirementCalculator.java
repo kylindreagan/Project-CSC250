@@ -945,13 +945,11 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
         TitleLabel2.setText("HOW CAN YOU REACH THIS?");
         
-        float yearlySavings = final_needed / LY;
+        float yearlySavings = (final_needed * (Invest))/ ((float)Math.pow(1+Invest, LY) - 1);
         float savingsPercentage = yearlySavings / PIT * 100;
         
         OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
         OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
-        
-        
     }
     
     private void getOptionals() {
