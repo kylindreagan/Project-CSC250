@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -487,19 +488,6 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
             closingCostsStateSelection.setVisible(false);
         }
     }//GEN-LAST:event_closingCostsCheckBoxActionPerformed
-
-    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
-        if (homePriceRadio.isSelected()){
-            DownPaymentHelper.homePriceCalculate();
-        }
-        if (cashRadio.isSelected()){
-            DownPaymentHelper.cashCalculate();
-        }
-        if (downPaymentRadio.isSelected()){
-            DownPaymentHelper.downPaymentCalculate();
-        }
-    }//GEN-LAST:event_CalculateButtonActionPerformed
-
     /**
      * @param args the command line arguments
      */
