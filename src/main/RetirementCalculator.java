@@ -4,8 +4,10 @@
  */
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -14,6 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.util.List;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+
 
 /**
  *
@@ -151,6 +160,45 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARField.getDocument().addDocumentListener(documentListener);
         
     }
+    
+    private void addChartToPanel(List<Integer> savingsData) {
+        Graph.removeAll(); // Clear previous charts or components
+        DefaultCategoryDataset dataset = createDataset(savingsData);
+        
+        // Create chart
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Projected Retirement Savings Over Time",
+                "Year",
+                "Savings ($)",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+        
+        // Customize the chart
+        chart.setBackgroundPaint(Color.white);
+
+        // Add the chart to a ChartPanel
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(500, 400));
+        System.out.println("Adding chart with data: " + savingsData);
+        
+        // Add the ChartPanel to the existing panel
+        Graph.add(chartPanel, BorderLayout.CENTER);
+        
+        // Refresh the panel to show the new component
+        Graph.validate();
+    }
+    
+     private DefaultCategoryDataset createDataset(List<Integer> savingsData) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        // Populate dataset
+        for (int year = 0; year < savingsData.size(); year++) {
+            dataset.addValue(savingsData.get(year), "Savings", Integer.toString(year));
+        }
+        
+        return dataset;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,6 +264,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel2 = new javax.swing.JLabel();
         OutputLabel2 = new javax.swing.JLabel();
         OutputLabel3 = new javax.swing.JLabel();
+        Graph = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
 
@@ -694,6 +743,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         RetirementTabs.addTab("Results", ResultTab);
 
+        Graph.setLayout(new java.awt.BorderLayout());
+        RetirementTabs.addTab("Graph", Graph);
+
         Title1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 48)); // NOI18N
         Title1.setForeground(new java.awt.Color(51, 0, 204));
         Title1.setText("Retirement Calculator");
@@ -962,6 +1014,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
             OutputLabel2.setText("");
             
         }
+        addChartToPanel(TORI);
     }
     
     private void getOptionals() {
@@ -1020,6 +1073,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> FutureComboBox;
     private javax.swing.JTextField FutureField;
     private javax.swing.JLabel FutureLabelTrailing;
+    private javax.swing.JPanel Graph;
     private javax.swing.JPanel HowMuch;
     private javax.swing.JPanel HowTo;
     private javax.swing.JComboBox<String> INARComboBox;
