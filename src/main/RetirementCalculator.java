@@ -214,6 +214,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel = new javax.swing.JLabel();
         TitleLabel1 = new javax.swing.JLabel();
         OutputLabel1 = new javax.swing.JLabel();
+        TitleLabel2 = new javax.swing.JLabel();
+        OutputLabel2 = new javax.swing.JLabel();
+        OutputLabel3 = new javax.swing.JLabel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
 
@@ -632,49 +635,62 @@ public class RetirementCalculator extends javax.swing.JFrame {
         RetirementTabs.addTab("How much can you withdraw after retirement?", Withdraw);
 
         OutputLabel.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         TitleLabel.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
+        TitleLabel.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         TitleLabel1.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
+        TitleLabel1.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         OutputLabel1.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        TitleLabel2.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
+        TitleLabel2.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        OutputLabel2.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        OutputLabel3.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout ResultTabLayout = new javax.swing.GroupLayout(ResultTab);
         ResultTab.setLayout(ResultTabLayout);
         ResultTabLayout.setHorizontalGroup(
             ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ResultTabLayout.createSequentialGroup()
-                .addContainerGap(273, Short.MAX_VALUE)
-                .addGroup(ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ResultTabLayout.createSequentialGroup()
-                        .addComponent(TitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(106, 106, 106))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ResultTabLayout.createSequentialGroup()
-                        .addGroup(ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(OutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(OutputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(209, 209, 209))))
-            .addGroup(ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ResultTabLayout.createSequentialGroup()
-                    .addContainerGap(287, Short.MAX_VALUE)
-                    .addComponent(TitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(92, 92, 92)))
+            .addComponent(OutputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TitleLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(OutputLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TitleLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TitleLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(OutputLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ResultTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(OutputLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+                .addContainerGap())
         );
         ResultTabLayout.setVerticalGroup(
             ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ResultTabLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(44, 44, 44)
                 .addComponent(TitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(OutputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102)
+                .addGap(18, 18, 18)
+                .addComponent(TitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(OutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(396, Short.MAX_VALUE))
-            .addGroup(ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ResultTabLayout.createSequentialGroup()
-                    .addGap(145, 145, 145)
-                    .addComponent(TitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(429, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(TitleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(OutputLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(OutputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(256, Short.MAX_VALUE))
         );
 
         RetirementTabs.addTab("Results", ResultTab);
@@ -922,6 +938,15 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_needed));
         TitleLabel1.setText("YOU WILL HAVE:");
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
+        TitleLabel2.setText("HOW CAN YOU REACH THIS?");
+        
+        float yearlySavings = final_needed / LY;
+        float savingsPercentage = yearlySavings / PIT * 100;
+        
+        OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
+        OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
+        
+        
     }
     
     private void getOptionals() {
@@ -992,6 +1017,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JTextField OIARField;
     private javax.swing.JLabel OutputLabel;
     private javax.swing.JLabel OutputLabel1;
+    private javax.swing.JLabel OutputLabel2;
+    private javax.swing.JLabel OutputLabel3;
     private javax.swing.JTextField PrecomeField;
     private javax.swing.JButton QuitButton;
     private javax.swing.JButton ResetButton;
@@ -1004,6 +1031,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel Title4;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel TitleLabel1;
+    private javax.swing.JLabel TitleLabel2;
     private javax.swing.JLabel UnderCons;
     private javax.swing.JLabel UnderCons1;
     private javax.swing.JLabel WarningLabel;
