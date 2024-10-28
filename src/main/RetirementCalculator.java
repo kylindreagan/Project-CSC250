@@ -205,6 +205,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
         ClearButton = new javax.swing.JButton();
         SuperClearButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
+        HowTo = new javax.swing.JPanel();
+        UnderCons = new javax.swing.JLabel();
+        Withdraw = new javax.swing.JPanel();
+        UnderCons1 = new javax.swing.JLabel();
         ResultTab = new javax.swing.JPanel();
         OutputLabel = new javax.swing.JLabel();
         TitleLabel = new javax.swing.JLabel();
@@ -573,6 +577,60 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         RetirementTabs.addTab("How much do you need to retire?", HowMuch);
 
+        UnderCons.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 48)); // NOI18N
+        UnderCons.setForeground(new java.awt.Color(204, 255, 51));
+        UnderCons.setText("UNDER CONSTRUCTION");
+
+        javax.swing.GroupLayout HowToLayout = new javax.swing.GroupLayout(HowTo);
+        HowTo.setLayout(HowToLayout);
+        HowToLayout.setHorizontalGroup(
+            HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 817, Short.MAX_VALUE)
+            .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(HowToLayout.createSequentialGroup()
+                    .addGap(152, 152, 152)
+                    .addComponent(UnderCons, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(80, Short.MAX_VALUE)))
+        );
+        HowToLayout.setVerticalGroup(
+            HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 614, Short.MAX_VALUE)
+            .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(HowToLayout.createSequentialGroup()
+                    .addGap(279, 279, 279)
+                    .addComponent(UnderCons)
+                    .addContainerGap(280, Short.MAX_VALUE)))
+        );
+
+        RetirementTabs.addTab("How Can you save for Retirement?", HowTo);
+
+        UnderCons1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 48)); // NOI18N
+        UnderCons1.setForeground(new java.awt.Color(204, 255, 51));
+        UnderCons1.setText("UNDER CONSTRUCTION");
+
+        javax.swing.GroupLayout WithdrawLayout = new javax.swing.GroupLayout(Withdraw);
+        Withdraw.setLayout(WithdrawLayout);
+        WithdrawLayout.setHorizontalGroup(
+            WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 817, Short.MAX_VALUE)
+            .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(WithdrawLayout.createSequentialGroup()
+                    .addGap(152, 152, 152)
+                    .addComponent(UnderCons1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(80, Short.MAX_VALUE)))
+        );
+        WithdrawLayout.setVerticalGroup(
+            WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 614, Short.MAX_VALUE)
+            .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(WithdrawLayout.createSequentialGroup()
+                    .addGap(279, 279, 279)
+                    .addComponent(UnderCons1)
+                    .addContainerGap(280, Short.MAX_VALUE)))
+        );
+
+        RetirementTabs.addTab("How much can you withdraw after retirement?", Withdraw);
+
         OutputLabel.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
 
         TitleLabel.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
@@ -923,6 +981,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JTextField FutureField;
     private javax.swing.JLabel FutureLabelTrailing;
     private javax.swing.JPanel HowMuch;
+    private javax.swing.JPanel HowTo;
     private javax.swing.JComboBox<String> INARComboBox;
     private javax.swing.JTextField INARField;
     private javax.swing.JLabel INARLabelTrailing;
@@ -945,6 +1004,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel Title4;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel TitleLabel1;
+    private javax.swing.JLabel UnderCons;
+    private javax.swing.JLabel UnderCons1;
     private javax.swing.JLabel WarningLabel;
+    private javax.swing.JPanel Withdraw;
     // End of variables declaration//GEN-END:variables
 }
