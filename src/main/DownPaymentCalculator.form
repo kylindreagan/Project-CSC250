@@ -50,13 +50,11 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="homePriceRadio" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="cashRadio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="downPaymentRadio" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
@@ -64,7 +62,7 @@
                           <Group type="102" attributes="0">
                               <Component id="upfrontCashLabel" min="-2" pref="143" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="upfrontCashEntryField" min="-2" pref="71" max="-2" attributes="0"/>
+                              <Component id="upfrontCashEntryField" min="-2" pref="95" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="downPaymentLabel" min="-2" pref="82" max="-2" attributes="0"/>
@@ -76,7 +74,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="closingCostsCheckBox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="closingCostsPercentSign" min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="closingCostsDollarSign" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -85,11 +83,6 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="interestRateEntryField" min="-2" pref="71" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="interestRatePercentSign" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="CalculateButton" min="-2" max="-2" attributes="0"/>
@@ -104,6 +97,18 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="resetButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="interestRateEntryField" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="closingCostsEntryField" min="-2" pref="89" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="closingCostsStateSelection" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="interestRatePercentSign" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -114,14 +119,18 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
-              <Component id="closingCostsEntryField" min="-2" pref="71" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="closingCostsStateSelection" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="downPaymentRadio" max="32767" attributes="0"/>
+                          <Component id="errorLabel" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -145,7 +154,6 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="homePriceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="homePriceEntryField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -164,9 +172,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="closingCostsCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="closingCostsEntryField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="closingCostsPercentSign" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="closingCostsDollarSign" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="closingCostsStateSelection" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="closingCostsEntryField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -182,18 +190,22 @@
                               <Component id="yearsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                      <Component id="errorLabel" min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="CalculateButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="clearButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="resetButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -267,11 +279,6 @@
         <Property name="text" type="java.lang.String" value="Upfront Cash Available    $"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="upfrontCashEntryField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="100,000"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="downPaymentLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Down Payment"/>
@@ -321,12 +328,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="closingCostsEntryField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="3,391"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="closingCostsPercentSign">
+    <Component class="javax.swing.JLabel" name="closingCostsDollarSign">
       <Properties>
         <Property name="text" type="java.lang.String" value="$"/>
       </Properties>
@@ -390,5 +392,41 @@
         <Property name="text" type="java.lang.String" value="500,000"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JFormattedTextField" name="upfrontCashEntryField">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="0" type="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="100,000"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="closingCostsEntryField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="3,391"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="errorLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Error: None"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="resultsLabel">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
