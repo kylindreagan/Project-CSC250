@@ -4,8 +4,10 @@
  */
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -14,6 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.util.List;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+
 
 /**
  *
@@ -151,6 +160,45 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARField.getDocument().addDocumentListener(documentListener);
         
     }
+    
+    private void addChartToPanel(List<Integer> savingsData, Integer CA) {
+        Graph.removeAll(); // Clear previous charts or components
+        DefaultCategoryDataset dataset = createDataset(savingsData, CA);
+        
+        // Create chart
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Projected Retirement Savings Over Time",
+                "Year",
+                "Savings ($)",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+        
+        // Customize the chart
+        chart.setBackgroundPaint(Color.white);
+
+        // Add the chart to a ChartPanel
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(500, 400));
+        System.out.println("Adding chart with data: " + savingsData);
+        
+        // Add the ChartPanel to the existing panel
+        Graph.add(chartPanel, BorderLayout.CENTER);
+        
+        // Refresh the panel to show the new component
+        Graph.validate();
+    }
+    
+     private DefaultCategoryDataset createDataset(List<Integer> savingsData, Integer CA) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        // Populate dataset
+        for (int year = 0; year < savingsData.size(); year++) {
+            dataset.addValue(savingsData.get(year), "Savings", Integer.toString(CA+year));
+        }
+        
+        return dataset;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -216,6 +264,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel2 = new javax.swing.JLabel();
         OutputLabel2 = new javax.swing.JLabel();
         OutputLabel3 = new javax.swing.JLabel();
+        Graph = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
 
@@ -694,6 +743,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         RetirementTabs.addTab("Results", ResultTab);
 
+        Graph.setLayout(new java.awt.BorderLayout());
+        RetirementTabs.addTab("Graph", Graph);
+
         Title1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 48)); // NOI18N
         Title1.setForeground(new java.awt.Color(51, 0, 204));
         Title1.setText("Retirement Calculator");
@@ -922,7 +974,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         int RY = LE - RA;
         int LY = RA - CA;
         float FIN;
-        float final_obtained;
+        Integer final_obtained;
         
         if (IRisPercent) {
             FIN = INAR * PIT;
@@ -931,13 +983,15 @@ public class RetirementCalculator extends javax.swing.JFrame {
             FIN = INAR;
         }
         List<Integer> NeededRemaining = RetirementHelper.Total_Required_Retirement_Income(FIN, LE, RA, CA, OIAR, Inflate, Invest);
-        float final_needed = NeededRemaining.get(0);
-        if ("%".equals(INARComboBox.getSelectedItem())){
-        List<Integer> TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, future, Increase);
-        final_obtained = TORI.get(TORI.size()-1);
+        Integer final_needed = NeededRemaining.get(0);
+        List<Integer> TORI;
+        if ("%".equals(FutureComboBox.getSelectedItem())){
+            TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, future, Increase);
+            final_obtained = TORI.get(TORI.size()-1);
         }
         else {
-            final_obtained = Math.round(future * LY);
+            TORI = RetirementHelper.Total_Obtained_Retirement_Income_Alt(LY, Invest, current, future);
+            final_obtained = TORI.get(TORI.size()-1);
         }
         TitleLabel.setText("YOU WILL NEED:");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_needed));
@@ -945,11 +999,22 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
         TitleLabel2.setText("HOW CAN YOU REACH THIS?");
         
-        float yearlySavings = (final_needed * (Invest))/ ((float)Math.pow(1+Invest, LY) - 1);
-        float savingsPercentage = yearlySavings / PIT * 100;
+        if (final_needed > final_obtained) {
         
-        OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
-        OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
+            float yearlySavings = (final_needed * (Invest))/ ((float)Math.pow(1+Invest, LY) - 1);
+            float savingsPercentage = yearlySavings / PIT * 100;
+
+            OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
+            OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
+        }
+        else {
+            Integer lowest_possible = RetirementHelper.posOfSmallestElementGtOeT(final_needed, TORI);
+            
+            OutputLabel3.setText(String.format("You'll have the amount you need at age %d by age %d", RA, lowest_possible+CA));
+            OutputLabel2.setText("");
+            
+        }
+        addChartToPanel(TORI, CA);
     }
     
     private void getOptionals() {
@@ -1008,6 +1073,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> FutureComboBox;
     private javax.swing.JTextField FutureField;
     private javax.swing.JLabel FutureLabelTrailing;
+    private javax.swing.JPanel Graph;
     private javax.swing.JPanel HowMuch;
     private javax.swing.JPanel HowTo;
     private javax.swing.JComboBox<String> INARComboBox;

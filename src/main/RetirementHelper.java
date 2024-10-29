@@ -30,11 +30,12 @@ public class RetirementHelper {
     public static List<Integer> Total_Required_Retirement_Income(float FIN, int LE, int RA, int CA, float OIAR, float Inflate, float Invest){
         List<Integer> TRRI = new ArrayList<>();
         float Yearly_Needs = (FIN - OIAR*12); //OIAR = Other Income After Retirement 
+        float Yearly_Gets = OIAR*12;
         System.out.println(Yearly_Needs);
         float Total_Needs = 0.0f;
         TRRI.add(0);
         for (int i = LE; i >= RA; i--) {
-           Total_Needs += (Yearly_Needs * (float)Math.pow(1+Inflate,i-CA)) / (float)Math.pow(1 + Invest, i - RA + 1);
+           Total_Needs += ((FIN * (float)Math.pow(1+Inflate,i-CA)) - Yearly_Gets) / (float)Math.pow(1 + Invest, i - RA + 1);
             TRRI.add(Math.round(Total_Needs));
             System.out.println("Year " + i + " Total Needs (discounted): " + Total_Needs);
         }
@@ -50,6 +51,19 @@ public class RetirementHelper {
         for (int i = 0; i < Living_Years; i++){
             years_income = PIT * (float)Math.pow((1+Increase),i);
             float contribution = years_income * future;
+            savings *= (1+Invest);
+            savings += contribution;
+            TORI.add(Math.round(savings));
+        }
+        return TORI;
+    }
+    
+    public static List<Integer> Total_Obtained_Retirement_Income_Alt(int Living_Years, float Invest, float Current, float future) {
+        List<Integer> TORI = new ArrayList<>();
+        float savings = Current;
+        TORI.add(Math.round(savings));
+        for (int i = 0; i < Living_Years; i++){
+            float contribution = future;
             savings *= (1+Invest);
             savings += contribution;
             TORI.add(Math.round(savings));
@@ -75,6 +89,20 @@ public class RetirementHelper {
         }
         
         return true;
+    }
+    
+    public static int posOfSmallestElementGtOeT(Integer limit, List<Integer> list) {
+    double greater = 0;
+    int pos = -1;
+    for(int i=0; i < list.size(); i++) {
+        if(list.get(i) >= limit) {
+            if(pos == -1) // check whether its the first value above the limit in the list
+                pos = i;
+            else if(list.get(pos) > list.get(i)) //compare the current value with the previous smallest value
+                pos = i;
+        }
+    }
+    return pos;
     }
     
     public static String generate_age_warning(String Retirement_Age, String Current_Age, String Life_Expectency) {
