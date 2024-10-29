@@ -161,9 +161,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
     }
     
-    private void addChartToPanel(List<Integer> savingsData) {
+    private void addChartToPanel(List<Integer> savingsData, Integer CA) {
         Graph.removeAll(); // Clear previous charts or components
-        DefaultCategoryDataset dataset = createDataset(savingsData);
+        DefaultCategoryDataset dataset = createDataset(savingsData, CA);
         
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
@@ -189,12 +189,12 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Graph.validate();
     }
     
-     private DefaultCategoryDataset createDataset(List<Integer> savingsData) {
+     private DefaultCategoryDataset createDataset(List<Integer> savingsData, Integer CA) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         // Populate dataset
         for (int year = 0; year < savingsData.size(); year++) {
-            dataset.addValue(savingsData.get(year), "Savings", Integer.toString(year));
+            dataset.addValue(savingsData.get(year), "Savings", Integer.toString(CA+year));
         }
         
         return dataset;
@@ -1010,11 +1010,11 @@ public class RetirementCalculator extends javax.swing.JFrame {
         else {
             Integer lowest_possible = RetirementHelper.posOfSmallestElementGtOeT(final_needed, TORI);
             
-            OutputLabel3.setText(String.format("You'll have the amount you need at age %d", lowest_possible+CA));
+            OutputLabel3.setText(String.format("You'll have the amount you need at age %d by age %d", RA, lowest_possible+CA));
             OutputLabel2.setText("");
             
         }
-        addChartToPanel(TORI);
+        addChartToPanel(TORI, CA);
     }
     
     private void getOptionals() {

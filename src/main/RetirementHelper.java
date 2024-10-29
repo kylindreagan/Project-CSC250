@@ -30,11 +30,12 @@ public class RetirementHelper {
     public static List<Integer> Total_Required_Retirement_Income(float FIN, int LE, int RA, int CA, float OIAR, float Inflate, float Invest){
         List<Integer> TRRI = new ArrayList<>();
         float Yearly_Needs = (FIN - OIAR*12); //OIAR = Other Income After Retirement 
+        float Yearly_Gets = OIAR*12;
         System.out.println(Yearly_Needs);
         float Total_Needs = 0.0f;
         TRRI.add(0);
         for (int i = LE; i >= RA; i--) {
-           Total_Needs += (Yearly_Needs * (float)Math.pow(1+Inflate,i-CA)) / (float)Math.pow(1 + Invest, i - RA + 1);
+           Total_Needs += ((FIN * (float)Math.pow(1+Inflate,i-CA)) - Yearly_Gets) / (float)Math.pow(1 + Invest, i - RA + 1);
             TRRI.add(Math.round(Total_Needs));
             System.out.println("Year " + i + " Total Needs (discounted): " + Total_Needs);
         }
