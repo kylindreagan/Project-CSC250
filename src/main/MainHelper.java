@@ -11,6 +11,23 @@ import java.text.DecimalFormat;
  * @author kylin
  */
 public class MainHelper {
+    
+    public static double monthlyPayment(float amt, float yearlyInterestRate, int numYears, boolean total){
+        if (is_positive(amt) && is_positive(yearlyInterestRate) && is_positive(numYears)){
+            int months = numYears * 12;
+            double monthlyInterestRate = (yearlyInterestRate * 0.01) / 12;
+            double monthlyPayment = (amt * monthlyInterestRate) / (1 - (1 / Math.pow((1 + monthlyInterestRate),months)));
+            double totalPayment = monthlyPayment * 12;
+            if (total){
+                return totalPayment;
+            } else{
+                return monthlyPayment;
+            }
+        } else{
+            return 0.0;
+
+        }
+    }
 
     public static boolean validate_money(String money, boolean allow_foreign) {
         if (allow_foreign) {
