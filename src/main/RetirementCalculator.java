@@ -33,7 +33,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private Boolean INARpercent;
     private Boolean Futurepercent;
     private static JTextField lastFocusedField = null;  // Variable to track last focused JTextField
-    private static Boolean allow_foreign = false;
+    private static final Boolean allow_foreign = false;
     float future;
     float OIAR;
     float current;
@@ -161,9 +161,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
     }
     
-    private void addChartToPanel(List<Integer> savingsData, Integer CA) {
+    private void addChartToPanel(List<Integer> savingsData, List<Integer> neededData, Integer CA) {
         Graph.removeAll(); // Clear previous charts or components
-        DefaultCategoryDataset dataset = createDataset(savingsData, CA);
+        DefaultCategoryDataset dataset = createDataset(savingsData, neededData, CA);
         
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
@@ -189,14 +189,18 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Graph.validate();
     }
     
-     private DefaultCategoryDataset createDataset(List<Integer> savingsData, Integer CA) {
+     private DefaultCategoryDataset createDataset(List<Integer> savingsData, List<Integer> neededData, Integer CA) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         // Populate dataset
         for (int year = 0; year < savingsData.size(); year++) {
-            dataset.addValue(savingsData.get(year), "Savings", Integer.toString(CA+year));
+            dataset.addValue(savingsData.get(year), "Obtained", Integer.toString(CA+year));
         }
         
+        for (int year = 0; year < savingsData.size(); year++) {
+            dataset.addValue(neededData.get(year), "Needed", Integer.toString(CA+year));
+        }
+
         return dataset;
     }
 
@@ -998,12 +1002,12 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel1.setText("YOU WILL HAVE:");
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
         TitleLabel2.setText("HOW CAN YOU REACH THIS?");
+        float percentHigher = ((float)final_needed / (float)final_obtained);
+        float savingsPercentage = (percentHigher * future)*110; //adjusted for error
+        float yearlySavings = PIT * savingsPercentage;
+
         
         if (final_needed > final_obtained) {
-        
-            float yearlySavings = (final_needed * (Invest))/ ((float)Math.pow(1+Invest, LY) - 1);
-            float savingsPercentage = yearlySavings / PIT * 100;
-
             OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
             OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
         }
@@ -1011,10 +1015,13 @@ public class RetirementCalculator extends javax.swing.JFrame {
             Integer lowest_possible = RetirementHelper.posOfSmallestElementGtOeT(final_needed, TORI);
             
             OutputLabel3.setText(String.format("You'll have the amount you need at age %d by age %d", RA, lowest_possible+CA));
-            OutputLabel2.setText("");
+            Integer Earliest_Retirement = RetirementHelper.Earliest_Retirement(final_needed, final_obtained, RA, CA, Inflate, OIAR*12, Invest, FIN);
+            OutputLabel2.setText(String.format("Assuming no changes to variables you might be able to retire by age %d", Earliest_Retirement));
             
         }
-        addChartToPanel(TORI, CA);
+        List<Integer> Required_TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, savingsPercentage/100, Increase);
+        System.out.println(Required_TORI);
+        addChartToPanel(TORI, Required_TORI, CA);
     }
     
     private void getOptionals() {
