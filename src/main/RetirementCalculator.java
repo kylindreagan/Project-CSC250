@@ -1673,7 +1673,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
             the_Beginning_Of_My_Poor_Ass_Life = future/PIT;
         }
         System.out.println(the_Beginning_Of_My_Poor_Ass_Life);
-        float percentHigher = Math.abs((float)final_needed - (float)final_obtained) / (((float)final_needed + (float)final_obtained)/2) / (Invest*100);
+        float percentHigher = Math.abs((float)final_needed - (float)final_obtained) / (((float)final_needed + (float)final_obtained)/2) / ((Invest+.01)*100);
         System.out.println(percentHigher);
         float savingsPercentage = (percentHigher + the_Beginning_Of_My_Poor_Ass_Life)*100; //adjusted for error
         float yearlySavings = PIT * (savingsPercentage/100);
