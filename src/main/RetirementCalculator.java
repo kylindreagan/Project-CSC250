@@ -1658,7 +1658,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
             final_obtained = TORI.get(TORI.size()-1);
         }
         else {
-            TORI = RetirementHelper.Total_Obtained_Retirement_Income_Alt(LY, Invest, current, future);
+            TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY,  PIT, Invest, current, Invest);
             final_obtained = TORI.get(TORI.size()-1);
         }
         TitleLabel.setText("YOU WILL NEED:");
