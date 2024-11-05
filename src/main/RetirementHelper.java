@@ -35,7 +35,7 @@ public class RetirementHelper {
         float Total_Needs = 0.0f;
         TRRI.add(0);
         for (int i = LE; i >= RA; i--) {
-           Total_Needs += ((FIN * (float)Math.pow(1+Inflate,i-CA)) - Yearly_Gets) / (float)Math.pow(1 + Invest, i - RA + 1);
+            Total_Needs += ((FIN * (float)Math.pow(1+Inflate,i-CA)) - Yearly_Gets) / (float)Math.pow(1 + Invest, i - RA + 1);
             TRRI.add(Math.round(Total_Needs));
             System.out.println("Year " + i + " Total Needs (discounted): " + Total_Needs);
         }
@@ -70,6 +70,22 @@ public class RetirementHelper {
         }
         return TORI;
     }
+    
+    public static List<Integer> Inverse_TORI(Integer ending_value, int Living_Years, float PIT, float Invest, float Current, float future, float Increase) {
+        List<Integer> TORI = new ArrayList<>();
+         float totalReduction = ending_value - Current;
+        float years_outcome = (totalReduction)/Living_Years;
+        float savings = ending_value;
+        TORI.add(Math.round(savings));
+        for (int i = Living_Years-1; i >= 0; i--){
+            float contribution = years_outcome;
+            savings -= contribution;
+            TORI.add(Math.round(savings));
+        }
+        Collections.reverse(TORI);
+        return TORI;
+    }
+    
 
     public static boolean validate_ages(String Retirement_Age, String Current_Age, String Life_Expectency) {
         int RA;
@@ -144,6 +160,18 @@ public class RetirementHelper {
         else{
             return MainHelper.parseMoney(value, ",");
         }
+    }
+    
+    public static Integer Earliest_Retirement(float final_needed, Integer final_obtained, Integer RA, Integer CA, float Inflate, float Yearly_Gets, float Invest, float FIN) {
+        for (int i=RA; i>=CA; i--) {
+            final_needed += ((FIN * (float)Math.pow(1+Inflate,i-CA)) - Yearly_Gets) / (float)Math.pow(1 + Invest, i - RA + 1);
+            if (final_needed > final_obtained) {
+                return i+1;
+            }
+            System.out.println("Year " + i + " Total Needs (discounted): " + final_needed);
+        }
+        return -1;
+        
     }
 
     //Additional Savings Needed=PV−FV
