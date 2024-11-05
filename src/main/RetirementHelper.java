@@ -83,9 +83,14 @@ public class RetirementHelper {
     
     public static float Inverse_TORI(Integer ending_value, int Living_Years, float PIT, float Invest, float Current, float Increase) {
         float future;
-        float numerator = (ending_value - Current * (float)Math.pow(1 + Invest, Living_Years)) * Math.abs(Invest - Increase);
-        float denom = PIT * Math.abs((float)Math.pow(1 + Invest, Living_Years) - (float)Math.pow(1 + Increase, Living_Years));
-        future = numerator / denom;
+        if (Invest != Increase) {
+            float numerator = (ending_value - Current * (float)Math.pow(1 + Invest, Living_Years)) * Math.abs(Invest - Increase);
+            float denom = PIT * Math.abs((float)Math.pow(1 + Invest, Living_Years) - (float)Math.pow(1 + Increase, Living_Years));
+            future = numerator / denom;
+        }
+        else {
+            future = (ending_value / (float)Math.pow(1 + Invest, Living_Years) - Current) / PIT;
+        }
         return future;
     }
     
