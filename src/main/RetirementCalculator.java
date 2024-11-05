@@ -321,7 +321,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                         AnnualField.setForeground(Color.red);
                          WarningLabel2.setText("⚠ Invalid Annual Contribution.");
                     }
-                    else{
+                    if (y){
                         InflateField1.setForeground(Color.black);
                         InvestField2.setForeground(Color.black);
                         MonthlyField.setForeground(Color.black);
@@ -1653,7 +1653,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Integer final_needed = NeededRemaining.get(0);
         List<Integer> TORI;
         if ("%".equals(FutureComboBox.getSelectedItem())){
-            TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, future, Increase);
+            float PTI = future * PIT; 
+            TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PTI, Invest, current, Increase);
             final_obtained = TORI.get(TORI.size()-1);
         }
         else {
@@ -1673,15 +1674,15 @@ public class RetirementCalculator extends javax.swing.JFrame {
             the_Beginning_Of_My_Poor_Ass_Life = future/PIT;
         }
         System.out.println(the_Beginning_Of_My_Poor_Ass_Life);
-        float percentHigher = Math.abs((float)final_needed - (float)final_obtained) / (((float)final_needed + (float)final_obtained)/2) / ((Invest+.01f)*100);
+        float percentHigher = Math.abs((float)final_needed - (float)final_obtained) / (((float)final_needed + (float)final_obtained)/2) / (Invest*100);
         System.out.println(percentHigher);
-        float savingsPercentage = (percentHigher + the_Beginning_Of_My_Poor_Ass_Life)*100; //adjusted for error
-        float yearlySavings = PIT * (savingsPercentage/100);
+        float savingsPercentage = RetirementHelper.Inverse_TORI(final_needed, LY, PIT, Invest, current, Increase);
+        float yearlySavings = PIT * savingsPercentage;
 
         
         if (final_needed > final_obtained) {
             OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
-            OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage));
+            OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage*100));
         }
         else {
             Integer lowest_possible = RetirementHelper.posOfSmallestElementGtOeT(final_needed, TORI);
@@ -1691,7 +1692,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
             OutputLabel2.setText(String.format("Assuming no changes to variables you might be able to retire by age %d", Earliest_Retirement));
             
         }
-        List<Integer> Required_TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, PIT, Invest, current, savingsPercentage/100, Increase);
+        float needed_PTI = PIT * (savingsPercentage);
+        List<Integer> Required_TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, needed_PTI, Invest, current, Increase);
         System.out.println(Required_TORI);
         addChartToPanel(TORI, Required_TORI, CA, final_needed > final_obtained);
     }
