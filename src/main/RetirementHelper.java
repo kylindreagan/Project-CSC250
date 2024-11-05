@@ -89,7 +89,7 @@ public class RetirementHelper {
             future = numerator / denom;
         }
         else {
-            future = (ending_value / (float)Math.pow(1 + Invest, Living_Years) - Current) / PIT;
+            future = (ending_value / (float)Math.pow(1 + Invest, Living_Years) - Current) / (PIT * Living_Years);
         }
         return future;
     }
