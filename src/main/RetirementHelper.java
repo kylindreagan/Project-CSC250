@@ -61,6 +61,10 @@ public class RetirementHelper {
         }
         return TORI;
     }
+    
+    public static float Current_Needed(float Invest, float ending_value, Integer Living_Years) {
+        return ending_value / (float)Math.pow(1+Invest, Living_Years);
+    }
 
     public static Integer Total_Obtained_Retirement_Income_At_Year(int Living_Years, float PTI, float Invest, float Current, float Increase) {
         float TORI = Math.round(Current * Math.pow(1 + Invest, Living_Years) + ((PTI * Math.abs(Math.pow(1 + Invest, Living_Years) - Math.pow(1 + Increase, Living_Years))) / Math.abs(Invest - Increase)));
@@ -70,18 +74,14 @@ public class RetirementHelper {
     
     public static List<Integer> Total_Obtained_Retirement_Income_Alt(int Living_Years, float Invest, float Current, float future) {
         List<Integer> TORI = new ArrayList<>();
-        float savings = Current;
-        TORI.add(Math.round(savings));
-        for (int i = 0; i < Living_Years; i++){
-            float contribution = future;
-            savings *= (1+Invest);
-            savings += contribution;
+        for (int i = 0; i <= Living_Years; i++){
+            float savings = Current + (future * (1+Invest) * ((float)Math.pow(1+Invest,i)-1))/Invest;
             TORI.add(Math.round(savings));
         }
         return TORI;
     }
     
-    public static float Inverse_TORI(Integer ending_value, int Living_Years, float PIT, float Invest, float Current, float Increase) {
+    public static float Inverse_TORI(float ending_value, int Living_Years, float PIT, float Invest, float Current, float Increase) {
         float future;
         if (Invest != Increase) {
             float numerator = (ending_value - Current * (float)Math.pow(1 + Invest, Living_Years)) * Math.abs(Invest - Increase);
@@ -92,6 +92,12 @@ public class RetirementHelper {
             future = (ending_value / (float)Math.pow(1 + Invest, Living_Years) - Current) / (PIT * Living_Years);
         }
         return future;
+    }
+    
+    public static float Inverse_PTI(float ending_value, int Living_Years, float Invest, float Current) {
+        float PTI;
+        PTI = ((ending_value - Current) * Invest) / ((1+Invest)*((float)Math.pow((1+Invest), Living_Years)-1));
+        return PTI;
     }
     
 

@@ -358,9 +358,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
     }
     
-    private void addChartToPanel(List<Integer> savingsData, List<Integer> neededData, Integer CA, Boolean two_graphs) {
+    private void addChartToPanel(List<Integer> savingsData, List<Integer> neededData, Integer CA, Boolean two_graphs, String title_1, String title_2) {
         Graph.removeAll(); // Clear previous charts or components
-        DefaultCategoryDataset dataset = createDataset(savingsData, neededData, CA, two_graphs);
+        DefaultCategoryDataset dataset = createDataset(savingsData, neededData, CA, two_graphs, title_1, title_2);
         
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
@@ -386,17 +386,17 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Graph.validate();
     }
     
-     private DefaultCategoryDataset createDataset(List<Integer> savingsData, List<Integer> neededData, Integer CA, Boolean two_graphs) {
+     private DefaultCategoryDataset createDataset(List<Integer> savingsData, List<Integer> neededData, Integer CA, Boolean two_graphs, String title_1, String title_2) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         // Populate dataset
         for (int year = 0; year < savingsData.size(); year++) {
-            dataset.addValue(savingsData.get(year), "Obtained", Integer.toString(CA+year));
+            dataset.addValue(savingsData.get(year), title_1, Integer.toString(CA+year));
         }
         
         if (two_graphs){
         for (int year = 0; year < savingsData.size(); year++) {
-            dataset.addValue(neededData.get(year), "Needed", Integer.toString(CA+year));
+            dataset.addValue(neededData.get(year), title_2, Integer.toString(CA+year));
         }
         }
 
@@ -509,6 +509,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel2 = new javax.swing.JLabel();
         OutputLabel2 = new javax.swing.JLabel();
         OutputLabel3 = new javax.swing.JLabel();
+        OutputLabel4 = new javax.swing.JLabel();
         Graph = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
@@ -940,7 +941,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         DollarSign1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DollarSign1.setText("$");
 
-        NeededField.setText("1,894,683");
+        NeededField.setText("600,000");
 
         AmountLabel25.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1319,6 +1320,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel3.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
         OutputLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        OutputLabel4.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout ResultTabLayout = new javax.swing.GroupLayout(ResultTab);
         ResultTab.setLayout(ResultTabLayout);
         ResultTabLayout.setHorizontalGroup(
@@ -1328,10 +1332,12 @@ public class RetirementCalculator extends javax.swing.JFrame {
             .addComponent(OutputLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(TitleLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(TitleLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(OutputLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ResultTabLayout.createSequentialGroup()
+            .addGroup(ResultTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(OutputLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+                .addGroup(ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(OutputLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+                    .addComponent(OutputLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(OutputLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ResultTabLayout.setVerticalGroup(
@@ -1341,17 +1347,19 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 .addComponent(TitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(OutputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(TitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OutputLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(TitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(OutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(TitleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(OutputLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(OutputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         RetirementTabs.addTab("Results", ResultTab);
@@ -1538,7 +1546,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_INARComboBoxActionPerformed
 
     private void CalculateButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButton2ActionPerformed
-        // TODO add your handling code here:
+        CalculateSave();
+        RetirementTabs.setSelectedComponent(ResultTab);
     }//GEN-LAST:event_CalculateButton2ActionPerformed
 
     private void ClearButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButton1ActionPerformed
@@ -1658,7 +1667,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
             final_obtained = TORI.get(TORI.size()-1);
         }
         else {
-            TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY,  PIT, Invest, current, Invest);
+            TORI = RetirementHelper.Total_Obtained_Retirement_Income_Alt(LY, Invest, current, future);
             final_obtained = TORI.get(TORI.size()-1);
         }
         TitleLabel.setText("YOU WILL NEED:");
@@ -1666,14 +1675,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel1.setText("YOU WILL HAVE:");
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
         TitleLabel2.setText("HOW CAN YOU REACH THIS?");
-        float the_Beginning_Of_My_Poor_Ass_Life;
-        if ("%".equals(FutureComboBox.getSelectedItem())){
-            the_Beginning_Of_My_Poor_Ass_Life = future;
-        }
-        else{
-            the_Beginning_Of_My_Poor_Ass_Life = future/PIT;
-        }
-        System.out.println(the_Beginning_Of_My_Poor_Ass_Life);
         float percentHigher = Math.abs((float)final_needed - (float)final_obtained) / (((float)final_needed + (float)final_obtained)/2) / (Invest*100);
         System.out.println(percentHigher);
         float savingsPercentage = RetirementHelper.Inverse_TORI(final_needed, LY, PIT, Invest, current, Increase);
@@ -1695,7 +1696,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         float needed_PTI = PIT * (savingsPercentage);
         List<Integer> Required_TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, needed_PTI, Invest, current, Increase);
         System.out.println(Required_TORI);
-        addChartToPanel(TORI, Required_TORI, CA, final_needed > final_obtained);
+        addChartToPanel(TORI, Required_TORI, CA, final_needed > final_obtained, "Obtained", "Needed");
     }
     
     private void getOptionals() {
@@ -1723,6 +1724,36 @@ public class RetirementCalculator extends javax.swing.JFrame {
         else {
             current = 0;
         }
+    }
+    
+    private void CalculateSave() {
+        int CA = Integer.parseInt(CurrentAgeField1.getText());
+        int RA = Integer.parseInt(RetireAgeField1.getText());
+        int Living_Years = RA - CA;
+        float Current = MainHelper.parseMoney(CurrentField1.getText(), ",");
+        float needed = MainHelper.parseMoney(NeededField.getText(), ",");
+        float invest = MainHelper.parseMoney(InvestField1.getText(), ",") / 100;
+        
+        float annual_investment = RetirementHelper.Inverse_PTI(needed, Living_Years, invest, Current);
+        System.out.println(annual_investment);
+        float monthly_investment = annual_investment / 12;
+        float current_needed = RetirementHelper.Current_Needed(invest, needed, Living_Years);
+        
+        TitleLabel.setText("WAYS TO SAVE:");
+        OutputLabel1.setText("Save $" + MainHelper.formatCurrency(annual_investment) + "/year or");
+        OutputLabel4.setText("Save $" + MainHelper.formatCurrency(monthly_investment) + "/month");
+        TitleLabel1.setText("IF YOU HAVE IT NOW:");
+        OutputLabel.setText("Additional Amount Needed $" + MainHelper.formatCurrency(current_needed));
+        
+        List<Integer> annual_invest_lines = RetirementHelper.Total_Obtained_Retirement_Income_Alt(RA-CA, invest, Current, annual_investment);
+        List<Integer> have_it_now = RetirementHelper.Total_Obtained_Retirement_Income(RA-CA, 0, invest, current_needed, invest);
+        addChartToPanel(annual_invest_lines, have_it_now, CA, true, "Annual Investments", "Single Investment");
+        
+        TitleLabel2.setText("");
+        OutputLabel3.setText("");
+        OutputLabel2.setText("");
+        
+        
     }
     
     
@@ -1805,6 +1836,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel OutputLabel1;
     private javax.swing.JLabel OutputLabel2;
     private javax.swing.JLabel OutputLabel3;
+    private javax.swing.JLabel OutputLabel4;
     private javax.swing.JTextField PrecomeField;
     private javax.swing.JButton QuitButton;
     private javax.swing.JButton ResetButton;
