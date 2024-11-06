@@ -1139,7 +1139,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         AnnualField.setText("0");
 
-        MonthlyField.setText("1,510");
+        MonthlyField.setText("500");
 
         AmountLabel36.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1573,7 +1573,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_ResetButton1ActionPerformed
 
     private void CalculateButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButton3ActionPerformed
-        // TODO add your handling code here:
+        WithdrawCalculate();
+        RetirementTabs.setSelectedComponent(ResultTab);
     }//GEN-LAST:event_CalculateButton3ActionPerformed
 
     private void ClearButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButton2ActionPerformed
@@ -1739,20 +1740,41 @@ public class RetirementCalculator extends javax.swing.JFrame {
         float monthly_investment = annual_investment / 12;
         float current_needed = RetirementHelper.Current_Needed(invest, needed, Living_Years);
         
-        TitleLabel.setText("WAYS TO SAVE:");
+        TitleLabel.setText("ANNUAL SAVINGS");
         OutputLabel1.setText("Save $" + MainHelper.formatCurrency(annual_investment) + "/year or");
-        OutputLabel4.setText("Save $" + MainHelper.formatCurrency(monthly_investment) + "/month");
-        TitleLabel1.setText("IF YOU HAVE IT NOW:");
-        OutputLabel.setText("Additional Amount Needed $" + MainHelper.formatCurrency(current_needed));
+        TitleLabel1.setText("MONTHLY SAVINGS");
+        OutputLabel.setText("Save $" + MainHelper.formatCurrency(monthly_investment) + "/month or");
+        TitleLabel2.setText("IF YOU HAVE IT NOW");
+        OutputLabel3.setText("Additional Amount Needed $" + MainHelper.formatCurrency(current_needed));
         
         List<Integer> annual_invest_lines = RetirementHelper.Total_Obtained_Retirement_Income_Alt(RA-CA, invest, Current, annual_investment);
         List<Integer> have_it_now = RetirementHelper.Total_Obtained_Retirement_Income(RA-CA, 0, invest, current_needed, invest);
         addChartToPanel(annual_invest_lines, have_it_now, CA, true, "Annual Investments", "Single Investment");
         
-        TitleLabel2.setText("");
-        OutputLabel3.setText("");
         OutputLabel2.setText("");
         
+        
+    }
+    
+    private void WithdrawCalculate() {
+        int CA = Integer.parseInt(CurrentAgeField2.getText());
+        int RA = Integer.parseInt(RetireAgeField2.getText());
+        int Living_Years = RA - CA;
+        int LE = Integer.parseInt(LifeExpField1.getText());
+        int Retirement_Years = LE - RA;
+        float Current = MainHelper.parseMoney(CurrentField2.getText(), ",");
+        float invest = MainHelper.parseMoney(InvestField2.getText(), ",") / 100;
+        float inflate = MainHelper.parseMoney(InflateField1.getText(), ",") / 100;
+        float annual = MainHelper.parseMoney(AnnualField.getText(), ",");
+        float monthly = MainHelper.parseMoney(MonthlyField.getText(), ",");
+        
+        List<Integer> buildup = RetirementHelper.Total_Obtained_Retirement_Income_Alt(Living_Years, invest, Current, annual + monthly*12);
+        int final_obtained = buildup.get(buildup.size()-1);
+        TitleLabel.setText("BALANCE AT RETIREMENT");
+        OutputLabel1.setText("$" + MainHelper.formatCurrency(final_obtained) + " by age " + String.valueOf(RA));
+        TitleLabel1.setText("FIXED AMOUNT");
+        OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained / (12*Retirement_Years)) + " from ages " + String.valueOf(RA) + " to " + String.valueOf(LE));
+        TitleLabel2.setText("ACCOUNTING FOR INFLATION");
         
     }
     
