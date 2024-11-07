@@ -455,6 +455,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         ClearButton = new javax.swing.JButton();
         SuperClearButton = new javax.swing.JButton();
         ResetButton = new javax.swing.JButton();
+        infoBoxLabel = new javax.swing.JLabel();
+        infoBoxLabel1 = new javax.swing.JLabel();
+        infoBoxLabel2 = new javax.swing.JLabel();
         HowTo = new javax.swing.JPanel();
         CalculateButton2 = new javax.swing.JButton();
         ClearButton1 = new javax.swing.JButton();
@@ -588,13 +591,13 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         AmountLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AmountLabel11.setText("<html>\nOther income <br> After Retirement\n</html>");
+        AmountLabel11.setText("<html> Other Income <br> After Retirement </html>");
 
         OIARField.setText("0");
 
         AmountLabel12.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AmountLabel12.setText("Investment Return");
+        AmountLabel12.setText("<html>Average <br> Investment Return</html>");
 
         AmountLabel13.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
         AmountLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -692,6 +695,27 @@ public class RetirementCalculator extends javax.swing.JFrame {
             }
         });
 
+        infoBoxLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        infoBoxLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoBoxLabel.setText("?");
+        infoBoxLabel.setToolTipText("<html><body style='width: 200px;'>The income you want to have after retirement. Many experts think that you will need 70-80% of your pre-retirement income to maintain your standard of living in retirement. You can either choose a percentage of current income or specify a dollar amount. When providing a dollar amount, please provide a number in today's money.</body></html>  ");
+        infoBoxLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoBoxLabel.setOpaque(true);
+
+        infoBoxLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        infoBoxLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoBoxLabel1.setText("?");
+        infoBoxLabel1.setToolTipText("<html><body style='width: 200px;'>The average inflation rate is around 3.5% in the past 100 years in U.S.</body></html>  ");
+        infoBoxLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoBoxLabel1.setOpaque(true);
+
+        infoBoxLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        infoBoxLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoBoxLabel2.setText("?");
+        infoBoxLabel2.setToolTipText("<html><body style='width: 200px;'>The income after retirement that comes from sources other than your savings, such as social security, pension, rental property, etc. Please provide the estimated money amount at time of retirement age rather than in today's money.</body></html>  ");
+        infoBoxLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoBoxLabel2.setOpaque(true);
+
         javax.swing.GroupLayout HowMuchLayout = new javax.swing.GroupLayout(HowMuch);
         HowMuch.setLayout(HowMuchLayout);
         HowMuchLayout.setHorizontalGroup(
@@ -720,9 +744,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73))))
-                    .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(0, 117, Short.MAX_VALUE)
-                        .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HowMuchLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(61, 61, 61))
             .addGroup(HowMuchLayout.createSequentialGroup()
                 .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -738,123 +763,137 @@ public class RetirementCalculator extends javax.swing.JFrame {
                         .addGap(123, 123, 123)
                         .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AmountLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(FutureField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(FutureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(FutureLabelTrailing))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AmountLabel17))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(AmountLabel18))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(InflateField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AmountLabel20))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(AmountLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(CurrentField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(AmountLabel15)
-                                .addGap(18, 18, 18)
-                                .addComponent(OIARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AmountLabel22))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(INARLabelTrailing)))))
-                    .addGroup(HowMuchLayout.createSequentialGroup()
                         .addGap(167, 167, 167)
                         .addComponent(Title3))
                     .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(Title4)))
-                .addContainerGap(144, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AmountLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addGap(277, 277, 277)
+                                .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Title4)
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(infoBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(HowMuchLayout.createSequentialGroup()
+                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(AmountLabel17)
+                                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                                .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(INARLabelTrailing))
+                                            .addComponent(AmountLabel18)))
+                                    .addGroup(HowMuchLayout.createSequentialGroup()
+                                        .addComponent(InflateField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(AmountLabel20))))
+                            .addComponent(infoBoxLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(AmountLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CurrentField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(infoBoxLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(AmountLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(OIARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(AmountLabel22))
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(FutureField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(FutureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FutureLabelTrailing)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         HowMuchLayout.setVerticalGroup(
             HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HowMuchLayout.createSequentialGroup()
-                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel2)
-                            .addComponent(CurrentAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel5)
-                            .addComponent(RetireAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel3)
-                            .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel16)
-                            .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel4)
-                            .addComponent(AmountLabel8))
-                        .addComponent(Title3)
+                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(HowMuchLayout.createSequentialGroup()
+                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(AmountLabel2)
+                                                    .addComponent(CurrentAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(42, 42, 42)
+                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(AmountLabel5)
+                                                    .addComponent(RetireAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(15, 15, 15)
+                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(AmountLabel3)
+                                                    .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(AmountLabel16)
+                                                    .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(AmountLabel4)
+                                                    .addComponent(AmountLabel8))
+                                                .addComponent(Title3))
+                                            .addGroup(HowMuchLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(SuperClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AmountLabel9))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowMuchLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(AmountLabel17))))
+                                .addGap(18, 18, 18)
+                                .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(infoBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(INARLabelTrailing)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel9)
-                            .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel17))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowMuchLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SuperClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(INARLabelTrailing))))
+                        .addComponent(AmountLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AmountLabel18)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel12)
-                    .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AmountLabel10)
+                    .addComponent(infoBoxLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InflateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AmountLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Title4)
-                .addGap(9, 9, 9)
+                .addGap(3, 3, 3)
                 .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AmountLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoBoxLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AmountLabel15)
                     .addComponent(OIARField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AmountLabel22))
@@ -863,14 +902,16 @@ public class RetirementCalculator extends javax.swing.JFrame {
                     .addComponent(AmountLabel6)
                     .addComponent(AmountLabel14)
                     .addComponent(CurrentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AmountLabel13)
                     .addComponent(FutureField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FutureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FutureLabelTrailing))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        infoBoxLabel.getAccessibleContext().setAccessibleDescription("<html><body style='width: 200px;'>The income you want to have after retirement. Many experts think that you will need 70-80% of your pre-retirement income to maintain your standard of living in retirement. You can either choose a percentage of current income or specify a dollar amount. When providing a dollar amount, please provide a number in today's money.</body></html>  ");
 
         RetirementTabs.addTab("How much do you need to retire?", HowMuch);
 
@@ -1048,7 +1089,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                             .addComponent(AmountLabel25)
                             .addComponent(InvestField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AmountLabel26))))
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
         RetirementTabs.addTab("How can you save for Retirement?", HowTo);
@@ -1286,10 +1327,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
                     .addComponent(AmountLabel38)
                     .addComponent(InflateField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AmountLabel39))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
             .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WithdrawLayout.createSequentialGroup()
-                    .addContainerGap(311, Short.MAX_VALUE)
+                    .addContainerGap(316, Short.MAX_VALUE)
                     .addComponent(AmountLabel32)
                     .addGap(282, 282, 282)))
         );
@@ -1359,7 +1400,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 .addComponent(OutputLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(OutputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         RetirementTabs.addTab("Results", ResultTab);
@@ -1402,8 +1443,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                     .addComponent(Title1)
                     .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addComponent(RetirementTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(RetirementTabs, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE))
         );
 
         pack();
@@ -1684,7 +1724,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
         if (final_needed > final_obtained) {
             OutputLabel3.setText("Save $" + MainHelper.formatCurrency(yearlySavings) + "/year or");
-            OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage*100));
+            OutputLabel2.setText(String.format("%.2f%% of your annual income", savingsPercentage*100+.01));
         }
         else {
             Integer lowest_possible = RetirementHelper.posOfSmallestElementGtOeT(final_needed, TORI);
@@ -1883,5 +1923,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel WarningLabel1;
     private javax.swing.JLabel WarningLabel2;
     private javax.swing.JPanel Withdraw;
+    private javax.swing.JLabel infoBoxLabel;
+    private javax.swing.JLabel infoBoxLabel1;
+    private javax.swing.JLabel infoBoxLabel2;
     // End of variables declaration//GEN-END:variables
 }
