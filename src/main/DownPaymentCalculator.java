@@ -36,30 +36,37 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                 String HP = homePriceEntryField.getText();
                 String CC = closingCostsEntryField.getText();
                 String UC = upfrontCashEntryField.getText();
-                Boolean validMoneyHP = MainHelper.validate_money(HP, false);
-                Boolean validMoneyCC = MainHelper.validate_money(CC, false);
-                Boolean validMoneyUC = MainHelper.validate_money(UC, false);
-                if (!validMoneyHP || !validMoneyCC || !validMoneyUC){
-                CalculateButton.setEnabled(false);
+                Boolean validMoneyHP = !MainHelper.validate_money(HP, false);
+                Boolean validMoneyCC = !MainHelper.validate_money(CC, false);
+                Boolean validMoneyUC = !MainHelper.validate_money(UC, false);                
                 String message = "";
-                if (!validMoneyHP){
-                    message = MainHelper.generate_USD_warning(HP);
+                if (validMoneyHP){
+                    message = "⚠ Invalid Home Price";
+                    homePriceEntryField.setForeground(Color.red); 
+                    errorLabel.setVisible(true);
+                    errorLabel.setText(message); 
+                    CalculateButton.setEnabled(false);
+                } else{
+                    homePriceEntryField.setForeground(Color.black);
                 }
-                if (!validMoneyCC){
-                    message = MainHelper.generate_USD_warning(CC);
-                }
-                if (!validMoneyUC){
-                    message = MainHelper.generate_USD_warning(UC);
-                }
-                errorLabel.setVisible(true);
-                errorLabel.setText(message); 
-                homePriceEntryField.setForeground(Color.red);
-                closingCostsEntryField.setForeground(Color.red);
-                upfrontCashEntryField.setForeground(Color.red);
+                if (validMoneyCC){
+                    message = "⚠ Invalid Closing Costs";
+                    closingCostsEntryField.setForeground(Color.red);
+                    errorLabel.setVisible(true);
+                    errorLabel.setText(message); 
+                    CalculateButton.setEnabled(false);
                 }
                 else {
-                    homePriceEntryField.setForeground(Color.black);
-                    closingCostsEntryField.setForeground(Color.black);
+                    closingCostsEntryField.setForeground(Color.black);                   
+                }
+                if (validMoneyUC){
+                    message = "⚠ Invalid Upfront Cash";                    
+                    upfrontCashEntryField.setForeground(Color.red);
+                    errorLabel.setVisible(true);
+                    errorLabel.setText(message);
+                    CalculateButton.setEnabled(false);
+                }
+                else {                    
                     upfrontCashEntryField.setForeground(Color.black); 
                 }
                 Boolean a = !MainHelper.isValidNumber(downPaymentEntryField.getText());
@@ -92,11 +99,11 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                         downPaymentEntryField.setForeground(Color.black);
                     }
                 }
-                else {
+                else if (!validMoneyUC && !validMoneyCC && !validMoneyHP){
                     downPaymentEntryField.setForeground(Color.black);
                     interestRateEntryField.setForeground(Color.black);
                     loanTermEntryField.setForeground(Color.black);
-                    errorLabel.setVisible(false);
+                    errorLabel.setText("Error: None");
                     CalculateButton.setEnabled(true);
                 }
               }
@@ -133,7 +140,6 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         closingCostsEntryField.setVisible(false);
         interestRateEntryField.setVisible(false);
         loanTermEntryField.setVisible(false);
-        errorLabel.setVisible(false);
         infoBoxLabel.setVisible(false);
     }
 
@@ -319,7 +325,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(216, 216, 216))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -335,9 +341,10 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(resetButton)))
                         .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addComponent(infoBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(upfrontCashLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,7 +383,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                                 .addComponent(homePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(60, 60, 60)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(downPaymentRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -410,7 +417,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(93, 93, 93))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(homePriceLabel)
                             .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
