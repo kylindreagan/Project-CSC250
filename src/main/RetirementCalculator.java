@@ -1775,7 +1775,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel1.setText("FIXED AMOUNT");
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained / (12*Retirement_Years)) + " from ages " + String.valueOf(RA) + " to " + String.valueOf(LE));
         TitleLabel2.setText("ACCOUNTING FOR INFLATION");
-        
+        OutputLabel3.setText("$" + MainHelper.formatCurrency(final_obtained / (12*Retirement_Years*(1+inflate))) + " adjusting " + String.valueOf(inflate*100) +"% annualy");
+        OutputLabel2.setText("");
     }
     
     
