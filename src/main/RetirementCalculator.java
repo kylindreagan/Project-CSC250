@@ -1808,7 +1808,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         float annual = MainHelper.parseMoney(AnnualField.getText(), ",");
         float monthly = MainHelper.parseMoney(MonthlyField.getText(), ",");
         
-        List<Integer> buildup = RetirementHelper.Total_Obtained_Retirement_Income_Alt(Living_Years, invest, Current, annual + monthly*12);
+        List<Integer> buildup = RetirementHelper.Total_Obtained_Retirement_Income_Monthly(Living_Years, invest, Current, annual, monthly);
         int final_obtained = buildup.get(buildup.size()-1);
         TitleLabel.setText("BALANCE AT RETIREMENT");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_obtained) + " by age " + String.valueOf(RA));

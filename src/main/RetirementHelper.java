@@ -81,6 +81,18 @@ public class RetirementHelper {
         return TORI;
     }
     
+    public static List<Integer> Total_Obtained_Retirement_Income_Monthly(int Living_Years, float Invest, float Current, float Annual, float Monthly) {
+        List<Integer> TORI = new ArrayList<>();
+        double Monthly_investment = (Invest)/12;
+        for (int i = 0; i <= Living_Years; i++){
+            float savings = Current*(float)Math.pow((1+Invest),i) + Annual * ((float)Math.pow(1+Invest,i)-1)/Invest + Monthly * (((float)Math.pow(1+Monthly_investment, 12*i)-1)/(float)(Monthly_investment));
+            System.out.println(Monthly * (((float)Math.pow(Monthly_investment, 12*i)-1)/(Monthly_investment-1)));
+            TORI.add(Math.round(savings));
+        }
+        System.out.println(TORI);
+        return TORI;
+    }
+    
     public static float Inverse_TORI(float ending_value, int Living_Years, float PIT, float Invest, float Current, float Increase) {
         float future;
         if (Invest != Increase) {
@@ -114,7 +126,7 @@ public class RetirementHelper {
             return false;
         }
 
-        if (LE <= RA || RA < CA ||CA <= 0 || LE > 150) {
+        if (LE <= RA || RA <= CA ||CA <= 0 || LE > 150) {
             return false;
         }
         
