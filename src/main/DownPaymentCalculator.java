@@ -63,7 +63,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                     upfrontCashEntryField.setForeground(Color.black); 
                 }
                 Boolean a = !MainHelper.isValidNumber(downPaymentEntryField.getText());
-                Boolean b = !MainHelper.isValidNumber(interestRateEntryField.getText()); //Needs to be an Integer
+                Boolean b = !MainHelper.isValidNumber(interestRateEntryField.getText()); 
                 Boolean c = !MainHelper.isValidNumber(loanTermEntryField.getText());
                 if ( a || b || c) {
                     CalculateButton.setEnabled(false);
@@ -107,6 +107,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
             homePriceEntryField.getDocument().addDocumentListener(documentListener);
             downPaymentEntryField.getDocument().addDocumentListener(documentListener);
             loanTermEntryField.getDocument().addDocumentListener(documentListener);
+            interestRateEntryField.getDocument().addDocumentListener(documentListener);
     }
 
     
@@ -133,6 +134,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         interestRateEntryField.setVisible(false);
         loanTermEntryField.setVisible(false);
         errorLabel.setVisible(false);
+        infoBoxLabel.setVisible(false);
     }
 
     /**
@@ -176,6 +178,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsLabel = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
+        infoBoxLabel = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -293,6 +296,12 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
 
         jLabel3.setText("Results:");
 
+        infoBoxLabel.setBackground(new java.awt.Color(102, 102, 255));
+        infoBoxLabel.setText(" ?");
+        infoBoxLabel.setToolTipText("<html><body style='width: 200px;'>A down payment of less than 20% may result in you paying PMI Insurance or a Mortgage Insurance Premium.</body></html>  ");
+        infoBoxLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoBoxLabel.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,12 +321,23 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(homePriceRadio)
-                        .addGap(24, 24, 24)
-                        .addComponent(cashRadio))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(homePriceRadio)
+                                .addGap(24, 24, 24)
+                                .addComponent(cashRadio))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(219, 219, 219)
+                                .addComponent(CalculateButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(clearButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(resetButton)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(infoBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(upfrontCashLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,20 +356,13 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(loanTermLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(interestRateLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(interestRateLabel, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(CalculateButton)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(loanTermEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(yearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(loanTermEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(clearButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(resetButton))
+                                        .addComponent(yearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(interestRateEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,18 +375,15 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(homePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(60, 60, 60)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(downPaymentRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(downPaymentRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,6 +402,15 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                     .addComponent(cashRadio))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(homePriceLabel)
                             .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -403,7 +422,8 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(downPaymentLabel)
                             .addComponent(downPaymentEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(downPaymentPercentSign))
+                            .addComponent(downPaymentPercentSign)
+                            .addComponent(infoBoxLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(closingCostsCheckBox)
@@ -421,19 +441,11 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(loanTermEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(yearsLabel)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 18, Short.MAX_VALUE)
-                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CalculateButton)
-                            .addComponent(clearButton)
-                            .addComponent(resetButton))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CalculateButton)
+                    .addComponent(clearButton)
+                    .addComponent(resetButton))
                 .addContainerGap())
         );
 
@@ -455,6 +467,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         loanTermLabel.setVisible(true);
         loanTermEntryField.setVisible(true);
         yearsLabel.setVisible(true);
+        infoBoxLabel.setVisible(true);
     }//GEN-LAST:event_homePriceRadioActionPerformed
     //This calculator does not use the upfront cash
     private void cashRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashRadioActionPerformed
@@ -471,6 +484,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         loanTermLabel.setVisible(true);
         loanTermEntryField.setVisible(true);
         yearsLabel.setVisible(true);
+        infoBoxLabel.setVisible(true);
     }//GEN-LAST:event_cashRadioActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
@@ -673,6 +687,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField homePriceEntryField;
     private javax.swing.JLabel homePriceLabel;
     private javax.swing.JRadioButton homePriceRadio;
+    private javax.swing.JLabel infoBoxLabel;
     private javax.swing.JTextField interestRateEntryField;
     private javax.swing.JLabel interestRateLabel;
     private javax.swing.JLabel interestRatePercentSign;
