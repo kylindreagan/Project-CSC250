@@ -1,62 +1,62 @@
-Euro, 0.91745, 1.089978
-British Pound, 0.7644, 1.308215
-Indian Rupee, 84.054609, 0.011897
-Australian Dollar, 1.490601, 0.67087
-Canadian Dollar, 1.379711, 0.72479
-Singapore Dollar, 1.309283, 0.763777
-Swiss Franc, 0.862056, 1.160017
-Malaysian Ringgit, 4.303836, 0.232351
-Japanese Yen, 149.285613, 0.006699
-Chinese Yuan Renminbi, 7.119253, 0.140464
-Argentine Peso, 979.32142, 0.001021
-Australian Dollar, 1.490601, 0.67087
-Bahraini Dinar, 0.376, 2.659574
-Botswana Pula, 13.300142, 0.075187
-Brazilian Real, 5.648607, 0.177035
-Bruneian Dollar, 1.309283, 0.763777
-Bulgarian Lev, 1.794376, 0.557297
-Canadian Dollar, 1.379711, 0.72479
-Chilean Peso, 939.301852, 0.001065
-Chinese Yuan Renminbi, 7.119253, 0.140464
-Colombian Peso, 4243.714424, 0.000236
-Czech Koruna, 23.144314, 0.043207
-Danish Krone, 6.845363, 0.146084
-Euro, 0.91745, 1.089978
-Hong Kong Dollar, 7.767731, 0.128738
-Hungarian Forint, 367.166082, 0.002724
-Icelandic Krona, 136.983681, 0.0073
-Indian Rupee, 84.054609, 0.011897
-Indonesian Rupiah, 15555.326967, 0.000064
-Iranian Rial, 42084.954267, 0.000024
-Israeli Shekel, 3.759945, 0.265961
-Japanese Yen, 149.285613, 0.006699
-Kazakhstani Tenge, 487.181509, 0.002053
-South Korean Won, 1365.107032, 0.000733
-Kuwaiti Dinar, 0.306705, 3.260461
-Libyan Dinar, 4.800067, 0.20833
-Malaysian Ringgit, 4.303836, 0.232351
-Mauritian Rupee, 46.29461, 0.021601
-Mexican Peso, 19.595074, 0.051033
-Nepalese Rupee, 134.550415, 0.007432
-New Zealand Dollar, 1.643161, 0.608583
-Norwegian Krone, 10.825252, 0.092377
-Omani Rial, 0.38497, 2.597604
-Pakistani Rupee, 277.538682, 0.003603
-Philippine Peso, 57.7991, 0.017301
-Polish Zloty, 3.939846, 0.253817
-Qatari Riyal, 3.64, 0.274725
-Romanian New Leu, 4.565409, 0.219038
-Russian Ruble, 97.098381, 0.010299
-Saudi Arabian Riyal, 3.75, 0.266667
-Singapore Dollar, 1.309283, 0.763777
-South African Rand, 17.634022, 0.056709
-Sri Lankan Rupee, 293.056238, 0.003412
-Swedish Krona, 10.384575, 0.096297
-Swiss Franc, 0.862056, 1.160017
-Taiwan New Dollar, 32.216441, 0.03104
-Thai Baht, 33.273544, 0.030054
-Trinidadian Dollar, 6.786818, 0.147344
-Turkish Lira, 34.238869, 0.029207
-Emirati Dirham, 3.6725, 0.272294
-British Pound, 0.7644, 1.308215
-Venezuelan Bolivar, 3883819.301472, 0.0
+Euro, 0.93, 1.07
+British Pound, 0.77, 1.29
+Indian Rupee, 84.37, 0.01
+Australian Dollar, 1.52, 0.66
+Canadian Dollar, 1.39, 0.72
+Singapore Dollar, 1.33, 0.75
+Swiss Franc, 0.88, 1.14
+Malaysian Ringgit, 4.40, 0.23
+Japanese Yen, 153.14, 0.01
+Chinese Yuan Renminbi, 7.18, 0.14
+Argentine Peso, 999.66, 0.00
+Australian Dollar, 1.52, 0.66
+Bahraini Dinar, 0.38, 2.66
+Botswana Pula, 13.31, 0.08
+Brazilian Real, 5.74, 0.17
+Bruneian Dollar, 1.33, 0.75
+Bulgarian Lev, 1.82, 0.55
+Canadian Dollar, 1.39, 0.72
+Chilean Peso, 970.48, 0.00
+Chinese Yuan Renminbi, 7.18, 0.14
+Colombian Peso, 4361.62, 0.00
+Czech Koruna, 23.56, 0.04
+Danish Krone, 6.96, 0.14
+Euro, 0.93, 1.07
+Hong Kong Dollar, 7.78, 0.13
+Hungarian Forint, 380.03, 0.00
+Icelandic Krona, 138.75, 0.01
+Indian Rupee, 84.37, 0.01
+Indonesian Rupiah, 15664.95, 0.00
+Iranian Rial, 42071.16, 0.00
+Israeli Shekel, 3.74, 0.27
+Japanese Yen, 153.14, 0.01
+Kazakhstani Tenge, 493.40, 0.00
+South Korean Won, 1397.38, 0.00
+Kuwaiti Dinar, 0.31, 3.26
+Libyan Dinar, 4.88, 0.20
+Malaysian Ringgit, 4.40, 0.23
+Mauritian Rupee, 46.37, 0.02
+Mexican Peso, 20.14, 0.05
+Nepalese Rupee, 135.06, 0.01
+New Zealand Dollar, 1.68, 0.60
+Norwegian Krone, 11.00, 0.09
+Omani Rial, 0.38, 2.60
+Pakistani Rupee, 278.77, 0.00
+Philippine Peso, 58.38, 0.02
+Polish Zloty, 4.04, 0.25
+Qatari Riyal, 3.64, 0.27
+Romanian New Leu, 4.64, 0.22
+Russian Ruble, 97.46, 0.01
+Saudi Arabian Riyal, 3.75, 0.27
+Singapore Dollar, 1.33, 0.75
+South African Rand, 17.62, 0.06
+Sri Lankan Rupee, 293.31, 0.00
+Swedish Krona, 10.82, 0.09
+Swiss Franc, 0.88, 1.14
+Taiwan New Dollar, 32.24, 0.03
+Thai Baht, 34.31, 0.03
+Trinidadian Dollar, 6.81, 0.15
+Turkish Lira, 34.36, 0.03
+Emirati Dirham, 3.67, 0.27
+British Pound, 0.77, 1.29
+Venezuelan Bolivar, 4463917.18, 0.00
