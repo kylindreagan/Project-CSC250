@@ -1,14 +1,14 @@
 Euro, 0.93, 1.07
 British Pound, 0.77, 1.29
-Indian Rupee, 84.37, 0.01
+Indian Rupee, 84.38, 0.01
 Australian Dollar, 1.52, 0.66
 Canadian Dollar, 1.39, 0.72
 Singapore Dollar, 1.33, 0.75
 Swiss Franc, 0.88, 1.14
 Malaysian Ringgit, 4.40, 0.23
-Japanese Yen, 153.14, 0.01
+Japanese Yen, 153.12, 0.01
 Chinese Yuan Renminbi, 7.18, 0.14
-Argentine Peso, 999.66, 0.00
+Argentine Peso, 999.47, 0.00
 Australian Dollar, 1.52, 0.66
 Bahraini Dinar, 0.38, 2.66
 Botswana Pula, 13.31, 0.08
@@ -16,47 +16,47 @@ Brazilian Real, 5.74, 0.17
 Bruneian Dollar, 1.33, 0.75
 Bulgarian Lev, 1.82, 0.55
 Canadian Dollar, 1.39, 0.72
-Chilean Peso, 970.48, 0.00
+Chilean Peso, 970.33, 0.00
 Chinese Yuan Renminbi, 7.18, 0.14
-Colombian Peso, 4361.62, 0.00
-Czech Koruna, 23.56, 0.04
-Danish Krone, 6.96, 0.14
+Colombian Peso, 4361.05, 0.00
+Czech Koruna, 23.55, 0.04
+Danish Krone, 6.95, 0.14
 Euro, 0.93, 1.07
-Hong Kong Dollar, 7.78, 0.13
-Hungarian Forint, 380.03, 0.00
-Icelandic Krona, 138.75, 0.01
-Indian Rupee, 84.37, 0.01
-Indonesian Rupiah, 15664.95, 0.00
-Iranian Rial, 42071.16, 0.00
+Hong Kong Dollar, 7.77, 0.13
+Hungarian Forint, 379.94, 0.00
+Icelandic Krona, 138.68, 0.01
+Indian Rupee, 84.38, 0.01
+Indonesian Rupiah, 15673.36, 0.00
+Iranian Rial, 42093.91, 0.00
 Israeli Shekel, 3.74, 0.27
-Japanese Yen, 153.14, 0.01
-Kazakhstani Tenge, 493.40, 0.00
-South Korean Won, 1397.38, 0.00
+Japanese Yen, 153.12, 0.01
+Kazakhstani Tenge, 493.65, 0.00
+South Korean Won, 1397.09, 0.00
 Kuwaiti Dinar, 0.31, 3.26
 Libyan Dinar, 4.88, 0.20
 Malaysian Ringgit, 4.40, 0.23
-Mauritian Rupee, 46.37, 0.02
+Mauritian Rupee, 46.40, 0.02
 Mexican Peso, 20.14, 0.05
-Nepalese Rupee, 135.06, 0.01
+Nepalese Rupee, 135.07, 0.01
 New Zealand Dollar, 1.68, 0.60
-Norwegian Krone, 11.00, 0.09
+Norwegian Krone, 11.01, 0.09
 Omani Rial, 0.38, 2.60
-Pakistani Rupee, 278.77, 0.00
-Philippine Peso, 58.38, 0.02
+Pakistani Rupee, 278.90, 0.00
+Philippine Peso, 58.48, 0.02
 Polish Zloty, 4.04, 0.25
 Qatari Riyal, 3.64, 0.27
 Romanian New Leu, 4.64, 0.22
-Russian Ruble, 97.46, 0.01
+Russian Ruble, 97.66, 0.01
 Saudi Arabian Riyal, 3.75, 0.27
 Singapore Dollar, 1.33, 0.75
 South African Rand, 17.62, 0.06
-Sri Lankan Rupee, 293.31, 0.00
+Sri Lankan Rupee, 293.37, 0.00
 Swedish Krona, 10.82, 0.09
 Swiss Franc, 0.88, 1.14
-Taiwan New Dollar, 32.24, 0.03
-Thai Baht, 34.31, 0.03
+Taiwan New Dollar, 32.21, 0.03
+Thai Baht, 34.29, 0.03
 Trinidadian Dollar, 6.81, 0.15
-Turkish Lira, 34.36, 0.03
+Turkish Lira, 34.37, 0.03
 Emirati Dirham, 3.67, 0.27
 British Pound, 0.77, 1.29
-Venezuelan Bolivar, 4463917.18, 0.00
+Venezuelan Bolivar, 4464729.33, 0.00

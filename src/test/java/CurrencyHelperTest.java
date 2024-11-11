@@ -42,6 +42,20 @@ public class CurrencyHelperTest {
         assertTrue(s);
     }
 
+    @Test
+    public void testFileReader() {
+        Map<String, Double[]> dict = new HashMap<>();
+        currencyHelper.loadFromFile(dict, "src/files/currency_rates.txt");
+        double yenTo = 153.12;
+        double yenFrom = 0.01;
+        Double[] rates = dict.get("Japanese Yen");
+        assertNotNull("Rates should not be null", rates);
+        //delta: a small threshold value that specifies the acceptable range of error when comparing two floating-point numbers
+        assertEquals("Check USD to Yen", yenTo, rates[0], 0.000001);
+        assertEquals("Check Yen to USD", yenFrom, rates[1], 0.000001);
+
+    }
+
 
     @Test
     public void testWebScraperSuccessEuro() {
@@ -75,19 +89,7 @@ public class CurrencyHelperTest {
             Math.abs(scrapedRates.get("Japanese Yen")[1] - expectedYenRate2) < toleranceB);
     }
 
-    @Test
-    public void testFileReader() {
-        Map<String, Double[]> dict = new HashMap<>();
-        currencyHelper.loadFromFile(dict, "src/files/currency_rates.txt");
-        double yenTo = 149.285613;
-        double yenFrom = 0.006699;
-        Double[] rates = dict.get("Japanese Yen");
-        assertNotNull("Rates should not be null", rates);
-        //delta: a small threshold value that specifies the acceptable range of error when comparing two floating-point numbers
-        assertEquals("Check USD to Yen", yenTo, rates[0], 0.000001);
-        assertEquals("Check Yen to USD", yenFrom, rates[1], 0.000001);
-
-    }
+    
 
     @Test
     public void testEmptyCurrency() {
