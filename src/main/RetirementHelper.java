@@ -126,7 +126,7 @@ public class RetirementHelper {
             return false;
         }
 
-        if (LE <= RA || RA <= CA ||CA <= 0 || LE > 150) {
+        if (LE <= RA || RA < CA ||CA <= 0 || LE > 150) {
             return false;
         }
         

@@ -35,7 +35,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private static JTextField lastFocusedField = null;  // Variable to track last focused JTextField
     private static JTextField lastFocusedField1 = null;
     private static JTextField lastFocusedField2 = null;
-    private static final Boolean allow_foreign = false;
     float future;
     float OIAR;
     float current;
@@ -911,8 +910,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        infoBoxLabel.getAccessibleContext().setAccessibleDescription("<html><body style='width: 200px;'>The income you want to have after retirement. Many experts think that you will need 70-80% of your pre-retirement income to maintain your standard of living in retirement. You can either choose a percentage of current income or specify a dollar amount. When providing a dollar amount, please provide a number in today's money.</body></html>  ");
-
         RetirementTabs.addTab("How much do you need to retire?", HowMuch);
 
         CalculateButton2.setBackground(new java.awt.Color(204, 153, 0));
@@ -1414,7 +1411,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         QuitButton.setBackground(new java.awt.Color(255, 0, 0));
         QuitButton.setForeground(new java.awt.Color(0, 0, 0));
-        QuitButton.setText("Quit");
+        QuitButton.setText("Return");
         QuitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QuitButtonMouseClicked(evt);
@@ -1503,7 +1500,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         else {
             FutureLabelTrailing.setText("of current income");
             if (!Futurepercent){
-            if (MainHelper.validate_money(FutureField.getText(), allow_foreign)) {
+            if (MainHelper.validate_money(FutureField.getText(), false)) {
                 Float f = MainHelper.parseMoney(FutureField.getText(), ",");
                 f /= 700;
                 FutureField.setText(String.valueOf(f));
@@ -1572,7 +1569,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
             INARLabelTrailing.setText("of current income");
             if (!INARpercent){
             INARpercent = true;
-            if (MainHelper.validate_money(INARField.getText(), allow_foreign)) {
+            if (MainHelper.validate_money(INARField.getText(), false)) {
                 Float f = MainHelper.parseMoney(INARField.getText(), ",");
                 f /= 700;
                 INARField.setText(String.valueOf(f));
@@ -1751,14 +1748,14 @@ public class RetirementCalculator extends javax.swing.JFrame {
         else {
             future = 0;
         }
-        Boolean OIARValid = MainHelper.validate_money(OIARField.getText(), allow_foreign);
+        Boolean OIARValid = MainHelper.validate_money(OIARField.getText(), false);
         if (OIARValid) {
             OIAR =MainHelper.parseMoney(OIARField.getText(), ",");
         }
         else {
             OIAR = 0;
         }
-        Boolean CurrentValid = MainHelper.validate_money(CurrentField.getText(), allow_foreign);
+        Boolean CurrentValid = MainHelper.validate_money(CurrentField.getText(), false);
         if (CurrentValid) {
             current = MainHelper.parseMoney(CurrentField.getText(), ",");
         }
@@ -1770,6 +1767,20 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private void CalculateSave() {
         int CA = Integer.parseInt(CurrentAgeField1.getText());
         int RA = Integer.parseInt(RetireAgeField1.getText());
+        if (RA==CA) {
+           float Current = MainHelper.parseMoney(CurrentField1.getText(), ",");
+           float needed = MainHelper.parseMoney(NeededField.getText(), ","); 
+           float one_year_needs = needed-Current;
+           TitleLabel.setText("ANNUAL SAVINGS");
+            OutputLabel1.setText("Save $" + MainHelper.formatCurrency(one_year_needs) + " by the end of the year");
+            TitleLabel1.setText("MONTHLY SAVINGS");
+            OutputLabel.setText("Save $" + MainHelper.formatCurrency(one_year_needs/12) + "/month for the rest of the year");
+            TitleLabel2.setText("IF YOU HAVE IT NOW");
+            OutputLabel3.setText("Additional Amount Needed $" + MainHelper.formatCurrency(one_year_needs));
+            OutputLabel2.setText("");
+
+        }
+        else{
         int Living_Years = RA - CA;
         float Current = MainHelper.parseMoney(CurrentField1.getText(), ",");
         float needed = MainHelper.parseMoney(NeededField.getText(), ",");
@@ -1792,6 +1803,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         addChartToPanel(annual_invest_lines, have_it_now, CA, true, "Annual Investments", "Single Investment");
         
         OutputLabel2.setText("");
+        }
         
         
     }
