@@ -372,9 +372,11 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
         if (carPriceRadio.isSelected()){
             float monthly = MainHelper.parseMoney(monthlyPaymentsEntryField.getText(), ",");
             message = AutoLoanHelper.carPriceCalculate(lterm, intRate, sTax, cIncent, dPay, trade, fees, monthly);
+            
         } else {
             float car = MainHelper.parseMoney(autoPriceEntryField.getText(), ",");
-            message = AutoLoanHelper.carPriceCalculate(lterm, intRate, sTax, cIncent, dPay, trade, fees, car);
+            message = AutoLoanHelper.monthlyPaymentCalculate(lterm, intRate, sTax, cIncent, dPay, trade, fees, car);
+            System.out.println("Here");
         }
         resultsBox.setText(message);
     }//GEN-LAST:event_calculateButtonActionPerformed
