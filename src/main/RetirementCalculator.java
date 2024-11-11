@@ -1822,12 +1822,15 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
         List<Integer> buildup = RetirementHelper.Total_Obtained_Retirement_Income_Monthly(Living_Years, invest, Current, annual, monthly);
         int final_obtained = buildup.get(buildup.size()-1);
+        float initialMonthlyWithdrawal = final_obtained / (9*(Retirement_Years-1));
+        float inflationAdjustedTotal = final_obtained + initialMonthlyWithdrawal * (((float)Math.pow(1 + inflate, Retirement_Years) - 1) / inflate);
+        float inflationAdjustedMonthly = inflationAdjustedTotal / (12 * Retirement_Years);
         TitleLabel.setText("BALANCE AT RETIREMENT");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_obtained) + " by age " + String.valueOf(RA));
         TitleLabel1.setText("FIXED AMOUNT");
-        OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained / (12*Retirement_Years)) + " from ages " + String.valueOf(RA) + " to " + String.valueOf(LE));
+        OutputLabel.setText("$" + MainHelper.formatCurrency(initialMonthlyWithdrawal) + " from ages " + String.valueOf(RA) + " to " + String.valueOf(LE));
         TitleLabel2.setText("ACCOUNTING FOR INFLATION");
-        OutputLabel3.setText("$" + MainHelper.formatCurrency(final_obtained / (12*Retirement_Years*(1+inflate))) + " adjusting " + String.valueOf(inflate*100) +"% annualy");
+        OutputLabel3.setText("$" + MainHelper.formatCurrency(inflationAdjustedMonthly) + " adjusting " + String.valueOf(inflate*100) +"% annualy");
         OutputLabel2.setText("");
     }
     
