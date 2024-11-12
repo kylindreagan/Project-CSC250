@@ -37,8 +37,26 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                 String CC = closingCostsEntryField.getText();
                 String UC = upfrontCashEntryField.getText();
                 Boolean validMoneyHP = !MainHelper.validate_money(HP, false);
+                if (HP.equals("")){
+                    HP = "0";
+                }
+                if (!validMoneyHP){
+                    validMoneyHP = !MainHelper.is_positive(MainHelper.parseMoney(HP, ","));                 
+                }
                 Boolean validMoneyCC = !MainHelper.validate_money(CC, false);
-                Boolean validMoneyUC = !MainHelper.validate_money(UC, false);                
+                if (CC.equals("")){
+                    CC = "0";
+                }
+                if (!validMoneyCC){
+                    validMoneyCC = !MainHelper.is_positive(MainHelper.parseMoney(CC, ","));                 
+                }
+                Boolean validMoneyUC = !MainHelper.validate_money(UC, false);
+                if (UC.equals("")){
+                    UC = "0";
+                }
+                if (!validMoneyUC){
+                    validMoneyUC = !MainHelper.is_positive(MainHelper.parseMoney(UC, ","));                 
+                }           
                 String message = "";
                 if (validMoneyHP){
                     message = "⚠ Invalid Home Price";
@@ -541,7 +559,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
     //Depending on the calculator selected, it calls different calculations-- Also changes based on Closing Costs
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
         float intRate = Float.parseFloat(interestRateEntryField.getText());
-        int lTerm = Integer.parseInt(loanTermEntryField.getText());
+        float lTerm = Float.parseFloat(loanTermEntryField.getText());
         String message = "";
         if (homePriceRadio.isSelected()){
             float uCash = MainHelper.parseMoney(upfrontCashEntryField.getText(), ",");

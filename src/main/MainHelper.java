@@ -12,9 +12,9 @@ import java.text.DecimalFormat;
  */
 public class MainHelper {
     
-    public static double monthlyPayment(float amt, float yearlyInterestRate, int numYears, boolean total){
+    public static double monthlyPayment(float amt, float yearlyInterestRate, float numYears, boolean total){
         if (is_positive(amt) && is_positive(yearlyInterestRate) && is_positive(numYears)){
-            int months = numYears * 12;
+            float months = numYears * 12;
             double monthlyInterestRate = (yearlyInterestRate * 0.01) / 12;
             double monthlyPayment = (amt * monthlyInterestRate) / (1 - (1 / Math.pow((1 + monthlyInterestRate),months)));
             double totalPayment = monthlyPayment * 12;
@@ -56,7 +56,7 @@ public class MainHelper {
     
     public static float parseMoney(String m, String groupingSeparator) {
         Float money;
-        
+
         m = m.replaceAll("\\Q" + groupingSeparator + "\\E", "");
         money = Float.valueOf(m);
         return money;
