@@ -82,7 +82,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 Boolean x = !MainHelper.validate_money(CurrentAmountField.getText(), false);
                 Boolean c = ((!MainHelper.validate_money(AnnualField.getText(), false)) && !YesRadioButton.isSelected());
                 Boolean a = !MainHelper.isValidNumber(ERRField.getText());
-                Boolean b = !MainHelper.isValidNumber(TaxField.getText());
+                Boolean b = !MainHelper.isValidNumber(TaxField.getText()) || !(Float.parseFloat(TaxField.getText())<100);
                 if (x || a || b || c) {
                     CalculateButton.setEnabled(false);
                     if (b) {
