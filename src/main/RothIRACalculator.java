@@ -4,19 +4,29 @@
  */
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
- * @author giann
+ * @author Kylind
  */
 public class RothIRACalculator extends javax.swing.JFrame {
     private static JTextField lastFocusedField = null;
@@ -69,7 +79,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 RetireAgeField.setForeground(Color.black);
                 CurrentAgeField.setForeground(Color.black);
                 Boolean x = !MainHelper.validate_money(CurrentAmountField.getText(), false);
-                Boolean c = (!MainHelper.validate_money(AnnualField.getText(), false) && !"Maximized".equals(AnnualField.getText()));
+                Boolean c = ((!MainHelper.validate_money(AnnualField.getText(), false) ||  MainHelper.parseMoney(AnnualField.getText(),",") > 8000) && !"Maximized".equals(AnnualField.getText()));
                 Boolean a = !MainHelper.isValidNumber(ERRField.getText());
                 Boolean b = !MainHelper.isValidNumber(TaxField.getText());
                 if (x || a || b || c) {
@@ -122,6 +132,64 @@ public class RothIRACalculator extends javax.swing.JFrame {
         TaxField.getDocument().addDocumentListener(documentListener);
         
     }
+    
+    private void addChartToPanel(List<Integer> RothIRAData, List<Integer> TaxableData, List<Integer> PricipalData, Integer CA) {
+        int tabIndex = IRATabs.indexOfTab("Graph");
+        if (tabIndex != -1) {
+            IRATabs.remove(tabIndex);
+        }
+        DefaultCategoryDataset dataset = createDataset(RothIRAData, TaxableData, PricipalData, CA);
+        
+        // Create chart
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Balance Accumulation Graph",
+                "Age",
+                "Savings ($)",
+                dataset,
+                PlotOrientation.VERTICAL,
+                true, true, false);
+        
+        // Customize the chart
+        chart.setBackgroundPaint(Color.white);
+
+        // Add the chart to a ChartPanel
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(350, 240));
+        
+        // Add the ChartPanel to the existing panel
+        IRATabs.addTab("Graph", chartPanel);
+    }
+    
+     private DefaultCategoryDataset createDataset(List<Integer> RothIRADAta, List<Integer> TaxableData, List<Integer> PrincipalData, Integer CA) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        // Populate dataset
+        for (int year = 0; year < RothIRADAta.size(); year++) {
+            dataset.addValue(RothIRADAta.get(year), "Roth IRA", Integer.toString(CA+year));
+        }
+        for (int year = 0; year < TaxableData.size(); year++) {
+            dataset.addValue(TaxableData.get(year), "Taxable Account", Integer.toString(CA+year));
+        }
+        for (int year = 0; year < PrincipalData.size(); year++) {
+            dataset.addValue(PrincipalData.get(year), "Principal", Integer.toString(CA+year));
+        }
+        return dataset;
+    }
+     
+     private void addTableToPanel(List<Integer> RothIRADAta, List<Integer> TaxableData, List<Integer> PrincipalData, Integer CA){
+         String[] columnNames = {"", "Principal", "Roth IRA", "Taxable account"};
+         Object[][] data = new Object[RothIRADAta.size()][4];
+         for (int year = 0; year < RothIRADAta.size(); year++) {
+             data[year][0] = CA + year;
+             data[year][1] = PrincipalData.get(year);
+             data[year][2] = RothIRADAta.get(year);
+             data[year][3] = TaxableData.get(year);
+         }
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(tableModel);
+        SchedulePanel.setViewportView(table);
+         
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,9 +232,8 @@ public class RothIRACalculator extends javax.swing.JFrame {
         infoBoxLabel1 = new javax.swing.JLabel();
         infoBoxLabel2 = new javax.swing.JLabel();
         infoBoxLabel3 = new javax.swing.JLabel();
-        ResultPanel = new javax.swing.JPanel();
-        GraphPanel = new javax.swing.JPanel();
-        SchedulePanel = new javax.swing.JPanel();
+        ResultPane = new javax.swing.JScrollPane();
+        SchedulePanel = new javax.swing.JScrollPane();
         QuitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -402,6 +469,10 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
+            .addGroup(InputPanelLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(ResultPane, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         InputPanelLayout.setVerticalGroup(
             InputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,48 +526,12 @@ public class RothIRACalculator extends javax.swing.JFrame {
                     .addComponent(TaxField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AmountLabel19)
                     .addComponent(infoBoxLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ResultPane, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         IRATabs.addTab("Input", InputPanel);
-
-        javax.swing.GroupLayout ResultPanelLayout = new javax.swing.GroupLayout(ResultPanel);
-        ResultPanel.setLayout(ResultPanelLayout);
-        ResultPanelLayout.setHorizontalGroup(
-            ResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
-        );
-        ResultPanelLayout.setVerticalGroup(
-            ResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
-        );
-
-        IRATabs.addTab("Results", ResultPanel);
-
-        javax.swing.GroupLayout GraphPanelLayout = new javax.swing.GroupLayout(GraphPanel);
-        GraphPanel.setLayout(GraphPanelLayout);
-        GraphPanelLayout.setHorizontalGroup(
-            GraphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
-        );
-        GraphPanelLayout.setVerticalGroup(
-            GraphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
-        );
-
-        IRATabs.addTab("Graph", GraphPanel);
-
-        javax.swing.GroupLayout SchedulePanelLayout = new javax.swing.GroupLayout(SchedulePanel);
-        SchedulePanel.setLayout(SchedulePanelLayout);
-        SchedulePanelLayout.setHorizontalGroup(
-            SchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
-        );
-        SchedulePanelLayout.setVerticalGroup(
-            SchedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
-        );
-
         IRATabs.addTab("Annual Schedule", SchedulePanel);
 
         QuitButton.setBackground(new java.awt.Color(255, 0, 0));
@@ -526,30 +561,38 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(Title1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addComponent(Title1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)))
-                .addComponent(IRATabs)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(IRATabs, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
-        CalculateFunction();
-        IRATabs.setSelectedComponent(ResultPanel);
-    }//GEN-LAST:event_CalculateButtonActionPerformed
+    private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_QuitButtonMouseClicked
 
-    private void ClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClearButtonMouseClicked
-        Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focusedComponent instanceof JTextField) {
-            ((JTextField) focusedComponent).setText("");
-        }
-    }//GEN-LAST:event_ClearButtonMouseClicked
+    private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
+        CurrentAmountField.setText("20,000");
+        AnnualField.setText("7,000");
+        ERRField.setText("6");
+        YesRadioButton.setSelected(false);
+        NoRadioButton.setSelected(true);
+        CurrentAgeField.setText("30");
+        RetireAgeField.setText("65");
+        TaxField.setText("25");
+    }//GEN-LAST:event_ResetButtonMouseClicked
+
+    private void SuperClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuperClearButtonMouseClicked
+        RetirementHelper.clearAllTextFields(InputPanel);
+        lastFocusedField = null;
+    }//GEN-LAST:event_SuperClearButtonMouseClicked
 
     private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
         if (lastFocusedField != null) {
@@ -560,43 +603,37 @@ public class RothIRACalculator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ClearButtonActionPerformed
 
-    private void SuperClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuperClearButtonMouseClicked
-        RetirementHelper.clearAllTextFields(InputPanel);
-        lastFocusedField = null;
-    }//GEN-LAST:event_SuperClearButtonMouseClicked
-
-    private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
-        CurrentAmountField.setText("20,000");
-        AnnualField.setText("7,000");
-        ERRField.setText("6");
-        YesRadioButton.setSelected(false);
-        NoRadioButton.setSelected(true);
-    }//GEN-LAST:event_ResetButtonMouseClicked
-
-    private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
-        this.dispose();
-    }//GEN-LAST:event_QuitButtonMouseClicked
-
-    private void YesRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesRadioButtonActionPerformed
-        if (Yes == false){
-        lastsavedannual = AnnualField.getText();
-        AnnualField.setEditable(false);
-        AnnualField.setText("Maximized");
-        AmountLabel17.setVisible(false);
-        Yes = true;
-        No = false;
+    private void ClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClearButtonMouseClicked
+        Component focusedComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+        if (focusedComponent instanceof JTextField) {
+            ((JTextField) focusedComponent).setText("");
         }
-    }//GEN-LAST:event_YesRadioButtonActionPerformed
+    }//GEN-LAST:event_ClearButtonMouseClicked
+
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
+        CalculateFunction();
+    }//GEN-LAST:event_CalculateButtonActionPerformed
 
     private void NoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoRadioButtonActionPerformed
         if (No == false){
-        AnnualField.setEditable(true);
-        AnnualField.setText(lastsavedannual);
-        AmountLabel17.setVisible(true);
-        Yes = false;
-        No = true;
+            AnnualField.setEditable(true);
+            AnnualField.setText(lastsavedannual);
+            AmountLabel17.setVisible(true);
+            Yes = false;
+            No = true;
         }
     }//GEN-LAST:event_NoRadioButtonActionPerformed
+
+    private void YesRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesRadioButtonActionPerformed
+        if (Yes == false){
+            lastsavedannual = AnnualField.getText();
+            AnnualField.setEditable(false);
+            AnnualField.setText("Maximized");
+            AmountLabel17.setVisible(false);
+            Yes = true;
+            No = false;
+        }
+    }//GEN-LAST:event_YesRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -633,8 +670,40 @@ public class RothIRACalculator extends javax.swing.JFrame {
         });
     }
     
-    public static void CalculateFunction() {
-    //temp
+    public void CalculateFunction() {
+        float balance = MainHelper.parseMoney(CurrentAmountField.getText(), ",");
+        String temp = AnnualField.getText();
+        float annual;
+        if (!"Maximize".equals(temp)){
+            annual = MainHelper.parseMoney(temp, ",");
+            if (annual > 7000) {
+                WarningLabel.setText("Annual contribution greater than limit ($7000) so was adjusted");
+            }
+        }
+        else{
+            annual = 8000;
+        }
+        int CA = Integer.parseInt(CurrentAgeField.getText());
+        int RA = Integer.parseInt(RetireAgeField.getText());
+        int years = RA-CA;
+        float ERR = MainHelper.parseMoney(ERRField.getText(),",")/100;
+        float taxes = MainHelper.parseMoney(TaxField.getText(),",")/100;
+        List<Integer> RothIRABalance = RothIRAHelper.Roth_IRA(years, CA, annual, ERR, balance);
+        List<Integer> Principal = RothIRAHelper.Principal(years, CA, annual, balance);
+        List<Integer> Taxable = RothIRAHelper.TaxableAccount(years, CA, annual, ERR, balance, taxes);
+        Integer  final_principal = Principal.get(Principal.size()-1);
+        Integer final_IRA = RothIRABalance.get(RothIRABalance.size()-1);
+        Integer final_Taxable = Taxable.get(Taxable.size()-1);
+        Integer total_taxes = RothIRAHelper.Total_Taxes(years, CA, annual, ERR, balance, taxes);
+        System.out.println(RothIRABalance);
+        String[] columnNames = {"", "Roth IRA", "Taxable account"};
+        Object[][] data = {{"Balance at age "+String.valueOf(RA),"$"+MainHelper.formatCurrency(final_IRA),"$"+MainHelper.formatCurrency(final_Taxable) },{"Total principal","$"+MainHelper.formatCurrency(final_principal), "$"+MainHelper.formatCurrency(final_principal)}, {"Total interest", "$"+MainHelper.formatCurrency(final_IRA-final_principal), "$"+MainHelper.formatCurrency(final_Taxable-final_principal)}, {"Total Tax", "$0","$"+MainHelper.formatCurrency(total_taxes)}};
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(tableModel);
+        // Add the table to the existing scroll pane
+        ResultPane.setViewportView(table);
+        addChartToPanel(RothIRABalance, Taxable, Principal, CA);
+        addTableToPanel(RothIRABalance, Taxable, Principal, CA);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -655,16 +724,15 @@ public class RothIRACalculator extends javax.swing.JFrame {
     private javax.swing.JTextField CurrentAgeField;
     private javax.swing.JTextField CurrentAmountField;
     private javax.swing.JTextField ERRField;
-    private javax.swing.JPanel GraphPanel;
     private javax.swing.JTabbedPane IRATabs;
     private javax.swing.ButtonGroup IRAbuttons;
     private javax.swing.JPanel InputPanel;
     private javax.swing.JRadioButton NoRadioButton;
     private javax.swing.JButton QuitButton;
     private javax.swing.JButton ResetButton;
-    private javax.swing.JPanel ResultPanel;
+    private javax.swing.JScrollPane ResultPane;
     private javax.swing.JTextField RetireAgeField;
-    private javax.swing.JPanel SchedulePanel;
+    private javax.swing.JScrollPane SchedulePanel;
     private javax.swing.JButton SuperClearButton;
     private javax.swing.JTextField TaxField;
     private javax.swing.JLabel Title1;
