@@ -23,7 +23,6 @@ public class RothIRAHelper {
         catch (NumberFormatException e) {
             return false;
         }
-
         if (RA <= CA ||CA <= 0 || RA>120) {
             return false;
         }
@@ -85,10 +84,28 @@ public class RothIRAHelper {
         }
         return TaxAccount;
     }
-    public static Integer Total_Taxes(int years, int CA, float contribution, float ERR, float Current, float Tax) {
-        List<Integer> TaxAccount = new ArrayList<>();
+    
+    public static Integer Total_Interest(int years, int CA, float contribution, float ERR, float Current) {
         float balance = Current;
-        TaxAccount.add(Math.round(balance));
+        float Total_Interest = contribution;
+        for (int i = 0; i < years; i++){
+            float interest = balance * ERR;
+            balance += interest;
+            Total_Interest += interest;
+            if (CA+i >= 50 || contribution <= 7000){
+                balance += contribution;
+            }
+            else {
+                balance += 7000;
+            }
+        }
+        return Math.round(Total_Interest);
+    }
+    
+    
+    
+    public static Integer Total_Taxes(int years, int CA, float contribution, float ERR, float Current, float Tax) {
+        float balance = Current;
         float Total_Taxes = 0;
         for (int i = 0; i < years; i++){
             balance += balance * ERR *(1-Tax);
@@ -99,10 +116,27 @@ public class RothIRAHelper {
             else {
                 balance += 7000;
             }
-            TaxAccount.add(Math.round(balance));
         }
         return Math.round(Total_Taxes);
     }
+    
+    public static Integer Total_Tax_Interest(int years, int CA, float contribution, float ERR, float Current, float Tax) {
+        float balance = Current;
+        float Total_Interest = 0;
+        for (int i = 0; i < years; i++){
+            float interest = balance * ERR;
+            balance += interest*(1-Tax);
+            Total_Interest += interest;
+            if (CA+i >= 50 || contribution <= 7000){
+                balance += contribution;
+            }
+            else {
+                balance += 7000;
+            }
+        }
+        return Math.round(Total_Interest);
+    }
+    
     public static List<Integer> Principal(int years, int CA, float contribution, float Current) {
         List<Integer> Principal = new ArrayList<>();
         float balance = Current;

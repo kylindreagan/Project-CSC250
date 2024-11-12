@@ -38,6 +38,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
      */
     public RothIRACalculator() {
         initComponents();
+        CalculateFunction();
         FocusListener focusListenerLastFocused = new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -79,7 +80,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 RetireAgeField.setForeground(Color.black);
                 CurrentAgeField.setForeground(Color.black);
                 Boolean x = !MainHelper.validate_money(CurrentAmountField.getText(), false);
-                Boolean c = ((!MainHelper.validate_money(AnnualField.getText(), false)) && !"Maximized".equals(AnnualField.getText()));
+                Boolean c = ((!MainHelper.validate_money(AnnualField.getText(), false)) && !YesRadioButton.isSelected());
                 Boolean a = !MainHelper.isValidNumber(ERRField.getText());
                 Boolean b = !MainHelper.isValidNumber(TaxField.getText());
                 if (x || a || b || c) {
@@ -579,6 +580,8 @@ public class RothIRACalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_QuitButtonMouseClicked
 
     private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
+        Yes = false;
+        No = true;
         CurrentAmountField.setText("20,000");
         AnnualField.setText("7,000");
         ERRField.setText("6");
@@ -592,10 +595,13 @@ public class RothIRACalculator extends javax.swing.JFrame {
     private void SuperClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuperClearButtonMouseClicked
         RetirementHelper.clearAllTextFields(InputPanel);
         lastFocusedField = null;
+        if (YesRadioButton.isSelected()) {
+            AnnualField.setText("Maximized");
+        }
     }//GEN-LAST:event_SuperClearButtonMouseClicked
 
     private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
-        if (lastFocusedField != null) {
+        if (lastFocusedField != null && !(lastFocusedField == AnnualField && YesRadioButton.isSelected())) {
             lastFocusedField.setText("");  // Clear the content of the last focused text field
             lastFocusedField = null;
         } else {
@@ -696,9 +702,11 @@ public class RothIRACalculator extends javax.swing.JFrame {
         Integer final_IRA = RothIRABalance.get(RothIRABalance.size()-1);
         Integer final_Taxable = Taxable.get(Taxable.size()-1);
         Integer total_taxes = RothIRAHelper.Total_Taxes(years, CA, annual, ERR, balance, taxes);
+        Integer total_interest = RothIRAHelper.Total_Interest(years, CA, annual, ERR, balance);
+        Integer total_tax_interest = RothIRAHelper.Total_Tax_Interest(years, CA, annual, ERR, balance, taxes);
         System.out.println(RothIRABalance);
         String[] columnNames = {"", "Roth IRA", "Taxable account"};
-        Object[][] data = {{"Balance at age "+String.valueOf(RA),"$"+MainHelper.formatCurrency(final_IRA),"$"+MainHelper.formatCurrency(final_Taxable) },{"Total principal","$"+MainHelper.formatCurrency(final_principal), "$"+MainHelper.formatCurrency(final_principal)}, {"Total interest", "$"+MainHelper.formatCurrency(final_IRA-final_principal), "$"+MainHelper.formatCurrency(final_Taxable-final_principal)}, {"Total Tax", "$0","$"+MainHelper.formatCurrency(total_taxes)}};
+        Object[][] data = {{"Balance at age "+String.valueOf(RA),"$"+MainHelper.formatCurrency(final_IRA),"$"+MainHelper.formatCurrency(final_Taxable) },{"Total principal","$"+MainHelper.formatCurrency(final_principal), "$"+MainHelper.formatCurrency(final_principal)}, {"Total interest", "$"+MainHelper.formatCurrency(total_interest), "$"+MainHelper.formatCurrency(total_tax_interest)}, {"Total Tax", "$0","$"+MainHelper.formatCurrency(total_taxes)}};
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(tableModel);
         // Add the table to the existing scroll pane
