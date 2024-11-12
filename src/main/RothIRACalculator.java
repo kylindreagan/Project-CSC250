@@ -81,6 +81,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         ResultPanel = new javax.swing.JPanel();
         GraphPanel = new javax.swing.JPanel();
         SchedulePanel = new javax.swing.JPanel();
+        QuitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -232,24 +233,23 @@ public class RothIRACalculator extends javax.swing.JFrame {
                                 .addGroup(InputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(AmountLabel18)
                                     .addComponent(AmountLabel19)))))
-                    .addGroup(InputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(InputPanelLayout.createSequentialGroup()
-                            .addGap(56, 56, 56)
-                            .addComponent(YesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(NoRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(InputPanelLayout.createSequentialGroup()
-                            .addGroup(InputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(InputPanelLayout.createSequentialGroup()
-                                    .addGap(26, 26, 26)
-                                    .addComponent(AmountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(InputPanelLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(AmountLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGap(13, 13, 13)
-                            .addComponent(AmountLabel16)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(CurrentAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(InputPanelLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(YesRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NoRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(InputPanelLayout.createSequentialGroup()
+                        .addGroup(InputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(InputPanelLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(AmountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(InputPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(AmountLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(13, 13, 13)
+                        .addComponent(AmountLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CurrentAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(119, 119, 119)
                 .addGroup(InputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,6 +357,15 @@ public class RothIRACalculator extends javax.swing.JFrame {
 
         IRATabs.addTab("Annual Schedule", SchedulePanel);
 
+        QuitButton.setBackground(new java.awt.Color(255, 0, 0));
+        QuitButton.setForeground(new java.awt.Color(0, 0, 0));
+        QuitButton.setText("Return");
+        QuitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QuitButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -364,15 +373,23 @@ public class RothIRACalculator extends javax.swing.JFrame {
             .addComponent(IRATabs)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Title1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(Title1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Title1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)))
                 .addComponent(IRATabs)
                 .addContainerGap())
         );
@@ -413,6 +430,10 @@ public class RothIRACalculator extends javax.swing.JFrame {
         YesRadioButton.setSelected(false);
         NoRadioButton.setSelected(false);
     }//GEN-LAST:event_ResetButtonMouseClicked
+
+    private void QuitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitButtonMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_QuitButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -476,6 +497,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
     private javax.swing.ButtonGroup IRAbuttons;
     private javax.swing.JPanel InputPanel;
     private javax.swing.JRadioButton NoRadioButton;
+    private javax.swing.JButton QuitButton;
     private javax.swing.JButton ResetButton;
     private javax.swing.JPanel ResultPanel;
     private javax.swing.JTextField RetireAgeField;
