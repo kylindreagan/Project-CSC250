@@ -58,7 +58,7 @@ public class RothIRAHelper {
         Roth_IRA.add(Math.round(balance));
         for (int i = 0; i < years; i++){
             balance += balance * ERR;
-            if (CA+years > 50 || contribution < 7000){
+            if (CA+i >= 50 || contribution <= 7000){
                 balance += contribution;
             }
             else {
@@ -75,7 +75,7 @@ public class RothIRAHelper {
         TaxAccount.add(Math.round(balance));
         for (int i = 0; i < years; i++){
             balance += balance * ERR *(1-Tax);
-            if (CA+years > 50 || contribution < 7000){
+            if (CA+i >= 50 || contribution <= 7000){
                 balance += contribution;
             }
             else {
@@ -93,7 +93,7 @@ public class RothIRAHelper {
         for (int i = 0; i < years; i++){
             balance += balance * ERR *(1-Tax);
             Total_Taxes += (balance * ERR) - (balance * ERR *(1-Tax));
-            if (CA+years > 50 || contribution < 7000){
+            if (CA+i >= 50 || contribution <= 7000){
                 balance += contribution;
             }
             else {
@@ -108,7 +108,7 @@ public class RothIRAHelper {
         float balance = Current;
         Principal.add(Math.round(balance));
         for (int i = 0; i < years; i++){
-            if (CA+years > 50 || contribution < 7000){
+            if (CA+i >= 50 || contribution <= 7000){
                 balance += contribution;
             }
             else {

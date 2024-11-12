@@ -79,7 +79,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 RetireAgeField.setForeground(Color.black);
                 CurrentAgeField.setForeground(Color.black);
                 Boolean x = !MainHelper.validate_money(CurrentAmountField.getText(), false);
-                Boolean c = ((!MainHelper.validate_money(AnnualField.getText(), false) ||  MainHelper.parseMoney(AnnualField.getText(),",") > 8000) && !"Maximized".equals(AnnualField.getText()));
+                Boolean c = ((!MainHelper.validate_money(AnnualField.getText(), false)) && !"Maximized".equals(AnnualField.getText()));
                 Boolean a = !MainHelper.isValidNumber(ERRField.getText());
                 Boolean b = !MainHelper.isValidNumber(TaxField.getText());
                 if (x || a || b || c) {
@@ -674,10 +674,11 @@ public class RothIRACalculator extends javax.swing.JFrame {
         float balance = MainHelper.parseMoney(CurrentAmountField.getText(), ",");
         String temp = AnnualField.getText();
         float annual;
-        if (!"Maximize".equals(temp)){
+        if (!"Maximized".equals(temp)){
             annual = MainHelper.parseMoney(temp, ",");
             if (annual > 7000) {
                 WarningLabel.setText("Annual contribution greater than limit ($7000) so was adjusted");
+                annual = 7000;
             }
         }
         else{
