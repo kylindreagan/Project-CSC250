@@ -1,12 +1,16 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Currency;
@@ -22,6 +26,7 @@ import java.util.Map;
  * @author kylin
  */
 public class currencyHelper {
+    private static Boolean fromFile;
     public static boolean canConnect() {
         boolean s;
         s = true;
@@ -42,12 +47,15 @@ public class currencyHelper {
         try {
             Document doc = Jsoup.connect("https://www.x-rates.com/table/?from=USD&amount=1").get();
             rows = doc.select("table.ratesTable > tbody > tr");
+            fromFile = false;
         }
         catch (IOException e) {
             System.out.printf("Error: %s%n", e);
             loadFromFile(dict, "src/files/currency_rates.txt");
+            fromFile = true;
         }
         if (rows != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/files/currency_rates.txt"))) {
             for (Element row : rows) {
                 Elements tds = row.select("td");
                 String currency = tds.get(0).text();
@@ -56,13 +64,25 @@ public class currencyHelper {
                     Double.valueOf(tds.get(2).text())
                 };
 
-                System.out.printf("Currency: %s, rate1: %s, rate2: %s%n",
-                currency, rates[0], rates[1]);
+                 writer.write(String.format("%s, %.2f, %.2f%n", currency, rates[0], rates[1]));
     
                 dict.put(currency, rates);
             }
+            } catch (IOException e) {
+            System.out.printf("Error writing to file: %s%n", e);
+        }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/files/timestamp.txt"))) {
+                writer.write(ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME));
+            }
+            catch (IOException e) {
+            System.out.printf("Error writing to file: %s%n", e);
+        }
         }
         return dict;
+    }
+    
+    public static Boolean FromFile(){
+        return fromFile;
     }
     
 
