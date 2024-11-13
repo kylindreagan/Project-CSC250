@@ -108,8 +108,8 @@ public class RothIRAHelper {
         float balance = Current;
         float Total_Taxes = 0;
         for (int i = 0; i < years; i++){
-            balance += balance * ERR *(1-Tax);
             Total_Taxes += (balance * ERR) - (balance * ERR *(1-Tax));
+            balance += balance * ERR *(1-Tax);
             if (CA+i >= 50 || contribution <= 7000){
                 balance += contribution;
             }
