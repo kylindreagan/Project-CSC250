@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="mainLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="closeButton" min="-2" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="initInvestLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="midLebel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="annualContrLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="monthlyContrLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="annualContrField" alignment="0" pref="142" max="32767" attributes="0"/>
+                                  <Component id="initInvestField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="monthlyContrField" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="calcButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="clearButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="IRLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="compoundLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="compoundBox" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="IRField" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="investLenLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="investLenYField" min="-2" pref="41" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              <Component id="yearsLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="investLenMField" min="-2" pref="36" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="monthsLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                      <Component id="midLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="beginButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="endButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                      <Component id="resultsLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="totalInterestLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="endBalanceLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalPrinLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalContrLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="interestOfInitLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                      <Component id="interestOfContrLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="endBalanceLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="totalPrinLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="totalContrLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="totalInterestLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="interestOfInitLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="interestOfContrLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="237" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="mainLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="closeButton" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="initInvestLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="initInvestField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="annualContrLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="annualContrField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="monthlyContrLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="monthlyContrField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="endButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="beginButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="midLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="midLebel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="IRLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="IRField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="compoundLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="compoundBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="investLenLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="investLenYField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="yearsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="investLenMField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="monthsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="82" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="calcButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="clearButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="resultsLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="endBalanceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="endBalanceLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="totalPrinLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalPrinLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="totalContrLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalContrLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="totalInterestLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="totalInterestLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="interestOfInitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="interestOfInitLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="interestOfContrLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="interestOfContrLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="mainLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Interest Calculator"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="initInvestLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Initial investment"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="annualContrLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Annual contribution"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="monthlyContrLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Monthly contribution"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="beginButton">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="beginning"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="beginButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="endButton">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="end"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="endButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="IRLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Interest rate (%)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="compoundLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Compound"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="investLenLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Investment length"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="calcButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Calculate"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="clearButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clear"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="midLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Contribute at the"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="midLebel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="of each compounding period"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="closeButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Close"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="resultsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Results"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="endBalanceLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ending balance"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="totalPrinLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total principal"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="totalContrLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total contributions"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="totalInterestLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total interest"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="interestOfInitLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Interest of initial investment"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="interestOfContrLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Interest of the contributions"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="initInvestField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="20000"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="initInvestFieldFocusLost"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="initInvestFieldKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="annualContrField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="500"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="annualContrFieldFocusLost"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="annualContrFieldKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="monthlyContrField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="monthlyContrFieldFocusLost"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="monthlyContrFieldKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="IRField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="5"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="IRFieldFocusLost"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="IRFieldKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="investLenYField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="10"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="investLenYFieldFocusLost"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="investLenYFieldKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="investLenMField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="6"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="investLenMFieldFocusLost"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="investLenMFieldKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="yearsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="years"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="monthsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="months"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="compoundBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="9">
+            <StringItem index="0" value="annually"/>
+            <StringItem index="1" value="semiannually"/>
+            <StringItem index="2" value="quarterly"/>
+            <StringItem index="3" value="monthly"/>
+            <StringItem index="4" value="semimonthly"/>
+            <StringItem index="5" value="biweekly"/>
+            <StringItem index="6" value="weekly"/>
+            <StringItem index="7" value="daily"/>
+            <StringItem index="8" value="continuously"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="endBalanceLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="$40,408.17"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="totalPrinLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="$25,500.00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="totalContrLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="$5,500.00"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="totalInterestLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="$14,908.17"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="interestOfInitLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="$13,382.41"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="interestOfContrLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="$1,525.76"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
