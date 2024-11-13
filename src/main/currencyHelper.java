@@ -11,15 +11,17 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Currency;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.Map;
+import org.jsoup.nodes.Element;
 
 /**
  *
@@ -41,6 +43,7 @@ public class currencyHelper {
 
 
     }
+    
     public static Map<String, Double[]> webScraper() {
         Map<String, Double[]> dict = new HashMap<>(Map.of("US Dollar", new Double[]{1.0, 1.0}));
         Elements rows = null;
@@ -155,6 +158,18 @@ public class currencyHelper {
     public static String getCurrencySymbol(Locale locale) {
         Currency currency = Currency.getInstance(locale);
         return currency.getSymbol(locale);
+    }
+    
+    public static String getTimestampFromFile(String file_name) {
+        String timestamp;
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/files/timestamp.txt"))) {
+                timestamp = reader.readLine();
+            }
+            catch (IOException e) {
+            System.out.printf("Error writing to file: %s%n", e);
+            timestamp="Sun, 10 Nov 2024 20:01:55 -0500";
+        }
+        return timestamp;
     }
     
     public static Boolean validate_nondec_currency(String money, Locale locale) {

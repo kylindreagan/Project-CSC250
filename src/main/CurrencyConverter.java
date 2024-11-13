@@ -16,12 +16,9 @@ import javax.swing.JComboBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URL;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -30,13 +27,14 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.util.Collections;
 import java.util.Objects;
-import javax.imageio.ImageIO;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 
 /**
  *
- * @author kylin
+ * @author Kylind
  */
 public class CurrencyConverter extends javax.swing.JFrame {
     private Map<String, Double[]> currencyDict;
@@ -60,29 +58,13 @@ public class CurrencyConverter extends javax.swing.JFrame {
      * Creates new form CurrencyCalculator
      */
     public CurrencyConverter(){
-        currencyDict = currencyHelper.webScraper();
-        String timestamp;
-        if (currencyHelper.FromFile()){
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/files/timestamp.txt"))) {
-                timestamp = reader.readLine();
-            }
-            catch (IOException e) {
-            System.out.printf("Error writing to file: %s%n", e);
-            timestamp="Sun, 10 Nov 2024 20:01:55 -0500";
-        }
-        }
-        else {
-            timestamp= ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
-        }
         initComponents();
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/swap.png"));
         Image scaledImage = originalIcon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
-        TimestampLabel.setText("Conversions valid as of "+timestamp);
 
         // Set the scaled image as the icon for the button
-        SwapButton.setIcon(new ImageIcon(scaledImage));        
-        updateComboBox(FromComboBox, FromCheckBox.isSelected());
-        updateComboBox(ToComboBox, ToCheckBox.isSelected());
+        SwapButton.setIcon(new ImageIcon(scaledImage));    
+        TimestampLabel.setText("Loading currency data...");
         StyledDocument doc = ResultTextPane.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
@@ -110,6 +92,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 WarningLabel.setText("");
             }
           }
+          
         };
         AmountTextField.getDocument().addDocumentListener(documentListener);
         // Add ActionListener to the JComboBox
@@ -118,7 +101,30 @@ public class CurrencyConverter extends javax.swing.JFrame {
         // Add ActionListener to the JCheckBox
         FromCheckBox.addActionListener(e -> documentListener.changedUpdate(null));
         SwapButton.addActionListener(e -> documentListener.changedUpdate(null));
+        loadCurrencyDictInBackground();
     }
+    
+    private void loadCurrencyDictInBackground() {
+    new Thread(() -> {
+        // Load currencyDict in a background thread
+        currencyDict = currencyHelper.webScraper();
+
+        // Update the UI after currencyDict is loaded
+        SwingUtilities.invokeLater(() -> {
+            // Update timestamp and any combo boxes dependent on currencyDict
+            String timestamp = currencyHelper.FromFile() 
+                               ? currencyHelper.getTimestampFromFile("src/files/timestamp.txt") 
+                               : ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+            TimestampLabel.setText("Conversions valid as of " + timestamp);
+
+            // Populate combo boxes now that currencyDict is loaded
+            updateComboBox(FromComboBox, FromCheckBox.isSelected());
+            updateComboBox(ToComboBox, ToCheckBox.isSelected());
+        });
+    }).start();
+}
+    
+
     
     private void updateComboBox(JComboBox<String> comboBox, boolean popular) {
         comboBox.removeAllItems();
