@@ -107,7 +107,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
     private void loadCurrencyDictInBackground() {
     new Thread(() -> {
         // Load currencyDict in a background thread
-        currencyDict = currencyHelper.webScraper();
+        currencyDict = Collections.unmodifiableMap(currencyHelper.webScraper());
 
         // Update the UI after currencyDict is loaded
         SwingUtilities.invokeLater(() -> {
