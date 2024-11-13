@@ -409,14 +409,14 @@ public class CurrencyConverter extends javax.swing.JFrame {
         for (ActionListener listener : listeners) {
             FromComboBox.removeActionListener(listener);
         }
-        updateComboBox(FromComboBox, FromCheckBox.isSelected());
+        updateComboBox(FromComboBox, ToCheckBox.isSelected());
         for (ActionListener listener : listeners) {
             FromComboBox.addActionListener(listener);
         }
         }
         
         if (!Objects.equals(newToPopular, toPopular)) {
-            updateComboBox(ToComboBox, ToCheckBox.isSelected());
+            updateComboBox(ToComboBox, FromCheckBox.isSelected());
         }
         
         Locale fromLocale = currencyHelper.getLocale((String) fromCountry);
