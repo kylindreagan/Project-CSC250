@@ -4,7 +4,6 @@
  */
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -623,6 +622,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
     private void NoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoRadioButtonActionPerformed
         if (No == false){
             AnnualField.setEditable(true);
+            AnnualField.setFocusable(true);
             AnnualField.setText(lastsavedannual);
             AmountLabel17.setVisible(true);
             Yes = false;
@@ -634,6 +634,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         if (Yes == false){
             lastsavedannual = AnnualField.getText();
             AnnualField.setEditable(false);
+            AnnualField.setFocusable(false);
             AnnualField.setText("Maximized");
             AmountLabel17.setVisible(false);
             Yes = true;
