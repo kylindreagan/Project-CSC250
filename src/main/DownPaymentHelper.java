@@ -16,9 +16,9 @@ import java.util.Hashtable;
 public class DownPaymentHelper {
     static Dictionary<String, Integer> stateClosingCosts = createVals(); //Global Dictionary
     
-    public static String homePriceCalculateEntry(float uCash, float dPayment, float intRate, int lTerm, float cCost){
+    public static String homePriceCalculateEntry(float uCash, float dPayment, float intRate, float lTerm, float cCost){
         float homePrice = (uCash-cCost)/(dPayment/100);
-        float loanAmount = homePrice - uCash + cCost;
+        float loanAmount = homePrice - uCash + cCost;        
         double monthlyPayment = MainHelper.monthlyPayment(loanAmount, intRate, lTerm, false);
         String s = new DecimalFormat ("#,###.00").format (homePrice);
         String s2 = new DecimalFormat ("#,###.00").format (loanAmount);
@@ -29,7 +29,7 @@ public class DownPaymentHelper {
         return msg;
     }
     
-    public static String homePriceCalculateState(float uCash, float dPayment, float intRate, int lTerm, String cCost){
+    public static String homePriceCalculateState(float uCash, float dPayment, float intRate, float lTerm, String cCost){
         float actualCC = stateClosingCosts.get(cCost);
         float homePrice = (uCash-actualCC)/(dPayment/100);
         float loanAmount = homePrice - uCash + actualCC;
@@ -43,7 +43,7 @@ public class DownPaymentHelper {
         
         return msg;
     }
-    public static String homePriceCalculate(float uCash, float dPayment, float intRate, int lTerm){
+    public static String homePriceCalculate(float uCash, float dPayment, float intRate, float lTerm){
         float homePrice = uCash/(dPayment/100);
         float loanAmount = homePrice - uCash;
         double monthlyPayment = MainHelper.monthlyPayment(loanAmount, intRate, lTerm, false);
@@ -55,7 +55,7 @@ public class DownPaymentHelper {
         return msg;
     }
     
-    public static String cashCalculateEntry(float hPrice, float dPayment, float intRate, int lTerm, float cCost){
+    public static String cashCalculateEntry(float hPrice, float dPayment, float intRate, float lTerm, float cCost){
         float cash = (hPrice * (dPayment/100)) + cCost;
         float loanAmount = hPrice - cash + cCost;
         double monthlyPayment = MainHelper.monthlyPayment(loanAmount, intRate, lTerm, false);
@@ -68,7 +68,7 @@ public class DownPaymentHelper {
         return msg;
     }
     
-    public static String cashCalculateState(float hPrice, float dPayment, float intRate, int lTerm, String cCost){
+    public static String cashCalculateState(float hPrice, float dPayment, float intRate, float lTerm, String cCost){
         float actualCC = stateClosingCosts.get(cCost);
         float cash = (hPrice * (dPayment/100)) + actualCC;
         float loanAmount = hPrice - cash + actualCC;
@@ -82,7 +82,7 @@ public class DownPaymentHelper {
         return msg;
     }
     
-    public static String cashCalculate(float hPrice, float dPayment, float intRate, int lTerm){
+    public static String cashCalculate(float hPrice, float dPayment, float intRate, float lTerm){
         float cash = hPrice * (dPayment/100);
         float loanAmount = hPrice - cash;
         double monthlyPayment = MainHelper.monthlyPayment(loanAmount, intRate, lTerm, false);
@@ -94,7 +94,7 @@ public class DownPaymentHelper {
         return msg;
     }
     
-    public static String downPaymentCalculateEntry(float hPrice, float uCash, float intRate, int lTerm, float cCost){
+    public static String downPaymentCalculateEntry(float hPrice, float uCash, float intRate, float lTerm, float cCost){
         float down = ((uCash-cCost)/hPrice) * 100;
         float loanAmount = hPrice - uCash + cCost;
         double monthlyPayment = MainHelper.monthlyPayment(loanAmount, intRate, lTerm, false);
@@ -107,7 +107,7 @@ public class DownPaymentHelper {
         return msg;
     }
     
-    public static String downPaymentCalculateState(float hPrice, float uCash, float intRate, int lTerm, String cCost){
+    public static String downPaymentCalculateState(float hPrice, float uCash, float intRate, float lTerm, String cCost){
         float actualCC = stateClosingCosts.get(cCost);
         float down = ((uCash-actualCC)/hPrice) * 100;
         float loanAmount = hPrice - uCash + actualCC;
@@ -121,7 +121,7 @@ public class DownPaymentHelper {
         return msg;
     }
     
-    public static String downPaymentCalculate(float hPrice, float uCash, float intRate, int lTerm){
+    public static String downPaymentCalculate(float hPrice, float uCash, float intRate, float lTerm){
         float down = (uCash/hPrice) * 100;
         float loanAmount = hPrice - uCash;
         double monthlyPayment = MainHelper.monthlyPayment(loanAmount, intRate, lTerm, false);
