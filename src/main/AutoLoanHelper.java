@@ -11,25 +11,17 @@ import java.text.DecimalFormat;
  * @author giann
  */
 public class AutoLoanHelper {
-    public static String carPriceCalculate (int lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float fees, float monthly){
+    public static String carPriceCalculate (float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float fees, float monthly){
         
         return "";
     }
     
-    public static Double amortizationInterest (float principal, float intRate, float numPayments){
-        Float r = (intRate/100) / 12;        
-        Double numerator = (r) * Math.pow((1 + r), numPayments);        
-        Double denominator = Math.pow((1 + r), numPayments) - 1;        
-        Double fraction = numerator/denominator;        
-        return fraction * principal;
-    }
-    
-    public static String monthlyPaymentCalculate(int lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float fees, float car){
+    public static String monthlyPaymentCalculate(float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float fees, float car){
         float loanAmt = car - dPay;
-        Double monthlyPayment = amortizationInterest(loanAmt, intRate, lTerm);
+        Double monthlyPayment = AmortizationHelper.amortizationInterest(loanAmt, intRate, lTerm);
         float saleTax = car * (sTax/100);
         float upfrontPayment = saleTax + dPay + fees;
-        Double totalLoanInterest = 0.00;     
+        Double totalLoanInterest = monthlyPayment * lTerm;     
         Double totalPayments = loanAmt + totalLoanInterest;
         Double totalCost = totalLoanInterest + upfrontPayment;
         String s = new DecimalFormat ("#,###.00").format (monthlyPayment);

@@ -345,6 +345,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
         feesEntryField.setText("");
         loanTermEntryField.setText("");
         tradeEntryField.setText("");
+        resultsBox.setText(" ");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
@@ -361,7 +362,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
     }//GEN-LAST:event_resetButtonActionPerformed
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
-        int lterm = Integer.parseInt(loanTermEntryField.getText());
+        float lterm = Float.parseFloat(loanTermEntryField.getText());
         float intRate = Float.parseFloat(interestRateEntryField.getText());
         float sTax = Float.parseFloat(salesTaxEntryField.getText());
         float cIncent = MainHelper.parseMoney(cashIncentivesEntryField.getText(), ",");
@@ -375,8 +376,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
             
         } else {
             float car = MainHelper.parseMoney(autoPriceEntryField.getText(), ",");
-            message = AutoLoanHelper.monthlyPaymentCalculate(lterm, intRate, sTax, cIncent, dPay, trade, fees, car);
-            System.out.println("Here");
+            message = AutoLoanHelper.monthlyPaymentCalculate(lterm, intRate, sTax, cIncent, dPay, trade, fees, car);          
         }
         resultsBox.setText(message);
     }//GEN-LAST:event_calculateButtonActionPerformed
