@@ -581,6 +581,8 @@ public class RothIRACalculator extends javax.swing.JFrame {
     private void ResetButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetButtonMouseClicked
         Yes = false;
         No = true;
+        AnnualField.setEditable(true);
+        AnnualField.setFocusable(true);
         CurrentAmountField.setText("20,000");
         AnnualField.setText("7,000");
         ERRField.setText("6");
