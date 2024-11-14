@@ -17,9 +17,9 @@ import java.util.Currency;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.Map;
+import org.jsoup.nodes.Element;
 
 /**
  *
@@ -41,6 +41,7 @@ public class currencyHelper {
 
 
     }
+    
     public static Map<String, Double[]> webScraper() {
         Map<String, Double[]> dict = new HashMap<>(Map.of("US Dollar", new Double[]{1.0, 1.0}));
         Elements rows = null;
@@ -131,7 +132,7 @@ public class currencyHelper {
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     char groupingSeparator = symbols.getGroupingSeparator();
     char decimalSeparator = symbols.getDecimalSeparator();
-    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) {
+    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA || locale.equals(new Locale("is", "IS"))) {
         return validate_nondec_currency(money, locale);
     }
 
@@ -155,6 +156,18 @@ public class currencyHelper {
     public static String getCurrencySymbol(Locale locale) {
         Currency currency = Currency.getInstance(locale);
         return currency.getSymbol(locale);
+    }
+    
+    public static String getTimestampFromFile(String file_name) {
+        String timestamp;
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/files/timestamp.txt"))) {
+                timestamp = reader.readLine();
+            }
+            catch (IOException e) {
+            System.out.printf("Error writing to file: %s%n", e);
+            timestamp="Sun, 10 Nov 2024 20:01:55 -0500";
+        }
+        return timestamp;
     }
     
     public static Boolean validate_nondec_currency(String money, Locale locale) {
@@ -218,7 +231,7 @@ public class currencyHelper {
         else if (amount.matches(regexWhole) || amount.matches(regexNoGroup)) {
             return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
-        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount, locale)) {
+        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA || locale.equals(new Locale("is", "IS"))) && !validate_nondec_currency(amount, locale)) {
             return "⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.";
         }
         else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {
