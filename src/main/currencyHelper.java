@@ -11,9 +11,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.AbstractMap;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Currency;
 
@@ -134,7 +132,7 @@ public class currencyHelper {
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     char groupingSeparator = symbols.getGroupingSeparator();
     char decimalSeparator = symbols.getDecimalSeparator();
-    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) {
+    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA || locale.equals(new Locale("is", "IS"))) {
         return validate_nondec_currency(money, locale);
     }
 
@@ -233,7 +231,7 @@ public class currencyHelper {
         else if (amount.matches(regexWhole) || amount.matches(regexNoGroup)) {
             return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
-        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount, locale)) {
+        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA || locale.equals(new Locale("is", "IS"))) && !validate_nondec_currency(amount, locale)) {
             return "⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.";
         }
         else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {
