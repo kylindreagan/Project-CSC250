@@ -9,6 +9,12 @@ package main;
  * @author giann
  */
 public class AmortizationHelper {
+    public static Double totalMonthlyPayments(float principal, float intRate, Double monthlyPayments, float numPayments){
+        //Return String with schedule 
+        //For loop?
+        return 0.00;
+    }
+    
     public static Double amortizationInterest (float principal, float intRate, float numPayments){
         Float r = (intRate/100) / 12;        
         Double numerator = (r) * Math.pow((1 + r), numPayments);        

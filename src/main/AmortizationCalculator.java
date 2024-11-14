@@ -17,6 +17,7 @@ public class AmortizationCalculator extends javax.swing.JFrame {
      */
     public AmortizationCalculator() {
         initComponents();
+        additionalPayments.setVisible(false);
     }
 
     /**
@@ -78,6 +79,8 @@ public class AmortizationCalculator extends javax.swing.JFrame {
         yearsField.setText("15");
 
         jLabel5.setText("Years");
+
+        monthsField.setText("0");
 
         jLabel6.setText("Months ");
 
@@ -256,7 +259,7 @@ public class AmortizationCalculator extends javax.swing.JFrame {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         totalAmtField.setText("200,000");
-        monthsField.setText(" ");
+        monthsField.setText("0");
         yearsField.setText("15");
         intRateField.setText("6");
     }//GEN-LAST:event_resetButtonActionPerformed
@@ -267,9 +270,9 @@ public class AmortizationCalculator extends javax.swing.JFrame {
         float interest = Float.parseFloat(intRateField.getText());
         Double monthlyPay = AmortizationHelper.amortizationInterest(principal, interest, numPayments);
         String s1 = new DecimalFormat ("#,###.00").format (monthlyPay);
-        float totalMPInterest = 0; // Code function for total interest
+        Double totalMPInterest = monthlyPay * numPayments; 
         String s2 = new DecimalFormat ("#,###.00").format (totalMPInterest);
-        float totalInterest = totalMPInterest - principal;
+        Double totalInterest = totalMPInterest - principal;
         String s3 = new DecimalFormat ("#,###.00").format (totalInterest);
         String message = "Monthly Pay: $" + s1 + "\nTotal of " + numPayments + " monthly payments: $" + s2 + "\nTotal Interest: $" + s3;
         resultsField.setText(message);
