@@ -4,6 +4,10 @@
  */
 package main;
 
+import java.awt.Color;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 /**
  *
  * @author giann
@@ -17,7 +21,152 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
         initComponents();
         carPriceRadio.setSelected(true);
         autoPriceLabel.setVisible(false);
-        autoPriceEntryField.setVisible(false);
+        autoPriceEntryField.setVisible(false);        
+        //Code from Kylind -- Used in Retirement Calculator
+        DocumentListener documentListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) { checkFields(); }
+            @Override
+            public void removeUpdate(DocumentEvent e) { checkFields(); }
+            @Override
+            public void changedUpdate(DocumentEvent e) { checkFields(); }
+                private void checkFields() {
+                    String AP = autoPriceEntryField.getText();
+                    String MP = monthlyPaymentsEntryField.getText();
+                    String CI = cashIncentivesEntryField.getText();
+                    String DP = downPaymentEntryField.getText();
+                    String TV = tradeEntryField.getText();
+                    String AO = amtOwedEntryField.getText();
+                    String OF = feesEntryField.getText();
+                    boolean validAP = MainHelper.validate_money(AP, false);
+                    boolean validMP = MainHelper.validate_money(MP, false);
+                    boolean validCI = MainHelper.validate_money(CI, false);
+                    boolean validDP = MainHelper.validate_money(DP, false);
+                    boolean validTV = MainHelper.validate_money(TV, false);
+                    boolean validAO = MainHelper.validate_money(AO, false);
+                    boolean validOF = MainHelper.validate_money(OF, false);
+                    String message = "";
+                    if (!validAP){
+                        message = "⚠ Invalid Auto Price";
+                        autoPriceEntryField.setForeground(Color.red); 
+                        errorLabel.setVisible(true);
+                        errorLabel.setText(message); 
+                        calculateButton.setEnabled(false);
+                    }   else {
+                        autoPriceEntryField.setForeground(Color.black);
+                    }
+                    
+                    if (!validMP){
+                        message = "⚠ Invalid Monthly Payment";
+                        monthlyPaymentsEntryField.setForeground(Color.red); 
+                        errorLabel.setVisible(true);
+                        errorLabel.setText(message); 
+                        calculateButton.setEnabled(false);
+                    }   else {
+                        monthlyPaymentsEntryField.setForeground(Color.black);
+                    }
+                    if (!validCI){
+                        message = "⚠ Invalid Cash Incentives";
+                        cashIncentivesEntryField.setForeground(Color.red); 
+                        errorLabel.setVisible(true);
+                        errorLabel.setText(message); 
+                        calculateButton.setEnabled(false);
+                    }   else {
+                        cashIncentivesEntryField.setForeground(Color.black);
+                    }
+                    if (!validDP){
+                        message = "⚠ Invalid Down Payment";
+                        downPaymentEntryField.setForeground(Color.red); 
+                        errorLabel.setVisible(true);
+                        errorLabel.setText(message); 
+                        calculateButton.setEnabled(false);
+                    }   else {
+                        downPaymentEntryField.setForeground(Color.black);
+                    }
+                    if (!validTV){
+                        message = "⚠ Invalid Trade-in Value";
+                        tradeEntryField.setForeground(Color.red); 
+                        errorLabel.setVisible(true);
+                        errorLabel.setText(message); 
+                        calculateButton.setEnabled(false);
+                    }   else {
+                        tradeEntryField.setForeground(Color.black);
+                    }
+                    if (!validAO){
+                        message = "⚠ Invalid Amount Owed";
+                        amtOwedEntryField.setForeground(Color.red); 
+                        errorLabel.setVisible(true);
+                        errorLabel.setText(message); 
+                        calculateButton.setEnabled(false);
+                    }   else {
+                        amtOwedEntryField.setForeground(Color.black);
+                    }
+                    if (!validOF){
+                        message = "⚠ Invalid Additional Fees";
+                        feesEntryField.setForeground(Color.red); 
+                        errorLabel.setVisible(true);
+                        errorLabel.setText(message); 
+                        calculateButton.setEnabled(false);
+                    }   else {
+                        feesEntryField.setForeground(Color.black);
+                    }
+                    boolean ST = !MainHelper.isValidNumber(salesTaxEntryField.getText());
+                    boolean LT = !MainHelper.isValidNumber(loanTermEntryField.getText());
+                    boolean IR = !MainHelper.isValidNumber(interestRateEntryField.getText());
+                    if ( ST || LT || IR) {
+                    calculateButton.setEnabled(false);
+                    if (LT) {
+                        loanTermEntryField.setForeground(Color.red);
+                        errorLabel.setVisible(true);
+                        errorLabel.setText("⚠ Invalid Loan Term.");
+                    }
+                    else {
+                        loanTermEntryField.setForeground(Color.black);
+                    }
+                    if (IR) {
+                        interestRateEntryField.setForeground(Color.red);
+                        errorLabel.setVisible(true);
+                        errorLabel.setText("⚠ Invalid Interest Rate.");
+                    }
+                    else {
+                        interestRateEntryField.setForeground(Color.black);
+                    }
+                    if (ST) {
+                        salesTaxEntryField.setForeground(Color.red);
+                        errorLabel.setVisible(true);
+                        errorLabel.setText("⚠ Invalid Sales Tax.");
+                    }
+                    else {
+                        salesTaxEntryField.setForeground(Color.black);
+                    }
+                }
+                else if (validAP && validMP && validCI && validDP && validDP && validTV && validAO && validOF){
+                    autoPriceEntryField.setForeground(Color.black);
+                    monthlyPaymentsEntryField.setForeground(Color.black);
+                    cashIncentivesEntryField.setForeground(Color.black);
+                    downPaymentEntryField.setForeground(Color.black);
+                    tradeEntryField.setForeground(Color.black);
+                    amtOwedEntryField.setForeground(Color.black);
+                    feesEntryField.setForeground(Color.black);
+                    salesTaxEntryField.setForeground(Color.black);
+                    interestRateEntryField.setForeground(Color.black);
+                    loanTermEntryField.setForeground(Color.black);
+                    errorLabel.setText("Error: None");
+                    calculateButton.setEnabled(true);
+                }
+                }
+            };
+                
+            autoPriceEntryField.getDocument().addDocumentListener(documentListener);
+            amtOwedEntryField.getDocument().addDocumentListener(documentListener);
+            cashIncentivesEntryField.getDocument().addDocumentListener(documentListener);
+            monthlyPaymentsEntryField.getDocument().addDocumentListener(documentListener);
+            salesTaxEntryField.getDocument().addDocumentListener(documentListener);
+            tradeEntryField.getDocument().addDocumentListener(documentListener);
+            feesEntryField.getDocument().addDocumentListener(documentListener);
+            downPaymentEntryField.getDocument().addDocumentListener(documentListener);
+            loanTermEntryField.getDocument().addDocumentListener(documentListener);
+            interestRateEntryField.getDocument().addDocumentListener(documentListener);
     }
     
     /**
@@ -64,6 +213,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
         resultsBox = new javax.swing.JTextArea();
         resultsLabel = new javax.swing.JLabel();
         otherFeesCheckBox = new javax.swing.JCheckBox();
+        errorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,7 +318,10 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
 
         resultsLabel.setText("Results");
 
-        otherFeesCheckBox.setText("Include Other Fees");
+        otherFeesCheckBox.setText("Include Other Fees Into Loan");
+
+        errorLabel.setForeground(new java.awt.Color(255, 51, 51));
+        errorLabel.setText("Error: None");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,7 +372,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(monthlyPaymentsEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cashIncentivesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cashIncentivesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cashIncentivesEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -247,8 +400,9 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
                     .addComponent(otherFeesCheckBox))
                 .addGap(150, 150, 150)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorLabel))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -265,7 +419,8 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(monthlyPaymentsLabel)
-                    .addComponent(monthlyPaymentsEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(monthlyPaymentsEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(autoPriceLabel)
@@ -442,6 +597,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
     private javax.swing.JButton clearButton;
     private javax.swing.JFormattedTextField downPaymentEntryField;
     private javax.swing.JLabel downPaymentLabel;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JFormattedTextField feesEntryField;
     private javax.swing.JLabel feesLabel;
     private javax.swing.JTextField interestRateEntryField;
