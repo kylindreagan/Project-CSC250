@@ -63,6 +63,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsBox = new javax.swing.JTextArea();
         resultsLabel = new javax.swing.JLabel();
+        otherFeesCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -167,6 +168,8 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
 
         resultsLabel.setText("Results");
 
+        otherFeesCheckBox.setText("Include Other Fees");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,7 +243,8 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(feesLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(feesEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(feesEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(otherFeesCheckBox))
                 .addGap(150, 150, 150)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(resultsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,7 +307,9 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(feesLabel)
-                            .addComponent(feesEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(feesEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(otherFeesCheckBox))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -368,15 +374,22 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
         float cIncent = MainHelper.parseMoney(cashIncentivesEntryField.getText(), ",");
         float dPay = MainHelper.parseMoney(downPaymentEntryField.getText(), ",");
         float trade = MainHelper.parseMoney(tradeEntryField.getText(), ",");
+        float amtOwed = MainHelper.parseMoney(amtOwedEntryField.getText(), ",");
         float fees = MainHelper.parseMoney(feesEntryField.getText(), ",");
         String message = "";
-        if (carPriceRadio.isSelected()){
+        if (carPriceRadio.isSelected() && otherFeesCheckBox.isSelected()){
             float monthly = MainHelper.parseMoney(monthlyPaymentsEntryField.getText(), ",");
-            message = AutoLoanHelper.carPriceCalculate(lterm, intRate, sTax, cIncent, dPay, trade, fees, monthly);
+            message = AutoLoanHelper.carPriceCalculateFees(lterm, intRate, sTax, cIncent, dPay, trade, amtOwed, fees, monthly);
             
-        } else {
+        } else if (carPriceRadio.isSelected() && !otherFeesCheckBox.isSelected()) {
+            float monthly = MainHelper.parseMoney(monthlyPaymentsEntryField.getText(), ",");
+            message = AutoLoanHelper.carPriceCalculate(lterm, intRate, sTax, cIncent, dPay, trade, amtOwed, fees, monthly);         
+        } else if (monthlyPaymentsRadio.isSelected() && otherFeesCheckBox.isSelected()) {
             float car = MainHelper.parseMoney(autoPriceEntryField.getText(), ",");
-            message = AutoLoanHelper.monthlyPaymentCalculate(lterm, intRate, sTax, cIncent, dPay, trade, fees, car);          
+            message = AutoLoanHelper.monthlyPaymentCalculateFees(lterm, intRate, sTax, cIncent, dPay, trade, amtOwed, fees, car);
+        } else{
+            float car = MainHelper.parseMoney(autoPriceEntryField.getText(), ",");
+            message = AutoLoanHelper.monthlyPaymentCalculate(lterm, intRate, sTax, cIncent, dPay, trade, amtOwed, fees, car);
         }
         resultsBox.setText(message);
     }//GEN-LAST:event_calculateButtonActionPerformed
@@ -440,6 +453,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel monthlyPaymentsLabel;
     private javax.swing.JRadioButton monthlyPaymentsRadio;
     private javax.swing.JLabel monthsLabel;
+    private javax.swing.JCheckBox otherFeesCheckBox;
     private javax.swing.JLabel percentLabel1;
     private javax.swing.JLabel percentLabel2;
     private javax.swing.JButton resetButton;
