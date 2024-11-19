@@ -21,6 +21,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import main.BackgroundPanel;
 
 
 
@@ -503,7 +504,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel38 = new javax.swing.JLabel();
         InflateField1 = new javax.swing.JTextField();
         AmountLabel39 = new javax.swing.JLabel();
-        ResultTab = new javax.swing.JPanel();
+        ResultTab = new BackgroundPanel("/images/RetirementImage.png");
         OutputLabel = new javax.swing.JLabel();
         TitleLabel = new javax.swing.JLabel();
         TitleLabel1 = new javax.swing.JLabel();
@@ -1921,7 +1922,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JButton ResetButton;
     private javax.swing.JButton ResetButton1;
     private javax.swing.JButton ResetButton2;
-    private javax.swing.JPanel ResultTab;
+    private main.BackgroundPanel ResultTab;
     private javax.swing.JTextField RetireAgeField;
     private javax.swing.JTextField RetireAgeField1;
     private javax.swing.JTextField RetireAgeField2;
