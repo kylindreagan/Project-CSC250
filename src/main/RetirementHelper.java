@@ -83,13 +83,15 @@ public class RetirementHelper {
     
     public static List<Integer> Total_Obtained_Retirement_Income_Monthly(int Living_Years, float Invest, float Current, float Annual, float Monthly) {
         List<Integer> TORI = new ArrayList<>();
-        double Monthly_investment = (Invest)/12;
+        float savings = Current;
         for (int i = 0; i <= Living_Years; i++){
-            float savings = Current*(float)Math.pow((1+Invest),i) + Annual * ((float)Math.pow(1+Invest,i)-1)/Invest + Monthly * (((float)Math.pow(1+Monthly_investment, 12*i)-1)/(float)(Monthly_investment));
-            System.out.println(Monthly * (((float)Math.pow(Monthly_investment, 12*i)-1)/(Monthly_investment-1)));
+            savings *= (1+Invest);
+            for (int j = 0; j < 11; j++) {
+                savings += Monthly;
+            }
+            savings += Annual;
             TORI.add(Math.round(savings));
         }
-        System.out.println(TORI);
         return TORI;
     }
     
@@ -194,7 +196,6 @@ public class RetirementHelper {
             if (final_needed > final_obtained) {
                 return i+1;
             }
-            System.out.println("Year " + i + " Total Needs (discounted): " + final_needed);
         }
         return -1;
         
