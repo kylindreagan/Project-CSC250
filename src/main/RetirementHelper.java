@@ -84,12 +84,14 @@ public class RetirementHelper {
     public static List<Integer> Total_Obtained_Retirement_Income_Monthly(int Living_Years, float Invest, float Current, float Annual, float Monthly) {
         List<Integer> TORI = new ArrayList<>();
         float savings = Current;
-        for (int i = 0; i <= Living_Years; i++){
-            savings *= (1+Invest);
-            for (int j = 0; j < 11; j++) {
-                savings += Monthly;
+        float monthlyInvestRate = (float)Math.pow(1 + Invest, 1.0 / 12) - 1;
+        TORI.add(Math.round(savings));
+        for (int i = 1; i <= Living_Years*12; i++){
+            savings *= (1+monthlyInvestRate);
+            savings += Monthly;
+            if (i % 12 == 0) {
+                savings += Annual;
             }
-            savings += Annual;
             TORI.add(Math.round(savings));
         }
         return TORI;

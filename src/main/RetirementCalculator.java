@@ -1822,9 +1822,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
         List<Integer> buildup = RetirementHelper.Total_Obtained_Retirement_Income_Monthly(Living_Years, invest, Current, annual, monthly);
         int final_obtained = buildup.get(buildup.size()-1);
-        float initialMonthlyWithdrawal = final_obtained / (9*(Retirement_Years-1));
-        float inflationAdjustedTotal = final_obtained + initialMonthlyWithdrawal * (((float)Math.pow(1 + inflate, Retirement_Years) - 1) / inflate);
-        float inflationAdjustedMonthly = inflationAdjustedTotal / (12 * Retirement_Years);
+        float monthlyRate = invest/12;
+        float initialMonthlyWithdrawal = (final_obtained*monthlyRate*(float)Math.pow(1+monthlyRate, Retirement_Years*12))/((float)(Math.pow(1+monthlyRate, Retirement_Years*12))-1);
+        float inflationAdjustedTotal = final_obtained * (((float)Math.pow(1 + inflate, Retirement_Years) - 1));
+        float inflationAdjustedMonthly = (inflationAdjustedTotal*monthlyRate*(float)Math.pow(1+monthlyRate, Retirement_Years*12))/((float)(Math.pow(1+monthlyRate, Retirement_Years*12))-1);
         TitleLabel.setText("BALANCE AT RETIREMENT");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_obtained) + " by age " + String.valueOf(RA));
         TitleLabel1.setText("FIXED AMOUNT");
