@@ -1829,9 +1829,20 @@ public class RetirementCalculator extends javax.swing.JFrame {
         List<Integer> buildup = RetirementHelper.Total_Obtained_Retirement_Income_Monthly(Living_Years, invest, Current, annual, monthly);
         int final_obtained = buildup.get(buildup.size()-1);
         float monthlyRate = invest/12;
+        float monthlyinfrate = inflate/12;
+        
         float initialMonthlyWithdrawal = (final_obtained*monthlyRate*(float)Math.pow(1+monthlyRate, Retirement_Years*12))/((float)(Math.pow(1+monthlyRate, Retirement_Years*12))-1);
-        float inflationAdjustedTotal = final_obtained * (((float)Math.pow(1 + inflate, Retirement_Years) - 1));
-        float inflationAdjustedMonthly = (inflationAdjustedTotal*monthlyRate*(float)Math.pow(1+monthlyRate, Retirement_Years*12))/((float)(Math.pow(1+monthlyRate, Retirement_Years*12))-1);
+        float inflationAdjustedMonthly;
+        if (monthlyRate != monthlyinfrate) {
+        inflationAdjustedMonthly = (final_obtained*Math.abs(monthlyRate-monthlyinfrate))/(1-((float)Math.pow(1+monthlyRate-monthlyinfrate,-(Retirement_Years*12))));
+        }
+        else{
+            inflationAdjustedMonthly = initialMonthlyWithdrawal/(float)(Math.pow(1+inflate, Retirement_Years));
+  
+        }
+        
+        System.out.println(inflationAdjustedMonthly);
+        
         TitleLabel.setText("BALANCE AT RETIREMENT");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_obtained) + " by age " + String.valueOf(RA));
         TitleLabel1.setText("FIXED AMOUNT");
@@ -1839,6 +1850,16 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel2.setText("ACCOUNTING FOR INFLATION");
         OutputLabel3.setText("$" + MainHelper.formatCurrency(inflationAdjustedMonthly) + " adjusting " + String.valueOf(inflate*100) +"% annualy");
         OutputLabel2.setText("");
+        
+        List<Integer> withdraw_fixed = RetirementHelper.WithdrawPlan(final_obtained, initialMonthlyWithdrawal, invest, 0, Retirement_Years);
+        List<Integer> withdraw_inflated = RetirementHelper.WithdrawPlan(final_obtained, inflationAdjustedMonthly, invest, inflate, Retirement_Years);
+        int final_withdraw = Math.min(withdraw_fixed.get(withdraw_fixed.size()-1), withdraw_inflated.get(withdraw_inflated.size()-1));
+        for (int i=0;i<withdraw_fixed.size();i++){
+            withdraw_fixed.set(i, withdraw_fixed.get(i)-final_withdraw);
+            withdraw_inflated.set(i, withdraw_inflated.get(i)-final_withdraw);
+        }
+        
+        addChartToPanel(withdraw_fixed, withdraw_inflated, RA+1, true, "Fixed Withdraw", "Inflation Withdraw");
     }
     
     

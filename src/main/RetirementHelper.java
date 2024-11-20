@@ -91,8 +91,8 @@ public class RetirementHelper {
             savings += Monthly;
             if (i % 12 == 0) {
                 savings += Annual;
+                TORI.add(Math.round(savings));
             }
-            TORI.add(Math.round(savings));
         }
         return TORI;
     }
@@ -202,6 +202,42 @@ public class RetirementHelper {
         return -1;
         
     }
+    
+    public static List<Integer> WithdrawPlan(int final_obtained, float withdrawrate, float invest, float inflate, int LY) {
+        List<Integer> withdraw = new ArrayList<>();
+        float current = final_obtained;
+        float monthlyInvestRate = (float)Math.pow(1 + invest, 1.0 / 12) - 1;
+        withdraw.add(Math.round(current));
+        for (int i=1;i<LY;i++){
+            for (int j=0;j<12;j++) {
+                current *= (1+monthlyInvestRate);
+                current-=withdrawrate;
+                if (current < 0){
+                    System.out.println("Balance ran out on month "+ String.valueOf(j)+" of year " +String.valueOf(i));
+                    break; // Stop further withdrawals
+                }
+            }
+            withdrawrate += withdrawrate*inflate;
+            if (current < 0){
+                    withdraw.add(0);
+                    break; // Stop further withdrawals
+            }
+            withdraw.add(Math.round(current));
+        }
+        
+        return withdraw;
+    }
+    
+    public static float calculateInflationAdjustedMonthly(float final_obtained, float inflate, float invest, int years) {
+        float sum = 0.0f;
+        System.out.println(final_obtained);
+        for (int t = 0; t < years*12; t++) {
+            sum += Math.pow(1 + inflate, t) / Math.pow(1 + invest, t);
+        }
+        return final_obtained / (sum*5);
+}
+
+
 
     //Additional Savings Needed=PV−FV
 
