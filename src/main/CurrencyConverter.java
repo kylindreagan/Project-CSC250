@@ -7,7 +7,10 @@ package main;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,8 +30,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.util.Collections;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.ImageIcon;
+import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 
 
@@ -37,6 +40,7 @@ import javax.swing.SwingUtilities;
  * @author Kylind
  */
 public class CurrencyConverter extends javax.swing.JFrame {
+    private Image backgroundImage;
     private Map<String, Double[]> currencyDict;
     private static final List<String> Popular_Currencies = Arrays.asList(
         "US Dollar", 
@@ -58,6 +62,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
      * Creates new form CurrencyCalculator
      */
     public CurrencyConverter(){
+        backgroundImage = new ImageIcon(getClass().getResource("/images/HowTo.png")).getImage();
         initComponents();
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/swap.png"));
         Image scaledImage = originalIcon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
@@ -139,6 +144,9 @@ public class CurrencyConverter extends javax.swing.JFrame {
 }
 
 
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,7 +175,9 @@ public class CurrencyConverter extends javax.swing.JFrame {
         SwapButton = new javax.swing.JButton();
         TimestampLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 102, 102));
+        setResizable(false);
 
         FromComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -247,6 +257,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
         ResultTextPane.setFont(getFont());
         ResultTextPane.setForeground(new java.awt.Color(153, 153, 0));
         ResultTextPane.setText("$100.00\nis equivalent to\n$100.00");
+        ResultTextPane.setOpaque(false);
         jScrollPane2.setViewportView(ResultTextPane);
 
         SwapButton.addActionListener(new java.awt.event.ActionListener() {
