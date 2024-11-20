@@ -518,7 +518,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setForeground(java.awt.Color.white);
 
         HowMuch.setPreferredSize(new java.awt.Dimension(710, 710));
