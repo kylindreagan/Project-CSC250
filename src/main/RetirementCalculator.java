@@ -47,6 +47,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARpercent = true;
         Futurepercent = true;
         initComponents();
+        setResizable(false);
         FocusListener focusListenerLastFocused = new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -413,7 +414,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private void initComponents() {
 
         RetirementTabs = new javax.swing.JTabbedPane();
-        HowMuch = new javax.swing.JPanel();
+        HowMuch = new main.BackgroundPanel("/images/HowMuch.png");
         AmountLabel2 = new javax.swing.JLabel();
         AmountLabel3 = new javax.swing.JLabel();
         AmountLabel4 = new javax.swing.JLabel();
@@ -458,7 +459,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         infoBoxLabel = new javax.swing.JLabel();
         infoBoxLabel1 = new javax.swing.JLabel();
         infoBoxLabel2 = new javax.swing.JLabel();
-        HowTo = new javax.swing.JPanel();
+        HowTo = new main.BackgroundPanel("/images/HowTo.png");
         CalculateButton2 = new javax.swing.JButton();
         ClearButton1 = new javax.swing.JButton();
         SuperClearButton1 = new javax.swing.JButton();
@@ -477,7 +478,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         InvestField1 = new javax.swing.JTextField();
         AmountLabel26 = new javax.swing.JLabel();
         WarningLabel1 = new javax.swing.JLabel();
-        Withdraw = new javax.swing.JPanel();
+        Withdraw = new main.BackgroundPanel("/images/HowMuch.png");
         WarningLabel2 = new javax.swing.JLabel();
         CalculateButton3 = new javax.swing.JButton();
         ClearButton2 = new javax.swing.JButton();
@@ -634,7 +635,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel18.setText("%/year");
 
-        INARLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        INARLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 16)); // NOI18N
         INARLabelTrailing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         INARLabelTrailing.setText("of current income");
 
@@ -662,6 +663,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButtonActionPerformed(evt);
             }
         });
+        
 
         ClearButton.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -922,6 +924,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButton2ActionPerformed(evt);
             }
         });
+        CalculateButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CalculateButton.png")));
+        CalculateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CalculateButton.png"))); 
+        CalculateButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CalculateButton.png")));
 
         ClearButton1.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -1896,8 +1901,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JTextField FutureField;
     private javax.swing.JLabel FutureLabelTrailing;
     private javax.swing.JPanel Graph;
-    private javax.swing.JPanel HowMuch;
-    private javax.swing.JPanel HowTo;
+    private main.BackgroundPanel HowMuch;
+    private main.BackgroundPanel HowTo;
     private javax.swing.JComboBox<String> INARComboBox;
     private javax.swing.JTextField INARField;
     private javax.swing.JLabel INARLabelTrailing;
@@ -1939,7 +1944,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel WarningLabel;
     private javax.swing.JLabel WarningLabel1;
     private javax.swing.JLabel WarningLabel2;
-    private javax.swing.JPanel Withdraw;
+    private main.BackgroundPanel Withdraw;
     private javax.swing.JLabel infoBoxLabel;
     private javax.swing.JLabel infoBoxLabel1;
     private javax.swing.JLabel infoBoxLabel2;
