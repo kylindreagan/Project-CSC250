@@ -184,7 +184,7 @@ public class MainForm extends javax.swing.JFrame {
         });
         getContentPane().add(downPaymentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 130, 60));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainformBkg.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MainformBkg.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -23, 1240, 700));
 
         jMenu2.setText("Quit");
