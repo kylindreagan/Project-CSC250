@@ -1,13 +1,18 @@
-package main;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Alyssa
  */
+
+
 public class InterestCalculator extends javax.swing.JFrame {
 
     /**
@@ -15,6 +20,22 @@ public class InterestCalculator extends javax.swing.JFrame {
      */
     public InterestCalculator() {
         initComponents();
+        myInitComponents();
+        
+    }
+    
+    private void scaleImage(){
+        //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        //pack();
+        Dimension actualSize = getContentPane().getSize();
+        jLabel1.setPreferredSize(actualSize);
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("NoText.png"));
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(actualSize.width, actualSize.height, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        jLabel1.setIcon(scaledIcon);
+
     }
 
     /**
@@ -63,18 +84,37 @@ public class InterestCalculator extends javax.swing.JFrame {
         totalInterestLabel1 = new javax.swing.JLabel();
         interestOfInitLabel1 = new javax.swing.JLabel();
         interestOfContrLabel1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(10, 55, 78));
+        setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        setSize(new java.awt.Dimension(1156, 630));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        mainLabel.setFont(new java.awt.Font("Nunito", 1, 36)); // NOI18N
+        mainLabel.setForeground(new java.awt.Color(238, 239, 239));
         mainLabel.setText("Interest Calculator");
+        getContentPane().add(mainLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
+        initInvestLabel.setFont(getFont());
+        initInvestLabel.setForeground(new java.awt.Color(27, 45, 74));
         initInvestLabel.setText("Initial investment");
+        getContentPane().add(initInvestLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
+        annualContrLabel.setFont(getFont());
+        annualContrLabel.setForeground(new java.awt.Color(27, 45, 74));
         annualContrLabel.setText("Annual contribution");
+        getContentPane().add(annualContrLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
 
+        monthlyContrLabel.setFont(getFont());
+        monthlyContrLabel.setForeground(new java.awt.Color(27, 45, 74));
         monthlyContrLabel.setText("Monthly contribution");
+        getContentPane().add(monthlyContrLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         buttonGroup1.add(beginButton);
+        beginButton.setFont(getFont());
+        beginButton.setForeground(new java.awt.Color(27, 45, 74));
         beginButton.setSelected(true);
         beginButton.setText("beginning");
         beginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -82,60 +122,114 @@ public class InterestCalculator extends javax.swing.JFrame {
                 beginButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(beginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
 
         buttonGroup1.add(endButton);
+        endButton.setFont(getFont());
+        endButton.setForeground(new java.awt.Color(27, 45, 74));
         endButton.setText("end");
         endButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 endButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(endButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
 
+        IRLabel.setFont(getFont());
+        IRLabel.setForeground(new java.awt.Color(27, 45, 74));
         IRLabel.setText("Interest rate (%)");
+        getContentPane().add(IRLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, -1, -1));
 
+        compoundLabel.setFont(getFont());
+        compoundLabel.setForeground(new java.awt.Color(27, 45, 74));
         compoundLabel.setText("Compound");
+        getContentPane().add(compoundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, -1, -1));
 
+        investLenLabel.setFont(getFont());
+        investLenLabel.setForeground(new java.awt.Color(27, 45, 74));
         investLenLabel.setText("Investment length");
+        getContentPane().add(investLenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
 
+        calcButton.setBackground(new java.awt.Color(158, 191, 183));
+        calcButton.setFont(getFont());
+        calcButton.setForeground(new java.awt.Color(27, 45, 74));
         calcButton.setText("Calculate");
+        calcButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         calcButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(calcButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, -1, -1));
 
+        clearButton.setFont(getFont());
+        clearButton.setForeground(new java.awt.Color(27, 45, 74));
         clearButton.setText("Clear");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, -1, -1));
 
+        midLabel1.setFont(getFont());
+        midLabel1.setForeground(new java.awt.Color(27, 45, 74));
         midLabel1.setText("Contribute at the");
+        getContentPane().add(midLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
 
+        midLebel2.setFont(getFont());
+        midLebel2.setForeground(new java.awt.Color(27, 45, 74));
         midLebel2.setText("of each compounding period");
+        getContentPane().add(midLebel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
 
+        closeButton.setFont(getFont());
+        closeButton.setForeground(new java.awt.Color(27, 45, 74));
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(closeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, -1, -1));
 
+        resultsLabel.setBackground(new java.awt.Color(27, 45, 74));
+        resultsLabel.setFont(new java.awt.Font("Nunito", 1, 36)); // NOI18N
+        resultsLabel.setForeground(new java.awt.Color(27, 45, 74));
         resultsLabel.setText("Results");
+        getContentPane().add(resultsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 352, -1));
 
+        endBalanceLabel.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
+        endBalanceLabel.setForeground(new java.awt.Color(27, 45, 74));
         endBalanceLabel.setText("Ending balance");
+        getContentPane().add(endBalanceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, -1, -1));
 
+        totalPrinLabel.setFont(getFont());
+        totalPrinLabel.setForeground(new java.awt.Color(27, 45, 74));
         totalPrinLabel.setText("Total principal");
+        getContentPane().add(totalPrinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, -1, -1));
 
+        totalContrLabel.setFont(getFont());
+        totalContrLabel.setForeground(new java.awt.Color(27, 45, 74));
         totalContrLabel.setText("Total contributions");
+        getContentPane().add(totalContrLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, -1, -1));
 
+        totalInterestLabel.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
+        totalInterestLabel.setForeground(new java.awt.Color(27, 45, 74));
         totalInterestLabel.setText("Total interest");
+        getContentPane().add(totalInterestLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, -1, -1));
 
+        interestOfInitLabel.setFont(getFont());
+        interestOfInitLabel.setForeground(new java.awt.Color(27, 45, 74));
         interestOfInitLabel.setText("Interest of initial investment");
+        getContentPane().add(interestOfInitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, -1, -1));
 
+        interestOfContrLabel.setFont(getFont());
+        interestOfContrLabel.setForeground(new java.awt.Color(27, 45, 74));
         interestOfContrLabel.setText("Interest of the contributions");
+        getContentPane().add(interestOfContrLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
 
+        initInvestField.setFont(getFont());
+        initInvestField.setForeground(new java.awt.Color(27, 45, 74));
         initInvestField.setText("20000");
         initInvestField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -146,8 +240,14 @@ public class InterestCalculator extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 initInvestFieldKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                initInvestFieldKeyReleased(evt);
+            }
         });
+        getContentPane().add(initInvestField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 142, -1));
 
+        annualContrField.setFont(getFont());
+        annualContrField.setForeground(new java.awt.Color(27, 45, 74));
         annualContrField.setText("500");
         annualContrField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -159,7 +259,10 @@ public class InterestCalculator extends javax.swing.JFrame {
                 annualContrFieldKeyPressed(evt);
             }
         });
+        getContentPane().add(annualContrField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 142, -1));
 
+        monthlyContrField.setFont(getFont());
+        monthlyContrField.setForeground(new java.awt.Color(27, 45, 74));
         monthlyContrField.setText("0");
         monthlyContrField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -171,7 +274,10 @@ public class InterestCalculator extends javax.swing.JFrame {
                 monthlyContrFieldKeyPressed(evt);
             }
         });
+        getContentPane().add(monthlyContrField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 142, -1));
 
+        IRField.setFont(getFont());
+        IRField.setForeground(new java.awt.Color(27, 45, 74));
         IRField.setText("5");
         IRField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -183,7 +289,10 @@ public class InterestCalculator extends javax.swing.JFrame {
                 IRFieldKeyPressed(evt);
             }
         });
+        getContentPane().add(IRField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 142, -1));
 
+        investLenYField.setFont(getFont());
+        investLenYField.setForeground(new java.awt.Color(27, 45, 74));
         investLenYField.setText("10");
         investLenYField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -195,7 +304,10 @@ public class InterestCalculator extends javax.swing.JFrame {
                 investLenYFieldKeyPressed(evt);
             }
         });
+        getContentPane().add(investLenYField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 41, -1));
 
+        investLenMField.setFont(getFont());
+        investLenMField.setForeground(new java.awt.Color(27, 45, 74));
         investLenMField.setText("6");
         investLenMField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -207,191 +319,73 @@ public class InterestCalculator extends javax.swing.JFrame {
                 investLenMFieldKeyPressed(evt);
             }
         });
+        getContentPane().add(investLenMField, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, 36, -1));
 
+        yearsLabel.setFont(getFont());
+        yearsLabel.setForeground(new java.awt.Color(27, 45, 74));
         yearsLabel.setText("years");
+        getContentPane().add(yearsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, -1, -1));
 
+        monthsLabel.setFont(getFont());
+        monthsLabel.setForeground(new java.awt.Color(27, 45, 74));
         monthsLabel.setText("months");
+        getContentPane().add(monthsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, -1, -1));
 
+        compoundBox.setFont(getFont());
+        compoundBox.setForeground(new java.awt.Color(27, 45, 74));
         compoundBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "annually", "semiannually", "quarterly", "monthly", "semimonthly", "biweekly", "weekly", "daily", "continuously" }));
+        getContentPane().add(compoundBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, -1, -1));
 
+        endBalanceLabel1.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
+        endBalanceLabel1.setForeground(new java.awt.Color(27, 45, 74));
         endBalanceLabel1.setText("$40,408.17");
+        getContentPane().add(endBalanceLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 190, -1, -1));
 
+        totalPrinLabel1.setFont(getFont());
+        totalPrinLabel1.setForeground(new java.awt.Color(27, 45, 74));
         totalPrinLabel1.setText("$25,500.00");
+        getContentPane().add(totalPrinLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 230, -1, -1));
 
+        totalContrLabel1.setFont(getFont());
+        totalContrLabel1.setForeground(new java.awt.Color(27, 45, 74));
         totalContrLabel1.setText("$5,500.00");
+        getContentPane().add(totalContrLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 270, -1, -1));
 
+        totalInterestLabel1.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
+        totalInterestLabel1.setForeground(new java.awt.Color(27, 45, 74));
         totalInterestLabel1.setText("$14,908.17");
+        getContentPane().add(totalInterestLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 310, -1, -1));
 
+        interestOfInitLabel1.setFont(getFont());
+        interestOfInitLabel1.setForeground(new java.awt.Color(27, 45, 74));
         interestOfInitLabel1.setText("$13,382.41");
+        getContentPane().add(interestOfInitLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 350, -1, -1));
 
+        interestOfContrLabel1.setFont(getFont());
+        interestOfContrLabel1.setForeground(new java.awt.Color(27, 45, 74));
         interestOfContrLabel1.setText("$1,525.76");
+        getContentPane().add(interestOfContrLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 390, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(closeButton))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(initInvestLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addComponent(midLebel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(annualContrLabel)
-                                    .addComponent(monthlyContrLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(annualContrField, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                    .addComponent(initInvestField)
-                                    .addComponent(monthlyContrField)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(calcButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clearButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(IRLabel)
-                                    .addComponent(compoundLabel))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(compoundBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(IRField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(investLenLabel)
-                                .addGap(27, 27, 27)
-                                .addComponent(investLenYField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(yearsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(investLenMField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(monthsLabel))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(midLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(beginButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(endButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(resultsLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(totalInterestLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(endBalanceLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(totalPrinLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(totalContrLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(interestOfInitLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(interestOfContrLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(endBalanceLabel1)
-                    .addComponent(totalPrinLabel1)
-                    .addComponent(totalContrLabel1)
-                    .addComponent(totalInterestLabel1)
-                    .addComponent(interestOfInitLabel1)
-                    .addComponent(interestOfContrLabel1))
-                .addContainerGap(237, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(mainLabel))
-                    .addComponent(closeButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(initInvestLabel)
-                            .addComponent(initInvestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(annualContrLabel)
-                            .addComponent(annualContrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(monthlyContrLabel)
-                            .addComponent(monthlyContrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(endButton)
-                            .addComponent(beginButton)
-                            .addComponent(midLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(midLebel2)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(IRLabel)
-                            .addComponent(IRField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(compoundLabel)
-                            .addComponent(compoundBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(investLenLabel)
-                            .addComponent(investLenYField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yearsLabel)
-                            .addComponent(investLenMField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(monthsLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(calcButton)
-                            .addComponent(clearButton))
-                        .addGap(49, 49, 49))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(resultsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(endBalanceLabel)
-                            .addComponent(endBalanceLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(totalPrinLabel)
-                            .addComponent(totalPrinLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(totalContrLabel)
-                            .addComponent(totalContrLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(totalInterestLabel)
-                            .addComponent(totalInterestLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(interestOfInitLabel)
-                            .addComponent(interestOfInitLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(interestOfContrLabel)
-                            .addComponent(interestOfContrLabel1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InterestRateBkg.png"))); // NOI18N
+        jLabel1.setFocusable(false);
+        jLabel1.setRequestFocusEnabled(false);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void myInitComponents() {
+        getContentPane().setBackground(new java.awt.Color(10, 55, 78));
+        setResizable(false);
+        
+        //setExtendedState(InterestCalculator.MAXIMIZED_BOTH);
+        
+        //scaleImage();
+        
+    }
+    
     private void calcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcButtonActionPerformed
         // function is the "calculator" part
         double ii = Double.parseDouble(initInvestField.getText().replaceAll(",", ""));
@@ -752,6 +746,16 @@ public class InterestCalculator extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_endButtonActionPerformed
 
+    private void initInvestFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_initInvestFieldKeyReleased
+        // works but need to check if the input is a decimal, because this is only for 
+        // integers as it formats with no decimal places
+        
+        //if (MainHelper.isValidNumber(initInvestField.getText().replaceAll(",", ""))){
+        //    initInvestField.setText(String.format("%,.0f", 
+        //            Double.parseDouble(initInvestField.getText().replaceAll(",", ""))));
+        //}
+    }//GEN-LAST:event_initInvestFieldKeyReleased
+
     private void setResultsLabelsNotVisible() {
         endBalanceLabel1.setVisible(false);
         totalPrinLabel1.setVisible(false);
@@ -832,7 +836,7 @@ public class InterestCalculator extends javax.swing.JFrame {
         }
         double Y = ilY + (ilM / 12);
         double r = ir / 100;
-        double c = ac + (mc / 12);
+        double c = ac + (mc * 12);
         
         if (cb == 0){
             // i think it works now?!
@@ -917,6 +921,7 @@ public class InterestCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel investLenLabel;
     private javax.swing.JTextField investLenMField;
     private javax.swing.JTextField investLenYField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel mainLabel;
     private javax.swing.JLabel midLabel1;
     private javax.swing.JLabel midLebel2;
