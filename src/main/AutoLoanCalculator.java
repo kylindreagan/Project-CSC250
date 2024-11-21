@@ -112,7 +112,7 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
                     }
                     boolean ST = !MainHelper.isValidNumber(salesTaxEntryField.getText());
                     boolean LT = !MainHelper.isValidNumber(loanTermEntryField.getText());
-                    boolean IR = !MainHelper.isValidNumber(interestRateEntryField.getText());
+                    boolean IR = !MainHelper.isValidNumber(interestRateEntryField.getText()) || isZero(interestRateEntryField.getText());
                     if ( ST || LT || IR) {
                     calculateButton.setEnabled(false);
                     if (LT) {
@@ -167,6 +167,17 @@ public class AutoLoanCalculator extends javax.swing.JFrame {
             downPaymentEntryField.getDocument().addDocumentListener(documentListener);
             loanTermEntryField.getDocument().addDocumentListener(documentListener);
             interestRateEntryField.getDocument().addDocumentListener(documentListener);
+    }
+    
+     public static boolean isZero(String s){
+        if (s.equals("")){
+            return false;
+        }
+        float str = Float.parseFloat(s);
+        if (str == 0){
+            return true;
+        }
+        return false;
     }
     
     /**
