@@ -523,23 +523,23 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         HowMuch.setPreferredSize(new java.awt.Dimension(710, 710));
 
-        AmountLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel2.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel2.setText("Current Age");
 
-        AmountLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel3.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel3.setText("Life Expectancy");
 
-        AmountLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel4.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel4.setText("/year");
 
-        AmountLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel5.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel5.setText("Retirement Age");
 
-        AmountLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel6.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel6.setText("Current Savings");
 
@@ -550,19 +550,19 @@ public class RetirementCalculator extends javax.swing.JFrame {
             }
         });
 
-        AmountLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel7.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel7.setText("<html>\nIncome Needed <br> After Retirement\n</html>");
 
-        AmountLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel8.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel8.setText("Pre Income Tax");
 
-        AmountLabel9.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel9.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel9.setText("Income Increase");
 
-        AmountLabel10.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel10.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel10.setText("Inflation Rate");
 
@@ -582,25 +582,25 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         INARField.setText("75");
 
-        Title3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        Title3.setFont(new java.awt.Font("Nunito", 1, 24)); // NOI18N
         Title3.setForeground(Color.WHITE);
         Title3.setText("Assumptions");
 
-        Title4.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        Title4.setFont(new java.awt.Font("Nunito", 1, 24)); // NOI18N
         Title4.setForeground(Color.WHITE);
         Title4.setText("Optional");
 
-        AmountLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel11.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel11.setText("<html> Other Income <br> After Retirement </html>");
 
         OIARField.setText("0");
 
-        AmountLabel12.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel12.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel12.setText("<html>Average <br> Investment Return</html>");
 
-        AmountLabel13.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel13.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel13.setText("Future Savings");
 
@@ -615,39 +615,39 @@ public class RetirementCalculator extends javax.swing.JFrame {
             }
         });
 
-        AmountLabel14.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel14.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel14.setText("$");
 
-        AmountLabel15.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel15.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel15.setText("$");
 
-        AmountLabel16.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel16.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel16.setText("$");
 
-        AmountLabel17.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel17.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel17.setText("%/year");
 
-        AmountLabel18.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel18.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel18.setText("%/year");
 
-        INARLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 16)); // NOI18N
+        INARLabelTrailing.setFont(new java.awt.Font("Nunito", 0, 16)); // NOI18N
         INARLabelTrailing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         INARLabelTrailing.setText("of current income");
 
-        AmountLabel20.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel20.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel20.setText("%/year");
 
-        FutureLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        FutureLabelTrailing.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         FutureLabelTrailing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         FutureLabelTrailing.setText("of current income");
 
-        AmountLabel22.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel22.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel22.setText("/month");
 
@@ -955,45 +955,45 @@ public class RetirementCalculator extends javax.swing.JFrame {
             }
         });
 
-        AmountLabel19.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel19.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel19.setText("Current Age");
 
         CurrentAgeField1.setText("35");
 
-        AmountLabel21.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel21.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel21.setText("Retirement Age");
 
         RetireAgeField1.setText("67");
 
-        AmountLabel23.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel23.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel23.setText("Current Savings");
 
         CurrentField1.setText("30,000");
 
-        DollarSign.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        DollarSign.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         DollarSign.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DollarSign.setText("$");
 
-        AmountLabel24.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel24.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel24.setText("Amount needed");
 
-        DollarSign1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        DollarSign1.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         DollarSign1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DollarSign1.setText("$");
 
         NeededField.setText("600,000");
 
-        AmountLabel25.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel25.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel25.setText("Investment Return");
 
         InvestField1.setText("6");
 
-        AmountLabel26.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel26.setFont(new java.awt.Font("Nunito", 0, 18));// NOI18N
         AmountLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel26.setText("%/year");
 
@@ -1137,47 +1137,47 @@ public class RetirementCalculator extends javax.swing.JFrame {
             }
         });
 
-        AmountLabel27.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel27.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel27.setText("Current Age");
 
         CurrentAgeField2.setText("35");
 
-        AmountLabel28.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel28.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel28.setText("Retirement Age");
 
         RetireAgeField2.setText("67");
 
-        AmountLabel29.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel29.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel29.setText("Life Expectancy");
 
         LifeExpField1.setText("85");
 
-        AmountLabel30.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel30.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel30.setText("Annual Contribution");
 
-        AmountLabel31.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel31.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel31.setText("$");
 
         CurrentField2.setText("30,000");
 
-        AmountLabel32.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel32.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel32.setText("Current Savings");
 
-        AmountLabel33.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel33.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel33.setText("Monthly Contribution");
 
-        AmountLabel34.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel34.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel34.setText("$");
 
-        AmountLabel35.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel35.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel35.setText("$");
 
@@ -1185,23 +1185,23 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         MonthlyField.setText("500");
 
-        AmountLabel36.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel36.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel36.setText("Investment Return");
 
         InvestField2.setText("6");
 
-        AmountLabel37.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel37.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel37.setText("%/year");
 
-        AmountLabel38.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel38.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel38.setText("Inflation Rate");
 
         InflateField1.setText("3");
 
-        AmountLabel39.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel39.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         AmountLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel39.setText("%/year");
 
@@ -1412,7 +1412,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Graph.setLayout(new java.awt.BorderLayout());
         RetirementTabs.addTab("Graph", Graph);
 
-        Title1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 48)); // NOI18N
+        Title1.setFont(new java.awt.Font("Nunito", 1, 48)); // NOI18N
         Title1.setForeground(Color.WHITE);
         Title1.setText("Retirement Calculator");
 
