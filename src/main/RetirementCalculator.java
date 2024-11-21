@@ -654,7 +654,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         WarningLabel.setForeground(new java.awt.Color(255, 51, 51));
         WarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        CalculateButton.setBackground(new java.awt.Color(204, 153, 0));
+        CalculateButton.setBackground(new java.awt.Color(255, 255, 255));
         CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton.setText("Calculate");
         CalculateButton.setToolTipText("Click to calculate the converted amount.");
@@ -924,9 +924,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButton2ActionPerformed(evt);
             }
         });
-        CalculateButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CalculateButton.png")));
-        CalculateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CalculateButton.png"))); 
-        CalculateButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CalculateButton.png")));
 
         ClearButton1.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -1415,7 +1412,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Title1.setForeground(Color.WHITE);
         Title1.setText("Retirement Calculator");
 
-        QuitButton.setBackground(new java.awt.Color(255, 0, 0));
+        QuitButton.setBackground(new java.awt.Color(255, 255, 255));
         QuitButton.setForeground(new java.awt.Color(0, 0, 0));
         QuitButton.setText("Return");
         QuitButton.addMouseListener(new java.awt.event.MouseAdapter() {
