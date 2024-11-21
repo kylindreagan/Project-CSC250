@@ -519,7 +519,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         QuitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setForeground(java.awt.Color.white);
+        getContentPane().setBackground(new java.awt.Color(20, 53, 70));
 
         HowMuch.setPreferredSize(new java.awt.Dimension(710, 710));
 
@@ -583,11 +583,11 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARField.setText("75");
 
         Title3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
-        Title3.setForeground(new java.awt.Color(51, 0, 204));
+        Title3.setForeground(Color.WHITE);
         Title3.setText("Assumptions");
 
         Title4.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
-        Title4.setForeground(new java.awt.Color(51, 0, 204));
+        Title4.setForeground(Color.WHITE);
         Title4.setText("Optional");
 
         AmountLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
@@ -1344,18 +1344,19 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         TitleLabel.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel.setForeground(new java.awt.Color(20, 53, 70));
         TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         TitleLabel1.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel1.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel1.setForeground(new java.awt.Color(20, 53, 70));
         TitleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         OutputLabel1.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
         OutputLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         TitleLabel2.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel2.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel2.setForeground(new java.awt.Color(20, 53, 70));
+    
         TitleLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         OutputLabel2.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
@@ -1412,7 +1413,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         RetirementTabs.addTab("Graph", Graph);
 
         Title1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 48)); // NOI18N
-        Title1.setForeground(new java.awt.Color(51, 0, 204));
+        Title1.setForeground(Color.WHITE);
         Title1.setText("Retirement Calculator");
 
         QuitButton.setBackground(new java.awt.Color(255, 0, 0));
