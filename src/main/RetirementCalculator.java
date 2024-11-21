@@ -583,11 +583,11 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARField.setText("75");
 
         Title3.setFont(new java.awt.Font("Nunito", 1, 24)); // NOI18N
-        Title3.setForeground(Color.WHITE);
+        Title3.setForeground(new java.awt.Color(20, 53, 70));
         Title3.setText("Assumptions");
 
         Title4.setFont(new java.awt.Font("Nunito", 1, 24)); // NOI18N
-        Title4.setForeground(Color.WHITE);
+        Title4.setForeground(new java.awt.Color(20, 53, 70));
         Title4.setText("Optional");
 
         AmountLabel11.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
@@ -1235,7 +1235,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(LifeExpField1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(WithdrawLayout.createSequentialGroup()
-                                .addGap(167, 167, 167)
+                            .addGap(4, 4, 4)
+                            .addComponent(AmountLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+
                                 .addComponent(AmountLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CurrentField2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1276,11 +1279,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(WarningLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89))
-            .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(WithdrawLayout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(AmountLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(640, Short.MAX_VALUE)))
         );
         WithdrawLayout.setVerticalGroup(
             WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1309,8 +1307,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(AmountLabel31)
-                            .addComponent(CurrentField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(29, 29, 29)
+                            .addComponent(CurrentField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmountLabel32))))
+                                .addGap(29, 29, 29)
                 .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AmountLabel30)
                     .addComponent(AmountLabel34)
