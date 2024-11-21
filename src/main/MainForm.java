@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
-
 /**
  *
  * @author kylin
@@ -15,6 +14,19 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        setResizable(false);
+        amortizationButton.setContentAreaFilled(false);
+        autoLoanButton.setContentAreaFilled(false);
+        currencyButton.setContentAreaFilled(false);
+        downPaymentButton.setContentAreaFilled(false);
+        houseAffordabilityButton.setContentAreaFilled(false);
+        interestButton.setContentAreaFilled(false);
+        mortgageButton.setContentAreaFilled(false);
+        refinanceButton.setContentAreaFilled(false);
+        rentButton.setContentAreaFilled(false);
+        rentVsBuyButton.setContentAreaFilled(false);
+        retirementButton.setContentAreaFilled(false);
+        rothIRAButton.setContentAreaFilled(false);
     }
 
     /**
@@ -39,109 +51,141 @@ public class MainForm extends javax.swing.JFrame {
         refinanceButton = new javax.swing.JButton();
         rothIRAButton = new javax.swing.JButton();
         downPaymentButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nunito", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(27, 45, 74));
         jLabel1.setText("Financial Calculators");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, 50));
 
-        currencyButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        currencyButton.setText("Currency Converter");
+        currencyButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        currencyButton.setForeground(new java.awt.Color(27, 45, 74));
+        currencyButton.setText("<html>Currency <br> Converter");
         currencyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 currencyButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(currencyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 130, 70));
 
-        mortgageButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        mortgageButton.setText("Mortgage Calculator");
+        mortgageButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        mortgageButton.setForeground(new java.awt.Color(27, 45, 74));
+        mortgageButton.setText("Mortgage");
         mortgageButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mortgageButtonMousePressed(evt);
             }
         });
+        getContentPane().add(mortgageButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 130, 70));
 
-        amortizationButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        amortizationButton.setText("Amortization Calculator");
+        amortizationButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        amortizationButton.setForeground(new java.awt.Color(27, 45, 74));
+        amortizationButton.setText("Amortization");
+        amortizationButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         amortizationButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 amortizationButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(amortizationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, 70));
 
-        rentVsBuyButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        rentVsBuyButton.setText("Rent vs. Buy Calculator");
+        rentVsBuyButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        rentVsBuyButton.setForeground(new java.awt.Color(27, 45, 74));
+        rentVsBuyButton.setText("Rent vs. Buy");
         rentVsBuyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rentVsBuyButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(rentVsBuyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 140, 70));
 
-        houseAffordabilityButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        houseAffordabilityButton.setText("House Affordability Calculator");
+        houseAffordabilityButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        houseAffordabilityButton.setForeground(new java.awt.Color(27, 45, 74));
+        houseAffordabilityButton.setText("<html>House<br> Affordability");
         houseAffordabilityButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 houseAffordabilityButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(houseAffordabilityButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 140, 60));
 
-        retirementButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        retirementButton.setText("Retirement Calculator");
+        retirementButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        retirementButton.setForeground(new java.awt.Color(27, 45, 74));
+        retirementButton.setText("Retirement");
         retirementButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 retirementButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(retirementButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 510, 130, 70));
 
-        autoLoanButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        autoLoanButton.setText("Auto Loan Calculator");
+        autoLoanButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        autoLoanButton.setForeground(new java.awt.Color(27, 45, 74));
+        autoLoanButton.setText("Auto Loan");
         autoLoanButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 autoLoanButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(autoLoanButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 220, 130, 70));
 
-        interestButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        interestButton.setText("Interest Calculator");
+        interestButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        interestButton.setForeground(new java.awt.Color(27, 45, 74));
+        interestButton.setText("Interest");
         interestButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 interestButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(interestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, 130, 60));
 
-        rentButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        rentButton.setText("Rent Calculator");
+        rentButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        rentButton.setForeground(new java.awt.Color(27, 45, 74));
+        rentButton.setText("Rent");
         rentButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rentButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(rentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, 130, 70));
 
-        refinanceButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        refinanceButton.setText("Refinance Calculator");
+        refinanceButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        refinanceButton.setForeground(new java.awt.Color(27, 45, 74));
+        refinanceButton.setText("Refinance");
         refinanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 refinanceButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(refinanceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, 130, 70));
 
-        rothIRAButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        rothIRAButton.setText("Roth IRA Calculator");
+        rothIRAButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        rothIRAButton.setForeground(new java.awt.Color(27, 45, 74));
+        rothIRAButton.setText("Roth IRA");
         rothIRAButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 rothIRAButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(rothIRAButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 510, 140, 70));
 
-        downPaymentButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        downPaymentButton.setText("Down Payment Calculator");
+        downPaymentButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        downPaymentButton.setForeground(new java.awt.Color(27, 45, 74));
+        downPaymentButton.setText("<html>Down <br>Payment");
         downPaymentButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 downPaymentButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(downPaymentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 130, 60));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainformBkg.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -23, 1240, 700));
 
         jMenu2.setText("Quit");
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,65 +197,8 @@ public class MainForm extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(currencyButton)
-                            .addComponent(rentVsBuyButton)
-                            .addComponent(autoLoanButton)
-                            .addComponent(refinanceButton))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mortgageButton)
-                            .addComponent(houseAffordabilityButton)
-                            .addComponent(interestButton)
-                            .addComponent(rothIRAButton))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(downPaymentButton)
-                            .addComponent(rentButton)
-                            .addComponent(retirementButton)
-                            .addComponent(amortizationButton))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currencyButton)
-                    .addComponent(mortgageButton)
-                    .addComponent(amortizationButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rentVsBuyButton)
-                    .addComponent(houseAffordabilityButton)
-                    .addComponent(retirementButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(autoLoanButton)
-                    .addComponent(interestButton)
-                    .addComponent(rentButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(refinanceButton)
-                    .addComponent(rothIRAButton)
-                    .addComponent(downPaymentButton))
-                .addContainerGap(96, Short.MAX_VALUE))
-        );
-
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
@@ -309,6 +296,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton houseAffordabilityButton;
     private javax.swing.JButton interestButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton mortgageButton;
