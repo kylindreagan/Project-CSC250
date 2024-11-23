@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -23,11 +25,27 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
 
     /**
      * Creates new form HouseAffordabilityCalculator
-     */
+     */    
+    
     public HouseAffordabilityCalculator() {
         initComponents();
         ToolTipManager.sharedInstance().setInitialDelay(0);
         ToolTipManager.sharedInstance().setDismissDelay(20000);
+        jPanel8.setVisible(false);
+
+                
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            
+            public void itemStateChanged(java.awt.event.ItemEvent evt){
+                if (jCheckBox1.isSelected()){
+
+                jPanel8.setVisible(true);
+                } 
+                else{
+                    jPanel8.setVisible(false);
+                } 
+            }
+        });
 
     }
 
@@ -80,6 +98,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel66 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
@@ -95,7 +114,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jComboBox12 = new javax.swing.JComboBox<>();
+        jLabel69 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
@@ -146,6 +165,8 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel63 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -235,7 +256,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jTextField4.setText("0");
         jPanel5.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 119, 220, -1));
 
-        jTextField5.setText("20");
+        jTextField5.setText("4");
         jPanel5.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 220, -1));
 
         jTextField6.setText("1.5");
@@ -280,7 +301,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jPanel5.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 224, 60, -1));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        jPanel5.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 155, 60, -1));
+        jPanel5.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 60, -1));
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
         jPanel5.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 189, 60, -1));
@@ -313,28 +334,30 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         });
         jPanel5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 110, 40));
 
+        jLabel66.setText("%");
+        jPanel5.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, -1, -1));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(339, 339, 339)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(339, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(361, 361, 361))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(63, 63, 63)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Household Income-To-Debt Estimates", jPanel2);
@@ -359,9 +382,22 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel25.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel25.setText("Down payment:");
         jPanel6.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 105, 146, -1));
+
+        jTextField9.setText("3000");
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 15, 220, -1));
+
+        jTextField10.setText("30");
         jPanel6.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 45, 220, -1));
+
+        jTextField11.setText("6.699");
         jPanel6.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 75, 220, -1));
+
+        jTextField12.setText("20");
         jPanel6.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 105, 220, -1));
 
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -371,8 +407,8 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel30.setOpaque(true);
         jPanel6.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 18, 15, 15));
 
-        jLabel32.setText("$");
-        jPanel6.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 18, -1, -1));
+        jLabel32.setText("%");
+        jPanel6.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
 
         jLabel34.setText("per month");
         jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 18, -1, -1));
@@ -388,8 +424,8 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         });
         jPanel6.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
 
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        jPanel6.add(jComboBox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 105, 60, -1));
+        jLabel69.setText("$");
+        jPanel6.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 18, -1, -1));
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -432,12 +468,16 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel26.setText("Property tax:");
 
+        jTextField13.setText("0.5");
+
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
         jLabel37.setText("per year");
 
         jLabel28.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel28.setText("HOA or co-op fee:");
+
+        jTextField14.setText("0");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
@@ -446,6 +486,9 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel27.setText("Insurance:");
 
+        jTextField16.setText("0");
+        jTextField16.setToolTipText("");
+
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
         jLabel36.setText("per year");
@@ -453,6 +496,8 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel29.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel29.setText("<html>Maintenance Cost (repair, utility, etc)<html>");
         jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jTextField17.setText("2");
 
         jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
@@ -537,41 +582,40 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(412, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141))
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(266, 266, 266))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(201, 201, 201))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)))
+                        .addGap(421, 421, 421))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(646, 646, 646)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(130, 130, 130)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Fixed Monthly Budgets", jPanel3);
@@ -712,13 +756,19 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
 
         jLabel64.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel64.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel64.setText("Annual insurance cost");
+        jLabel64.setText("Total monthly cost on the house");
         jPanel9.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
 
         jLabel65.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel65.setForeground(new java.awt.Color(255, 255, 255));
         jLabel65.setText("Money");
         jPanel9.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, -1, -1));
+
+        jLabel67.setText("%");
+        jPanel9.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, -1));
+
+        jLabel68.setText("%");
+        jPanel9.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, -1));
 
         jTabbedPane1.addTab("Results", jPanel9);
 
@@ -735,14 +785,15 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(55, 55, 55))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(55, 55, 55))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,9 +802,9 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("House Affordability");
@@ -766,9 +817,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -819,6 +868,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         if (!allFieldsValid) {
             return; // Stop processing if any field is invalid
         }
+
         double income = Double.parseDouble(incomeInput);
         double loanTerm = Double.parseDouble(loanTermInput);
         double interestRate = Double.parseDouble(interestRateInput);
@@ -856,8 +906,15 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         double yIn;
         double maint;
         double totalMonth;
+        double VAloan;
         
-
+        if(loanTerm <= 0){
+            JOptionPane.showMessageDialog(null, "Please input a positive loan term value");
+            return;
+    }
+        if(interestRate <= 0){
+            interestRate = 0.00000001;
+    }
                 String selectedFrequency = (String) jComboBox1.getSelectedItem();
 
                 if ("Conventional loan (28/36 rule)".equals(selectedFrequency)) {
@@ -866,9 +923,12 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
                 } else if ("FHA loan (31% front-end, 43% back end)".equals(selectedFrequency)) {
                     frontEnd = 31/100.0;
                     backEnd = 43/100.0;
+                    JOptionPane.showMessageDialog(null, "Attention: Unfortunately, this option is under construction. Please check tommorow for a fix. Thank you!");
+                    return;
                 } else if ("VA loan (41%)".equals(selectedFrequency)) {
                     frontEnd = 41/100.0;
                     backEnd = 41/100.0;
+     
                 } else if ("10%".equals(selectedFrequency)) {
                     frontEnd = 10/100.0;
                     backEnd = 10/100.0;
@@ -928,14 +988,111 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
             perInsurance = insurance/100.0;
             insurance = 0;
         }
+       
+        
+        if(isDownPaymentCash == false){
+            if ("VA loan (41%)".equals(selectedFrequency)) {
+                jComboBox3.setVisible(false);
+
+                if (perDownPayment < 0.05){
+                    VAloan = 0.0215;
+                }
+                else if(perDownPayment > 0.05 && perDownPayment <0.10){
+                    VAloan = 0.015;
+                }
+                else if(perDownPayment >= 0.10 && perDownPayment < 1)
+                {
+                    VAloan = 0.0125;
+                }
+                else{
+                    jTextField5.setBackground(Color.RED);
+                    JOptionPane.showMessageDialog(null, "Attention: For disclosure, our VA calculator only accepts downpayment as a percentage. Please input a number below 100%. Thank you!");
+                    jTextField5.setBackground(Color.WHITE);
+                    return;
+                }
+                
+                loan = HouseAffordabilityHelper.principleLoanVA(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan, VAloan);
+                jLabel31.setText(String.format("$%,.0f", loan));
+                jTabbedPane1.setSelectedIndex(2);
+            }
+            
+            else{
+                loan = HouseAffordabilityHelper.principleLoan(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan);
+                jLabel31.setText(String.format("$%,.0f", loan));
+                JOptionPane.showMessageDialog(null, "Calculating...");
+                jTabbedPane1.setSelectedIndex(2);
+            }
+
+        }
+        else if(isDownPaymentCash == true){
+            loan = HouseAffordabilityHelper.CashprincipleLoan(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan);
+            jLabel31.setText(String.format("$%,.0f",loan));
+            JOptionPane.showMessageDialog(null,"calculating...");
+            jTabbedPane1.setSelectedIndex(2);
+    }
+        
+        Total = HouseAffordabilityHelper.TotalHousePrice(loan,perDownPayment,downPayment,isDownPaymentCash);
+        jLabel41.setText(String.format("$%,.0f",Total));
+        
+        DP = HouseAffordabilityHelper.totalDownPayment(Total, perDownPayment, downPayment, isDownPaymentCash);
+        jLabel43.setText(String.format("$%,.0f",DP));
+        
+        ECC = Total * 0.03;
+        jLabel45.setText(String.format("$%,.0f",ECC));
+        
+        
+        boolean checkDownPayment;  
+
+        if (isDownPaymentCash == true){
+            checkDownPayment = HouseAffordabilityHelper.checkDebt(downPayment, Total);
+            if (checkDownPayment == true){
+                JOptionPane.showMessageDialog(null,"Unfortunately, calculations for when down payment is represented as cash, pmi is wrong therefore resulting into accurate numbers for all results. A fix will come soon. Thank you!");
+            }
+        }
+        
+        
+        PMI = HouseAffordabilityHelper.pmiTotal(loan,isDownPaymentCash, perDownPayment);
+        jLabel55.setText(String.format("$%,.0f",PMI));
+        
+        yPt = HouseAffordabilityHelper.ptTotal(Total,perPropTax,propertyTax,isPropTaxCash);
+        jLabel57.setText(String.format("$%,.0f",yPt));
+        
+        yHoa = HouseAffordabilityHelper.HOATotal(Total,perHoa,hoaFee,isHoaCash);
+        jLabel59.setText(String.format("$%,.0f",yHoa));
+        
+        yIn = HouseAffordabilityHelper.inTotal(Total,perInsurance,insurance,isInsCash);
+        jLabel61.setText(String.format("$%,.0f",yIn));
+
+        maint = 0.015 * Total;
+        jLabel63.setText(String.format("$%,.0f",maint));
+        
+        
+        MonthlyMortgage = HouseAffordabilityHelper.monthlyMortgage(income, monthlyDebt, frontEnd, backEnd, PMI, yPt, yHoa, yIn);
+        jLabel53.setText(String.format("$%,.0f",MonthlyMortgage));
+        
+        totalMonth = HouseAffordabilityHelper.totalMonthlyCost(MonthlyMortgage, PMI, yPt, yHoa, yIn, maint);
+        jLabel65.setText(String.format("$%,.0f",totalMonth));
+        
+        //Need to make everything disappear when you cannot afford any house. When annual house hold is 0 send the message
+        //
+        double DTINum = MonthlyMortgage + (yPt/12.0) + (yHoa/12.0) + (yIn/12.0)+PMI;
+        double DTIDenom = income/12.0;
+        FDTI = (DTINum/DTIDenom)*100.0;
+        jLabel47.setText(String.format("%,.0f"+"",FDTI));
+        double BDTINum = DTINum + monthlyDebt;
+        BDTI = (BDTINum/DTIDenom)*100.0;
+        jLabel49.setText(String.format("%,.0f",BDTI));
+        
+        TotalPayment = (Total * 0.03) + DP;
+        jLabel51.setText(String.format("$%,.0f",TotalPayment));
+        
+        
+        
         
 
-            loan = HouseAffordabilityHelper.principleLoan(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan);
-            jLabel31.setText(String.format("$%,.0f", loan));
-            JOptionPane.showMessageDialog(null, "Calculating...");
-            jTabbedPane1.setSelectedIndex(2);
 
-                
+
+   
         
         
         
@@ -947,6 +1104,174 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+// Declare these variables at the method or class level to ensure they are in scope
+double propertyTax = 0;
+double hoaFee = 0;
+double insurance = 0;
+double maint = 0;
+
+double perPropTax = 0;
+double perHoa = 0;
+double perInsurance = 0;
+double perMaintenance = 0;
+
+boolean isPropTaxCash = true;
+boolean isHoaCash = true;
+boolean isInsCash = true;
+boolean isMaintenanceCash = true;
+
+// Always-required fields
+String budget = jTextField9.getText().trim().replace(",", "");
+String mortgage = jTextField10.getText().trim().replace(",", "");
+String interest = jTextField11.getText().trim().replace(",", "");
+String downPaymentInput = jTextField12.getText().trim().replace(",", "");
+
+// Core fields validation
+Map<JTextField, String> fieldsToValidate = new LinkedHashMap<>();
+fieldsToValidate.put(jTextField9, "Please input a valid budget for house (non-negative number > 0)");
+fieldsToValidate.put(jTextField10, "Please input a valid loan term (non-negative number)");
+fieldsToValidate.put(jTextField11, "Please input a valid interest rate (non-negative number)");
+fieldsToValidate.put(jTextField12, "Please input a valid down payment (non-negative number)");
+
+boolean allFieldsValid = HouseAffordabilityHelper.validateAndHighlightFields(fieldsToValidate);
+
+if (!allFieldsValid) {
+    return; // Stop processing if any field is invalid
+}
+
+// Additional fields if the checkbox is selected
+if (jCheckBox1.isSelected()) {
+    String propertyTaxInput = jTextField16.getText().trim().replace(",", "");
+    String hoaFeeInput = jTextField14.getText().trim().replace(",", "");
+    String insuranceInput = jTextField13.getText().trim().replace(",", "");
+    String maintenanceInput = jTextField17.getText().trim().replace(",", "");
+
+    Map<JTextField, String> additionalFieldsToValidate = new LinkedHashMap<>();
+    additionalFieldsToValidate.put(jTextField16, "Please input a valid property tax (non-negative number)");
+    additionalFieldsToValidate.put(jTextField14, "Please input a valid HOA fee (non-negative number)");
+    additionalFieldsToValidate.put(jTextField13, "Please input a valid insurance amount (non-negative number)");
+    additionalFieldsToValidate.put(jTextField17, "Please input a valid maintenance amount (non-negative number)");
+
+    boolean additionalFieldsValid = HouseAffordabilityHelper.validateAndHighlightFields(additionalFieldsToValidate);
+
+    if (!additionalFieldsValid) {
+        return; // Stop processing if any additional field is invalid
+    }
+
+    // Parse additional fields
+    propertyTax = Double.parseDouble(propertyTaxInput);
+    hoaFee = Double.parseDouble(hoaFeeInput);
+    insurance = Double.parseDouble(insuranceInput);
+    maint = Double.parseDouble(maintenanceInput);
+}
+
+// Parse core fields
+double budgetforHouse = Double.parseDouble(budget);
+double loanTerm = Double.parseDouble(mortgage);
+double interestRate = Double.parseDouble(interest);
+double downPayment = Double.parseDouble(downPaymentInput);
+       downPayment = downPayment/100;
+       
+        if(loanTerm <= 0){
+            JOptionPane.showMessageDialog(null, "Please input a positive loan term value");
+            return;
+    }
+        if(interestRate <= 0){
+            interestRate = 0.00000001;
+    }
+
+// Adjust values based on combo box selections
+String selectedFrequency3 = (String) jComboBox10.getSelectedItem();
+if ("%".equals(selectedFrequency3)) {
+    isPropTaxCash = false;
+    perPropTax = propertyTax / 100.0;
+    propertyTax = 0;
+}
+
+String selectedFrequency4 = (String) jComboBox7.getSelectedItem();
+if ("%".equals(selectedFrequency4)) {
+    isHoaCash = false;
+    perHoa = hoaFee / 100.0;
+    hoaFee = 0;
+}
+
+String selectedFrequency5 = (String) jComboBox9.getSelectedItem();
+if ("%".equals(selectedFrequency5)) {
+    isInsCash = false;
+    perInsurance = insurance / 100.0;
+    insurance = 0;
+}
+
+String selectedFrequency2 = (String) jComboBox11.getSelectedItem();
+if ("%".equals(selectedFrequency2)) {
+    isMaintenanceCash = false;
+    perMaintenance = maint / 100.0;
+    maint = 0;
+}
+
+        double loan = 0;
+        double Total;
+        double DP;
+        double ECC;
+        double TotalPayment;        
+        
+loan = HouseAffordabilityHelper.principleHouse(isPropTaxCash, isHoaCash, isInsCash, isMaintenanceCash, budgetforHouse, loanTerm, interestRate, downPayment, propertyTax, hoaFee, insurance, maint, perPropTax, perHoa, perInsurance, perMaintenance, loan);
+                jLabel31.setText(String.format("$%,.0f", loan));
+                JOptionPane.showMessageDialog(null, "Calculating...");
+                jTabbedPane1.setSelectedIndex(2);
+                
+        Total = loan/(1-downPayment);
+        jLabel41.setText(String.format("$%,.0f",Total));
+        
+        DP = Total * downPayment;
+        jLabel43.setText(String.format("$%,.0f",DP));        
+        
+        ECC = Total * 0.03;
+        jLabel45.setText(String.format("$%,.0f",ECC));
+        
+        TotalPayment = ECC + DP;
+        jLabel51.setText(String.format("$%,.0f",TotalPayment));
+        
+        double PMI;
+        if (downPayment < 0.20){
+            PMI = (0.005 * loan)/12;
+            }
+            else{
+                PMI = 0;
+            }        
+        jLabel55.setText(String.format("$%,.0f",PMI));
+        
+        double yPt;
+        yPt = HouseAffordabilityHelper.ptTotal(Total,perPropTax,propertyTax,isPropTaxCash);
+        jLabel57.setText(String.format("$%,.0f",yPt));
+        double yHoa;
+        yHoa = HouseAffordabilityHelper.HOATotal(Total,perHoa,hoaFee,isHoaCash);
+        jLabel59.setText(String.format("$%,.0f",yHoa));
+        double yIn;
+        yIn = HouseAffordabilityHelper.inTotal(Total,perInsurance,insurance,isInsCash);
+        jLabel61.setText(String.format("$%,.0f",yIn));
+        
+        double maintenance;
+        if (isMaintenanceCash == false){
+            maintenance = Total * perMaintenance;
+        }
+        else{
+            maintenance = perMaintenance;
+        }
+        
+        jLabel63.setText(String.format("$%,.0f",maintenance));
+        
+        double monthlyMortgage = (budgetforHouse) - (PMI) - (yPt/12) - (yHoa/12) - (yIn/12) - (maintenance/12);
+        jLabel53.setText(String.format("$%,.0f",monthlyMortgage));
+        
+        double totalmonth = monthlyMortgage + PMI + (yPt/12) + (yHoa/12) + (yIn/12) + (maintenance/12);
+        jLabel65.setText(String.format("$%,.0f",totalmonth));        
+        
+        
+
+      
+        
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -956,6 +1281,10 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1003,7 +1332,6 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox12;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -1072,6 +1400,10 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
