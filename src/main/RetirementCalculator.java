@@ -557,6 +557,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel38 = new javax.swing.JLabel();
         InflateField1 = new javax.swing.JTextField();
         AmountLabel39 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         ResultTab = new javax.swing.JPanel();
         OutputLabel = new javax.swing.JLabel();
         TitleLabel = new javax.swing.JLabel();
@@ -843,7 +844,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButton2ActionPerformed(evt);
             }
         });
-        HowTo.add(CalculateButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 90, 51));
+        HowTo.add(CalculateButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 90, 51));
 
         ClearButton1.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -853,7 +854,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ClearButton1ActionPerformed(evt);
             }
         });
-        HowTo.add(ClearButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 115, 50));
+        HowTo.add(ClearButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 115, 50));
 
         SuperClearButton1.setBackground(new java.awt.Color(255, 255, 255));
         SuperClearButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -863,7 +864,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 SuperClearButton1ActionPerformed(evt);
             }
         });
-        HowTo.add(SuperClearButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 94, 51));
+        HowTo.add(SuperClearButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 94, 51));
 
         ResetButton1.setBackground(new java.awt.Color(255, 255, 255));
         ResetButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -873,7 +874,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ResetButton1ActionPerformed(evt);
             }
         });
-        HowTo.add(ResetButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 94, 51));
+        HowTo.add(ResetButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 94, 51));
 
         AmountLabel19.setFont(getFontParas());
         AmountLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -923,7 +924,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         HowTo.add(AmountLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 287, 161, -1));
 
         InvestField1.setText("6");
-        HowTo.add(InvestField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 189, -1));
+        HowTo.add(InvestField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 189, -1));
 
         AmountLabel26.setFont(getFontParas());
         AmountLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -943,9 +944,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         WarningLabel2.setForeground(new java.awt.Color(255, 51, 51));
         WarningLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Withdraw.add(WarningLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 31, 639, 46));
+        Withdraw.add(WarningLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 639, 46));
 
-        CalculateButton3.setBackground(new java.awt.Color(204, 153, 0));
+        CalculateButton3.setBackground(new java.awt.Color(0, 100, 0));
         CalculateButton3.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton3.setText("Calculate");
         CalculateButton3.setToolTipText("Click to calculate the converted amount.");
@@ -954,7 +955,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButton3ActionPerformed(evt);
             }
         });
-        Withdraw.add(CalculateButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 350, 115, 51));
+        Withdraw.add(CalculateButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 115, 51));
 
         ClearButton2.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -964,7 +965,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ClearButton2ActionPerformed(evt);
             }
         });
-        Withdraw.add(ClearButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 115, 46));
+        Withdraw.add(ClearButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 115, 50));
 
         SuperClearButton2.setBackground(new java.awt.Color(255, 255, 255));
         SuperClearButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -974,7 +975,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 SuperClearButton2ActionPerformed(evt);
             }
         });
-        Withdraw.add(SuperClearButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 360, 94, 51));
+        Withdraw.add(SuperClearButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, 110, 51));
 
         ResetButton2.setBackground(new java.awt.Color(255, 255, 255));
         ResetButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -984,96 +985,99 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ResetButton2ActionPerformed(evt);
             }
         });
-        Withdraw.add(ResetButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 360, 94, 51));
+        Withdraw.add(ResetButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 110, 51));
 
-        AmountLabel27.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel27.setFont(getFontParas());
         AmountLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel27.setText("Current Age");
-        Withdraw.add(AmountLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 161, -1));
+        Withdraw.add(AmountLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 161, -1));
 
         CurrentAgeField2.setText("35");
-        Withdraw.add(CurrentAgeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 200, -1));
+        Withdraw.add(CurrentAgeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 200, -1));
 
-        AmountLabel28.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel28.setFont(getFontParas());
         AmountLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel28.setText("Retirement Age");
-        Withdraw.add(AmountLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 161, -1));
+        Withdraw.add(AmountLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 161, -1));
 
         RetireAgeField2.setText("67");
-        Withdraw.add(RetireAgeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 195, 200, -1));
+        Withdraw.add(RetireAgeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 200, -1));
 
-        AmountLabel29.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel29.setFont(getFontParas());
         AmountLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel29.setText("Life Expectancy");
-        Withdraw.add(AmountLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 161, -1));
+        Withdraw.add(AmountLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 161, -1));
 
         LifeExpField1.setText("85");
-        Withdraw.add(LifeExpField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 200, -1));
+        Withdraw.add(LifeExpField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 200, -1));
 
-        AmountLabel30.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel30.setFont(getFontParas());
         AmountLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel30.setText("Annual Contribution");
-        Withdraw.add(AmountLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 187, -1));
+        Withdraw.add(AmountLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 187, -1));
 
-        AmountLabel31.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel31.setFont(getFontParas());
         AmountLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel31.setText("$");
-        Withdraw.add(AmountLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 20, -1));
+        Withdraw.add(AmountLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 20, -1));
 
         CurrentField2.setText("30,000");
-        Withdraw.add(CurrentField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 189, -1));
+        Withdraw.add(CurrentField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 189, -1));
 
-        AmountLabel32.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel32.setFont(getFontParas());
         AmountLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel32.setText("Current Savings");
-        Withdraw.add(AmountLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 161, -1));
+        Withdraw.add(AmountLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 161, -1));
 
-        AmountLabel33.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel33.setFont(getFontParas());
         AmountLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel33.setText("Monthly Contribution");
-        Withdraw.add(AmountLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 194, -1));
+        Withdraw.add(AmountLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 194, -1));
 
-        AmountLabel34.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel34.setFont(getFontParas());
         AmountLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel34.setText("$");
-        Withdraw.add(AmountLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 20, -1));
+        Withdraw.add(AmountLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 20, -1));
 
-        AmountLabel35.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel35.setFont(getFontParas());
         AmountLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel35.setText("$");
-        Withdraw.add(AmountLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 20, -1));
+        Withdraw.add(AmountLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 20, -1));
 
         AnnualField.setText("0");
-        Withdraw.add(AnnualField, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 189, -1));
+        Withdraw.add(AnnualField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 189, -1));
 
         MonthlyField.setText("500");
-        Withdraw.add(MonthlyField, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 189, -1));
+        Withdraw.add(MonthlyField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 189, -1));
 
-        AmountLabel36.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel36.setFont(getFontParas());
         AmountLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel36.setText("Investment Return");
-        Withdraw.add(AmountLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 450, 161, -1));
+        Withdraw.add(AmountLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 161, -1));
 
         InvestField2.setText("6");
-        Withdraw.add(InvestField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 448, 189, -1));
+        Withdraw.add(InvestField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 189, -1));
 
-        AmountLabel37.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel37.setFont(getFontParas());
         AmountLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel37.setText("%/year");
-        Withdraw.add(AmountLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 450, -1, -1));
+        Withdraw.add(AmountLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, -1, -1));
 
-        AmountLabel38.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel38.setFont(getFontParas());
         AmountLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel38.setText("Inflation Rate");
-        Withdraw.add(AmountLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 496, 161, -1));
+        Withdraw.add(AmountLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 161, -1));
 
         InflateField1.setText("3");
-        Withdraw.add(InflateField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 494, 190, -1));
+        Withdraw.add(InflateField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 190, -1));
 
-        AmountLabel39.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel39.setFont(getFontParas());
         AmountLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel39.setText("%/year");
-        Withdraw.add(AmountLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 496, -1, -1));
+        Withdraw.add(AmountLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Withdraw.png"))); // NOI18N
+        Withdraw.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 600));
 
         RetirementTabs.addTab("How much can you withdraw after retirement?", Withdraw);
 
@@ -1717,5 +1721,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
