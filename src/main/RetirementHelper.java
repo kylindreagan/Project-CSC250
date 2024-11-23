@@ -31,13 +31,11 @@ public class RetirementHelper {
         List<Integer> TRRI = new ArrayList<>();
         float Yearly_Needs = (FIN - OIAR*12); //OIAR = Other Income After Retirement 
         float Yearly_Gets = OIAR*12;
-        System.out.println(Yearly_Needs);
         float Total_Needs = 0.0f;
         TRRI.add(0);
         for (int i = LE; i >= RA; i--) {
             Total_Needs += ((FIN * (float)Math.pow(1+Inflate,i-CA)) - Yearly_Gets) / (float)Math.pow(1 + Invest, i - RA + 1);
             TRRI.add(Math.round(Total_Needs));
-            System.out.println("Year " + i + " Total Needs (discounted): " + Total_Needs);
         }
         Collections.reverse(TRRI); // Reverse the list in-place for correct order
         return TRRI;
@@ -68,7 +66,6 @@ public class RetirementHelper {
 
     public static Integer Total_Obtained_Retirement_Income_At_Year(int Living_Years, float PTI, float Invest, float Current, float Increase) {
         float TORI = Math.round(Current * Math.pow(1 + Invest, Living_Years) + ((PTI * Math.abs(Math.pow(1 + Invest, Living_Years) - Math.pow(1 + Increase, Living_Years))) / Math.abs(Invest - Increase)));
-        System.out.println(TORI);
         return Math.round(TORI);
     }
     
@@ -161,22 +158,22 @@ public class RetirementHelper {
             LE = Integer.parseInt(Life_Expectency);
         }
         catch (NumberFormatException e) {
-            return "Ages must be valid whole number integers.";
+            return "⚠ Ages must be valid whole number integers.";
         }
 
         if (LE <= RA) {
-            return "Life expectancy needs to be larger than planned retirement age.";
+            return "⚠ Life expectancy needs to be larger than planned retirement age.";
         }
         
         if (RA < CA){
-            return "You are already in retirement";
+            return "⚠ You are already in retirement";
         }
         
         if (CA <= 0 || LE > 150) {
-            return "Please provide positive and reasonable ages"; 
+            return "⚠ Please provide positive and reasonable ages"; 
         }
         
-        return "Unknown error has occured";
+        return "⚠ Unknown error has occured";
     }
     
     public static Boolean validate_dynamic(String value, Boolean is_percent) {
@@ -230,7 +227,6 @@ public class RetirementHelper {
     
     public static float calculateInflationAdjustedMonthly(float final_obtained, float inflate, float invest, int years) {
         float sum = 0.0f;
-        System.out.println(final_obtained);
         for (int t = 0; t < years*12; t++) {
             sum += Math.pow(1 + inflate, t) / Math.pow(1 + invest, t);
         }

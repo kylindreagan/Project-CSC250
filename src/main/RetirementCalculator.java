@@ -4,7 +4,7 @@
  */
 package main;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -24,9 +24,9 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.plot.CategoryPlot;
@@ -55,6 +55,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARpercent = true;
         Futurepercent = true;
         initComponents();
+        addChartToPanel(Collections.emptyList(), Collections.emptyList(), null, false, "Savings", "Needed");
         setResizable(false);
         FocusListener focusListenerLastFocused = new FocusListener() {
             @Override
@@ -134,7 +135,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 String CA = CurrentAgeField.getText();
                 String LE = LifeExpField.getText();
                 Boolean ValidAge = RetirementHelper.validate_ages(RA, CA, LE);
-                System.out.println(ValidAge);
                 if (!ValidAge){
                 CalculateButton.setEnabled(false);
                 String message = RetirementHelper.generate_age_warning(RA, CA, LE);
@@ -376,7 +376,12 @@ public class RetirementCalculator extends javax.swing.JFrame {
         gbc.weighty = 1.0; // Stretch vertically
         gbc.fill = GridBagConstraints.BOTH; // Fill both horizontally and vertically
         
-        DefaultCategoryDataset dataset = createDataset(savingsData, neededData, CA, two_graphs, title_1, title_2);
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();;
+        
+        // Check if data exists, and fill the dataset only if valid data is provided
+        if (savingsData != null && !savingsData.isEmpty() && neededData != null && !neededData.isEmpty()) {
+            dataset = createDataset(savingsData, neededData, CA, two_graphs, title_1, title_2);
+        }
         
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
@@ -402,7 +407,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         // Add the chart to a ChartPanel
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(800, 600));
-        System.out.println("Adding chart with data: " + savingsData);
         
         // Add the ChartPanel to the existing panel
         Graph.add(chartPanel, gbc);
@@ -567,6 +571,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel2 = new javax.swing.JLabel();
         OutputLabel3 = new javax.swing.JLabel();
         OutputLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         Graph = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
@@ -661,12 +666,12 @@ public class RetirementCalculator extends javax.swing.JFrame {
         HowMuch.add(INARField, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 170, 40));
 
         Title3.setFont(getFontHeading());
-        Title3.setForeground(new java.awt.Color(51, 0, 204));
+        Title3.setForeground(new java.awt.Color(11, 56, 79));
         Title3.setText("Attributes");
         HowMuch.add(Title3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         Title4.setFont(getFontHeading());
-        Title4.setForeground(new java.awt.Color(51, 0, 204));
+        Title4.setForeground(new java.awt.Color(11, 56, 79));
         Title4.setText("Optional");
         HowMuch.add(Title4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
 
@@ -748,8 +753,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel22.setText("/month");
         HowMuch.add(AmountLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
 
-        WarningLabel.setFont(getFontParas());
-        WarningLabel.setForeground(new java.awt.Color(255, 255, 255));
+        WarningLabel.setForeground(new java.awt.Color(255, 51, 0));
         WarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         HowMuch.add(WarningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 639, 46));
 
@@ -824,7 +828,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         HowMuch.add(infoBoxLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 20, 23));
 
         Title5.setFont(getFontHeading());
-        Title5.setForeground(new java.awt.Color(51, 0, 204));
+        Title5.setForeground(new java.awt.Color(11, 56, 79));
         Title5.setText("Assumptions");
         HowMuch.add(Title5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
 
@@ -931,9 +935,9 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel26.setText("%/year");
         HowTo.add(AmountLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, -1, -1));
 
-        WarningLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        WarningLabel1.setForeground(new java.awt.Color(255, 51, 0));
         WarningLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        HowTo.add(WarningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 15, 639, 46));
+        HowTo.add(WarningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 639, 46));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/HowTo.png"))); // NOI18N
         HowTo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 600));
@@ -942,9 +946,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         Withdraw.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        WarningLabel2.setForeground(new java.awt.Color(255, 51, 51));
+        WarningLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        WarningLabel2.setForeground(new java.awt.Color(255, 51, 0));
         WarningLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Withdraw.add(WarningLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 639, 46));
+        Withdraw.add(WarningLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 550, 46));
 
         CalculateButton3.setBackground(new java.awt.Color(0, 100, 0));
         CalculateButton3.setForeground(new java.awt.Color(0, 0, 0));
@@ -1083,47 +1088,50 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         ResultTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        OutputLabel.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel.setFont(getFontParas());
         OutputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ResultTab.add(OutputLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 226, 1100, 29));
 
-        TitleLabel.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel.setFont(getFontHeading());
+        TitleLabel.setForeground(new java.awt.Color(11, 56, 79));
         TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ResultTab.add(TitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 44, 1100, 40));
 
-        TitleLabel1.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel1.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel1.setFont(getFontHeading());
+        TitleLabel1.setForeground(new java.awt.Color(11, 56, 79));
         TitleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ResultTab.add(TitleLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 168, 1100, 40));
 
-        OutputLabel1.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel1.setFont(getFontParas());
         OutputLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ResultTab.add(OutputLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 1100, 29));
 
-        TitleLabel2.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel2.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel2.setFont(getFontHeading());
+        TitleLabel2.setForeground(new java.awt.Color(11, 56, 79));
         TitleLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ResultTab.add(TitleLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 273, 1100, 40));
+        ResultTab.add(TitleLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1100, 40));
 
-        OutputLabel2.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel2.setFont(getFontParas());
         OutputLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ResultTab.add(OutputLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 360, 1090, 29));
+        ResultTab.add(OutputLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 1090, 29));
 
-        OutputLabel3.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel3.setFont(getFontParas());
         OutputLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ResultTab.add(OutputLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 325, 1090, 29));
+        ResultTab.add(OutputLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 1090, 29));
 
-        OutputLabel4.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel4.setFont(getFontParas());
         OutputLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ResultTab.add(OutputLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 131, 1090, 29));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RetirementImage.png"))); // NOI18N
+        ResultTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 600));
 
         RetirementTabs.addTab("Results", ResultTab);
 
         Graph.setLayout(new java.awt.GridBagLayout());
         RetirementTabs.addTab("Graph", Graph);
 
-        getContentPane().add(RetirementTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1150, 620));
+        getContentPane().add(RetirementTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1150, 600));
 
         Title1.setFont(getFontTitle());
         Title1.setForeground(new java.awt.Color(255, 255, 255));
@@ -1416,7 +1424,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
         TitleLabel2.setText("HOW CAN YOU REACH THIS?");
         float percentHigher = Math.abs((float)final_needed - (float)final_obtained) / (((float)final_needed + (float)final_obtained)/2) / (Invest*100);
-        System.out.println(percentHigher);
         float savingsPercentage = RetirementHelper.Inverse_TORI(final_needed, LY, PIT, Invest, current, Increase);
         float yearlySavings = PIT * savingsPercentage;
 
@@ -1435,7 +1442,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         }
         float needed_PTI = PIT * (savingsPercentage);
         List<Integer> Required_TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, needed_PTI, Invest, current, Increase);
-        System.out.println(Required_TORI);
         addChartToPanel(TORI, Required_TORI, CA, final_needed > final_obtained, "Obtained", "Needed");
     }
     
@@ -1489,7 +1495,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         float invest = MainHelper.parseMoney(InvestField1.getText(), ",") / 100;
         
         float annual_investment = RetirementHelper.Inverse_PTI(needed, Living_Years, invest, Current);
-        System.out.println(annual_investment);
         float monthly_investment = annual_investment / 12;
         float current_needed = RetirementHelper.Current_Needed(invest, needed, Living_Years);
         
@@ -1536,8 +1541,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
             inflationAdjustedMonthly = initialMonthlyWithdrawal/(float)(Math.pow(1+inflate, Retirement_Years));
   
         }
-        
-        System.out.println(inflationAdjustedMonthly);
         
         TitleLabel.setText("BALANCE AT RETIREMENT");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_obtained) + " by age " + String.valueOf(RA));
@@ -1722,5 +1725,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
