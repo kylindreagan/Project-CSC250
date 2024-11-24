@@ -266,6 +266,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         SchedulePanel = new javax.swing.JScrollPane();
         QuitButton = new javax.swing.JButton();
+        infoBoxLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -275,7 +276,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         Title1.setForeground(new java.awt.Color(255, 255, 255));
         Title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title1.setText("Roth IRA Calculator");
-        getContentPane().add(Title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 18, 513, -1));
+        getContentPane().add(Title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 513, -1));
 
         InputPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -472,7 +473,16 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 QuitButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 23, 74, 38));
+        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 74, 38));
+
+        infoBoxLabel4.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        infoBoxLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoBoxLabel4.setText("?");
+        infoBoxLabel4.setToolTipText("<html><body style='width: 200px;'>A Roth IRA is a type of Individual Retirement Arrangement (IRA) that provides tax-free growth and tax-free income in retirement. The major difference between Roth IRAs and traditional IRAs is that contributions to the former are not tax-deductible, and contributions (not earnings) may be withdrawn tax-free at any time without penalty. Roth IRA was first introduced and established by the Taxpayer Relief Act of 1997 and is named after Senator William Roth.</body></html>  ");
+        infoBoxLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoBoxLabel4.setOpaque(true);
+        getContentPane().add(infoBoxLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 20, 23));
+        infoBoxLabel4.getAccessibleContext().setAccessibleDescription("<html><body style='width: 200px;'>A Roth IRA is a type of Individual Retirement Arrangement (IRA) that provides tax-free growth and tax-free income in retirement. The major difference between Roth IRAs and traditional IRAs is that contributions to the former are not tax-deductible, and contributions (not earnings) may be withdrawn tax-free at any time without penalty. Roth IRA was first introduced and established by the Taxpayer Relief Act of 1997 and is named after Senator William Roth.</body></html>  ");
 
         jLabel1.setBackground(new java.awt.Color(11, 56, 79));
         jLabel1.setOpaque(true);
@@ -685,6 +695,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
     private javax.swing.JLabel infoBoxLabel1;
     private javax.swing.JLabel infoBoxLabel2;
     private javax.swing.JLabel infoBoxLabel3;
+    private javax.swing.JLabel infoBoxLabel4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
