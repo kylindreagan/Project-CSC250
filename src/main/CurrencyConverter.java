@@ -274,7 +274,6 @@ public class CurrencyConverter extends javax.swing.JFrame {
         });
         getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 38, 74, 50));
 
-        WarningLabel.setFont(new java.awt.Font("Nunito", 0, 12));
         WarningLabel.setForeground(new java.awt.Color(255, 51, 51));
         WarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(WarningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 73, 639, 46));
