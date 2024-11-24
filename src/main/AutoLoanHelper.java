@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
  * @author giann
  */
 public class AutoLoanHelper {
+    
     public static String carPriceCalculate (float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float amtOwed, float fees, float monthly){
         float totalPayments = monthly * lTerm;
         Double totalLoanAmount = AmortizationHelper.principalFromMP(intRate, lTerm, monthly);
@@ -26,7 +27,7 @@ public class AutoLoanHelper {
         String s4 = new DecimalFormat ("#,###.00").format (totalPayments);
         String s5 = new DecimalFormat ("#,###.00").format (totalLoanInterest);
         String s6 = new DecimalFormat ("#,###.00").format (totalCost);
-        return "Vehicle Price is: $" +s1 + "\nTotal Loan Amount is: $"+ s + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
+        return "Vehicle Price is: $" +s1 + "\nTotal Loan Amount is: $"+ s + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal Loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
     }
     
     public static String carPriceCalculateFees(float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float amtOwed, float fees, float monthly){
@@ -44,7 +45,7 @@ public class AutoLoanHelper {
         String s4 = new DecimalFormat ("#,###.00").format (totalPayments);
         String s5 = new DecimalFormat ("#,###.00").format (totalLoanInterest);
         String s6 = new DecimalFormat ("#,###.00").format (totalCost);
-        return "Vehicle Price is: $" +s1 + "\nTotal Loan Amount is: $"+ s + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
+        return "Vehicle Price is: $" +s1 + "\nTotal Loan Amount is: $"+ s + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal Loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
     }
     
     public static String monthlyPaymentCalculate(float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float amtOwed, float fees, float car){
@@ -62,7 +63,7 @@ public class AutoLoanHelper {
         String s4 = new DecimalFormat ("#,###.00").format (totalPayments);
         String s5 = new DecimalFormat ("#,###.00").format (totalLoanInterest);
         String s6 = new DecimalFormat ("#,###.00").format (totalCost);
-        return "Monthly Payment is: $" +s + "\nLoan Amount is: $"+ s1 + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
+        return "Monthly Payment is: $" +s + "\nLoan Amount is: $"+ s1 + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal Loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
     }
     
     public static String monthlyPaymentCalculateFees(float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float amtOwed, float fees, float car){
@@ -80,6 +81,6 @@ public class AutoLoanHelper {
         String s4 = new DecimalFormat ("#,###.00").format (totalPayments);
         String s5 = new DecimalFormat ("#,###.00").format (totalLoanInterest);
         String s6 = new DecimalFormat ("#,###.00").format (totalCost);
-        return "Monthly Payment is: $" +s + "\nLoan Amount is: $"+ s1 + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
+        return "Monthly Payment is: $" +s + "\nLoan Amount is: $"+ s1 + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal Loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
     }
 }
