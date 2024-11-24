@@ -65,6 +65,7 @@ public class AutoLoanHelper {
         return "Monthly Payment is: $" +s + "\nLoan Amount is: $"+ s1 + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
     }
     
+    
     public static String monthlyPaymentCalculateFees(float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float amtOwed, float fees, float car){
         float saleTax = (car- trade) * (sTax/100);
         float loanAmt = car - dPay - cIncent - trade + amtOwed + fees + saleTax;
