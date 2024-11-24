@@ -1137,7 +1137,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Title1.setForeground(new java.awt.Color(255, 255, 255));
         Title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title1.setText("Retirement Calculator");
-        getContentPane().add(Title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 6, 513, 50));
+        getContentPane().add(Title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 513, 50));
 
         QuitButton.setBackground(new java.awt.Color(255, 255, 255));
         QuitButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -1147,7 +1147,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 QuitButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 74, 38));
+        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 74, 38));
 
         jLabel1.setBackground(new java.awt.Color(11, 56, 79));
         jLabel1.setOpaque(true);
