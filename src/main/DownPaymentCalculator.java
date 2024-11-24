@@ -5,6 +5,10 @@
 
 package main;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -20,11 +24,25 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
      */
     public DownPaymentCalculator() {
         initComponents();
+        myInitComponents();
         setInvisible();
         updateComboBox(closingCostsStateSelection);
         
+        upfrontCashLabel.setVisible(true);
+        upfrontCashEntryField.setVisible(true);
+        downPaymentLabel.setVisible(true);
+        downPaymentEntryField.setVisible(true);
+        downPaymentPercentSign.setVisible(true);
+        closingCostsCheckBox.setVisible(true);
+        interestRateLabel.setVisible(true);
+        interestRatePercentSign.setVisible(true);
+        interestRateEntryField.setVisible(true);
+        loanTermLabel.setVisible(true);
+        loanTermEntryField.setVisible(true);
+        yearsLabel.setVisible(true);
+        infoBoxLabel.setVisible(true);
+        
         //Code from Kylind -- Used in Retirement Calculator
-        //Continue working on error messages
         DocumentListener documentListener = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) { checkFields(); }
@@ -59,7 +77,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                 }           
                 String message = "";
                 if (validMoneyHP){
-                    message = "⚠ Invalid Home Price";
+                    message = "Error: Invalid Home Price";
                     homePriceEntryField.setForeground(Color.red); 
                     errorLabel.setVisible(true);
                     errorLabel.setText(message); 
@@ -68,7 +86,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                     homePriceEntryField.setForeground(Color.black);
                 }
                 if (validMoneyCC){
-                    message = "⚠ Invalid Closing Costs";
+                    message = "Error: Invalid Closing Costs";
                     closingCostsEntryField.setForeground(Color.red);
                     errorLabel.setVisible(true);
                     errorLabel.setText(message); 
@@ -78,7 +96,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                     closingCostsEntryField.setForeground(Color.black);                   
                 }
                 if (validMoneyUC){
-                    message = "⚠ Invalid Upfront Cash";                    
+                    message = "Error: Invalid Upfront Cash";                    
                     upfrontCashEntryField.setForeground(Color.red);
                     errorLabel.setVisible(true);
                     errorLabel.setText(message);
@@ -95,7 +113,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                     if (c) {
                         loanTermEntryField.setForeground(Color.red);
                         errorLabel.setVisible(true);
-                        errorLabel.setText("⚠ Invalid Loan Term.");
+                        errorLabel.setText("Error: Invalid Loan Term.");
                     }
                     else {
                         loanTermEntryField.setForeground(Color.black);
@@ -103,7 +121,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                     if (b) {
                         interestRateEntryField.setForeground(Color.red);
                         errorLabel.setVisible(true);
-                        errorLabel.setText("⚠ Invalid Interest Rate.");
+                        errorLabel.setText("Error: Invalid Interest Rate.");
                     }
                     else {
                         interestRateEntryField.setForeground(Color.black);
@@ -111,7 +129,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
                     if (a) {
                         downPaymentEntryField.setForeground(Color.red);
                         errorLabel.setVisible(true);
-                        errorLabel.setText("⚠ Invalid Down Payment Percentage.");
+                        errorLabel.setText("Error: Invalid Down Payment Percentage.");
                     }
                     else {
                         downPaymentEntryField.setForeground(Color.black);
@@ -134,8 +152,12 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
             loanTermEntryField.getDocument().addDocumentListener(documentListener);
             interestRateEntryField.getDocument().addDocumentListener(documentListener);
     }
-
     
+    //Code from Alyssa in Interest Calculator
+    private void myInitComponents() {
+        getContentPane().setBackground(new java.awt.Color(10, 55, 78));
+        setResizable(false);
+    }
     
     
     //Hides/Clears all irrelevant fields
@@ -176,7 +198,6 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         homePriceRadio = new javax.swing.JRadioButton();
         cashRadio = new javax.swing.JRadioButton();
         downPaymentRadio = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
         homePriceLabel = new javax.swing.JLabel();
         upfrontCashLabel = new javax.swing.JLabel();
         downPaymentLabel = new javax.swing.JLabel();
@@ -203,279 +224,220 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         resultsLabel = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         infoBoxLabel = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nunito", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(238, 239, 239));
         jLabel1.setText("Down Payment Calculator");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 470, -1));
 
         buttonGroup1.add(homePriceRadio);
+        homePriceRadio.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        homePriceRadio.setForeground(new java.awt.Color(25, 55, 77));
+        homePriceRadio.setSelected(true);
         homePriceRadio.setText("Calculate Affordable Home Price");
         homePriceRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homePriceRadioActionPerformed(evt);
             }
         });
+        getContentPane().add(homePriceRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, -1));
 
         buttonGroup1.add(cashRadio);
+        cashRadio.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        cashRadio.setForeground(new java.awt.Color(25, 55, 77));
         cashRadio.setText("Calculate Upfront Cash Needed");
         cashRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cashRadioActionPerformed(evt);
             }
         });
+        getContentPane().add(cashRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
 
         buttonGroup1.add(downPaymentRadio);
+        downPaymentRadio.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        downPaymentRadio.setForeground(new java.awt.Color(25, 55, 77));
         downPaymentRadio.setText("Calculate Down Payment %");
         downPaymentRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downPaymentRadioActionPerformed(evt);
             }
         });
+        getContentPane().add(downPaymentRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 415, -1));
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jLabel2.setText("Select a calculator to start");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jLabel2.setOpaque(true);
+        homePriceLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        homePriceLabel.setForeground(new java.awt.Color(25, 55, 77));
+        homePriceLabel.setText("Home Price                        $");
+        getContentPane().add(homePriceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 240, -1));
 
-        homePriceLabel.setText("Home Price    $");
-
+        upfrontCashLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        upfrontCashLabel.setForeground(new java.awt.Color(25, 55, 77));
         upfrontCashLabel.setText("Upfront Cash Available    $");
+        getContentPane().add(upfrontCashLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 230, -1));
 
+        downPaymentLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        downPaymentLabel.setForeground(new java.awt.Color(25, 55, 77));
         downPaymentLabel.setText("Down Payment");
+        getContentPane().add(downPaymentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 220, -1));
 
+        downPaymentEntryField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         downPaymentEntryField.setText("20");
+        getContentPane().add(downPaymentEntryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 160, -1));
 
+        downPaymentPercentSign.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        downPaymentPercentSign.setForeground(new java.awt.Color(25, 55, 77));
         downPaymentPercentSign.setText("%");
+        getContentPane().add(downPaymentPercentSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, 37, -1));
 
+        interestRateLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        interestRateLabel.setForeground(new java.awt.Color(25, 55, 77));
         interestRateLabel.setText("Interest Rate");
+        getContentPane().add(interestRateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, -1, -1));
 
+        closingCostsCheckBox.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        closingCostsCheckBox.setForeground(new java.awt.Color(25, 55, 77));
         closingCostsCheckBox.setText("Include Closing Costs");
         closingCostsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closingCostsCheckBoxActionPerformed(evt);
             }
         });
+        getContentPane().add(closingCostsCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
+        loanTermLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        loanTermLabel.setForeground(new java.awt.Color(25, 55, 77));
         loanTermLabel.setText("Loan Term");
+        getContentPane().add(loanTermLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 140, -1));
 
+        CalculateButton.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
         CalculateButton.setText("Calculate");
         CalculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalculateButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(CalculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 580, -1, -1));
 
+        clearButton.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
         clearButton.setText("Clear");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 580, -1, -1));
 
+        closingCostsDollarSign.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        closingCostsDollarSign.setForeground(new java.awt.Color(25, 55, 77));
         closingCostsDollarSign.setText("$");
+        getContentPane().add(closingCostsDollarSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 16, -1));
 
+        closingCostsStateSelection.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         closingCostsStateSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(closingCostsStateSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
 
+        interestRateEntryField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         interestRateEntryField.setText("6.489");
+        getContentPane().add(interestRateEntryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 450, 160, -1));
 
+        interestRatePercentSign.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        interestRatePercentSign.setForeground(new java.awt.Color(25, 55, 77));
         interestRatePercentSign.setText("%");
+        getContentPane().add(interestRatePercentSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, -1, -1));
 
+        loanTermEntryField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        loanTermEntryField.setForeground(new java.awt.Color(25, 55, 77));
         loanTermEntryField.setText("30");
+        getContentPane().add(loanTermEntryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, 160, -1));
 
+        yearsLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        yearsLabel.setForeground(new java.awt.Color(25, 55, 77));
         yearsLabel.setText("Years");
+        getContentPane().add(yearsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 80, -1));
 
+        returnButton.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
         returnButton.setText("Return");
         returnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 20, -1, -1));
 
+        resetButton.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
         resetButton.setText("Reset");
         resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 580, -1, -1));
 
         homePriceEntryField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         homePriceEntryField.setText("500,000");
+        homePriceEntryField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        getContentPane().add(homePriceEntryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 160, -1));
 
         upfrontCashEntryField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         upfrontCashEntryField.setText("100,000");
+        upfrontCashEntryField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        getContentPane().add(upfrontCashEntryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 330, 160, -1));
 
         closingCostsEntryField.setText("3,391");
+        closingCostsEntryField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        getContentPane().add(closingCostsEntryField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, 160, -1));
 
+        errorLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         errorLabel.setForeground(new java.awt.Color(255, 0, 0));
         errorLabel.setText("Error: None");
+        getContentPane().add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 50, 440, 41));
 
         resultsLabel.setEditable(false);
         resultsLabel.setColumns(20);
+        resultsLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         resultsLabel.setRows(5);
         jScrollPane1.setViewportView(resultsLabel);
 
-        jLabel3.setText("Results:");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 198, 320, 390));
 
-        infoBoxLabel.setBackground(new java.awt.Color(102, 102, 255));
+        jLabel3.setFont(new java.awt.Font("Nunito", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel3.setText("Results:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 180, -1));
+
+        infoBoxLabel.setBackground(new java.awt.Color(51, 150, 255));
         infoBoxLabel.setText(" ?");
         infoBoxLabel.setToolTipText("<html><body style='width: 200px;'>A down payment of less than 20% may result in you paying PMI Insurance or a Mortgage Insurance Premium.</body></html>  ");
         infoBoxLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         infoBoxLabel.setOpaque(true);
+        getContentPane().add(infoBoxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 15, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(264, 264, 264))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(returnButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(homePriceRadio)
-                                .addGap(24, 24, 24)
-                                .addComponent(cashRadio))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(219, 219, 219)
-                                .addComponent(CalculateButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clearButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(resetButton)))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(infoBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(upfrontCashLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(upfrontCashEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(downPaymentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(downPaymentEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(downPaymentPercentSign, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(closingCostsCheckBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(closingCostsDollarSign, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(loanTermLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(interestRateLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(loanTermEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(yearsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(interestRateEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(closingCostsEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(closingCostsStateSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(interestRatePercentSign)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(homePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(downPaymentRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(returnButton))
-                .addGap(9, 9, 9)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(homePriceRadio)
-                        .addComponent(downPaymentRadio))
-                    .addComponent(cashRadio))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(homePriceLabel)
-                            .addComponent(homePriceEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(upfrontCashLabel)
-                            .addComponent(upfrontCashEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(downPaymentLabel)
-                            .addComponent(downPaymentEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(downPaymentPercentSign)
-                            .addComponent(infoBoxLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(closingCostsCheckBox)
-                            .addComponent(closingCostsDollarSign)
-                            .addComponent(closingCostsStateSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(closingCostsEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(interestRateLabel)
-                            .addComponent(interestRateEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(interestRatePercentSign))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(loanTermLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(loanTermEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(yearsLabel)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CalculateButton)
-                    .addComponent(clearButton)
-                    .addComponent(resetButton))
-                .addContainerGap())
-        );
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/downPaymentBckgrd.png"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    //Code from Kylind in Currency Converter
+    public Font getFont() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/Nunito-VariableFont_wght.ttf"));
+            customFont = customFont.deriveFont(Font.BOLD, 18);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 18);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
+    }   
+
+
+
     //Buttons are linked to a button group that only allows certain fields to be displayed at a time
     //This calculator does not use the initial home price
     private void homePriceRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homePriceRadioActionPerformed
@@ -697,6 +659,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CalculateButton;
+    private javax.swing.JLabel background;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton cashRadio;
     private javax.swing.JButton clearButton;
@@ -717,7 +680,6 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel interestRateLabel;
     private javax.swing.JLabel interestRatePercentSign;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
