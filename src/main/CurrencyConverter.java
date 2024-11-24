@@ -197,7 +197,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
         Title.setForeground(new java.awt.Color(255, 255, 255));
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("Currency Calculator");
-        getContentPane().add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 645, 61));
+        getContentPane().add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 630, 61));
 
         ToLabel.setFont(getFontParas());
         ToLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -228,7 +228,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 CalculateButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(CalculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 421, 115, 51));
+        getContentPane().add(CalculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 115, 51));
 
         ClearButton.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -239,7 +239,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 ClearButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 70, 40));
+        getContentPane().add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 70, 40));
 
         AmountLabel1.setFont(getFontParas());
         AmountLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -272,7 +272,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 QuitButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 74, 38));
+        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 38, 74, 50));
 
         WarningLabel.setFont(new java.awt.Font("Nunito", 0, 12));
         WarningLabel.setForeground(new java.awt.Color(255, 51, 51));
