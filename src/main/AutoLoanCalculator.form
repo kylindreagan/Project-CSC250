@@ -85,7 +85,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="cashIncentivesLabel" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="cashIncentivesLabel" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cashIncentivesEntryField" min="-2" pref="126" max="-2" attributes="0"/>
                   </Group>
@@ -117,11 +117,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="feesEntryField" min="-2" pref="126" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="otherFeesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="resultsLabel" min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="342" max="-2" attributes="0"/>
+                  <Component id="resultsLabel" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="errorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="95" max="32767" attributes="0"/>
           </Group>
@@ -143,6 +145,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="monthlyPaymentsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="monthlyPaymentsEntryField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="errorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -195,6 +198,8 @@
                           <Component id="feesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="feesEntryField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="otherFeesCheckBox" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
               </Group>
@@ -409,6 +414,19 @@
     <Component class="javax.swing.JLabel" name="resultsLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Results"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="otherFeesCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Include Other Fees Into Loan"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="errorLabel">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Error: None"/>
       </Properties>
     </Component>
   </SubComponents>

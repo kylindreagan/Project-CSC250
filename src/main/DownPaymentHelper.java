@@ -103,7 +103,7 @@ public class DownPaymentHelper {
         String s2 = new DecimalFormat ("#,###.00").format (cCost);
         String s3 = new DecimalFormat ("#,###.00").format (loanAmount);
         String s4 = new DecimalFormat ("#,###.00").format (monthlyPayment);
-        String msg = "\nDown Payment Percentage: " + s + "%\nDown Payment is: $" + s1 +"\nClosing Costs are: $" + s2 + "\nLoan Amount is: " + s3 + "\nMonthly Payment is: $ " + s4 ;
+        String msg = "Down Payment Percentage: " + s + "%\nDown Payment is: $" + s1 +"\nClosing Costs are: $" + s2 + "\nLoan Amount is: " + s3 + "\nMonthly Payment is: $ " + s4 ;
         return msg;
     }
     
@@ -117,7 +117,7 @@ public class DownPaymentHelper {
         String s2 = new DecimalFormat ("#,###.00").format (actualCC);
         String s3 = new DecimalFormat ("#,###.00").format (loanAmount);
         String s4 = new DecimalFormat ("#,###.00").format (monthlyPayment);
-        String msg = "\nDown Payment Percentage: " + s + "%\nDown Payment is: $" + s1 +"\nClosing Costs are: $" + s2 + "\nLoan Amount is: " + s3 + "\nMonthly Payment is: $ " + s4 ;
+        String msg = "Down Payment Percentage: " + s + "%\nDown Payment is: $" + s1 +"\nClosing Costs are: $" + s2 + "\nLoan Amount is: " + s3 + "\nMonthly Payment is: $ " + s4 ;
         return msg;
     }
     
@@ -129,7 +129,7 @@ public class DownPaymentHelper {
         String s1 = new DecimalFormat ("#,###.00").format (hPrice * (down/100));
         String s3 = new DecimalFormat ("#,###.00").format (loanAmount);
         String s4 = new DecimalFormat ("#,###.00").format (monthlyPayment);
-        String msg = "\nDown Payment Percentage: " + s + "%\nDown Payment is: $" + s1 + "\nLoan Amount is: " + s3 + "\nMonthly Payment is: $ " + s4 ;
+        String msg = "Down Payment Percentage: " + s + "%\nDown Payment is: $" + s1 + "\nLoan Amount is: " + s3 + "\nMonthly Payment is: $ " + s4 ;
         return msg;
     }
     
