@@ -43,47 +43,73 @@ public class RetirementHelper {
         return TRRI;
     }
 
-    public static List<Integer> Total_Obtained_Retirement_Income(int Living_Years, float PIT, float Invest, float Current, float future, float Increase) {
+    public static List<Integer> Total_Obtained_Retirement_Income(int Living_Years, float PTI, float Invest, float Current, float Increase) {
         List<Integer> TORI = new ArrayList<>();
-        float years_income;
         float savings = Current;
         TORI.add(Math.round(savings));
-        for (int i = 0; i < Living_Years; i++){
-            years_income = PIT * (float)Math.pow((1+Increase),i);
-            float contribution = years_income * future;
-            savings *= (1+Invest);
-            savings += contribution;
+        for (int i = 1; i <= Living_Years; i++){
+            float particular_solution;
+            if (Invest != Increase) {
+                particular_solution = ((PTI * (float)Math.abs(Math.pow(1 + Invest, i) - Math.pow(1 + Increase, i))) / Math.abs(Invest - Increase));
+                savings = Current * (float)Math.pow(1 + Invest, i) + particular_solution;
+            }
+            else {
+                savings = (Current + PTI * i) * (float)Math.pow(1 + Increase, i);
+            }
+            
             TORI.add(Math.round(savings));
         }
         return TORI;
+    }
+    
+    public static float Current_Needed(float Invest, float ending_value, Integer Living_Years) {
+        return ending_value / (float)Math.pow(1+Invest, Living_Years);
+    }
+
+    public static Integer Total_Obtained_Retirement_Income_At_Year(int Living_Years, float PTI, float Invest, float Current, float Increase) {
+        float TORI = Math.round(Current * Math.pow(1 + Invest, Living_Years) + ((PTI * Math.abs(Math.pow(1 + Invest, Living_Years) - Math.pow(1 + Increase, Living_Years))) / Math.abs(Invest - Increase)));
+        System.out.println(TORI);
+        return Math.round(TORI);
     }
     
     public static List<Integer> Total_Obtained_Retirement_Income_Alt(int Living_Years, float Invest, float Current, float future) {
         List<Integer> TORI = new ArrayList<>();
-        float savings = Current;
-        TORI.add(Math.round(savings));
-        for (int i = 0; i < Living_Years; i++){
-            float contribution = future;
-            savings *= (1+Invest);
-            savings += contribution;
+        for (int i = 0; i <= Living_Years; i++){
+            float savings = Current + (future * (1+Invest) * ((float)Math.pow(1+Invest,i)-1))/Invest;
             TORI.add(Math.round(savings));
         }
         return TORI;
     }
     
-    public static List<Integer> Inverse_TORI(Integer ending_value, int Living_Years, float PIT, float Invest, float Current, float future, float Increase) {
+    public static List<Integer> Total_Obtained_Retirement_Income_Monthly(int Living_Years, float Invest, float Current, float Annual, float Monthly) {
         List<Integer> TORI = new ArrayList<>();
-         float totalReduction = ending_value - Current;
-        float years_outcome = (totalReduction)/Living_Years;
-        float savings = ending_value;
-        TORI.add(Math.round(savings));
-        for (int i = Living_Years-1; i >= 0; i--){
-            float contribution = years_outcome;
-            savings -= contribution;
+        double Monthly_investment = (Invest)/12;
+        for (int i = 0; i <= Living_Years; i++){
+            float savings = Current*(float)Math.pow((1+Invest),i) + Annual * ((float)Math.pow(1+Invest,i)-1)/Invest + Monthly * (((float)Math.pow(1+Monthly_investment, 12*i)-1)/(float)(Monthly_investment));
+            System.out.println(Monthly * (((float)Math.pow(Monthly_investment, 12*i)-1)/(Monthly_investment-1)));
             TORI.add(Math.round(savings));
         }
-        Collections.reverse(TORI);
+        System.out.println(TORI);
         return TORI;
+    }
+    
+    public static float Inverse_TORI(float ending_value, int Living_Years, float PIT, float Invest, float Current, float Increase) {
+        float future;
+        if (Invest != Increase) {
+            float numerator = (ending_value - Current * (float)Math.pow(1 + Invest, Living_Years)) * Math.abs(Invest - Increase);
+            float denom = PIT * Math.abs((float)Math.pow(1 + Invest, Living_Years) - (float)Math.pow(1 + Increase, Living_Years));
+            future = numerator / denom;
+        }
+        else {
+            future = (ending_value / (float)Math.pow(1 + Invest, Living_Years) - Current) / (PIT * Living_Years);
+        }
+        return future;
+    }
+    
+    public static float Inverse_PTI(float ending_value, int Living_Years, float Invest, float Current) {
+        float PTI;
+        PTI = ((ending_value - Current) * Invest) / ((1+Invest)*((float)Math.pow((1+Invest), Living_Years)-1));
+        return PTI;
     }
     
 

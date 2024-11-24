@@ -55,7 +55,7 @@ public class RetirementHelperTest {
         float future = 0.1f;
         float Increase = 0.03f;
 
-        List<Integer> result = RetirementHelper.Total_Obtained_Retirement_Income(Living_Years, PIT, Invest, Current, future, Increase);
+        List<Integer> result = RetirementHelper.Total_Obtained_Retirement_Income(Living_Years, PIT * future, Invest, Current, Increase);
         assertFalse(result.isEmpty());
         assertTrue("Total obtained should increase over time due to investment", result.get(result.size() - 1) > Current);
     }
@@ -99,8 +99,8 @@ public class RetirementHelperTest {
 
     @Test
     public void testIntialParameters() {
-        List<Integer> TORI = RetirementHelper.Total_Obtained_Retirement_Income(32,70000.00f,.06f,30000,.1f,.03f);
+        List<Integer> TORI = RetirementHelper.Total_Obtained_Retirement_Income(32,7000.00f,.06f,30000,.03f);
         Integer final_obtained = TORI.get(TORI.size()-1);
-        assertEquals(1098538,final_obtained, 0.01f);
+        assertEquals(1098537,final_obtained, 0.01f);
     }
 }

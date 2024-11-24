@@ -1,27 +1,32 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Currency;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.Map;
+import org.jsoup.nodes.Element;
 
 /**
  *
  * @author kylin
  */
 public class currencyHelper {
+    private static Boolean fromFile;
     public static boolean canConnect() {
         boolean s;
         s = true;
@@ -36,18 +41,22 @@ public class currencyHelper {
 
 
     }
+    
     public static Map<String, Double[]> webScraper() {
         Map<String, Double[]> dict = new HashMap<>(Map.of("US Dollar", new Double[]{1.0, 1.0}));
         Elements rows = null;
         try {
             Document doc = Jsoup.connect("https://www.x-rates.com/table/?from=USD&amount=1").get();
             rows = doc.select("table.ratesTable > tbody > tr");
+            fromFile = false;
         }
         catch (IOException e) {
             System.out.printf("Error: %s%n", e);
             loadFromFile(dict, "src/files/currency_rates.txt");
+            fromFile = true;
         }
         if (rows != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/files/currency_rates.txt"))) {
             for (Element row : rows) {
                 Elements tds = row.select("td");
                 String currency = tds.get(0).text();
@@ -56,13 +65,25 @@ public class currencyHelper {
                     Double.valueOf(tds.get(2).text())
                 };
 
-                System.out.printf("Currency: %s, rate1: %s, rate2: %s%n",
-                currency, rates[0], rates[1]);
+                 writer.write(String.format("%s, %.2f, %.2f%n", currency, rates[0], rates[1]));
     
                 dict.put(currency, rates);
             }
+            } catch (IOException e) {
+            System.out.printf("Error writing to file: %s%n", e);
+        }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/files/timestamp.txt"))) {
+                writer.write(ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME));
+            }
+            catch (IOException e) {
+            System.out.printf("Error writing to file: %s%n", e);
+        }
         }
         return dict;
+    }
+    
+    public static Boolean FromFile(){
+        return fromFile;
     }
     
 
@@ -111,7 +132,7 @@ public class currencyHelper {
     DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
     char groupingSeparator = symbols.getGroupingSeparator();
     char decimalSeparator = symbols.getDecimalSeparator();
-    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) {
+    if (locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA || locale.equals(new Locale("is", "IS"))) {
         return validate_nondec_currency(money, locale);
     }
 
@@ -135,6 +156,18 @@ public class currencyHelper {
     public static String getCurrencySymbol(Locale locale) {
         Currency currency = Currency.getInstance(locale);
         return currency.getSymbol(locale);
+    }
+    
+    public static String getTimestampFromFile(String file_name) {
+        String timestamp;
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/files/timestamp.txt"))) {
+                timestamp = reader.readLine();
+            }
+            catch (IOException e) {
+            System.out.printf("Error writing to file: %s%n", e);
+            timestamp="Sun, 10 Nov 2024 20:01:55 -0500";
+        }
+        return timestamp;
     }
     
     public static Boolean validate_nondec_currency(String money, Locale locale) {
@@ -198,7 +231,7 @@ public class currencyHelper {
         else if (amount.matches(regexWhole) || amount.matches(regexNoGroup)) {
             return "⚠ Wrong numerical format (Must match 1" + groupingSeparator+ "000" + decimalSeparator + "00 or 1000" + decimalSeparator + "00)";
         }
-        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA) && !validate_nondec_currency(amount, locale)) {
+        else if ((locale == Locale.JAPAN || locale.equals(new Locale("es", "CL")) || locale == Locale.KOREA || locale.equals(new Locale("is", "IS"))) && !validate_nondec_currency(amount, locale)) {
             return "⚠ Cents (Decimal Values) are not allowed for this currency. Please enter a non-negative integer for the conversion amount.";
         }
         else if (amount.charAt(amount.length() - 1) == '.' || amount.charAt(amount.length() - 1) == ',') {
