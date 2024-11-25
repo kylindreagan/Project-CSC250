@@ -7,8 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
-import javax.swing.*;
 import java.util.List;
 
 import main.RetirementHelper;
@@ -75,13 +73,13 @@ public class RetirementHelperTest {
 
     @Test
     public void testGenerateAgeWarning() {
-        assertEquals("Life expectancy needs to be larger than planned retirement age.",
+        assertEquals("⚠ Life expectancy needs to be larger than planned retirement age.",
                 RetirementHelper.generate_age_warning("65", "45", "64"));
-        assertEquals("You are already in retirement",
+        assertEquals("⚠ You are already in retirement",
                 RetirementHelper.generate_age_warning("45", "65", "85"));
-        assertEquals("Please provide positive and reasonable ages",
+        assertEquals("⚠ Please provide positive and reasonable ages",
                 RetirementHelper.generate_age_warning("65", "0", "85"));
-        assertEquals("Ages must be valid whole number integers.",
+        assertEquals("⚠ Ages must be valid whole number integers.",
                 RetirementHelper.generate_age_warning("sixty-five", "forty-five", "eighty-five"));
     }
 

@@ -4,10 +4,12 @@
  */
 package main;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -21,6 +23,13 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import java.awt.GridBagConstraints;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.plot.CategoryPlot;
 
 
 
@@ -46,6 +55,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
         INARpercent = true;
         Futurepercent = true;
         initComponents();
+        addChartToPanel(Collections.emptyList(), Collections.emptyList(), null, false, "Savings", "Needed");
+        setResizable(false);
         FocusListener focusListenerLastFocused = new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -124,7 +135,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 String CA = CurrentAgeField.getText();
                 String LE = LifeExpField.getText();
                 Boolean ValidAge = RetirementHelper.validate_ages(RA, CA, LE);
-                System.out.println(ValidAge);
                 if (!ValidAge){
                 CalculateButton.setEnabled(false);
                 String message = RetirementHelper.generate_age_warning(RA, CA, LE);
@@ -359,7 +369,19 @@ public class RetirementCalculator extends javax.swing.JFrame {
     
     private void addChartToPanel(List<Integer> savingsData, List<Integer> neededData, Integer CA, Boolean two_graphs, String title_1, String title_2) {
         Graph.removeAll(); // Clear previous charts or components
-        DefaultCategoryDataset dataset = createDataset(savingsData, neededData, CA, two_graphs, title_1, title_2);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0; // Column index
+        gbc.gridy = 0; // Row index
+        gbc.weightx = 1.0; // Stretch horizontally
+        gbc.weighty = 1.0; // Stretch vertically
+        gbc.fill = GridBagConstraints.BOTH; // Fill both horizontally and vertically
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();;
+        
+        // Check if data exists, and fill the dataset only if valid data is provided
+        if (savingsData != null && !savingsData.isEmpty() && neededData != null && !neededData.isEmpty()) {
+            dataset = createDataset(savingsData, neededData, CA, two_graphs, title_1, title_2);
+        }
         
         // Create chart
         JFreeChart chart = ChartFactory.createLineChart(
@@ -372,14 +394,22 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
         // Customize the chart
         chart.setBackgroundPaint(Color.white);
+        
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryAxis xAxis = plot.getDomainAxis();
+        xAxis.setTickLabelsVisible(true);
+        xAxis.setTickMarksVisible(true);
+        xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); // Rotate labels for clarity
+        xAxis.setMaximumCategoryLabelWidthRatio(1.0f); // Prevent truncation
+        xAxis.setCategoryMargin(0.2); // Space between categories
+
 
         // Add the chart to a ChartPanel
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(500, 400));
-        System.out.println("Adding chart with data: " + savingsData);
+        chartPanel.setPreferredSize(new Dimension(800, 600));
         
         // Add the ChartPanel to the existing panel
-        Graph.add(chartPanel, BorderLayout.CENTER);
+        Graph.add(chartPanel, gbc);
         
         // Refresh the panel to show the new component
         Graph.validate();
@@ -388,6 +418,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
      private DefaultCategoryDataset createDataset(List<Integer> savingsData, List<Integer> neededData, Integer CA, Boolean two_graphs, String title_1, String title_2) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
+        if (savingsData.size() < 80) {
         // Populate dataset
         for (int year = 0; year < savingsData.size(); year++) {
             dataset.addValue(savingsData.get(year), title_1, Integer.toString(CA+year));
@@ -397,6 +428,30 @@ public class RetirementCalculator extends javax.swing.JFrame {
         for (int year = 0; year < savingsData.size(); year++) {
             dataset.addValue(neededData.get(year), title_2, Integer.toString(CA+year));
         }
+        }
+        }
+        else if (savingsData.size() < 120){
+            // Populate dataset
+        for (int year = 0; year < savingsData.size(); year+=2) {
+            dataset.addValue(savingsData.get(year), title_1, Integer.toString(CA+year));
+        }
+        
+        if (two_graphs){
+        for (int year = 0; year < savingsData.size(); year+=2) {
+            dataset.addValue(neededData.get(year), title_2, Integer.toString(CA+year));
+        }
+        }
+        }
+        else {
+           for (int year = 0; year < savingsData.size(); year+=5) {
+            dataset.addValue(savingsData.get(year), title_1, Integer.toString(CA+year));
+        }
+        
+        if (two_graphs){
+        for (int year = 0; year < savingsData.size(); year+=5) {
+            dataset.addValue(neededData.get(year), title_2, Integer.toString(CA+year));
+        }
+        } 
         }
 
         return dataset;
@@ -457,6 +512,8 @@ public class RetirementCalculator extends javax.swing.JFrame {
         infoBoxLabel = new javax.swing.JLabel();
         infoBoxLabel1 = new javax.swing.JLabel();
         infoBoxLabel2 = new javax.swing.JLabel();
+        Title5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         HowTo = new javax.swing.JPanel();
         CalculateButton2 = new javax.swing.JButton();
         ClearButton1 = new javax.swing.JButton();
@@ -476,6 +533,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         InvestField1 = new javax.swing.JTextField();
         AmountLabel26 = new javax.swing.JLabel();
         WarningLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Withdraw = new javax.swing.JPanel();
         WarningLabel2 = new javax.swing.JLabel();
         CalculateButton3 = new javax.swing.JButton();
@@ -503,6 +561,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         AmountLabel38 = new javax.swing.JLabel();
         InflateField1 = new javax.swing.JTextField();
         AmountLabel39 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         ResultTab = new javax.swing.JPanel();
         OutputLabel = new javax.swing.JLabel();
         TitleLabel = new javax.swing.JLabel();
@@ -512,147 +571,193 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel2 = new javax.swing.JLabel();
         OutputLabel3 = new javax.swing.JLabel();
         OutputLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         Graph = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
         QuitButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setForeground(java.awt.Color.white);
+        setPreferredSize(new java.awt.Dimension(1140, 725));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        RetirementTabs.setPreferredSize(new java.awt.Dimension(1243, 700));
 
         HowMuch.setPreferredSize(new java.awt.Dimension(710, 710));
+        HowMuch.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AmountLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel2.setFont(getFontParas());
         AmountLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel2.setText("Current Age");
+        HowMuch.add(AmountLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 161, -1));
 
-        AmountLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel3.setFont(getFontParas());
         AmountLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel3.setText("Life Expectancy");
+        HowMuch.add(AmountLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 161, -1));
 
-        AmountLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel4.setFont(getFontParas());
         AmountLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel4.setText("/year");
+        HowMuch.add(AmountLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
 
-        AmountLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel5.setFont(getFontParas());
         AmountLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel5.setText("Retirement Age");
+        HowMuch.add(AmountLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 161, -1));
 
-        AmountLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel6.setFont(getFontParas());
         AmountLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel6.setText("Current Savings");
+        HowMuch.add(AmountLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 161, -1));
 
+        INARComboBox.setFont(getFontCombo());
         INARComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
         INARComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 INARComboBoxActionPerformed(evt);
             }
         });
+        HowMuch.add(INARComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 170, 64, -1));
 
-        AmountLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel7.setFont(getFontParas());
         AmountLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel7.setText("<html>\nIncome Needed <br> After Retirement\n</html>");
+        HowMuch.add(AmountLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 161, -1));
 
-        AmountLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel8.setFont(getFontParas());
         AmountLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel8.setText("Pre Income Tax");
+        HowMuch.add(AmountLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 161, -1));
 
-        AmountLabel9.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel9.setFont(getFontParas());
         AmountLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel9.setText("Income Increase");
+        HowMuch.add(AmountLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 161, 30));
 
-        AmountLabel10.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel10.setFont(getFontParas());
         AmountLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel10.setText("Inflation Rate");
+        HowMuch.add(AmountLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 161, -1));
 
         LifeExpField.setText("85");
+        HowMuch.add(LifeExpField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 190, -1));
 
         CurrentAgeField.setText("35");
+        HowMuch.add(CurrentAgeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 189, -1));
 
         PrecomeField.setText("70,000");
+        HowMuch.add(PrecomeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 160, -1));
 
         IncreaseField.setText("3");
+        HowMuch.add(IncreaseField, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 189, -1));
 
         RetireAgeField.setText("67");
+        HowMuch.add(RetireAgeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 190, -1));
 
         InvestField.setText("6");
+        HowMuch.add(InvestField, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 189, -1));
 
         InflateField.setText("3");
+        HowMuch.add(InflateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 270, 190, -1));
 
         INARField.setText("75");
+        HowMuch.add(INARField, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 170, 40));
 
-        Title3.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
-        Title3.setForeground(new java.awt.Color(51, 0, 204));
-        Title3.setText("Assumptions");
+        Title3.setFont(getFontHeading());
+        Title3.setForeground(new java.awt.Color(11, 56, 79));
+        Title3.setText("Attributes");
+        HowMuch.add(Title3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        Title4.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
-        Title4.setForeground(new java.awt.Color(51, 0, 204));
+        Title4.setFont(getFontHeading());
+        Title4.setForeground(new java.awt.Color(11, 56, 79));
         Title4.setText("Optional");
+        HowMuch.add(Title4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
 
-        AmountLabel11.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel11.setFont(getFontParas());
         AmountLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel11.setText("<html> Other Income <br> After Retirement </html>");
+        HowMuch.add(AmountLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 161, -1));
 
         OIARField.setText("0");
+        HowMuch.add(OIARField, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 360, 180, 44));
 
-        AmountLabel12.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel12.setFont(getFontParas());
         AmountLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel12.setText("<html>Average <br> Investment Return</html>");
+        HowMuch.add(AmountLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 161, -1));
 
-        AmountLabel13.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel13.setFont(getFontParas());
         AmountLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel13.setText("Future Savings");
+        HowMuch.add(AmountLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 161, -1));
 
         FutureField.setText("10");
+        HowMuch.add(FutureField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 183, -1));
 
         CurrentField.setText("30,000");
+        HowMuch.add(CurrentField, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 410, 180, 30));
 
+        FutureComboBox.setFont(getFontCombo());
         FutureComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
         FutureComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FutureComboBoxActionPerformed(evt);
             }
         });
+        HowMuch.add(FutureComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 450, 64, -1));
 
-        AmountLabel14.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel14.setFont(getFontParas());
         AmountLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel14.setText("$");
+        HowMuch.add(AmountLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, -1, -1));
 
-        AmountLabel15.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel15.setFont(getFontParas());
         AmountLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel15.setText("$");
+        HowMuch.add(AmountLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
 
-        AmountLabel16.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel16.setFont(getFontParas());
         AmountLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel16.setText("$");
+        HowMuch.add(AmountLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, -1));
 
-        AmountLabel17.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel17.setFont(getFontParas());
         AmountLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel17.setText("%/year");
+        HowMuch.add(AmountLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, -1, -1));
 
-        AmountLabel18.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel18.setFont(getFontParas());
         AmountLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel18.setText("%/year");
+        HowMuch.add(AmountLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 240, -1, -1));
 
-        INARLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        INARLabelTrailing.setFont(getFontParas());
         INARLabelTrailing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         INARLabelTrailing.setText("of current income");
+        HowMuch.add(INARLabelTrailing, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 170, -1, -1));
 
-        AmountLabel20.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel20.setFont(getFontParas());
         AmountLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel20.setText("%/year");
+        HowMuch.add(AmountLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 270, -1, -1));
 
-        FutureLabelTrailing.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        FutureLabelTrailing.setFont(getFontParas());
         FutureLabelTrailing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         FutureLabelTrailing.setText("of current income");
+        HowMuch.add(FutureLabelTrailing, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, -1, -1));
 
-        AmountLabel22.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel22.setFont(getFontParas());
         AmountLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel22.setText("/month");
+        HowMuch.add(AmountLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
 
-        WarningLabel.setForeground(new java.awt.Color(255, 51, 51));
+        WarningLabel.setForeground(new java.awt.Color(255, 51, 0));
         WarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HowMuch.add(WarningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 639, 46));
 
-        CalculateButton.setBackground(new java.awt.Color(204, 153, 0));
+        CalculateButton.setBackground(new java.awt.Color(0, 100, 0));
         CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton.setText("Calculate");
         CalculateButton.setToolTipText("Click to calculate the converted amount.");
@@ -661,6 +766,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButtonActionPerformed(evt);
             }
         });
+        HowMuch.add(CalculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, 290, 60));
 
         ClearButton.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -675,6 +781,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ClearButtonActionPerformed(evt);
             }
         });
+        HowMuch.add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 460, -1, 60));
 
         SuperClearButton.setBackground(new java.awt.Color(255, 255, 255));
         SuperClearButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -684,6 +791,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 SuperClearButtonMouseClicked(evt);
             }
         });
+        HowMuch.add(SuperClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 460, 94, 60));
 
         ResetButton.setBackground(new java.awt.Color(255, 255, 255));
         ResetButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -693,6 +801,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ResetButtonMouseClicked(evt);
             }
         });
+        HowMuch.add(ResetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 460, 94, 60));
 
         infoBoxLabel.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         infoBoxLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -700,6 +809,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         infoBoxLabel.setToolTipText("<html><body style='width: 200px;'>The income you want to have after retirement. Many experts think that you will need 70-80% of your pre-retirement income to maintain your standard of living in retirement. You can either choose a percentage of current income or specify a dollar amount. When providing a dollar amount, please provide a number in today's money.</body></html>  ");
         infoBoxLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         infoBoxLabel.setOpaque(true);
+        HowMuch.add(infoBoxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, 20, 23));
 
         infoBoxLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         infoBoxLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -707,6 +817,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         infoBoxLabel1.setToolTipText("<html><body style='width: 200px;'>The average inflation rate is around 3.5% in the past 100 years in U.S.</body></html>  ");
         infoBoxLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         infoBoxLabel1.setOpaque(true);
+        HowMuch.add(infoBoxLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 20, 23));
 
         infoBoxLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         infoBoxLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -714,205 +825,21 @@ public class RetirementCalculator extends javax.swing.JFrame {
         infoBoxLabel2.setToolTipText("<html><body style='width: 200px;'>The income after retirement that comes from sources other than your savings, such as social security, pension, rental property, etc. Please provide the estimated money amount at time of retirement age rather than in today's money.</body></html>  ");
         infoBoxLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         infoBoxLabel2.setOpaque(true);
+        HowMuch.add(infoBoxLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 20, 23));
 
-        javax.swing.GroupLayout HowMuchLayout = new javax.swing.GroupLayout(HowMuch);
-        HowMuch.setLayout(HowMuchLayout);
-        HowMuchLayout.setHorizontalGroup(
-            HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowMuchLayout.createSequentialGroup()
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HowMuchLayout.createSequentialGroup()
-                                        .addComponent(AmountLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(RetireAgeField))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HowMuchLayout.createSequentialGroup()
-                                        .addComponent(AmountLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(SuperClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(AmountLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CurrentAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HowMuchLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(61, 61, 61))
-            .addGroup(HowMuchLayout.createSequentialGroup()
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(AmountLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AmountLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AmountLabel4)
-                        .addGap(123, 123, 123)
-                        .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(Title3))
-                    .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AmountLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addGap(277, 277, 277)
-                                .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Title4)
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(infoBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(HowMuchLayout.createSequentialGroup()
-                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(AmountLabel17)
-                                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                                .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(INARLabelTrailing))
-                                            .addComponent(AmountLabel18)))
-                                    .addGroup(HowMuchLayout.createSequentialGroup()
-                                        .addComponent(InflateField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(AmountLabel20))))
-                            .addComponent(infoBoxLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(AmountLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CurrentField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(infoBoxLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(AmountLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(OIARField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AmountLabel22))
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(FutureField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(FutureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(FutureLabelTrailing)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        HowMuchLayout.setVerticalGroup(
-            HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HowMuchLayout.createSequentialGroup()
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(HowMuchLayout.createSequentialGroup()
-                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(HowMuchLayout.createSequentialGroup()
-                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(AmountLabel2)
-                                                    .addComponent(CurrentAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(42, 42, 42)
-                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(AmountLabel5)
-                                                    .addComponent(RetireAgeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(15, 15, 15)
-                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(AmountLabel3)
-                                                    .addComponent(LifeExpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(AmountLabel16)
-                                                    .addComponent(PrecomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(AmountLabel4)
-                                                    .addComponent(AmountLabel8))
-                                                .addComponent(Title3))
-                                            .addGroup(HowMuchLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(SuperClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(ResetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AmountLabel9))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowMuchLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(IncreaseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(AmountLabel17))))
-                                .addGap(18, 18, 18)
-                                .addComponent(AmountLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(infoBoxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(INARField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(INARComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(INARLabelTrailing)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AmountLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(InvestField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(AmountLabel18)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel10)
-                    .addComponent(infoBoxLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InflateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Title4)
-                .addGap(3, 3, 3)
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(infoBoxLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel15)
-                    .addComponent(OIARField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel22))
-                .addGap(18, 18, 18)
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel6)
-                    .addComponent(AmountLabel14)
-                    .addComponent(CurrentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(HowMuchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel13)
-                    .addComponent(FutureField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FutureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FutureLabelTrailing))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        Title5.setFont(getFontHeading());
+        Title5.setForeground(new java.awt.Color(11, 56, 79));
+        Title5.setText("Assumptions");
+        HowMuch.add(Title5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/HowMuch.png"))); // NOI18N
+        HowMuch.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 600));
 
         RetirementTabs.addTab("How much do you need to retire?", HowMuch);
 
-        CalculateButton2.setBackground(new java.awt.Color(204, 153, 0));
+        HowTo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CalculateButton2.setBackground(new java.awt.Color(0, 100, 0));
         CalculateButton2.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton2.setText("Calculate");
         CalculateButton2.setToolTipText("Click to calculate the converted amount.");
@@ -921,6 +848,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButton2ActionPerformed(evt);
             }
         });
+        HowTo.add(CalculateButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 90, 51));
 
         ClearButton1.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -930,6 +858,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ClearButton1ActionPerformed(evt);
             }
         });
+        HowTo.add(ClearButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 115, 50));
 
         SuperClearButton1.setBackground(new java.awt.Color(255, 255, 255));
         SuperClearButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -939,6 +868,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 SuperClearButton1ActionPerformed(evt);
             }
         });
+        HowTo.add(SuperClearButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 94, 51));
 
         ResetButton1.setBackground(new java.awt.Color(255, 255, 255));
         ResetButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -948,153 +878,80 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ResetButton1ActionPerformed(evt);
             }
         });
+        HowTo.add(ResetButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 94, 51));
 
-        AmountLabel19.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel19.setFont(getFontParas());
         AmountLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel19.setText("Current Age");
+        HowTo.add(AmountLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 81, 161, -1));
 
         CurrentAgeField1.setText("35");
+        HowTo.add(CurrentAgeField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 189, -1));
 
-        AmountLabel21.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel21.setFont(getFontParas());
         AmountLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel21.setText("Retirement Age");
+        HowTo.add(AmountLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 141, 161, -1));
 
         RetireAgeField1.setText("67");
+        HowTo.add(RetireAgeField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 189, -1));
 
-        AmountLabel23.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel23.setFont(getFontParas());
         AmountLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel23.setText("Current Savings");
+        HowTo.add(AmountLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 194, 161, -1));
 
         CurrentField1.setText("30,000");
+        HowTo.add(CurrentField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, -1));
 
-        DollarSign.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        DollarSign.setFont(getFontParas());
         DollarSign.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DollarSign.setText("$");
+        HowTo.add(DollarSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 20, -1));
 
-        AmountLabel24.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel24.setFont(getFontParas());
         AmountLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel24.setText("Amount needed");
+        HowTo.add(AmountLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 234, 161, -1));
 
-        DollarSign1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        DollarSign1.setFont(getFontParas());
         DollarSign1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DollarSign1.setText("$");
+        HowTo.add(DollarSign1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 20, -1));
 
         NeededField.setText("600,000");
+        HowTo.add(NeededField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 180, -1));
 
-        AmountLabel25.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel25.setFont(getFontParas());
         AmountLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel25.setText("Investment Return");
+        HowTo.add(AmountLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 287, 161, -1));
 
         InvestField1.setText("6");
+        HowTo.add(InvestField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 189, -1));
 
-        AmountLabel26.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel26.setFont(getFontParas());
         AmountLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel26.setText("%/year");
+        HowTo.add(AmountLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, -1, -1));
 
-        WarningLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        WarningLabel1.setForeground(new java.awt.Color(255, 51, 0));
         WarningLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HowTo.add(WarningLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 639, 46));
 
-        javax.swing.GroupLayout HowToLayout = new javax.swing.GroupLayout(HowTo);
-        HowTo.setLayout(HowToLayout);
-        HowToLayout.setHorizontalGroup(
-            HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HowToLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(AmountLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowToLayout.createSequentialGroup()
-                        .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(HowToLayout.createSequentialGroup()
-                                .addComponent(DollarSign, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CurrentField1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(HowToLayout.createSequentialGroup()
-                                .addComponent(DollarSign1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NeededField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ClearButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(SuperClearButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowToLayout.createSequentialGroup()
-                        .addGap(0, 387, Short.MAX_VALUE)
-                        .addComponent(CalculateButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119))
-                    .addGroup(HowToLayout.createSequentialGroup()
-                        .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(RetireAgeField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CurrentAgeField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(HowToLayout.createSequentialGroup()
-                        .addComponent(InvestField1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AmountLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ResetButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(128, 128, 128))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HowToLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(WarningLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
-        );
-        HowToLayout.setVerticalGroup(
-            HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HowToLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(WarningLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel19)
-                    .addComponent(CurrentAgeField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(HowToLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CalculateButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(HowToLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel21)
-                            .addComponent(RetireAgeField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(HowToLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ClearButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SuperClearButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ResetButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(HowToLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel23)
-                            .addComponent(CurrentField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DollarSign))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel24)
-                            .addComponent(DollarSign1)
-                            .addComponent(NeededField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(HowToLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel25)
-                            .addComponent(InvestField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmountLabel26))))
-                .addContainerGap(306, Short.MAX_VALUE))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/HowTo.png"))); // NOI18N
+        HowTo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 600));
 
         RetirementTabs.addTab("How can you save for Retirement?", HowTo);
 
-        WarningLabel2.setForeground(new java.awt.Color(255, 51, 51));
-        WarningLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Withdraw.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        CalculateButton3.setBackground(new java.awt.Color(204, 153, 0));
+        WarningLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        WarningLabel2.setForeground(new java.awt.Color(255, 51, 0));
+        WarningLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Withdraw.add(WarningLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 550, 46));
+
+        CalculateButton3.setBackground(new java.awt.Color(0, 100, 0));
         CalculateButton3.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton3.setText("Calculate");
         CalculateButton3.setToolTipText("Click to calculate the converted amount.");
@@ -1103,6 +960,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 CalculateButton3ActionPerformed(evt);
             }
         });
+        Withdraw.add(CalculateButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 115, 51));
 
         ClearButton2.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1112,6 +970,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ClearButton2ActionPerformed(evt);
             }
         });
+        Withdraw.add(ClearButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 115, 50));
 
         SuperClearButton2.setBackground(new java.awt.Color(255, 255, 255));
         SuperClearButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1121,6 +980,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 SuperClearButton2ActionPerformed(evt);
             }
         });
+        Withdraw.add(SuperClearButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, 110, 51));
 
         ResetButton2.setBackground(new java.awt.Color(255, 255, 255));
         ResetButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1130,286 +990,156 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 ResetButton2ActionPerformed(evt);
             }
         });
+        Withdraw.add(ResetButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 110, 51));
 
-        AmountLabel27.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel27.setFont(getFontParas());
         AmountLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel27.setText("Current Age");
+        Withdraw.add(AmountLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 161, -1));
 
         CurrentAgeField2.setText("35");
+        Withdraw.add(CurrentAgeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 200, -1));
 
-        AmountLabel28.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel28.setFont(getFontParas());
         AmountLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel28.setText("Retirement Age");
+        Withdraw.add(AmountLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 161, -1));
 
         RetireAgeField2.setText("67");
+        Withdraw.add(RetireAgeField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 200, -1));
 
-        AmountLabel29.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel29.setFont(getFontParas());
         AmountLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel29.setText("Life Expectancy");
+        Withdraw.add(AmountLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 161, -1));
 
         LifeExpField1.setText("85");
+        Withdraw.add(LifeExpField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 200, -1));
 
-        AmountLabel30.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel30.setFont(getFontParas());
         AmountLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel30.setText("Annual Contribution");
+        Withdraw.add(AmountLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 187, -1));
 
-        AmountLabel31.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel31.setFont(getFontParas());
         AmountLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel31.setText("$");
+        Withdraw.add(AmountLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 20, -1));
 
         CurrentField2.setText("30,000");
+        Withdraw.add(CurrentField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 189, -1));
 
-        AmountLabel32.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel32.setFont(getFontParas());
         AmountLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel32.setText("Current Savings");
+        Withdraw.add(AmountLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 161, -1));
 
-        AmountLabel33.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel33.setFont(getFontParas());
         AmountLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel33.setText("Monthly Contribution");
+        Withdraw.add(AmountLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 194, -1));
 
-        AmountLabel34.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel34.setFont(getFontParas());
         AmountLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel34.setText("$");
+        Withdraw.add(AmountLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 20, -1));
 
-        AmountLabel35.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel35.setFont(getFontParas());
         AmountLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel35.setText("$");
+        Withdraw.add(AmountLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 20, -1));
 
         AnnualField.setText("0");
+        Withdraw.add(AnnualField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 189, -1));
 
         MonthlyField.setText("500");
+        Withdraw.add(MonthlyField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 189, -1));
 
-        AmountLabel36.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel36.setFont(getFontParas());
         AmountLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel36.setText("Investment Return");
+        Withdraw.add(AmountLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 161, -1));
 
         InvestField2.setText("6");
+        Withdraw.add(InvestField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 189, -1));
 
-        AmountLabel37.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel37.setFont(getFontParas());
         AmountLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel37.setText("%/year");
+        Withdraw.add(AmountLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, -1, -1));
 
-        AmountLabel38.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel38.setFont(getFontParas());
         AmountLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel38.setText("Inflation Rate");
+        Withdraw.add(AmountLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 161, -1));
 
         InflateField1.setText("3");
+        Withdraw.add(InflateField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 190, -1));
 
-        AmountLabel39.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 18)); // NOI18N
+        AmountLabel39.setFont(getFontParas());
         AmountLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel39.setText("%/year");
+        Withdraw.add(AmountLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, -1));
 
-        javax.swing.GroupLayout WithdrawLayout = new javax.swing.GroupLayout(Withdraw);
-        Withdraw.setLayout(WithdrawLayout);
-        WithdrawLayout.setHorizontalGroup(
-            WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(WithdrawLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WithdrawLayout.createSequentialGroup()
-                        .addComponent(AmountLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CurrentAgeField2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                        .addGap(239, 239, 239)
-                        .addComponent(CalculateButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(160, 160, 160))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WithdrawLayout.createSequentialGroup()
-                        .addComponent(AmountLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RetireAgeField2)
-                        .addGap(119, 119, 119)
-                        .addComponent(ClearButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96)
-                        .addComponent(SuperClearButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WithdrawLayout.createSequentialGroup()
-                        .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(WithdrawLayout.createSequentialGroup()
-                                .addComponent(AmountLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(LifeExpField1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(WithdrawLayout.createSequentialGroup()
-                                .addGap(167, 167, 167)
-                                .addComponent(AmountLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CurrentField2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ResetButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(171, 171, 171))
-                    .addGroup(WithdrawLayout.createSequentialGroup()
-                        .addComponent(AmountLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AmountLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AnnualField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(WithdrawLayout.createSequentialGroup()
-                        .addComponent(AmountLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AmountLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(MonthlyField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(WithdrawLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(AmountLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(WithdrawLayout.createSequentialGroup()
-                        .addComponent(InvestField2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AmountLabel37))
-                    .addGroup(WithdrawLayout.createSequentialGroup()
-                        .addComponent(InflateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AmountLabel39)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WithdrawLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(WarningLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
-            .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(WithdrawLayout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(AmountLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(640, Short.MAX_VALUE)))
-        );
-        WithdrawLayout.setVerticalGroup(
-            WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(WithdrawLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(WarningLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CalculateButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(AmountLabel27)
-                        .addComponent(CurrentAgeField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClearButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuperClearButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel28)
-                    .addComponent(RetireAgeField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ResetButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(WithdrawLayout.createSequentialGroup()
-                        .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel29)
-                            .addComponent(LifeExpField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AmountLabel31)
-                            .addComponent(CurrentField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(29, 29, 29)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel30)
-                    .addComponent(AmountLabel34)
-                    .addComponent(AnnualField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel33)
-                    .addComponent(AmountLabel35)
-                    .addComponent(MonthlyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel36)
-                    .addComponent(InvestField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel37))
-                .addGap(18, 18, 18)
-                .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel38)
-                    .addComponent(InflateField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AmountLabel39))
-                .addContainerGap(97, Short.MAX_VALUE))
-            .addGroup(WithdrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WithdrawLayout.createSequentialGroup()
-                    .addContainerGap(316, Short.MAX_VALUE)
-                    .addComponent(AmountLabel32)
-                    .addGap(282, 282, 282)))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Withdraw.png"))); // NOI18N
+        Withdraw.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 600));
 
         RetirementTabs.addTab("How much can you withdraw after retirement?", Withdraw);
 
-        OutputLabel.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        ResultTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        OutputLabel.setFont(getFontParas());
         OutputLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(OutputLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 226, 1100, 29));
 
-        TitleLabel.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel.setFont(getFontHeading());
+        TitleLabel.setForeground(new java.awt.Color(11, 56, 79));
         TitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(TitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 44, 1100, 40));
 
-        TitleLabel1.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel1.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel1.setFont(getFontHeading());
+        TitleLabel1.setForeground(new java.awt.Color(11, 56, 79));
         TitleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(TitleLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 168, 1100, 40));
 
-        OutputLabel1.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel1.setFont(getFontParas());
         OutputLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(OutputLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 1100, 29));
 
-        TitleLabel2.setFont(new java.awt.Font("HP Simplified", 3, 18)); // NOI18N
-        TitleLabel2.setForeground(new java.awt.Color(51, 0, 204));
+        TitleLabel2.setFont(getFontHeading());
+        TitleLabel2.setForeground(new java.awt.Color(11, 56, 79));
         TitleLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(TitleLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1100, 40));
 
-        OutputLabel2.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel2.setFont(getFontParas());
         OutputLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(OutputLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 1090, 29));
 
-        OutputLabel3.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel3.setFont(getFontParas());
         OutputLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(OutputLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 1090, 29));
 
-        OutputLabel4.setFont(new java.awt.Font("HP Simplified Jpan", 1, 12)); // NOI18N
+        OutputLabel4.setFont(getFontParas());
         OutputLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ResultTab.add(OutputLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 131, 1090, 29));
 
-        javax.swing.GroupLayout ResultTabLayout = new javax.swing.GroupLayout(ResultTab);
-        ResultTab.setLayout(ResultTabLayout);
-        ResultTabLayout.setHorizontalGroup(
-            ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OutputLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(TitleLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(OutputLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(TitleLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(TitleLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(ResultTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(OutputLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-                    .addComponent(OutputLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OutputLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        ResultTabLayout.setVerticalGroup(
-            ResultTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ResultTabLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(TitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(OutputLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OutputLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(TitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(OutputLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(TitleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(OutputLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(OutputLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RetirementImage.png"))); // NOI18N
+        ResultTab.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 600));
 
         RetirementTabs.addTab("Results", ResultTab);
 
-        Graph.setLayout(new java.awt.BorderLayout());
+        Graph.setLayout(new java.awt.GridBagLayout());
         RetirementTabs.addTab("Graph", Graph);
 
-        Title1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 48)); // NOI18N
-        Title1.setForeground(new java.awt.Color(51, 0, 204));
-        Title1.setText("Retirement Calculator");
+        getContentPane().add(RetirementTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1150, 620));
 
-        QuitButton.setBackground(new java.awt.Color(255, 0, 0));
+        Title1.setFont(getFontTitle());
+        Title1.setForeground(new java.awt.Color(255, 255, 255));
+        Title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Title1.setText("Retirement Calculator");
+        getContentPane().add(Title1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 513, 50));
+
+        QuitButton.setBackground(new java.awt.Color(255, 255, 255));
         QuitButton.setForeground(new java.awt.Color(0, 0, 0));
         QuitButton.setText("Return");
         QuitButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1417,33 +1147,14 @@ public class RetirementCalculator extends javax.swing.JFrame {
                 QuitButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 74, 38));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(RetirementTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Title1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Title1)
-                    .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(RetirementTabs, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE))
-        );
+        jLabel1.setBackground(new java.awt.Color(11, 56, 79));
+        jLabel1.setOpaque(true);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 110));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
@@ -1714,7 +1425,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         OutputLabel.setText("$" + MainHelper.formatCurrency(final_obtained));
         TitleLabel2.setText("HOW CAN YOU REACH THIS?");
         float percentHigher = Math.abs((float)final_needed - (float)final_obtained) / (((float)final_needed + (float)final_obtained)/2) / (Invest*100);
-        System.out.println(percentHigher);
         float savingsPercentage = RetirementHelper.Inverse_TORI(final_needed, LY, PIT, Invest, current, Increase);
         float yearlySavings = PIT * savingsPercentage;
 
@@ -1733,7 +1443,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         }
         float needed_PTI = PIT * (savingsPercentage);
         List<Integer> Required_TORI = RetirementHelper.Total_Obtained_Retirement_Income(LY, needed_PTI, Invest, current, Increase);
-        System.out.println(Required_TORI);
         addChartToPanel(TORI, Required_TORI, CA, final_needed > final_obtained, "Obtained", "Needed");
     }
     
@@ -1787,7 +1496,6 @@ public class RetirementCalculator extends javax.swing.JFrame {
         float invest = MainHelper.parseMoney(InvestField1.getText(), ",") / 100;
         
         float annual_investment = RetirementHelper.Inverse_PTI(needed, Living_Years, invest, Current);
-        System.out.println(annual_investment);
         float monthly_investment = annual_investment / 12;
         float current_needed = RetirementHelper.Current_Needed(invest, needed, Living_Years);
         
@@ -1822,9 +1530,19 @@ public class RetirementCalculator extends javax.swing.JFrame {
         
         List<Integer> buildup = RetirementHelper.Total_Obtained_Retirement_Income_Monthly(Living_Years, invest, Current, annual, monthly);
         int final_obtained = buildup.get(buildup.size()-1);
-        float initialMonthlyWithdrawal = final_obtained / (9*(Retirement_Years-1));
-        float inflationAdjustedTotal = final_obtained + initialMonthlyWithdrawal * (((float)Math.pow(1 + inflate, Retirement_Years) - 1) / inflate);
-        float inflationAdjustedMonthly = inflationAdjustedTotal / (12 * Retirement_Years);
+        float monthlyRate = invest/12;
+        float monthlyinfrate = inflate/12;
+        
+        float initialMonthlyWithdrawal = (final_obtained*monthlyRate*(float)Math.pow(1+monthlyRate, Retirement_Years*12))/((float)(Math.pow(1+monthlyRate, Retirement_Years*12))-1);
+        float inflationAdjustedMonthly;
+        if (monthlyRate != monthlyinfrate) {
+        inflationAdjustedMonthly = (final_obtained*Math.abs(monthlyRate-monthlyinfrate))/(1-((float)Math.pow(1+monthlyRate-monthlyinfrate,-(Retirement_Years*12))));
+        }
+        else{
+            inflationAdjustedMonthly = initialMonthlyWithdrawal/(float)(Math.pow(1+inflate, Retirement_Years));
+  
+        }
+        
         TitleLabel.setText("BALANCE AT RETIREMENT");
         OutputLabel1.setText("$" + MainHelper.formatCurrency(final_obtained) + " by age " + String.valueOf(RA));
         TitleLabel1.setText("FIXED AMOUNT");
@@ -1832,6 +1550,68 @@ public class RetirementCalculator extends javax.swing.JFrame {
         TitleLabel2.setText("ACCOUNTING FOR INFLATION");
         OutputLabel3.setText("$" + MainHelper.formatCurrency(inflationAdjustedMonthly) + " adjusting " + String.valueOf(inflate*100) +"% annualy");
         OutputLabel2.setText("");
+        
+        List<Integer> withdraw_fixed = RetirementHelper.WithdrawPlan(final_obtained, initialMonthlyWithdrawal, invest, 0, Retirement_Years);
+        List<Integer> withdraw_inflated = RetirementHelper.WithdrawPlan(final_obtained, inflationAdjustedMonthly, invest, inflate, Retirement_Years);
+        int final_withdraw = Math.min(withdraw_fixed.get(withdraw_fixed.size()-1), withdraw_inflated.get(withdraw_inflated.size()-1));
+        for (int i=0;i<withdraw_fixed.size();i++){
+            withdraw_fixed.set(i, withdraw_fixed.get(i)-final_withdraw);
+            withdraw_inflated.set(i, withdraw_inflated.get(i)-final_withdraw);
+        }
+        
+        addChartToPanel(withdraw_fixed, withdraw_inflated, RA+1, true, "Fixed Withdraw", "Inflation Withdraw");
+    }
+    
+    public Font getFontTitle() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/Nunito-VariableFont_wght.ttf"));
+            customFont = customFont.deriveFont(Font.BOLD, 36);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 36);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
+    }
+    
+    public Font getFontHeading() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/Nunito-VariableFont_wght.ttf"));
+            customFont = customFont.deriveFont(Font.BOLD, 20);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 36);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
+    }
+    
+     public Font getFontParas() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/Nunito-VariableFont_wght.ttf"));
+            customFont = customFont.deriveFont(Font.PLAIN, 18);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.PLAIN, 18);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
+    }
+     
+     public Font getFontCombo() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/Nunito-VariableFont_wght.ttf"));
+            customFont = customFont.deriveFont(Font.PLAIN, 18);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.PLAIN, 18);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
     }
     
     
@@ -1931,6 +1711,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel Title1;
     private javax.swing.JLabel Title3;
     private javax.swing.JLabel Title4;
+    private javax.swing.JLabel Title5;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel TitleLabel1;
     private javax.swing.JLabel TitleLabel2;
@@ -1941,5 +1722,10 @@ public class RetirementCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel infoBoxLabel;
     private javax.swing.JLabel infoBoxLabel1;
     private javax.swing.JLabel infoBoxLabel2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,13 +31,11 @@ public class RetirementHelper {
         List<Integer> TRRI = new ArrayList<>();
         float Yearly_Needs = (FIN - OIAR*12); //OIAR = Other Income After Retirement 
         float Yearly_Gets = OIAR*12;
-        System.out.println(Yearly_Needs);
         float Total_Needs = 0.0f;
         TRRI.add(0);
         for (int i = LE; i >= RA; i--) {
             Total_Needs += ((FIN * (float)Math.pow(1+Inflate,i-CA)) - Yearly_Gets) / (float)Math.pow(1 + Invest, i - RA + 1);
             TRRI.add(Math.round(Total_Needs));
-            System.out.println("Year " + i + " Total Needs (discounted): " + Total_Needs);
         }
         Collections.reverse(TRRI); // Reverse the list in-place for correct order
         return TRRI;
@@ -68,7 +66,6 @@ public class RetirementHelper {
 
     public static Integer Total_Obtained_Retirement_Income_At_Year(int Living_Years, float PTI, float Invest, float Current, float Increase) {
         float TORI = Math.round(Current * Math.pow(1 + Invest, Living_Years) + ((PTI * Math.abs(Math.pow(1 + Invest, Living_Years) - Math.pow(1 + Increase, Living_Years))) / Math.abs(Invest - Increase)));
-        System.out.println(TORI);
         return Math.round(TORI);
     }
     
@@ -83,13 +80,17 @@ public class RetirementHelper {
     
     public static List<Integer> Total_Obtained_Retirement_Income_Monthly(int Living_Years, float Invest, float Current, float Annual, float Monthly) {
         List<Integer> TORI = new ArrayList<>();
-        double Monthly_investment = (Invest)/12;
-        for (int i = 0; i <= Living_Years; i++){
-            float savings = Current*(float)Math.pow((1+Invest),i) + Annual * ((float)Math.pow(1+Invest,i)-1)/Invest + Monthly * (((float)Math.pow(1+Monthly_investment, 12*i)-1)/(float)(Monthly_investment));
-            System.out.println(Monthly * (((float)Math.pow(Monthly_investment, 12*i)-1)/(Monthly_investment-1)));
-            TORI.add(Math.round(savings));
+        float savings = Current;
+        float monthlyInvestRate = (float)Math.pow(1 + Invest, 1.0 / 12) - 1;
+        TORI.add(Math.round(savings));
+        for (int i = 1; i <= Living_Years*12; i++){
+            savings *= (1+monthlyInvestRate);
+            savings += Monthly;
+            if (i % 12 == 0) {
+                savings += Annual;
+                TORI.add(Math.round(savings));
+            }
         }
-        System.out.println(TORI);
         return TORI;
     }
     
@@ -157,22 +158,22 @@ public class RetirementHelper {
             LE = Integer.parseInt(Life_Expectency);
         }
         catch (NumberFormatException e) {
-            return "Ages must be valid whole number integers.";
+            return "⚠ Ages must be valid whole number integers.";
         }
 
         if (LE <= RA) {
-            return "Life expectancy needs to be larger than planned retirement age.";
+            return "⚠ Life expectancy needs to be larger than planned retirement age.";
         }
         
         if (RA < CA){
-            return "You are already in retirement";
+            return "⚠ You are already in retirement";
         }
         
         if (CA <= 0 || LE > 150) {
-            return "Please provide positive and reasonable ages"; 
+            return "⚠ Please provide positive and reasonable ages"; 
         }
         
-        return "Unknown error has occured";
+        return "⚠ Unknown error has occured";
     }
     
     public static Boolean validate_dynamic(String value, Boolean is_percent) {
@@ -194,11 +195,45 @@ public class RetirementHelper {
             if (final_needed > final_obtained) {
                 return i+1;
             }
-            System.out.println("Year " + i + " Total Needs (discounted): " + final_needed);
         }
         return -1;
         
     }
+    
+    public static List<Integer> WithdrawPlan(int final_obtained, float withdrawrate, float invest, float inflate, int LY) {
+        List<Integer> withdraw = new ArrayList<>();
+        float current = final_obtained;
+        float monthlyInvestRate = (float)Math.pow(1 + invest, 1.0 / 12) - 1;
+        withdraw.add(Math.round(current));
+        for (int i=1;i<LY;i++){
+            for (int j=0;j<12;j++) {
+                current *= (1+monthlyInvestRate);
+                current-=withdrawrate;
+                if (current < 0){
+                    System.out.println("Balance ran out on month "+ String.valueOf(j)+" of year " +String.valueOf(i));
+                    break; // Stop further withdrawals
+                }
+            }
+            withdrawrate += withdrawrate*inflate;
+            if (current < 0){
+                    withdraw.add(0);
+                    break; // Stop further withdrawals
+            }
+            withdraw.add(Math.round(current));
+        }
+        
+        return withdraw;
+    }
+    
+    public static float calculateInflationAdjustedMonthly(float final_obtained, float inflate, float invest, int years) {
+        float sum = 0.0f;
+        for (int t = 0; t < years*12; t++) {
+            sum += Math.pow(1 + inflate, t) / Math.pow(1 + invest, t);
+        }
+        return final_obtained / (sum*5);
+}
+
+
 
     //Additional Savings Needed=PV−FV
 
