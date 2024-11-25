@@ -7,7 +7,10 @@ package main;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,8 +30,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.util.Collections;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.ImageIcon;
+import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 
 
@@ -37,6 +40,7 @@ import javax.swing.SwingUtilities;
  * @author Kylind
  */
 public class CurrencyConverter extends javax.swing.JFrame {
+    private Image backgroundImage;
     private Map<String, Double[]> currencyDict;
     private static final List<String> Popular_Currencies = Arrays.asList(
         "US Dollar", 
@@ -58,6 +62,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
      * Creates new form CurrencyCalculator
      */
     public CurrencyConverter(){
+        backgroundImage = new ImageIcon(getClass().getResource("/images/HowTo.png")).getImage();
         initComponents();
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/swap.png"));
         Image scaledImage = originalIcon.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH);
@@ -139,6 +144,9 @@ public class CurrencyConverter extends javax.swing.JFrame {
 }
 
 
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,26 +174,40 @@ public class CurrencyConverter extends javax.swing.JFrame {
         ResultTextPane = new javax.swing.JTextPane();
         SwapButton = new javax.swing.JButton();
         TimestampLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 102, 102));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         FromComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(FromComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 177, 317, -1));
 
         ToComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(ToComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 256, 317, -1));
 
-        FromLabel.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        FromLabel.setFont(getFontParas());
+        FromLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         FromLabel.setText("From");
+        getContentPane().add(FromLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 182, 67, -1));
 
-        Title.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 36)); // NOI18N
-        Title.setForeground(new java.awt.Color(51, 0, 204));
+        Title.setFont(getFontTitle());
+        Title.setForeground(new java.awt.Color(255, 255, 255));
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("Currency Calculator");
+        getContentPane().add(Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 630, 61));
 
-        ToLabel.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        ToLabel.setFont(getFontParas());
+        ToLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ToLabel.setText("To");
+        getContentPane().add(ToLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 261, 61, -1));
 
-        AmountLabel.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        AmountLabel.setFont(getFontParas());
+        AmountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel.setText("Amount");
+        getContentPane().add(AmountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 95, 40));
 
         AmountTextField.setText("100.00");
         AmountTextField.setToolTipText("Enter the amount to be converted.");
@@ -194,28 +216,35 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 AmountTextFieldKeyPressed(evt);
             }
         });
+        getContentPane().add(AmountTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 131, 307, -1));
 
-        CalculateButton.setBackground(new java.awt.Color(204, 153, 0));
+        CalculateButton.setBackground(new java.awt.Color(0, 100, 0));
         CalculateButton.setForeground(new java.awt.Color(0, 0, 0));
         CalculateButton.setText("Calculate");
         CalculateButton.setToolTipText("Click to calculate the converted amount.");
+        CalculateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CalculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CalculateButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(CalculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 115, 51));
 
         ClearButton.setBackground(new java.awt.Color(255, 255, 255));
         ClearButton.setForeground(new java.awt.Color(0, 0, 0));
         ClearButton.setText("Clear");
+        ClearButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ClearButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ClearButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 70, 40));
 
-        AmountLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 24)); // NOI18N
+        AmountLabel1.setFont(getFontParas());
+        AmountLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel1.setText("Result");
+        getContentPane().add(AmountLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 348, 61, -1));
 
         FromCheckBox.setSelected(true);
         FromCheckBox.setText("Show only most popular currencies");
@@ -224,6 +253,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 FromCheckBoxActionPerformed(evt);
             }
         });
+        getContentPane().add(FromCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 209, 227, -1));
 
         ToCheckBox.setText("Show only most popular currencies");
         ToCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -231,134 +261,50 @@ public class CurrencyConverter extends javax.swing.JFrame {
                 ToCheckBoxActionPerformed(evt);
             }
         });
+        getContentPane().add(ToCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 288, 227, -1));
 
-        QuitButton.setBackground(new java.awt.Color(255, 0, 0));
+        QuitButton.setBackground(new java.awt.Color(255, 255, 255));
         QuitButton.setForeground(new java.awt.Color(0, 0, 0));
         QuitButton.setText("Return");
+        QuitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         QuitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QuitButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(QuitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 38, 74, 50));
 
         WarningLabel.setForeground(new java.awt.Color(255, 51, 51));
         WarningLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(WarningLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 73, 639, 46));
 
-        ResultTextPane.setFont(getFont());
+        ResultTextPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ResultTextPane.setFont(getFontResult());
         ResultTextPane.setForeground(new java.awt.Color(153, 153, 0));
         ResultTextPane.setText("$100.00\nis equivalent to\n$100.00");
+        ResultTextPane.setOpaque(false);
         jScrollPane2.setViewportView(ResultTextPane);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 324, 289, 85));
+
+        SwapButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SwapButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SwapButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(SwapButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 201, 69, 81));
 
         TimestampLabel.setFont(new java.awt.Font("Dubai", 2, 12)); // NOI18N
+        TimestampLabel.setForeground(new java.awt.Color(255, 255, 255));
         TimestampLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(TimestampLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 478, 639, 21));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(FromCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(FromLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(FromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(67, 67, 67)
-                                    .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(ToCheckBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ToLabel)
-                            .addComponent(AmountLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SwapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(AmountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TimestampLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AmountLabel)
-                    .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(FromLabel)
-                            .addComponent(FromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FromCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ToLabel)
-                            .addComponent(ToComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(SwapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ToCheckBox)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(AmountLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ClearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)))
-                .addComponent(TimestampLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CurrencyConverter.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ClearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClearButtonMouseClicked
@@ -442,13 +388,37 @@ public class CurrencyConverter extends javax.swing.JFrame {
     }//GEN-LAST:event_SwapButtonActionPerformed
 
     
-    public Font getFont() {
+    public Font getFontResult() {
         try {
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/iskoola-pota.ttf"));
             customFont = customFont.deriveFont(Font.BOLD, 18);
             return customFont;
         } catch (FontFormatException | IOException e) {
            Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 18);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
+    }
+    public Font getFontTitle() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/Nunito-VariableFont_wght.ttf"));
+            customFont = customFont.deriveFont(Font.BOLD, 36);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.BOLD, 36);
+            customFont = customFont.deriveFont(18f); // Set the desired size
+            return customFont;
+        }
+
+    }
+     public Font getFontParas() {
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/Nunito-VariableFont_wght.ttf"));
+            customFont = customFont.deriveFont(Font.PLAIN, 18);
+            return customFont;
+        } catch (FontFormatException | IOException e) {
+           Font customFont = new java.awt.Font("Arial Unicode MS", java.awt.Font.PLAIN, 18);
             customFont = customFont.deriveFont(18f); // Set the desired size
             return customFont;
         }
@@ -525,6 +495,7 @@ public class CurrencyConverter extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ToComboBox;
     private javax.swing.JLabel ToLabel;
     private javax.swing.JLabel WarningLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
