@@ -29,6 +29,7 @@ public class AutoLoanHelper {
         String s6 = new DecimalFormat ("#,###.00").format (totalCost);
         return "Vehicle Price is: $" +s1 + "\nTotal Loan Amount is: $"+ s + "\nSale Tax is: $"+ s2 + "\nUpfront Payment is: $"+ s3 + "\nTotal of "+ lTerm + " Loan Payments is: $"+ s4 + "\nTotal Loan Interest is: $"+ s5 + "\nTotal Cost is: $"+ s6;
     }
+
     
     public static String carPriceCalculateFees(float lTerm, float intRate, float sTax, float cIncent, float dPay, float trade, float amtOwed, float fees, float monthly){
         float totalPayments = monthly * lTerm;
