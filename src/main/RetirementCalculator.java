@@ -579,7 +579,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setForeground(java.awt.Color.white);
-        setPreferredSize(new java.awt.Dimension(1140, 700));
+        setPreferredSize(new java.awt.Dimension(1140, 725));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         RetirementTabs.setPreferredSize(new java.awt.Dimension(1243, 700));
@@ -1131,7 +1131,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         Graph.setLayout(new java.awt.GridBagLayout());
         RetirementTabs.addTab("Graph", Graph);
 
-        getContentPane().add(RetirementTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1150, 600));
+        getContentPane().add(RetirementTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1150, 620));
 
         Title1.setFont(getFontTitle());
         Title1.setForeground(new java.awt.Color(255, 255, 255));
@@ -1154,6 +1154,7 @@ public class RetirementCalculator extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 110));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
