@@ -36,7 +36,7 @@ public class AmortizationCalculator extends javax.swing.JFrame {
                     boolean validMP = MainHelper.validate_money(MP, false);                    
                     String message = "";
                     if (!validTA){
-                        message = "⚠ Invalid Auto Price";
+                        message = "Error: Invalid Auto Price";
                         totalAmtField.setForeground(Color.red); 
                         errorLabel.setVisible(true);
                         errorLabel.setText(message); 
@@ -46,7 +46,7 @@ public class AmortizationCalculator extends javax.swing.JFrame {
                     }
                     
                     if (!validMP){
-                        message = "⚠ Invalid Monthly Payment";
+                        message = "Error: Invalid Monthly Payment";
                         monthlyPaymentField.setForeground(Color.red); 
                         errorLabel.setVisible(true);
                         errorLabel.setText(message); 
@@ -56,15 +56,36 @@ public class AmortizationCalculator extends javax.swing.JFrame {
                     }
                     
                     boolean Y = !MainHelper.isValidNumber(yearsField.getText());
-                    boolean M = !MainHelper.isValidNumber(monthsField.getText());
+                    boolean M = !MainHelper.isValidNumber(monthsField.getText());              
                     boolean IR = !MainHelper.isValidNumber(intRateField.getText()) || AutoLoanCalculator.isZero(intRateField.getText());
-                    boolean combo = AutoLoanCalculator.isZero(yearsField.getText()) && AutoLoanCalculator.isZero(monthsField.getText());
+                    boolean combo = false;
+                    if (!Y && !M){
+                        combo = AutoLoanCalculator.isZero(yearsField.getText()) && AutoLoanCalculator.isZero(monthsField.getText());
+                    }
+                    
                     if ( Y || M || IR || combo) {
                     calculateButton.setEnabled(false);
+                    if (combo){
+                        monthsField.setForeground(Color.red);
+                        yearsField.setForeground(Color.red);
+                        errorLabel.setVisible(true);
+                        errorLabel.setText("Error: Must have a positive number of months or years");                        
+                    } else {
+                        monthsField.setForeground(Color.black);
+                        yearsField.setForeground(Color.black);
+                    }
+                    if (M) {
+                        monthsField.setForeground(Color.red);
+                        errorLabel.setVisible(true);
+                        errorLabel.setText("Error: Invalid Number of Months.");
+                    }
+                    else {
+                        monthsField.setForeground(Color.black);
+                    }
                     if (Y) {
                         yearsField.setForeground(Color.red);
                         errorLabel.setVisible(true);
-                        errorLabel.setText("⚠ Invalid Number of Years.");
+                        errorLabel.setText("Error: Invalid Number of Years.");
                     }
                     else {
                         yearsField.setForeground(Color.black);
@@ -72,28 +93,13 @@ public class AmortizationCalculator extends javax.swing.JFrame {
                     if (IR) {
                         intRateField.setForeground(Color.red);
                         errorLabel.setVisible(true);
-                        errorLabel.setText("⚠ Invalid Interest Rate.");
+                        errorLabel.setText("Error: Invalid Interest Rate.");
                     }
                     else {
                         intRateField.setForeground(Color.black);
                     }
-                    if (M) {
-                        monthsField.setForeground(Color.red);
-                        errorLabel.setVisible(true);
-                        errorLabel.setText("⚠ Invalid Number of Months.");
-                    }
-                    else {
-                        monthsField.setForeground(Color.black);
-                    }
-                    if (combo){
-                        monthsField.setForeground(Color.red);
-                        yearsField.setForeground(Color.red);
-                        errorLabel.setVisible(true);
-                        errorLabel.setText("⚠ Must have a positive number of months or years");                        
-                    } else {
-                        monthsField.setForeground(Color.black);
-                        yearsField.setForeground(Color.black);
-                    }
+                    
+                    
                 }
                 else if (validTA && validMP){
                     totalAmtField.setForeground(Color.black);
@@ -148,69 +154,115 @@ public class AmortizationCalculator extends javax.swing.JFrame {
         monthlyPaymentLabel = new javax.swing.JLabel();
         monthlyPaymentField = new javax.swing.JFormattedTextField();
         errorLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nunito", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(238, 239, 239));
         jLabel1.setText("Amortization Calculator");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
 
+        jButton1.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(27, 45, 74));
         jButton1.setText("Return");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 20, -1, -1));
 
-        totalAmtLabel.setText("Total Amount  $");
+        totalAmtLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        totalAmtLabel.setForeground(new java.awt.Color(27, 45, 74));
+        totalAmtLabel.setText("Total Amount        $");
+        getContentPane().add(totalAmtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         totalAmtField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         totalAmtField.setText("200,000");
+        totalAmtField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        getContentPane().add(totalAmtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 190, -1));
 
+        jLabel3.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(27, 45, 74));
         jLabel3.setText("Loan Term ");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(27, 45, 74));
         jLabel4.setText("Interest Rate ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, -1, -1));
 
+        yearsField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         yearsField.setText("15");
+        getContentPane().add(yearsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 100, -1));
 
+        jLabel5.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(27, 45, 74));
         jLabel5.setText("Years");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 70, -1));
 
+        monthsField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         monthsField.setText("0");
+        getContentPane().add(monthsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 90, -1));
 
+        jLabel6.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(27, 45, 74));
         jLabel6.setText("Months ");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, -1, -1));
 
+        intRateField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         intRateField.setText("6");
+        getContentPane().add(intRateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 190, -1));
 
+        jLabel7.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(27, 45, 74));
         jLabel7.setText("%");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, -1, -1));
 
         resultsField.setEditable(false);
         resultsField.setColumns(20);
         resultsField.setRows(5);
         jScrollPane1.setViewportView(resultsField);
 
-        jLabel8.setText("Results ");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 210, 320, 390));
 
+        jLabel8.setFont(new java.awt.Font("Nunito", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(27, 45, 74));
+        jLabel8.setText("Results ");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 240, -1));
+
+        calculateButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         calculateButton.setText("Calculate");
         calculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calculateButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(calculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, -1, -1));
 
+        clearButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         clearButton.setText("Clear");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, -1, -1));
 
+        resetButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         resetButton.setText("Reset");
         resetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, -1));
 
         buttonGroup1.add(loanButton);
+        loanButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        loanButton.setForeground(new java.awt.Color(27, 45, 74));
         loanButton.setSelected(true);
         loanButton.setText("Amortized Interest from Total Loan");
         loanButton.addActionListener(new java.awt.event.ActionListener() {
@@ -218,129 +270,38 @@ public class AmortizationCalculator extends javax.swing.JFrame {
                 loanButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(loanButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
 
         buttonGroup1.add(mpButton);
+        mpButton.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        mpButton.setForeground(new java.awt.Color(27, 45, 74));
         mpButton.setText("Amortized Interest from Monthly Payment");
         mpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mpButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(mpButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
+        monthlyPaymentLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        monthlyPaymentLabel.setForeground(new java.awt.Color(27, 45, 74));
         monthlyPaymentLabel.setText("Monthly Payment  $");
+        getContentPane().add(monthlyPaymentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         monthlyPaymentField.setText("750");
+        monthlyPaymentField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        getContentPane().add(monthlyPaymentField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 190, -1));
 
+        errorLabel.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         errorLabel.setForeground(new java.awt.Color(255, 0, 0));
         errorLabel.setText("Error: None");
+        getContentPane().add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 60, 450, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(calculateButton)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(clearButton)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(resetButton)))
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(262, 262, 262)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(208, 208, 208)
-                                .addComponent(loanButton)
-                                .addGap(86, 86, 86)
-                                .addComponent(mpButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(intRateField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(yearsField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(monthsField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(totalAmtLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(totalAmtField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(monthlyPaymentLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(monthlyPaymentField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(113, 113, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel1)))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loanButton)
-                    .addComponent(mpButton))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(monthlyPaymentLabel)
-                    .addComponent(monthlyPaymentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalAmtLabel)
-                    .addComponent(totalAmtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(yearsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(monthsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(intRateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(25, 25, 25)
-                .addComponent(errorLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(calculateButton)
-                    .addComponent(clearButton)
-                    .addComponent(resetButton))
-                .addContainerGap(84, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/downPaymentBckgrd.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -446,6 +407,7 @@ public class AmortizationCalculator extends javax.swing.JFrame {
     private javax.swing.JTextField intRateField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
