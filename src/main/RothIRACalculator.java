@@ -81,10 +81,18 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 WarningLabel.setText(message); 
                 RetireAgeField.setForeground(Color.red);
                 CurrentAgeField.setForeground(Color.red);
+                CurrentAmountField.setForeground(Color.red);
+                AnnualField.setForeground(Color.red);
+                ERRField.setForeground(Color.red);
+                TaxField.setForeground(Color.red);
             }
             else {
-                RetireAgeField.setForeground(Color.black);
-                CurrentAgeField.setForeground(Color.black);
+                RetireAgeField.setForeground(Color.red);
+                CurrentAgeField.setForeground(Color.red);
+                CurrentAmountField.setForeground(Color.red);
+                AnnualField.setForeground(Color.red);
+                ERRField.setForeground(Color.red);
+                TaxField.setForeground(Color.red);
                 Boolean x = !MainHelper.validate_money(CurrentAmountField.getText(), false);
                 Boolean c = ((!MainHelper.validate_money(AnnualField.getText(), false)) && !YesRadioButton.isSelected());
                 Boolean a = !MainHelper.isValidNumber(ERRField.getText());
@@ -92,32 +100,16 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 if (x || a || b || c) {
                     CalculateButton.setEnabled(false);
                     if (b) {
-                        TaxField.setForeground(Color.red);
                         WarningLabel.setText("⚠ Invalid Marginal Tax Rate.");
                     }
-                    else {
-                        TaxField.setForeground(Color.black);
-                    }
                     if (a) {
-                        ERRField.setForeground(Color.red);
                         WarningLabel.setText("⚠ Invalid Expected Rate of Return.");
                     }
-                    else {
-                        ERRField.setForeground(Color.red);
-                    }
                     if (c) {
-                        AnnualField.setForeground(Color.red);
                         WarningLabel.setText("⚠ Invalid Annual Contribution.");
                     }
-                    else {
-                        AnnualField.setForeground(Color.black);
-                    }
                     if(x) {
-                        CurrentAmountField.setForeground(Color.red);
                         WarningLabel.setText("⚠ Invalid Current Amount.");
-                    }
-                    else {
-                        CurrentAmountField.setForeground(Color.black);
                     }
                 }
                 else {
@@ -125,6 +117,8 @@ public class RothIRACalculator extends javax.swing.JFrame {
                     AnnualField.setForeground(Color.black);
                     ERRField.setForeground(Color.black);
                     TaxField.setForeground(Color.black);
+                    RetireAgeField.setForeground(Color.black);
+                    CurrentAgeField.setForeground(Color.black);
                     WarningLabel.setText("");
                     CalculateButton.setEnabled(true);  
                 }
@@ -283,12 +277,12 @@ public class RothIRACalculator extends javax.swing.JFrame {
         AmountLabel2.setFont(getFontParas());
         AmountLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel2.setText("Current Amount");
-        InputPanel.add(AmountLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 130, -1));
+        InputPanel.add(AmountLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 130, 30));
 
         AmountLabel3.setFont(getFontParas());
         AmountLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel3.setText("Annual Contribution");
-        InputPanel.add(AmountLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        InputPanel.add(AmountLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         AmountLabel4.setFont(getFontParas());
         AmountLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -299,23 +293,23 @@ public class RothIRACalculator extends javax.swing.JFrame {
         AmountLabel5.setFont(getFontParas());
         AmountLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel5.setText("Current Age");
-        InputPanel.add(AmountLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 161, -1));
+        InputPanel.add(AmountLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 36, 161, 30));
 
         AmountLabel6.setFont(getFontParas());
         AmountLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel6.setText("Retirement Age");
-        InputPanel.add(AmountLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 161, -1));
+        InputPanel.add(AmountLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 76, 161, 20));
 
         AmountLabel7.setFont(getFontParas());
         AmountLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel7.setText("<html>Expected Rate<br>of Return</html>");
-        InputPanel.add(AmountLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 182, -1));
+        InputPanel.add(AmountLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 182, 40));
 
         AmountLabel8.setFont(getFontParas());
         AmountLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel8.setText("Maximize Contributions?");
         AmountLabel8.setToolTipText("");
-        InputPanel.add(AmountLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 229, -1));
+        InputPanel.add(AmountLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 229, -1));
 
         IRAbuttons.add(YesRadioButton);
         YesRadioButton.setText("Yes");
@@ -324,7 +318,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 YesRadioButtonActionPerformed(evt);
             }
         });
-        InputPanel.add(YesRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 53, -1));
+        InputPanel.add(YesRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 53, -1));
 
         IRAbuttons.add(NoRadioButton);
         NoRadioButton.setSelected(true);
@@ -334,22 +328,22 @@ public class RothIRACalculator extends javax.swing.JFrame {
                 NoRadioButtonActionPerformed(evt);
             }
         });
-        InputPanel.add(NoRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 47, -1));
+        InputPanel.add(NoRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 47, -1));
 
         CurrentAmountField.setText("20,000");
-        InputPanel.add(CurrentAmountField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 189, -1));
+        InputPanel.add(CurrentAmountField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 189, -1));
 
         AnnualField.setText("7,000");
-        InputPanel.add(AnnualField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 189, -1));
+        InputPanel.add(AnnualField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 189, -1));
 
         ERRField.setText("6");
-        InputPanel.add(ERRField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 189, 40));
+        InputPanel.add(ERRField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 189, 40));
 
         CurrentAgeField.setText("30");
-        InputPanel.add(CurrentAgeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 189, -1));
+        InputPanel.add(CurrentAgeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 189, -1));
 
         RetireAgeField.setText("65");
-        InputPanel.add(RetireAgeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 189, -1));
+        InputPanel.add(RetireAgeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 189, -1));
 
         TaxField.setText("25");
         InputPanel.add(TaxField, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 189, -1));
@@ -403,12 +397,12 @@ public class RothIRACalculator extends javax.swing.JFrame {
         AmountLabel16.setFont(getFontParas());
         AmountLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel16.setText("$");
-        InputPanel.add(AmountLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
+        InputPanel.add(AmountLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 166, 20, 30));
 
         AmountLabel17.setFont(getFontParas());
         AmountLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel17.setText("$");
-        InputPanel.add(AmountLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 20, -1));
+        InputPanel.add(AmountLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 206, 20, 30));
 
         AmountLabel19.setFont(getFontParas());
         AmountLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -425,7 +419,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         infoBoxLabel.setToolTipText("<html><body style='width: 200px;'>The amount you plan to contribute to the Roth IRA account each year. The maximum contribution limit is $7,000 for individuals under the age of 50 and increases to $8,000 for individuals aged 50 and above.</body></html>  ");
         infoBoxLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         infoBoxLabel.setOpaque(true);
-        InputPanel.add(infoBoxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 20, 23));
+        InputPanel.add(infoBoxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 20, 23));
 
         infoBoxLabel1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         infoBoxLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -433,7 +427,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         infoBoxLabel1.setToolTipText("<html><body style='width: 200px;'>Please select 'yes' if you plan to contribute the maximum allowed amount each year. The maximum contribution limit is $6,500 before the age of 50 and increases to $7,500 after the age of 50.</body></html>  ");
         infoBoxLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         infoBoxLabel1.setOpaque(true);
-        InputPanel.add(infoBoxLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 20, 23));
+        InputPanel.add(infoBoxLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 20, 23));
 
         infoBoxLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         infoBoxLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -441,7 +435,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         infoBoxLabel2.setToolTipText("<html><body style='width: 200px;'>The expected average annual return you will earn on your money in the account.</body></html>  ");
         infoBoxLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         infoBoxLabel2.setOpaque(true);
-        InputPanel.add(infoBoxLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 20, 23));
+        InputPanel.add(infoBoxLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 20, 23));
 
         infoBoxLabel3.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         infoBoxLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -455,7 +449,7 @@ public class RothIRACalculator extends javax.swing.JFrame {
         AmountLabel20.setFont(getFontParas());
         AmountLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AmountLabel20.setText("%");
-        InputPanel.add(AmountLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
+        InputPanel.add(AmountLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RothIRA.png"))); // NOI18N
         InputPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 500));
