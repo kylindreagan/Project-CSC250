@@ -38,18 +38,18 @@ public class RothIRAHelper {
             CA = Integer.parseInt(Current_Age);
         }
         catch (NumberFormatException e) {
-            return "Ages must be valid whole number integers.";
+            return "⚠ Ages must be valid whole number integers.";
         }
         
         if (RA <= CA){
-            return "You are already in retirement";
+            return "⚠ You are already in retirement";
         }
         
         if (CA <= 0 || RA > 120) {
-            return "Please provide positive and reasonable ages"; 
+            return "⚠ Please provide positive and reasonable ages"; 
         }
         
-        return "Unknown error has occured";    }
+        return "⚠ Unknown error has occured";    }
     
     public static List<Integer> Roth_IRA(int years, int CA, float contribution, float ERR, float Current) {
         List<Integer> Roth_IRA = new ArrayList<>();
