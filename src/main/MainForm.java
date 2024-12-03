@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kylin
@@ -218,7 +221,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_amortizationButtonMouseClicked
 
     private void rentVsBuyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rentVsBuyButtonMouseClicked
-        new RentVsBuyCalculator().setVisible(true);
+        JOptionPane.showMessageDialog(null, "This feature is under construction");
     }//GEN-LAST:event_rentVsBuyButtonMouseClicked
 
     private void houseAffordabilityButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_houseAffordabilityButtonMouseClicked
@@ -242,7 +245,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_rentButtonMouseClicked
 
     private void refinanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refinanceButtonMouseClicked
-        new RefinanceCalculator().setVisible(true);
+        JOptionPane.showMessageDialog(null, "This feature is under construction");
     }//GEN-LAST:event_refinanceButtonMouseClicked
 
     private void rothIRAButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rothIRAButtonMouseClicked

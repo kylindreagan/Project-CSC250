@@ -41,6 +41,8 @@ public class RentCalculator extends javax.swing.JFrame {
         jPanel8.setVisible(true);    }
     public RentCalculator() {
         initComponents();
+        setResizable(false);
+
         hidePanels();
         ToolTipManager.sharedInstance().setInitialDelay(0);
         ToolTipManager.sharedInstance().setDismissDelay(20000);
@@ -60,23 +62,21 @@ public class RentCalculator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel10 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -85,35 +85,77 @@ public class RentCalculator extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        jPanel10.setOpaque(false);
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nunito", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Rent Calculator");
-        jPanel10.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 6, -1, 49));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, 49));
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel6.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(239, 240, 240));
+        jLabel6.setText("<html><body style='width: 400px;'>Use the rent calculator below to estimate the affordable monthly rental spending amount based on income and debt level.</body></html>");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 490, 70));
 
+        jLabel10.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(25, 55, 77));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 430, -1, -1));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Nunito", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel2.setText("How much Rent can you afford?");
+        jLabel2.setToolTipText("");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(25, 55, 77));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 270, 170, 40));
+
+        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel9.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel9.setToolTipText("");
+        jLabel9.setMaximumSize(new java.awt.Dimension(20, 23));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 270, 180, 40));
+
+        jButton3.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(25, 55, 77));
+        jButton3.setText("Return");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, 110, 40));
+
+        jLabel3.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(25, 55, 77));
         jLabel3.setText("Your pre-tax income:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        jLabel4.setText("Your monthly payback Debt:");
+        jLabel4.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel4.setText("<html>Your monthly payback Debt:<html>");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 200, 50));
+
+        jTextField1.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(25, 55, 77));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 100, -1));
+
+        jTextField2.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField2.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 100, -1));
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 255));
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
@@ -122,115 +164,27 @@ public class RentCalculator extends javax.swing.JFrame {
         jLabel5.setToolTipText("<html><body style='width: 200px;'>The total of the minimum amounts you pay each month to keep up with the ongoing debts, such as student loans, car loans, credit cards, child support, alimony paid, and personal loans</body></html>");
         jLabel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel5.setOpaque(true);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 20, 20));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "per month", "per year" }));
-
-        jButton1.setText("Calculate");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
+        jLabel13.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(25, 55, 77));
         jLabel13.setText("$");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 20, 30));
 
+        jComboBox2.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(25, 55, 77));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "per month", "per year" }));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 130, -1));
+
+        jLabel14.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(25, 55, 77));
         jLabel14.setText("$");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel14))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel13)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel4))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        jPanel10.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, 150));
-
-        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("<html><body style='width: 540px;'>Use the rent calculator below to estimate the affordable monthly rental spending amount based on income and debt level.</body></html>");
-        jPanel10.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 90, 710, 30));
-
-        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jPanel10.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
-
-        jPanel3.setBackground(new java.awt.Color(153, 0, 0));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 11, Short.MAX_VALUE)
-        );
-
-        jPanel10.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 124, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, 30));
 
         jPanel4.setBackground(new java.awt.Color(51, 204, 0));
 
+        jLabel7.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(25, 55, 77));
         jLabel7.setText("Safe");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -238,178 +192,144 @@ public class RentCalculator extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel7)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(69, 69, 69))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel10.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 140, 30));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, 180, 50));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 0));
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel11.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(25, 55, 77));
         jLabel11.setText("Acceptable");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(jLabel11)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel10.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 100, 30));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, 180, 50));
 
         jPanel6.setBackground(new java.awt.Color(255, 51, 0));
 
-        jLabel12.setText("Aggresive");
+        jLabel12.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel12.setText("Aggressive");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
                 .addComponent(jLabel12)
-                .addGap(34, 34, 34))
+                .addGap(49, 49, 49))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel12)
-                .addContainerGap())
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel10.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 130, 30));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 330, 180, 50));
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 240, 5, 30));
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(945, 308, 10, 50));
 
-        jPanel8.setBackground(new java.awt.Color(51, 255, 0));
+        jPanel8.setBackground(new java.awt.Color(25, 55, 77));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
+            .addGap(0, 10, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel10.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 240, 5, 30));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 308, 10, 50));
 
-        jButton3.setText("Close");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        jButton1.setBackground(new java.awt.Color(158, 191, 183));
+        jButton1.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jButton1.setText("Calculate");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
-        jPanel10.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, -1, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 140, 30));
 
-        jPanel9.setBackground(new java.awt.Color(153, 0, 0));
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
+        jButton2.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Clear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 140, 30));
 
-        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("About");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel16)
-                .addContainerGap(667, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 7, Short.MAX_VALUE)
-                .addComponent(jLabel16))
-        );
-
-        jPanel10.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 730, 30));
-
-        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel15.setText("<html><body style='width: 550px;'>Input your income and monthly debt payments to get a clearer idea of what you can afford. This calculator uses your preincome tax to calcuate your recommened max rental payment by multipying it by a common percentage of 36% and subtracting any debt payyments. Your suggested rental payment is calcuated by multipying your preincome tax by 28% and subtracting your monthly debt payments. Negative suggested numbers usually represent that the debt payment is too large relative to the pre-tax income, and the formula based on disposable income starts producing values that suggest your debts exceed your capacity to afford rent. This is a signal that it's financially unsustainable to afford any rent at all in that situation. </body></html>");
-        jPanel10.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 720, 230));
-
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel2.setText("How much Rent can you afford?");
-        jPanel10.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 61, -1, -1));
-
-        jPanel2.setBackground(new java.awt.Color(255, 153, 102));
-
-        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 255, 0));
-        jLabel8.setText("bruh");
-
-        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("bro");
-        jLabel9.setMaximumSize(new java.awt.Dimension(20, 23));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel8)
-                .addGap(68, 68, 68)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(308, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(212, 212, 212)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(515, Short.MAX_VALUE))
-        );
-
-        jPanel10.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 750));
-
-        jScrollPane1.setViewportView(jPanel10);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 470));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RentCalcDesign.png"))); // NOI18N
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1243, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jTextField1.setText("");
+        jTextField2.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
@@ -419,19 +339,32 @@ public class RentCalculator extends javax.swing.JFrame {
         // Check if the income input is valid and positive
         if (!RentCalculatorHelper.isValidNumber(incomeInput) || Double.parseDouble(incomeInput) < 0)  {
             jTextField1.setBackground(Color.red);
-            JOptionPane.showMessageDialog(null, "Please input a valid income (non-negative number > 0)");
+            JOptionPane.showMessageDialog(
+                null,
+                "Please input a valid income (positive number > 0)",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            jTextField1.setBackground(Color.white);
             return;
         }
 
         // Check if the debt input is valid
         if (!RentCalculatorHelper.isValidNumber(debtInput)) {
-            JOptionPane.showMessageDialog(null, "Please input a valid monthly debt payback");
             jTextField2.setBackground(Color.red);
+                        JOptionPane.showMessageDialog(
+                null,
+                "Please input a valid monthly debt payback)",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            jTextField2.setBackground(Color.white);
+
             return;
         }
+        
         jTextField1.setBackground(Color.white); // Custom red color
         jTextField2.setBackground(Color.white); // Custom red color
-
 
         double income = Double.parseDouble(incomeInput);
         double debt = Double.parseDouble(debtInput);
@@ -440,10 +373,9 @@ public class RentCalculator extends javax.swing.JFrame {
         double min;
         double monthlyincome;
 
-        
         String selectedFrequency = (String) jComboBox2.getSelectedItem();
-        
-       if ("per month".equals(selectedFrequency)) {
+
+        if ("per month".equals(selectedFrequency)) {
             Threshold = RentCalculatorHelper.ThreshHold(income);
             max = RentCalculatorHelper.max(income, debt);
             min = RentCalculatorHelper.min(income, debt);
@@ -453,78 +385,67 @@ public class RentCalculator extends javax.swing.JFrame {
             max = RentCalculatorHelper.max(monthlyincome, debt);
             min = RentCalculatorHelper.min(monthlyincome, debt);
         }
-       
 
-       if (max <= 0 || income == 0 && debt>=0){
-           
+        if (max <= 0 || income == 0 && debt>=0){
+
             jLabel10.setText("<html> At that income and debt level, it will be hard to meet rent payments.<html>");
             hidePanels();
 
-       }       
-               
+        }
+
         else if(income == 0 && debt < 0){
             jLabel8.setVisible(true);
             jLabel9.setVisible(true);
             jLabel8.setText(String.format("$%,.0f",min));
             jLabel9.setText(String.format("$%,.0f",max));
             showPanels();
-            jLabel10.setText(String.format("<html> Some landlords may not accept applications with more than 1/3 of gross income on rent, which is $%.0f <br>"
-                    + "You can afford up to $%,.0f per month on a rental payment.<br>"
-                    + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,Threshold,max,min));
+            jLabel10.setText(String.format("<html> Some landlords may not accept applications with more <br>" 
+                    + "than 1/3 of gross income on rent, which is $%,.0f <br>"
+                + "You can afford up to $%,.0f per month on a rental payment.<br>"
+                + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,Threshold,max,min));
         }
-        
+
         else if(debt <= 0){
             jLabel8.setVisible(true);
             jLabel9.setVisible(true);
             jLabel8.setText(String.format("$%,.0f",min));
             jLabel9.setText(String.format("$%,.0f",max));
             showPanels();
-            jLabel10.setText(String.format("<html> Some landlords may not accept applications with more than 1/3 of gross income on rent, which is $%.0f <br>"
-                    + "You can afford up to $%,.0f per month on a rental payment.<br>"
-                    + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,Threshold,max,min));
-            
+            jLabel10.setText(String.format("<html> Some landlords may not accept applications with more <br>"+ "than 1/3 of gross income on rent, which is $%,.0f <br>"
+                + "You can afford up to $%,.0f per month on a rental payment.<br>"
+                + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,Threshold,max,min));
+
         }
-        
+
         else if(Threshold < max){
             jLabel8.setVisible(true);
             jLabel9.setVisible(true);
             jLabel8.setText(String.format("$%,.0f",min));
             jLabel9.setText(String.format("$%,.0f",max));
             showPanels();
-            jLabel10.setText(String.format("<html> Some landlords may not accept applications with more than 1/3 of gross income on rent, which is $%.0f <br>"
-                    + "You can afford up to $%,.0f per month on a rental payment.<br>"
-                    + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,Threshold,max,min));
+            jLabel10.setText(String.format("<html> Some landlords may not accept applications with more<br>"+ "than 1/3 of gross income on rent, which is $%,.0f <br>"
+                + "You can afford up to $%,.0f per month on a rental payment.<br>"
+                + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,Threshold,max,min));
         }
         else{
             jLabel8.setVisible(true);
             jLabel9.setVisible(true);
             jLabel8.setText(String.format("$%,.0f",min));
             jLabel9.setText(String.format("$%,.0f",max));
-            showPanels();    
+            showPanels();
             jLabel10.setText(String.format("<html> You can afford up to $%,.0f per month on a rental payment.<br>"
-                    + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,max,min));
-            
+                + "It is recommended to keep your rental payment below $%,.0f per month.<html>" ,max,min));
+
         }
-
-
-            
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jTextField1.setText("");
-        jTextField2.setText("");
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -574,7 +495,6 @@ public class RentCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -583,17 +503,11 @@ public class RentCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

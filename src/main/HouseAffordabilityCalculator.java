@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -12,6 +14,12 @@ import javax.swing.ToolTipManager;
 import java.util.List;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 
 
 
@@ -23,13 +31,35 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
 
     /**
      * Creates new form HouseAffordabilityCalculator
-     */
+     */    
+    
     public HouseAffordabilityCalculator() {
         initComponents();
+        setResizable(false);
+
         ToolTipManager.sharedInstance().setInitialDelay(0);
         ToolTipManager.sharedInstance().setDismissDelay(20000);
+        jPanel8.setVisible(false);
+
+
+                
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            
+            public void itemStateChanged(java.awt.event.ItemEvent evt){
+                if (jCheckBox1.isSelected()){
+
+                jPanel8.setVisible(true);
+                } 
+                else{
+                    jPanel8.setVisible(false);
+                } 
+            }
+        });
 
     }
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,7 +70,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -65,7 +95,6 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -78,9 +107,13 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -95,27 +128,25 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jComboBox12 = new javax.swing.JComboBox<>();
-        jPanel7 = new javax.swing.JPanel();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
         jComboBox9 = new javax.swing.JComboBox<>();
-        jLabel37 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
         jComboBox7 = new javax.swing.JComboBox<>();
-        jLabel38 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jTextField16 = new javax.swing.JTextField();
         jComboBox10 = new javax.swing.JComboBox<>();
-        jLabel36 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jTextField17 = new javax.swing.JTextField();
         jComboBox11 = new javax.swing.JComboBox<>();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -146,172 +177,231 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         jLabel63 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel70 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1243, 700));
+        setMinimumSize(new java.awt.Dimension(1243, 700));
+        setPreferredSize(new java.awt.Dimension(1243, 700));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jButton1.setBackground(new java.awt.Color(239, 240, 240));
+        jButton1.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 40, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel1.setText("How Much House Can I Afford?");
+        jLabel1.setFont(new java.awt.Font("Nunito", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("House Affordability");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
+        jTabbedPane1.setBackground(new java.awt.Color(178, 215, 208));
+        jTabbedPane1.setForeground(new java.awt.Color(0, 102, 0));
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jPanel4.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(239, 240, 240));
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jPanel4.setBackground(new java.awt.Color(239, 240, 240));
+
+        jLabel2.setFont(new java.awt.Font("Nunito", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(25, 55, 77));
         jLabel2.setText("Modify the values and click the Calculate button to use");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(170, 170, 170))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addGap(14, 14, 14))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel5.setBackground(new java.awt.Color(239, 240, 240));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(25, 55, 77));
         jLabel3.setText("Annual Household Income: ");
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 15, 192, -1));
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(25, 55, 77));
         jLabel4.setText("Mortgage loan term: ");
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 50, -1, -1));
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(25, 55, 77));
         jLabel5.setText("Interest rate:");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 85, 93, -1));
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 150, -1));
 
-        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(25, 55, 77));
         jLabel6.setText("Monthly debt payback:");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 120, 162, -1));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 200, -1));
 
-        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(25, 55, 77));
         jLabel7.setText("Down payment:");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 155, 146, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 146, -1));
 
-        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(25, 55, 77));
         jLabel8.setText("Property tax:");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 190, 146, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 146, -1));
 
-        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(25, 55, 77));
         jLabel9.setText("Insurance:");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 259, 146, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 146, -1));
 
-        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(25, 55, 77));
         jLabel10.setText("HOA or co-op fee:");
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 224, 146, -1));
+        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 210, -1));
 
-        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(25, 55, 77));
         jLabel11.setText("Debt-to-income (DTI) ratio:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 297, 184, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, -1));
 
+        jTextField1.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jTextField1.setText("100,000");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 14, 220, -1));
+        jPanel5.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 10, 230, -1));
 
+        jTextField2.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jTextField2.setText("30");
-        jPanel5.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 49, 220, -1));
+        jPanel5.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 50, 230, -1));
 
+        jTextField3.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jTextField3.setText("6.699");
-        jPanel5.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 84, 220, -1));
+        jPanel5.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 90, 230, -1));
 
+        jTextField4.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jTextField4.setText("0");
-        jPanel5.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 119, 220, -1));
+        jPanel5.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 130, 230, -1));
 
-        jTextField5.setText("20");
-        jPanel5.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 220, -1));
+        jTextField5.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField5.setText("4");
+        jPanel5.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 180, 230, -1));
 
+        jTextField6.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jTextField6.setText("1.5");
-        jPanel5.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 220, -1));
+        jPanel5.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 220, 230, -1));
 
+        jTextField7.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jTextField7.setText("0");
-        jPanel5.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 220, -1));
+        jPanel5.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 270, 230, -1));
 
+        jTextField8.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jTextField8.setText("0.5");
-        jPanel5.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 258, 220, -1));
+        jPanel5.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 310, 230, -1));
 
+        jComboBox1.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conventional loan (28/36 rule)", "FHA loan (31% front-end, 43% back end)", "VA loan (41%)", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%" }));
-        jPanel5.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 296, 220, -1));
-
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("?");
-        jLabel12.setToolTipText("<html><body style='width: 200px;'> The entire before-tax income of the household, including salary tips, commissions, bonuses, investment income, dividens, alimony received, and more.</body></html>");
-        jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        jLabel12.setOpaque(true);
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 18, 15, 15));
+        jPanel5.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 350, 230, -1));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("?");
         jLabel13.setToolTipText("<html><body style='width: 200px;'>The total of the minimum amounts you pay each month to keep up with the ongoing debts, such as student loans, car loans, credit cards, child support, alimony paid, and personal loans.</body></html>");
         jLabel13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
         jLabel13.setOpaque(true);
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 123, 15, 15));
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 133, 18, 18));
 
+        jLabel14.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jLabel14.setText("$");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 18, -1, -1));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 10, -1, -1));
 
+        jLabel15.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(25, 55, 77));
         jLabel15.setText("long term debts, car, student loan, etc");
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, -1, -1));
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 135, 280, -1));
 
+        jLabel16.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(25, 55, 77));
         jLabel16.setText("salary + other incomes (before tax)");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 17, -1, -1));
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 13, 260, -1));
 
+        jLabel17.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(25, 55, 77));
         jLabel17.setText("years");
-        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 53, 70, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        jPanel5.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 224, 60, -1));
+        jPanel5.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 275, 60, -1));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        jPanel5.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 155, 60, -1));
+        jPanel5.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 185, 60, -1));
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        jPanel5.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 189, 60, -1));
+        jPanel5.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 225, 60, -1));
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        jPanel5.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 258, 60, -1));
+        jPanel5.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 315, 60, -1));
 
+        jLabel18.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(25, 55, 77));
         jLabel18.setText("per year");
-        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 258, -1, -1));
+        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 315, 90, -1));
 
+        jLabel19.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(25, 55, 77));
         jLabel19.setText("per year");
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 192, -1, -1));
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 225, 90, -1));
 
+        jLabel20.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(25, 55, 77));
         jLabel20.setText("per year");
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 227, -1, -1));
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 275, 90, -1));
 
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 110, 40));
+        jLabel66.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        jLabel66.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel66.setText("%");
+        jPanel5.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 50, -1));
 
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("?");
+        jLabel12.setToolTipText("<html><body style='width: 200px;'> The entire before-tax income of the household, including salary tips, commissions, bonuses, investment income, dividens, alimony received, and more.</body></html>");
+        jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
+        jLabel12.setOpaque(true);
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 14, 18, 18));
+
+        jButton3.setBackground(new java.awt.Color(158, 191, 183));
+        jButton3.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jButton3.setText("Calculate");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 110, 40));
+
+        jButton2.setBackground(new java.awt.Color(239, 240, 240));
+        jButton2.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(25, 55, 77));
+        jButton2.setText("Clear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -320,142 +410,222 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(129, 129, 129)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addGap(284, 284, 284)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 779, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Household Income-To-Debt Estimates", jPanel2);
 
-        jPanel3.setBackground(new java.awt.Color(102, 0, 102));
+        jPanel3.setBackground(new java.awt.Color(239, 240, 240));
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel6.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel21.setText("Budget for house:");
-        jPanel6.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 15, 120, -1));
-
-        jLabel22.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel22.setText("Mortgage loan term: ");
-        jPanel6.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 45, -1, -1));
-
-        jLabel23.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel23.setText("Interest rate:");
-        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 75, 93, -1));
-
-        jLabel25.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel25.setText("Down payment:");
-        jPanel6.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 105, 146, -1));
-        jPanel6.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 15, 220, -1));
-        jPanel6.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 45, 220, -1));
-        jPanel6.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 75, 220, -1));
-        jPanel6.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 105, 220, -1));
-
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("?");
-        jLabel30.setToolTipText("<html><body style='width: 200px;'>The amount of money you can afford and are willing to pay for the house each month</body></html>");
-        jLabel30.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        jLabel30.setOpaque(true);
-        jPanel6.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 18, 15, 15));
-
-        jLabel32.setText("$");
-        jPanel6.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 18, -1, -1));
-
-        jLabel34.setText("per month");
-        jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 18, -1, -1));
-
-        jLabel35.setText("years");
-        jPanel6.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 48, -1, -1));
-
-        jCheckBox1.setText("Include the tax and fees below into the budget");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
-
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
-        jPanel6.add(jComboBox12, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 105, 60, -1));
-
-        jPanel7.setBackground(new java.awt.Color(204, 204, 255));
-
-        jLabel39.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel39.setText("Modify the values and click the Calculate button to use");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
-                .addComponent(jLabel39)
-                .addGap(170, 170, 170))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel39)
-                .addGap(14, 14, 14))
-        );
-
+        jButton5.setBackground(new java.awt.Color(158, 191, 183));
+        jButton5.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         jButton5.setText("Calculate");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 110, 40));
 
-        jButton4.setText("Clear");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setBackground(new java.awt.Color(239, 240, 240));
+        jButton6.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jButton6.setText("Clear");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, 110, 40));
 
-        jPanel8.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel6.setBackground(new java.awt.Color(239, 240, 240));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel26.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel21.setText("Budget for house:");
+        jPanel6.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 170, -1));
+
+        jLabel22.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel22.setText("Mortgage loan term: ");
+        jPanel6.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel23.setText("Interest rate:");
+        jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 84, 150, -1));
+
+        jLabel25.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel25.setText("Down payment:");
+        jPanel6.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 115, 146, -1));
+
+        jTextField9.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField9.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField9.setText("3000");
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 220, -1));
+
+        jTextField10.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField10.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField10.setText("30");
+        jPanel6.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 220, -1));
+
+        jTextField11.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField11.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField11.setText("6.699");
+        jPanel6.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 220, -1));
+
+        jTextField12.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField12.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField12.setText("20");
+        jPanel6.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 220, -1));
+
+        jLabel30.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("?");
+        jLabel30.setToolTipText("<html><body style='width: 200px;'>The amount of money you can afford and are willing to pay for the house each month</body></html>");
+        jLabel30.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
+        jLabel30.setOpaque(true);
+        jPanel6.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 27, 17, 17));
+
+        jLabel32.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel32.setText("%");
+        jPanel6.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 87, -1, -1));
+
+        jLabel34.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel34.setText("per month");
+        jPanel6.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
+
+        jLabel35.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel35.setText("years");
+        jPanel6.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, -1));
+
+        jCheckBox1.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(25, 55, 77));
+        jCheckBox1.setText("Include the tax and fees below into the budget");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
+
+        jLabel69.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel69.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel69.setText("$");
+        jPanel6.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+
+        jLabel72.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel72.setText("%");
+        jPanel6.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 115, -1, -1));
+
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 640, 185));
+
+        jLabel39.setFont(new java.awt.Font("Nunito", 0, 24)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel39.setText("Modify the values and click the Calculate button to use");
+        jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
+        jPanel8.setBackground(new java.awt.Color(239, 240, 240));
+
+        jLabel26.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(25, 55, 77));
         jLabel26.setText("Property tax:");
 
+        jTextField13.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField13.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField13.setText("0.5");
+
+        jComboBox9.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jComboBox9.setForeground(new java.awt.Color(25, 55, 77));
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
-        jLabel37.setText("per year");
-
-        jLabel28.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(25, 55, 77));
         jLabel28.setText("HOA or co-op fee:");
 
+        jTextField14.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField14.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField14.setText("0");
+
+        jComboBox7.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jComboBox7.setForeground(new java.awt.Color(25, 55, 77));
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
-        jLabel38.setText("per year");
-
-        jLabel27.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(25, 55, 77));
         jLabel27.setText("Insurance:");
 
+        jTextField16.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField16.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField16.setText("0");
+        jTextField16.setToolTipText("");
+
+        jComboBox10.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jComboBox10.setForeground(new java.awt.Color(25, 55, 77));
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
-        jLabel36.setText("per year");
-
-        jLabel29.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(25, 55, 77));
         jLabel29.setText("<html>Maintenance Cost (repair, utility, etc)<html>");
         jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        jTextField17.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jTextField17.setForeground(new java.awt.Color(25, 55, 77));
+        jTextField17.setText("2");
+
+        jComboBox11.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jComboBox11.setForeground(new java.awt.Color(25, 55, 77));
         jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "%", "$" }));
 
+        jLabel36.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel36.setText("per year");
+
+        jLabel37.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel37.setText("per year");
+
+        jLabel38.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel38.setText("per year");
+
+        jLabel40.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(25, 55, 77));
         jLabel40.setText("per year");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -464,43 +634,36 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel8Layout.createSequentialGroup()
-                            .addComponent(jLabel27)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                            .addComponent(jLabel28)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                            .addComponent(jLabel26)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel36))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel40))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel37))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel38)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel37)
+                    .addComponent(jLabel38)
+                    .addComponent(jLabel40))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,287 +675,485 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
                     .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel37))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36))
-                .addGap(8, 8, 8)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel28)
+                            .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel36))
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
                     .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel38))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel40))
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel40))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(201, 201, 201))))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
-        );
+        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 210));
 
         jTabbedPane1.addTab("Fixed Monthly Budgets", jPanel3);
 
-        jPanel9.setBackground(new java.awt.Color(102, 0, 51));
+        jPanel9.setBackground(new java.awt.Color(239, 240, 240));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel24.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel24.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(25, 55, 77));
         jLabel24.setText("You can borrow:");
-        jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 115, -1));
+        jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 250, -1));
 
-        jLabel31.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setText("Money");
-        jPanel9.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
+        jLabel31.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel31.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel31.setToolTipText("");
+        jPanel9.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, -1, -1));
 
-        jLabel33.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel33.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(25, 55, 77));
         jLabel33.setText("Total Price of the house");
-        jPanel9.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
+        jPanel9.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
 
-        jLabel41.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel41.setText("Money");
-        jPanel9.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, -1, -1));
+        jLabel41.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel41.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, -1, -1));
 
-        jLabel42.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel42.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel42.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(25, 55, 77));
         jLabel42.setText("Down payment");
-        jPanel9.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
+        jPanel9.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, -1));
 
-        jLabel43.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel43.setText("Money");
-        jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, -1));
+        jLabel43.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel43.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, -1, -1));
 
-        jLabel44.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel44.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel44.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(25, 55, 77));
         jLabel44.setText("Estimated closing cost (one time, assume 3%)");
-        jPanel9.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
+        jPanel9.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
-        jLabel45.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel45.setText("Money");
-        jPanel9.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
+        jLabel45.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel45.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, -1, -1));
 
-        jLabel46.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel46.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel46.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(25, 55, 77));
         jLabel46.setText("Front-end debt-to-income (DTI) ratio");
-        jPanel9.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
+        jPanel9.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, -1));
 
-        jLabel47.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel47.setText("Money");
-        jPanel9.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, -1, -1));
+        jLabel47.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel47.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, -1, -1));
 
-        jLabel48.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel48.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel48.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel48.setForeground(new java.awt.Color(25, 55, 77));
         jLabel48.setText("Back-end debt-to-income (DTI) ratio");
-        jPanel9.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
+        jPanel9.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
 
-        jLabel49.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel49.setText("Money");
-        jPanel9.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, -1, -1));
+        jLabel49.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel49.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, -1, -1));
 
-        jLabel50.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel50.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel50.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(25, 55, 77));
         jLabel50.setText("Total one-time payment at closing");
-        jPanel9.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+        jPanel9.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
-        jLabel51.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel51.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel51.setText("Money");
-        jPanel9.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+        jLabel51.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel51.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, -1, -1));
 
-        jLabel52.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel52.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel52.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel52.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel52.setForeground(new java.awt.Color(25, 55, 77));
         jLabel52.setText("Monthly mortgage payment");
-        jPanel9.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        jPanel9.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
 
-        jLabel53.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel53.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel53.setText("Money");
-        jPanel9.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+        jLabel53.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel53.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel53.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, -1, -1));
 
-        jLabel54.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel54.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel54.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel54.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel54.setForeground(new java.awt.Color(25, 55, 77));
         jLabel54.setText("Monthly PMI insurance payment");
-        jPanel9.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
+        jPanel9.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
 
-        jLabel55.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel55.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel55.setText("Money");
-        jPanel9.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, -1, -1));
+        jLabel55.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel55.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, -1, -1));
 
-        jLabel56.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel56.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel56.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel56.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(25, 55, 77));
         jLabel56.setText("Annual property tax");
-        jPanel9.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+        jPanel9.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, -1, -1));
 
-        jLabel57.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel57.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel57.setText("Money");
-        jPanel9.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, -1));
+        jLabel57.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel57.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, -1, -1));
 
-        jLabel58.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel58.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel58.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel58.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(25, 55, 77));
         jLabel58.setText("Annual HOA or co-op fee");
-        jPanel9.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
+        jPanel9.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
 
-        jLabel59.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel59.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel59.setText("Money");
-        jPanel9.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, -1, -1));
+        jLabel59.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel59.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel59.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, -1, -1));
 
-        jLabel60.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel60.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel60.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel60.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(25, 55, 77));
         jLabel60.setText("Annual insurance cost");
-        jPanel9.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, -1));
+        jPanel9.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, -1, -1));
 
-        jLabel61.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel61.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel61.setText("Money");
-        jPanel9.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, -1, -1));
+        jLabel61.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel61.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel61.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, -1, -1));
 
-        jLabel62.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel62.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel62.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel62.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel62.setForeground(new java.awt.Color(25, 55, 77));
         jLabel62.setText("<html>Estimated annual maintenance cost (repair, utility etc., assume 1.5%)<html>");
         jLabel62.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel9.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 250, 40));
+        jPanel9.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 300, 60));
 
-        jLabel63.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel63.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel63.setText("Money");
-        jPanel9.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, -1, -1));
+        jLabel63.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel63.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel63.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, -1, -1));
 
-        jLabel64.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel64.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel64.setText("Annual insurance cost");
-        jPanel9.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+        jLabel64.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel64.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel64.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel64.setText("Total monthly cost on the house");
+        jPanel9.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, -1, -1));
 
-        jLabel65.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
-        jLabel65.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel65.setText("Money");
-        jPanel9.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 400, -1, -1));
+        jLabel65.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel65.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel65.setForeground(new java.awt.Color(25, 55, 77));
+        jPanel9.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, -1, -1));
+
+        jLabel67.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel67.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel67.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel67.setText("%");
+        jPanel9.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, -1, -1));
+
+        jLabel68.setBackground(new java.awt.Color(239, 240, 240));
+        jLabel68.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
+        jLabel68.setForeground(new java.awt.Color(25, 55, 77));
+        jLabel68.setText("%");
+        jPanel9.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, -1, -1));
 
         jTabbedPane1.addTab("Results", jPanel9);
 
-        jButton1.setText("Close");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(55, 55, 55))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 121, 819, 535));
         jTabbedPane1.getAccessibleContext().setAccessibleName("House Affordability");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/housefinal.png"))); // NOI18N
+        getContentPane().add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1243, 704));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        List<JTextField> fieldsToClear = Arrays.asList(
-            jTextField1, jTextField2, jTextField3, jTextField4, jTextField5,
-            jTextField6, jTextField7, jTextField8, jTextField9, jTextField10
-        );
-        HouseAffordabilityHelper.clearTextFields(fieldsToClear);
+        // Declare these variables at the method or class level to ensure they are in scope
+        double propertyTax = 0;
+        double hoaFee = 0;
+        double insurance = 0;
+        double maint = 0;
+
+        double perPropTax = 0;
+        double perHoa = 0;
+        double perInsurance = 0;
+        double perMaintenance = 0;
+
+        boolean isPropTaxCash = true;
+        boolean isHoaCash = true;
+        boolean isInsCash = true;
+        boolean isMaintenanceCash = true;
+
+        // Always-required fields
+        String budget = jTextField9.getText().trim().replace(",", "");
+        String mortgage = jTextField10.getText().trim().replace(",", "");
+        String interest = jTextField11.getText().trim().replace(",", "");
+        String downPaymentInput = jTextField12.getText().trim().replace(",", "");
+
+        // Core fields validation
+        Map<JTextField, String> fieldsToValidate = new LinkedHashMap<>();
+        fieldsToValidate.put(jTextField9, "Please input a valid budget for house (non-negative number > 0)");
+        fieldsToValidate.put(jTextField10, "Please input a valid loan term (non-negative number)");
+        fieldsToValidate.put(jTextField11, "Please input a valid interest rate (non-negative number)");
+        fieldsToValidate.put(jTextField12, "Please input a valid down payment (non-negative number)");
+
+        boolean allFieldsValid = HouseAffordabilityHelper.validateAndHighlightFields(fieldsToValidate);
+
+        if (!allFieldsValid) {
+            return; // Stop processing if any field is invalid
+        }
+
+        // Additional fields if the checkbox is selected
+        if (jCheckBox1.isSelected()) {
+            String propertyTaxInput = jTextField16.getText().trim().replace(",", "");
+            String hoaFeeInput = jTextField14.getText().trim().replace(",", "");
+            String insuranceInput = jTextField13.getText().trim().replace(",", "");
+            String maintenanceInput = jTextField17.getText().trim().replace(",", "");
+
+            Map<JTextField, String> additionalFieldsToValidate = new LinkedHashMap<>();
+            additionalFieldsToValidate.put(jTextField16, "Please input a valid property tax (non-negative number)");
+            additionalFieldsToValidate.put(jTextField14, "Please input a valid HOA fee (non-negative number)");
+            additionalFieldsToValidate.put(jTextField13, "Please input a valid insurance amount (non-negative number)");
+            additionalFieldsToValidate.put(jTextField17, "Please input a valid maintenance amount (non-negative number)");
+
+            boolean additionalFieldsValid = HouseAffordabilityHelper.validateAndHighlightFields(additionalFieldsToValidate);
+
+            if (!additionalFieldsValid) {
+                return; // Stop processing if any additional field is invalid
+            }
+
+            // Parse additional fields
+            propertyTax = Double.parseDouble(propertyTaxInput);
+            hoaFee = Double.parseDouble(hoaFeeInput);
+            insurance = Double.parseDouble(insuranceInput);
+            maint = Double.parseDouble(maintenanceInput);
+        }
+
+        // Parse core fields
+        double budgetforHouse = Double.parseDouble(budget);
+        double loanTerm = Double.parseDouble(mortgage);
+        double interestRate = Double.parseDouble(interest);
+        double downPayment = Double.parseDouble(downPaymentInput);
+        downPayment = downPayment/100.0;
+
+        if(loanTerm <= 0){
+            JOptionPane.showMessageDialog(null, "<html><font size='5'>Please input a positive loan term value<html>");
+            return;
+        }
+        if(interestRate <= 0){
+            interestRate = 0.00000001;
+        }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if((loanTerm) > 100){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>I'm sorry, most banks will not give you money if you cannot<br>pay back within 100 years.<br>Please input a loan term less than 100",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        if((interestRate/100.0) > 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input an interest rate less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+             if(budgetforHouse<=0){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>With a budget of $0, you probably cannot afford any house.<html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );      
+            return;
+            
+        }
+             
+        if(downPayment >=1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a down payment less than 100%.<html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );      
+            return;
+            
+        }        // Adjust values based on combo box selections
+        String selectedFrequency3 = (String) jComboBox10.getSelectedItem();
+        if ("%".equals(selectedFrequency3)) {
+            isPropTaxCash = false;
+            perPropTax = propertyTax / 100.0;
+            propertyTax = 0;
+            if (perPropTax >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a property tax less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }        }
+
+        String selectedFrequency4 = (String) jComboBox7.getSelectedItem();
+        if ("%".equals(selectedFrequency4)) {
+            isHoaCash = false;
+            perHoa = hoaFee / 100.0;
+            hoaFee = 0;
+            if (perHoa >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a HOA or co-op fee less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }        }
+
+        String selectedFrequency5 = (String) jComboBox9.getSelectedItem();
+        if ("%".equals(selectedFrequency5)) {
+            isInsCash = false;
+            perInsurance = insurance / 100.0;
+            insurance = 0;
+            
+            if (perInsurance >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a insurance less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+            }
+        }
+
+        String selectedFrequency2 = (String) jComboBox11.getSelectedItem();
+        if ("%".equals(selectedFrequency2)) {
+            isMaintenanceCash = false;
+            perMaintenance = maint / 100.0;
+            maint = 0;
+            if (perMaintenance >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a maintenance less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+            }
+        }
+
+        double loan = 0;
+        double Total;
+        double DP;
+        double ECC;
+        double TotalPayment;
+
+        loan = HouseAffordabilityHelper.principleHouse(isPropTaxCash, isHoaCash, isInsCash, isMaintenanceCash, budgetforHouse, loanTerm, interestRate, downPayment, propertyTax, hoaFee, insurance, maint, perPropTax, perHoa, perInsurance, perMaintenance, loan);
+        jLabel31.setText(String.format("$%,.0f", loan));
+        jTabbedPane1.setSelectedIndex(2);
+
+        Total = loan/(1-downPayment);
+        jLabel41.setText(String.format("$%,.0f",Total));
+
+        DP = Total * downPayment;
+        jLabel43.setText(String.format("$%,.0f",DP));
+
+        ECC = Total * 0.03;
+        jLabel45.setText(String.format("$%,.0f",ECC));
+
+        TotalPayment = ECC + DP;
+        jLabel51.setText(String.format("$%,.0f",TotalPayment));
+
+        double PMI;
+        if (downPayment < 0.20){
+            PMI = (0.005 * loan)/12;
+        }
+        else{
+            PMI = 0;
+        }
+        jLabel55.setText(String.format("$%,.0f",PMI));
+
+        double yPt;
+        yPt = HouseAffordabilityHelper.ptTotal(Total,perPropTax,propertyTax,isPropTaxCash);
+        jLabel57.setText(String.format("$%,.0f",yPt));
+        double yHoa;
+        yHoa = HouseAffordabilityHelper.HOATotal(Total,perHoa,hoaFee,isHoaCash);
+        jLabel59.setText(String.format("$%,.0f",yHoa));
+        double yIn;
+        yIn = HouseAffordabilityHelper.inTotal(Total,perInsurance,insurance,isInsCash);
+        jLabel61.setText(String.format("$%,.0f",yIn));
+
+        double maintenance;
+        if (isMaintenanceCash == false){
+            maintenance = Total * perMaintenance;
+        }
+        else{
+            maintenance = perMaintenance;
+        }
+
+        jLabel63.setText(String.format("$%,.0f",maintenance));
+        jLabel62.setText("Annual maintenance cost");
+
+        double monthlyMortgage = (budgetforHouse) - (PMI) - (yPt/12) - (yHoa/12) - (yIn/12) - (maintenance/12);
+        jLabel53.setText(String.format("$%,.0f",monthlyMortgage));
+
+        double totalmonth = monthlyMortgage + PMI + (yPt/12) + (yHoa/12) + (yIn/12) + (maintenance/12);
+        jLabel65.setText(String.format("$%,.0f",totalmonth));
+        
+        jLabel46.setText("");
+        jLabel48.setText("");
+        jLabel47.setText("");
+        jLabel49.setText("");
+        jLabel67.setText("");
+        jLabel68.setText("");
+
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         String incomeInput = jTextField1.getText().trim().replace(",", "");
         String loanTermInput = jTextField2.getText().trim().replace(",", "");
         String interestRateInput = jTextField3.getText().trim().replace(",", "");
@@ -801,7 +1162,7 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         String propertyTaxInput = jTextField6.getText().trim().replace(",", "");
         String hoaFeeInput = jTextField7.getText().trim().replace(",", "");
         String insuranceInput = jTextField8.getText().trim().replace(",", "");
-        
+
         Map<JTextField, String> fieldsToValidate = new LinkedHashMap<>();
         fieldsToValidate.put(jTextField1, "Please input a valid income (non-negative number > 0)");
         fieldsToValidate.put(jTextField2, "Please input a valid loan term (non-negative number)");
@@ -812,13 +1173,13 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         fieldsToValidate.put(jTextField7, "Please input a valid HOA fee (non-negative number)");
         fieldsToValidate.put(jTextField8, "Please input a valid insurance amount (non-negative number)");
 
-
         // Validate all fields at once
         boolean allFieldsValid = HouseAffordabilityHelper.validateAndHighlightFields(fieldsToValidate);
 
         if (!allFieldsValid) {
             return; // Stop processing if any field is invalid
         }
+
         double income = Double.parseDouble(incomeInput);
         double loanTerm = Double.parseDouble(loanTermInput);
         double interestRate = Double.parseDouble(interestRateInput);
@@ -829,19 +1190,19 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         double insurance = Double.parseDouble(insuranceInput);
         double frontEnd = 0;
         double backEnd = 0;
-        
+
         boolean isDownPaymentCash = true;
         double perDownPayment = 0;
-        
+
         boolean isPropTaxCash = true;
         double perPropTax = 0;
 
         boolean isHoaCash = true;
         double perHoa = 0;
-        
+
         boolean isInsCash = true;
         double perInsurance = 0;
-       
+
         double loan = 0;
         double Total;
         double DP;
@@ -850,112 +1211,301 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
         double BDTI;
         double TotalPayment;
         double MonthlyMortgage;
-        double PMI;
+        double PMI = 0.0;
         double yPt;
         double yHoa;
         double yIn;
         double maint;
         double totalMonth;
-        
+        double VAloan = 0.0;
 
-                String selectedFrequency = (String) jComboBox1.getSelectedItem();
+        if(loanTerm <= 0){
+            JOptionPane.showMessageDialog(null, "<html><font size='5'>Please input a positive loan term value<html>");
+            return;
+        }
+        if(interestRate <= 0){
+            interestRate = 0.00000001;
+        }
+        if((loanTerm) > 100){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>I'm sorry, most banks will not give you money if you cannot<br>pay back within 100 years.<br>Please input a loan term less than 100",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        if((interestRate/100.0) > 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input an interest rate less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+             if(income<=0){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>With a budget of $0, you probably cannot afford any house.<html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );      
+            return;
+            
+        }
+        String selectedFrequency = (String) jComboBox1.getSelectedItem();
 
-                if ("Conventional loan (28/36 rule)".equals(selectedFrequency)) {
-                    frontEnd = 28/100.0;
-                    backEnd = 36/100.0;
-                } else if ("FHA loan (31% front-end, 43% back end)".equals(selectedFrequency)) {
-                    frontEnd = 31/100.0;
-                    backEnd = 43/100.0;
-                } else if ("VA loan (41%)".equals(selectedFrequency)) {
-                    frontEnd = 41/100.0;
-                    backEnd = 41/100.0;
-                } else if ("10%".equals(selectedFrequency)) {
-                    frontEnd = 10/100.0;
-                    backEnd = 10/100.0;
-                } else if ("15%".equals(selectedFrequency)) {
-                    frontEnd = 15/100.0;
-                    backEnd = 15/100.0;
-                } else if ("20%".equals(selectedFrequency)) {
-                    frontEnd = 20/100.0;
-                    backEnd = 20/100.0;
-                } else if ("25%".equals(selectedFrequency)) {
-                    frontEnd = 25/100.0;
-                    backEnd = 25/100.0;
-                } else if ("30%".equals(selectedFrequency)) {
-                    frontEnd = 30/100.0;
-                    backEnd = 30/100.0;
-                } else if ("35%".equals(selectedFrequency)) {
-                    frontEnd = 35/100.0;
-                    backEnd = 35/100.0;
-                } else if ("40%".equals(selectedFrequency)) {
-                    frontEnd = 40/100.0;
-                    backEnd = 40/100.0;
-                } else if ("45%".equals(selectedFrequency)) {
-                    frontEnd = 45/100.0;
-                    backEnd = 45/100.0;
-                } else if ("50%".equals(selectedFrequency)) {
-                    frontEnd = 50/100.0;
-                    backEnd = 50/100.0;
-                }
-    /** Case by case what am i dealing with**/
-    
+        if ("Conventional loan (28/36 rule)".equals(selectedFrequency)) {
+            frontEnd = 28/100.0;
+            backEnd = 36/100.0;
+        } else if ("FHA loan (31% front-end, 43% back end)".equals(selectedFrequency)) {
+            frontEnd = 31/100.0;
+            backEnd = 43/100.0;
+            JOptionPane.showMessageDialog(null, "<html><font size='5'>Attention: Unfortunately, this option is under construction.<br> Please check tommorow for a fix. Thank you!<html>");
+            return;
+        } else if ("VA loan (41%)".equals(selectedFrequency)) {
+            frontEnd = 41/100.0;
+            backEnd = 41/100.0;
+
+        } else if ("10%".equals(selectedFrequency)) {
+            frontEnd = 10/100.0;
+            backEnd = 10/100.0;
+        } else if ("15%".equals(selectedFrequency)) {
+            frontEnd = 15/100.0;
+            backEnd = 15/100.0;
+        } else if ("20%".equals(selectedFrequency)) {
+            frontEnd = 20/100.0;
+            backEnd = 20/100.0;
+        } else if ("25%".equals(selectedFrequency)) {
+            frontEnd = 25/100.0;
+            backEnd = 25/100.0;
+        } else if ("30%".equals(selectedFrequency)) {
+            frontEnd = 30/100.0;
+            backEnd = 30/100.0;
+        } else if ("35%".equals(selectedFrequency)) {
+            frontEnd = 35/100.0;
+            backEnd = 35/100.0;
+        } else if ("40%".equals(selectedFrequency)) {
+            frontEnd = 40/100.0;
+            backEnd = 40/100.0;
+        } else if ("45%".equals(selectedFrequency)) {
+            frontEnd = 45/100.0;
+            backEnd = 45/100.0;
+        } else if ("50%".equals(selectedFrequency)) {
+            frontEnd = 50/100.0;
+            backEnd = 50/100.0;
+        }
+        /** Case by case what am i dealing with**/
+
         String selectedFrequency2 = (String) jComboBox3.getSelectedItem();
         if ("%".equals(selectedFrequency2)) {
             isDownPaymentCash = false;
             perDownPayment = downPayment/100.0;
             downPayment = 0;
+            if (perDownPayment >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a downpayment less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+            }
         }
-        
+
         String selectedFrequency3 = (String) jComboBox4.getSelectedItem();
         if ("%".equals(selectedFrequency3)) {
             isPropTaxCash = false;
             perPropTax = propertyTax/100.0;
             propertyTax = 0;
-            
+            if (perPropTax >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a property tax less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
         }
-        
+        }
+
         String selectedFrequency4 = (String) jComboBox2.getSelectedItem();
         if ("%".equals(selectedFrequency4)) {
             isHoaCash = false;
             perHoa = hoaFee/100.0;
             hoaFee = 0;
-
+            if (perHoa >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a HOA or co-op fee less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
         }
-        
+        }
+
         String selectedFrequency5 = (String) jComboBox5.getSelectedItem();
         if ("%".equals(selectedFrequency5)) {
             isInsCash = false;
             perInsurance = insurance/100.0;
             insurance = 0;
+            if (perInsurance >= 1){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Please input a insurance less than 100% <html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+            }
         }
         
 
-            loan = HouseAffordabilityHelper.principleLoan(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan);
-            jLabel31.setText(String.format("$%,.0f", loan));
-            JOptionPane.showMessageDialog(null, "Calculating...");
-            jTabbedPane1.setSelectedIndex(2);
+        
 
-                
+        if(isDownPaymentCash == false){
+            if ("VA loan (41%)".equals(selectedFrequency)) {
+                if (perDownPayment <= 0.05){
+                    VAloan = 0.0215;
+                }
+                else if(perDownPayment > 0.05 && perDownPayment < 0.10){
+                    VAloan = 0.015;
+                }
+                else if(perDownPayment >= 0.10 && perDownPayment < 1)
+                {
+                    VAloan = 0.0125;
+                }
+                else{
+                    jTextField5.setBackground(Color.RED);
+                    JOptionPane.showMessageDialog(null, "<html><font size='5'>Please input a percentage < 100. Thank you!<html>");
+                    jTextField5.setBackground(Color.WHITE);
+                    return;
+                }
+
+                loan = HouseAffordabilityHelper.principleLoanVA(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan, VAloan);
+                jLabel31.setText(String.format("$%,.0f", loan));
+                jTabbedPane1.setSelectedIndex(2);
+            }
+
+            else{
+                loan = HouseAffordabilityHelper.principleLoan(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan);
+                jLabel31.setText(String.format("$%,.0f", loan));
+                jTabbedPane1.setSelectedIndex(2);
+            }
+
+        }
+        else if(isDownPaymentCash == true){
+            if ("VA loan (41%)".equals(selectedFrequency)) {
+                    jTextField5.setBackground(Color.RED);
+                    JOptionPane.showMessageDialog(null, "<html><font size='5'>Attention: For disclosure, our VA calculator only accepts downpayment as a percentage.<br>Please select percentage. Thank you!<html>");
+                    jTextField5.setBackground(Color.WHITE);
+                    return;
+                }
+            loan = HouseAffordabilityHelper.CashprincipleLoan(isDownPaymentCash, isPropTaxCash, isHoaCash, isInsCash, income, frontEnd, backEnd, loanTerm, interestRate, monthlyDebt, downPayment, propertyTax, hoaFee, insurance, perDownPayment, perPropTax, perHoa, perInsurance, loan);
+            jLabel31.setText(String.format("$%,.0f",loan));
+            
+            jTabbedPane1.setSelectedIndex(2);
+        }
+
+        Total = HouseAffordabilityHelper.TotalHousePrice(loan,perDownPayment,downPayment,isDownPaymentCash);
+        jLabel41.setText(String.format("$%,.0f",Total));
+
+        DP = HouseAffordabilityHelper.totalDownPayment(Total, perDownPayment, downPayment, isDownPaymentCash);
+        jLabel43.setText(String.format("$%,.0f",DP));
+
+        ECC = Total * 0.03;
+        jLabel45.setText(String.format("$%,.0f",ECC));
+
+        boolean checkDownPayment;
+
+        if (isDownPaymentCash == true){
+            checkDownPayment = HouseAffordabilityHelper.checkDebt(downPayment, Total);
+            if (checkDownPayment == true){
+                JOptionPane.showMessageDialog(null,"<html><font size = '5'>Unfortunately, your input for downpayment caused it to crash.<br> Now we have inaccurate numbers for all results. <br> A fix will come soon. Thanks alot!<html>");
+
+            }
+        }
         
         
+        if ("VA loan (41%)".equals(selectedFrequency)) {
+            PMI = (loan * VAloan)/12;
+            jLabel55.setText(String.format("$%,.0f",PMI));
+            jLabel54.setText(String.format("Monthly VA loan funding fee %.2f%%",VAloan*100));
+
+
+            
+        }
+            else{
+            PMI = HouseAffordabilityHelper.pmiTotal(loan,isDownPaymentCash, perDownPayment);
+            jLabel55.setText(String.format("$%,.0f",PMI));
+        }
         
+
+        yPt = HouseAffordabilityHelper.ptTotal(Total,perPropTax,propertyTax,isPropTaxCash);
+        jLabel57.setText(String.format("$%,.0f",yPt));
+
+        yHoa = HouseAffordabilityHelper.HOATotal(Total,perHoa,hoaFee,isHoaCash);
+        jLabel59.setText(String.format("$%,.0f",yHoa));
+
+        yIn = HouseAffordabilityHelper.inTotal(Total,perInsurance,insurance,isInsCash);
+        jLabel61.setText(String.format("$%,.0f",yIn));
+
+        maint = 0.015 * Total;
+        jLabel63.setText(String.format("$%,.0f",maint));
+
+        MonthlyMortgage = HouseAffordabilityHelper.monthlyMortgage(income, monthlyDebt, frontEnd, backEnd, PMI, yPt, yHoa, yIn);
+        jLabel53.setText(String.format("$%,.0f",MonthlyMortgage));
+
+        totalMonth = HouseAffordabilityHelper.totalMonthlyCost(MonthlyMortgage, PMI, yPt, yHoa, yIn, maint);
+        jLabel65.setText(String.format("$%,.0f",totalMonth));
+
+        //Need to make everything disappear when you cannot afford any house. When annual house hold is 0 send the message
+        //
+        double DTINum = MonthlyMortgage + (yPt/12.0) + (yHoa/12.0) + (yIn/12.0)+PMI;
+        double DTIDenom = income/12.0;
+        FDTI = (DTINum/DTIDenom)*100.0;
+        jLabel47.setText(String.format("%,.0f"+"",FDTI));
+        double BDTINum = DTINum + monthlyDebt;
+        BDTI = (BDTINum/DTIDenom)*100.0;
+        jLabel49.setText(String.format("%,.0f",BDTI));
+        
+        double FDTIperc = FDTI/100;
+        if (FDTIperc < 0.0){
+            JOptionPane.showMessageDialog(
+                null,
+                "<html><font size='5'>Unfortunately, the information provided did not allow for an affordable house purchase scenario.<br> The debt obligations and the housing costs exceed the recommended ratio of gross income<html>",
+                "Invalid Input",
+                JOptionPane.ERROR_MESSAGE
+            );
+            jTabbedPane1.setSelectedIndex(0);
+            return;
+        }
+        TotalPayment = (Total * 0.03) + DP;
+        jLabel51.setText(String.format("$%,.0f",TotalPayment));
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        List<JTextField> fieldsToClear = Arrays.asList(
+            jTextField1, jTextField2, jTextField3, jTextField4, jTextField5,
+            jTextField6, jTextField7, jTextField8, jTextField9, jTextField10
+        );
+        HouseAffordabilityHelper.clearTextFields(fieldsToClear);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        List<JTextField> fieldsToClear = Arrays.asList(
+            jTextField9, jTextField10, jTextField11, jTextField12, jTextField16,
+            jTextField14, jTextField13, jTextField17
+            );
+            HouseAffordabilityHelper.clearTextFields(fieldsToClear);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -997,13 +1547,12 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox12;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -1072,16 +1621,20 @@ public class HouseAffordabilityCalculator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
