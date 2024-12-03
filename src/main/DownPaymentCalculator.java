@@ -421,6 +421,7 @@ public class DownPaymentCalculator extends javax.swing.JFrame {
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1240, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     //Code from Kylind in Currency Converter
     public Font getFont() {

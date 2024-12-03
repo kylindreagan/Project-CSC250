@@ -59,21 +59,11 @@ public class AmortizationCalculator extends javax.swing.JFrame {
                     boolean M = !MainHelper.isValidNumber(monthsField.getText());              
                     boolean IR = !MainHelper.isValidNumber(intRateField.getText()) || AutoLoanCalculator.isZero(intRateField.getText());
                     boolean combo = false;
-                    if (!Y && !M){
-                        combo = AutoLoanCalculator.isZero(yearsField.getText()) && AutoLoanCalculator.isZero(monthsField.getText());
-                    }
                     
-                    if ( Y || M || IR || combo) {
+                    
+                    if ( Y || M || IR ) {
                     calculateButton.setEnabled(false);
-                    if (combo){
-                        monthsField.setForeground(Color.red);
-                        yearsField.setForeground(Color.red);
-                        errorLabel.setVisible(true);
-                        errorLabel.setText("Error: Must have a positive number of months or years");                        
-                    } else {
-                        monthsField.setForeground(Color.black);
-                        yearsField.setForeground(Color.black);
-                    }
+                    
                     if (M) {
                         monthsField.setForeground(Color.red);
                         errorLabel.setVisible(true);
@@ -97,6 +87,19 @@ public class AmortizationCalculator extends javax.swing.JFrame {
                     }
                     else {
                         intRateField.setForeground(Color.black);
+                    }
+                    
+                    if (!Y && !M){
+                        combo = AutoLoanCalculator.isZero(yearsField.getText()) && AutoLoanCalculator.isZero(monthsField.getText());
+                        if (combo){
+                        monthsField.setForeground(Color.red);
+                        yearsField.setForeground(Color.red);
+                        errorLabel.setVisible(true);
+                        errorLabel.setText("Error: Must have a positive number of months or years");                        
+                        } else {
+                            monthsField.setForeground(Color.black);
+                            yearsField.setForeground(Color.black);
+                        }
                     }
                     
                     
@@ -223,6 +226,7 @@ public class AmortizationCalculator extends javax.swing.JFrame {
 
         resultsField.setEditable(false);
         resultsField.setColumns(20);
+        resultsField.setFont(new java.awt.Font("Nunito", 0, 18)); // NOI18N
         resultsField.setRows(5);
         jScrollPane1.setViewportView(resultsField);
 
